@@ -1,0 +1,15 @@
+.tableHead {
+  background-color: black;
+  color: white;
+}
+.headCell {
+  font-size: large;
+  padding: 4px 16px;
+}
+.row {
+  background-color: #4c4c4c;
+  color: white;
+}
+.row:hover {
+  background-color: black;
+}
