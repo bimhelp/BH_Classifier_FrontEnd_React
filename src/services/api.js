@@ -1,9 +1,9 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://classifier-imxy.onrender.com";
+axios.defaults.baseURL = "https://classifier-imxy.onrender.com/api/v1";
 
 export async function getAll() {
   try {
-    const response = await axios.get(`api/v1/elements`);
+    const response = await axios.get(`/elements`);
     console.log(response);
     return response.data;
   } catch (error) {
