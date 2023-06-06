@@ -8,7 +8,7 @@ function App() {
     <>
       <h1>Classifier table</h1>
       <AddForm />
-      {/* <Table data={data} /> */}
+      <Table data={data} />
     </>
   );
 }
