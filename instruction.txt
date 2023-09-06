@@ -1,3 +1,8 @@
+Створити реакт апп
+Додати npm install react-router-dom
+
+Скинути стилі в index.css
+
 /* нормалізація стилів */
 @import-normalize;
 
@@ -17,9 +22,9 @@
   --text-gray: #757575;
   --text-dark-gray: #212121;
   --text-gray-alfa: rgba(255, 255, 255, 0.6);
-  --accent: #0a73a7;
-  --accent-hover: #0d83be;
-  --accent-transparent: rgba(33, 149, 243, 0.658);
+  --accent: #1fbd44;
+  --accent-hover: #12f146;
+  --accent-transparent: rgba(33, 150, 243, 0.9);
   --font-main: Roboto, sans-serif;
   --font-decor: Raleway, Segoe UI, sans-serif;
   --border-gray: rgba(236, 236, 236, 1);
@@ -33,11 +38,6 @@
   --cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
   --time-animation: 250ms;
   --transition-color: color var(--time-animatio) var(--cubic-bezier);
-  --breakpoint-mob: 375px;
-  --breakpoint-mobMax: 767px;
-  --breakpoint-tab: 1200px;
-  --breakpoint-tabMax: 1439px;
-  --breakpoint-desk: 1440px;
 }
 
 /* Скидання стилів */
@@ -75,3 +75,31 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+
+Створити структуру сторінок 
+      <Routes>
+        <Route path="welcome" element={<WelcomePage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LogInPage />} />
+
+        <Route path="/" element={<SharedLayout />} />
+        <Route path="cabinet" element={<CabinetPage />} />
+        <Route path="add" element={<AddItemPage />} />
+        <Route path="table" element={<TablePage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+
+Створити папку Components та наповнювати її компонентами.
+Створити компонент Section та Container
+
+Створити компоненти:
+Перший етап
+Розмітка
+Стилі
+
+Другий етап 
+Логіка
+
+
+

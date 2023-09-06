@@ -69,70 +69,82 @@ const AddForm = () => {
   };
 
   return (
-    <div>
+    <div className={css.formWrapper}>
+      <h2>Add Item</h2>
       <form onSubmit={handleSubmit} className={css.form}>
-        <label className={css.label}>
-          Description
+        <div className={css.inputWrapper}>
+          <label className={css.label} htmlFor="description">
+            Description
+          </label>
           <input
             type="text"
             placeholder="Enter description"
             value={description}
             name="description"
             onChange={handleChange}
+            className={css.input}
+            id="description"
           />
-        </label>
-        <label className={css.label}>
-          Price
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Price</label>
           <input
             type="text"
             placeholder="Enter price"
             value={price}
             name="price"
+            className={css.input}
             onChange={handleChange}
           />
-        </label>
-        <label className={css.label}>
-          Code
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Code</label>
           <input
             type="text"
             placeholder="Enter code"
             value={code}
             name="code"
+            className={css.input}
             onChange={handleChange}
           />
-        </label>
-        <label className={css.label}>
-          Unitcode
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Unitcode</label>
           <input
             type="text"
             placeholder="Enter unitcode"
             value={unitcode}
             name="unitcode"
+            className={css.input}
             onChange={handleChange}
           />
-        </label>
-        <label className={css.label}>
-          Level
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Level</label>
           <input
             type="text"
             placeholder="Enter level"
             value={level}
             name="level"
+            className={css.input}
             onChange={handleChange}
           />
-        </label>
-        <label className={css.label}>
-          Unit
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Unit</label>
           <input
             type="text"
             placeholder="Enter unit"
             value={unit}
             name="unit"
+            className={css.input}
             onChange={handleChange}
           />
-        </label>
+        </div>
 
-        <button type="submit">Send</button>
+        <button className={css.submitBtn} type="submit">
+          Send
+        </button>
       </form>
       {isLoading && <p>Sending data...</p>}
       {error && <p>{error}</p>}
