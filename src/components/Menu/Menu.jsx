@@ -7,15 +7,15 @@ const Menu = () => {
   return (
     <nav className={css.navigation}>
       <NavLink to="table" className={css.menuItem}>
-        Classifier
+        00000000-0
       </NavLink>
 
-      <NavLink to="add" className={css.menuItem}>
+      {/* <NavLink to="add" className={css.menuItem}>
         Add Item
       </NavLink>
       <NavLink to="cabinet" className={css.menuItem}>
         Cabinet
-      </NavLink>
+      </NavLink> */}
     </nav>
   );
 };

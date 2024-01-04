@@ -1,15 +1,25 @@
+.table {
+  background-color: #d9d9d9;
+  padding: 8px;
+}
+
 .tableHead {
-  background-color: black;
-  color: white;
+  /* background-color: black; */
+  /* color: white; */
 }
 .headCell {
   font-size: large;
   padding: 4px 16px;
 }
 .row {
-  background-color: #4c4c4c;
-  color: white;
+  background-color: #ffffff;
+  /* color: white; */
+}
+.row:not(:last-child) {
+  margin-bottom: 8px;
 }
 .row:hover {
-  background-color: black;
+  box-shadow: var(--shadow);
+  scale: 1.01;
+  cursor: pointer;
 }
