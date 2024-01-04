@@ -2,23 +2,14 @@ import React from "react";
 import css from "./Row.module.css";
 
 const Row = ({
-  element: {
-    price = "0",
-    unit = "",
-    unitcode = "",
-    description = "",
-    level = "",
-    code = "",
-  },
+  element: { Code = "", DescriptionUA = "", Price = "0", Unit = "" },
 }) => {
   return (
     <>
-      <td className={css.cell}>{description}</td>
-      <td className={css.cell}>{code}</td>
-      <td className={css.cell}>{price}</td>
-      <td className={css.cell}>{unitcode}</td>
-      <td className={css.cell}>{level}</td>
-      <td className={css.cell}>{unit}</td>
+      <td className={css.cell}>{Code}</td>
+      <td className={css.cell}>{DescriptionUA}</td>
+      <td className={css.cell}>{Price}</td>
+      <td className={css.cell}>{Unit}</td>
     </>
   );
 };

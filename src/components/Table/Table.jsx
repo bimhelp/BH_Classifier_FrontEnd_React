@@ -33,12 +33,13 @@ const Table = () => {
         <table>
           <thead>
             <tr className={css.tableHead}>
-              <th className={css.headCell}>Description</th>
               <th className={css.headCell}>Code</th>
+              <th className={css.headCell}>DescriptionUa</th>
+              {/* <th className={css.headCell}>DescriptionEn</th> */}
               <th className={css.headCell}>Price</th>
-              <th className={css.headCell}>Unitcode</th>
-              <th className={css.headCell}>Level</th>
               <th className={css.headCell}>Unit</th>
+              {/* <th className={css.headCell}>Unitcode</th> */}
+              {/* <th className={css.headCell}>Level</th> */}
             </tr>
           </thead>
           <tbody>
