@@ -10,6 +10,15 @@ export async function getAll() {
     console.log(error);
   }
 }
+export async function getCategory() {
+  try {
+    const response = await axios.get(`/elements/category`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function addElement(newElement) {
   try {

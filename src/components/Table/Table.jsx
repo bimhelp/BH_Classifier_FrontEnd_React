@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Row from "../Row/Row";
 import css from "./Table.module.css";
-import { getAll } from "../../services/api";
+import { getCategory } from "../../services/api";
 
 const Table = () => {
   const [data, setData] = useState([]);
@@ -10,10 +10,10 @@ const Table = () => {
 
   useEffect(() => {
     // створюємо асинхронну функцію
-    async function getAllElements() {
+    async function getAllCategory() {
       setIsLoading(true);
       try {
-        const response = await getAll();
+        const response = await getCategory();
         setData(response.data);
       } catch {
         setError("error");
@@ -22,7 +22,7 @@ const Table = () => {
       }
     }
     // викликаємо функцію
-    getAllElements();
+    getAllCategory();
   }, []);
 
   return (
@@ -30,16 +30,30 @@ const Table = () => {
       {isLoading ? (
         <p>Loading</p>
       ) : (
-        <table>
+        <ul>
+          <li>
+            {data.map((element) => (
+              <div key={element._id} className={css.row}>
+                <Row element={element} />
+              </div>
+            ))}
+          </li>
+        </ul>
+      )}
+      {error && <p>{error}</p>}
+    </>
+  );
+};
+
+export default Table;
+
+/* <table>
           <thead>
             <tr className={css.tableHead}>
               <th className={css.headCell}>Code</th>
               <th className={css.headCell}>DescriptionUa</th>
-              {/* <th className={css.headCell}>DescriptionEn</th> */}
               <th className={css.headCell}>Price</th>
               <th className={css.headCell}>Unit</th>
-              {/* <th className={css.headCell}>Unitcode</th> */}
-              {/* <th className={css.headCell}>Level</th> */}
             </tr>
           </thead>
           <tbody>
@@ -49,11 +63,4 @@ const Table = () => {
               </tr>
             ))}
           </tbody>
-        </table>
-      )}
-      {error && <p>{error}</p>}
-    </>
-  );
-};
-
-export default Table;
+        </table> */

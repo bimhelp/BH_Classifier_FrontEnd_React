@@ -46,8 +46,8 @@ body {
   margin: 0;
   font-family: sans-serif;
   line-height: 1.5;
-  color: white;
-  background-color: #1c2023;
+  /* color: white; */
+  background-color: #ffffff;
 }
 h1,
 h2,

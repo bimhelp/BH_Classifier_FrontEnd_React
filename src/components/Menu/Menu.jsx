@@ -7,7 +7,7 @@ const Menu = () => {
   return (
     <nav className={css.navigation}>
       <NavLink to="table" className={css.menuItem}>
-        Classifier
+        Table
       </NavLink>
 
       <NavLink to="add" className={css.menuItem}>
