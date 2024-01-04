@@ -30,7 +30,7 @@ const Table = () => {
       {isLoading ? (
         <p>Loading</p>
       ) : (
-        <ul>
+        <ul className={css.table}>
           <li>
             {data.map((element) => (
               <div key={element._id} className={css.row}>
