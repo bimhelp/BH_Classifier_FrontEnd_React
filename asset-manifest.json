@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Classifier/static/css/main.b63de2af.css",
+    "main.js": "/Classifier/static/js/main.d19255d1.js",
+    "index.html": "/Classifier/index.html",
+    "main.b63de2af.css.map": "/Classifier/static/css/main.b63de2af.css.map",
+    "main.d19255d1.js.map": "/Classifier/static/js/main.d19255d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b63de2af.css",
+    "static/js/main.d19255d1.js"
+  ]
+}
