@@ -6,8 +6,11 @@ import { NavLink } from "react-router-dom";
 const Menu = () => {
   return (
     <nav className={css.navigation}>
+      <NavLink to="/" className={css.menuItem}>
+        Home
+      </NavLink>
       <NavLink to="table" className={css.menuItem}>
-        00000000-0
+        Table
       </NavLink>
 
       {/* <NavLink to="add" className={css.menuItem}>

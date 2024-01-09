@@ -1,17 +1,18 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+
 // Компоненти
 // Public Pages
 import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import TablePage from "./pages/TablePage/TablePage";
 
 // Private Pages
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
-import TablePage from "./pages/TablePage/TablePage";
 
 function App() {
   return (
