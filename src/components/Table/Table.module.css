@@ -1,23 +1,15 @@
 .table {
-  background-color: #7e7e7e;
+  /* background-color: #7e7e7e; */
   padding: 8px;
 }
 
-.tableHead {
-  /* background-color: black; */
-  /* color: white; */
-}
-.headCell {
-  font-size: large;
-  padding: 4px 16px;
-}
 .row {
   background-color: #ffffff;
   /* color: white; */
 }
-.row:not(:last-child) {
+/* .row:not(:last-child) {
   margin-bottom: 2px;
-}
+} */
 .row:hover {
   box-shadow: var(--shadow);
   /* scale: 1.01; */

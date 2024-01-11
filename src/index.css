@@ -4,6 +4,13 @@
 /* змінні */
 :root {
   /* Color Palet */
+  --categoryColor: #125b56;
+  --categoryColorAlfa: rgba(18, 91, 86, 0.3);
+  --firstLevelColor: #567637;
+  --secondLevelColor: #29567f;
+  --thirdLevelColor: #44297f;
+  --itemColor: #4e4d4f;
+
   --icon-gray: #afb1b8;
   --background-white: #ffffff;
   --background-white-transperent: rgba(255, 255, 255, 0.1);

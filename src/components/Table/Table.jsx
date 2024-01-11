@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Category from "../Category/Category";
 import Row from "../Row/Row";
 import css from "./Table.module.css";
 import { getCategory, getSubCategory } from "../../services/api";
@@ -28,10 +29,16 @@ const Table = () => {
   }, []);
 
   const selectCategory = async (id, code) => {
-    console.log("id: ", id);
+    // console.log("id: ", id);
     const cpvCode = code.slice(0, 2);
-    // console.log("cpvCode: ", cpvCode);
-    setSelectedId(id);
+
+    // Відкриття-закриття основної категорії
+    if (selectedId === id) {
+      setSelectedId(null);
+    } else {
+      setSelectedId(id);
+    }
+
     setIsLoading(true);
     try {
       const response = await getSubCategory(cpvCode);
@@ -52,7 +59,7 @@ const Table = () => {
           <li>
             {data.map((element) => (
               <div key={element._id} className={css.row}>
-                <Row
+                <Category
                   element={element}
                   selectCategory={() =>
                     selectCategory(element._id, element.Code)
@@ -65,38 +72,9 @@ const Table = () => {
           </li>
         </ul>
       )}
-      {/* {subCategory.length > 0 && (
-        <ul>
-          <li>
-            {subCategory.map((element) => (
-              <div key={element._id} className={css.row}>
-                <Row element={element} selectCategory={selectCategory} />
-              </div>
-            ))}
-          </li>
-        </ul>
-      )} */}
       {error && <p>{error}</p>}
     </>
   );
 };
 
 export default Table;
-
-/* <table>
-          <thead>
-            <tr className={css.tableHead}>
-              <th className={css.headCell}>Code</th>
-              <th className={css.headCell}>DescriptionUa</th>
-              <th className={css.headCell}>Price</th>
-              <th className={css.headCell}>Unit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((element) => (
-              <tr key={element._id} className={css.row}>
-                <Row element={element} />
-              </tr>
-            ))}
-          </tbody>
-        </table> */

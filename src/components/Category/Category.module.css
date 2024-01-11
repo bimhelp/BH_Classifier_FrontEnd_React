@@ -1,0 +1,25 @@
+.categoryWrapper {
+  background-color: var(--categoryColorAlfa);
+  display: flex;
+  border-radius: 5px;
+  /* padding: 2px; */
+}
+
+.categoryWrapper:not(:last-child) {
+  margin-bottom: 2px;
+}
+.categoryWrapper:hover {
+  cursor: pointer;
+}
+
+.categoryCode {
+  padding: 0 10px;
+  border-radius: 5px;
+  display: inline-block;
+  background-color: var(--categoryColor);
+  color: var(--text-white);
+}
+
+.categoryDescription {
+  padding-left: 10px;
+}
