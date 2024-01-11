@@ -13,7 +13,19 @@ export async function getAll() {
 export async function getCategory() {
   try {
     const response = await axios.get(`/elements/category`);
-    console.log(response);
+    // console.log(response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getSubCategory(spvCode) {
+  try {
+    const response = await axios.get(`/elements/subcategory`, {
+      params: { code: spvCode },
+    });
+    // console.log("data: ", response.data.data);
     return response.data;
   } catch (error) {
     console.log(error);

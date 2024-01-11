@@ -1,6 +1,6 @@
 .rowWrapper {
   display: flex;
-  padding: 8px;
+  padding: 2px;
 }
 
 .code {
@@ -10,5 +10,5 @@
 }
 
 .cell {
-  padding: 4px 16px;
+  padding: 2px 4px;
 }
