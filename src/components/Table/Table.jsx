@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Category from "../Category/Category";
-import Row from "../Row/Row";
 import css from "./Table.module.css";
 import { getCategory, getSubCategory } from "../../services/api";
 
 const Table = () => {
   const [mainCategory, setMainCategory] = useState([]);
   const [firstLevel, setFirstLevel] = useState([]);
+  const [secondLevel, setSecondLevel] = useState([]);
+  const [thirdLevel, setThirdLevel] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -36,32 +37,35 @@ const Table = () => {
     const thirdLevelItems = [];
 
     data.forEach((element) => {
-      console.log(element.Code.indexOf("0"));
+      // console.log(element.Code.indexOf("0"));
       // потрібно обрізати перші дві цифри тому що бувають категорії які починаються на нуль
+
       switch (element.Code.slice(2, element.Code.length).indexOf("0")) {
         case 0:
-          console.log("level: 0");
+          // console.log("level: 0");
           break;
         case 1:
-          console.log("level: 0");
+          // console.log("level: 1");
           firstLevelItems.push(element);
           break;
         case 2:
-          console.log("level: 0");
+          // console.log("level: 2");
           secondLevelItems.push(element);
           break;
         case 3:
-          console.log("level: 1");
+          // console.log("level: 3");
           thirdLevelItems.push(element);
           break;
         default:
           break;
       }
     });
-    console.log("firstLevelItems: ", firstLevelItems);
+    // console.log("firstLevelItems: ", firstLevelItems);
     setFirstLevel(firstLevelItems);
-    console.log("secondLevelItems: ", secondLevelItems);
-    console.log("thirdLevelItems: ", thirdLevelItems);
+    // console.log("secondLevelItems: ", secondLevelItems);
+    setSecondLevel(secondLevelItems);
+    // console.log("thirdLevelItems: ", thirdLevelItems);
+    setThirdLevel(thirdLevelItems);
   }
   const selectCategory = async (id, code) => {
     // console.log("id: ", id);
@@ -82,8 +86,10 @@ const Table = () => {
 
     // Відкриття-закриття основної категорії
     if (selectedId === id) {
+      console.log("selectedId: ", selectedId, "=", id);
       setSelectedId(null);
     } else {
+      console.log("selectedId: ", selectedId, "!=", id);
       setSelectedId(id);
     }
 
@@ -114,6 +120,8 @@ const Table = () => {
                   }
                   isSelected={element._id === selectedId}
                   firstLevel={firstLevel}
+                  secondLevel={secondLevel}
+                  thirdLevel={thirdLevel}
                 />
               </div>
             ))}
