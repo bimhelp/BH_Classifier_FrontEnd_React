@@ -5,10 +5,11 @@ import css from "./Table.module.css";
 import { getCategory, getSubCategory } from "../../services/api";
 
 const Table = () => {
-  const [data, setData] = useState([]);
+  const [mainCategory, setMainCategory] = useState([]);
+  const [firstLevel, setFirstLevel] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [subCategory, setSubCategory] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ const Table = () => {
       setIsLoading(true);
       try {
         const response = await getCategory();
-        setData(response.data);
+        setMainCategory(response.data);
       } catch {
         setError("error");
       } finally {
@@ -28,12 +29,52 @@ const Table = () => {
     getAllCategory();
   }, []);
 
+  // Сортування категорій по вкладеності
+  function sortData(data) {
+    const firstLevelItems = [];
+    const secondLevelItems = [];
+    const thirdLevelItems = [];
+
+    data.forEach((element) => {
+      // console.log(element.Code.indexOf("0"));
+
+      switch (element.Code.indexOf("0")) {
+        case 0:
+          // console.log("level: 0");
+          break;
+        case 1:
+          // console.log("level: 0");
+          break;
+        case 2:
+          // console.log("level: 0");
+          break;
+        case 3:
+          // console.log("level: 1");
+          firstLevelItems.push(element);
+          break;
+        case 4:
+          // console.log("level: 2");
+          secondLevelItems.push(element);
+          break;
+        case 5:
+          // console.log("level: 3");
+          thirdLevelItems.push(element);
+          break;
+        default:
+          // console.log("default");
+          break;
+      }
+    });
+    console.log("firstLevelItems: ", firstLevelItems);
+    console.log("secondLevelItems: ", secondLevelItems);
+    console.log("thirdLevelItems: ", thirdLevelItems);
+  }
   const selectCategory = async (id, code) => {
     // console.log("id: ", id);
     const cpvCode = [];
 
     for (let index = 0; index < code.length; index++) {
-      if (code[index] === "0") {
+      if (code[index] === "0" && index !== 0) {
         break;
       } else {
         cpvCode.push(code[index]);
@@ -55,7 +96,9 @@ const Table = () => {
     setIsLoading(true);
     try {
       const response = await getSubCategory(stringCpvCode);
-      setSubCategory(response.data);
+      sortData(response.data);
+
+      setFirstLevel(response.data);
     } catch (error) {
       setError("error");
     } finally {
@@ -70,7 +113,7 @@ const Table = () => {
       ) : (
         <ul className={css.table}>
           <li>
-            {data.map((element) => (
+            {mainCategory.map((element) => (
               <div key={element._id} className={css.row}>
                 <Category
                   element={element}
@@ -78,7 +121,7 @@ const Table = () => {
                     selectCategory(element._id, element.Code)
                   }
                   isSelected={element._id === selectedId}
-                  subCategory={subCategory}
+                  firstLevel={firstLevel}
                 />
               </div>
             ))}
