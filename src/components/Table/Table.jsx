@@ -36,36 +36,30 @@ const Table = () => {
     const thirdLevelItems = [];
 
     data.forEach((element) => {
-      // console.log(element.Code.indexOf("0"));
-
-      switch (element.Code.indexOf("0")) {
+      console.log(element.Code.indexOf("0"));
+      // потрібно обрізати перші дві цифри тому що бувають категорії які починаються на нуль
+      switch (element.Code.slice(2, element.Code.length).indexOf("0")) {
         case 0:
-          // console.log("level: 0");
+          console.log("level: 0");
           break;
         case 1:
-          // console.log("level: 0");
-          break;
-        case 2:
-          // console.log("level: 0");
-          break;
-        case 3:
-          // console.log("level: 1");
+          console.log("level: 0");
           firstLevelItems.push(element);
           break;
-        case 4:
-          // console.log("level: 2");
+        case 2:
+          console.log("level: 0");
           secondLevelItems.push(element);
           break;
-        case 5:
-          // console.log("level: 3");
+        case 3:
+          console.log("level: 1");
           thirdLevelItems.push(element);
           break;
         default:
-          // console.log("default");
           break;
       }
     });
     console.log("firstLevelItems: ", firstLevelItems);
+    setFirstLevel(firstLevelItems);
     console.log("secondLevelItems: ", secondLevelItems);
     console.log("thirdLevelItems: ", thirdLevelItems);
   }
@@ -97,8 +91,6 @@ const Table = () => {
     try {
       const response = await getSubCategory(stringCpvCode);
       sortData(response.data);
-
-      setFirstLevel(response.data);
     } catch (error) {
       setError("error");
     } finally {
