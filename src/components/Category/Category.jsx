@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SubCategory from "../SubCategory/SubCategory";
 import css from "./Category.module.css";
 
@@ -8,6 +8,14 @@ const Category = ({
   isSelected,
   subCategory,
 }) => {
+  const [selectedSubCategoryId, setSelectedSubCategoryId] = useState(null);
+
+  const handleSubCategoryClick = (subCategoryId) => {
+    setSelectedSubCategoryId(
+      selectedSubCategoryId === subCategoryId ? null : subCategoryId
+    );
+  };
+
   return (
     <>
       <div onClick={selectCategory} className={css.categoryWrapper}>
@@ -18,16 +26,33 @@ const Category = ({
         {/* Якщо категорія вибрана то рендеримо підкатегорії */}
         {isSelected && (
           <ul>
-            <li>
-              {subCategory.map((element) => (
-                <div key={element._id}>
+            {subCategory.map((subElement) => (
+              <li key={subElement._id}>
+                <div onClick={() => handleSubCategoryClick(subElement._id)}>
                   <SubCategory
-                    element={element}
+                    element={subElement}
                     selectCategory={selectCategory}
                   />
                 </div>
-              ))}
-            </li>
+                {/* Якщо підкатегорія вибрана, рендеримо наступний рівень вкладеності */}
+                {selectedSubCategoryId === subElement._id && (
+                  <ul>
+                    {/* Вкладений список підкатегорій */}
+                    {subElement.subCategories.map((nestedSubElement) => (
+                      <li key={nestedSubElement._id}>
+                        <div>
+                          <SubCategory
+                            element={nestedSubElement}
+                            selectCategory={selectCategory}
+                          />
+                        </div>
+                        {/* І так далі, якщо потрібно */}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
           </ul>
         )}
       </div>

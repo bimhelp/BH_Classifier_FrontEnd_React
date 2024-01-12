@@ -30,7 +30,20 @@ const Table = () => {
 
   const selectCategory = async (id, code) => {
     // console.log("id: ", id);
-    const cpvCode = code.slice(0, 2);
+    const cpvCode = [];
+
+    for (let index = 0; index < code.length; index++) {
+      if (code[index] === "0") {
+        break;
+      } else {
+        cpvCode.push(code[index]);
+        // console.log(code[index]);
+      }
+    }
+
+    // console.log("cpvCode: ", cpvCode);
+    const stringCpvCode = cpvCode.join("");
+    // console.log("stringCpvCode: ", stringCpvCode);
 
     // Відкриття-закриття основної категорії
     if (selectedId === id) {
@@ -41,7 +54,7 @@ const Table = () => {
 
     setIsLoading(true);
     try {
-      const response = await getSubCategory(cpvCode);
+      const response = await getSubCategory(stringCpvCode);
       setSubCategory(response.data);
     } catch (error) {
       setError("error");
