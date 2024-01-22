@@ -32,6 +32,19 @@ export async function getSubCategory(spvCode) {
   }
 }
 
+export async function searchMaterials(number) {
+  try {
+    const response = await axios.get("/elements/search/by-code", {
+      params: {
+        number: number,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function addElement(newElement) {
   try {
     const response = await axios.post("/element", newElement);

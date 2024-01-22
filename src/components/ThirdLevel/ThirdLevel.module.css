@@ -1,0 +1,23 @@
+.thirdLevelWrapper {
+  display: flex;
+  padding-left: 60px;
+  margin-bottom: 2px;
+}
+.thirdLevelCode {
+  padding: 0 10px;
+  border-radius: 5px;
+  display: inline-block;
+  background-color: var(--thirdLevelColor);
+  color: var(--text-white);
+  min-width: 90px;
+  text-align: center;
+}
+
+.materialList {
+  margin-left: 80px;
+}
+
+.materialItem {
+  margin-bottom: 2px;
+  cursor: none;
+}

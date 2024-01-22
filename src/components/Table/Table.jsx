@@ -86,10 +86,10 @@ const Table = () => {
 
     // Відкриття-закриття основної категорії
     if (selectedId === id) {
-      console.log("selectedId: ", selectedId, "=", id);
+      // console.log("selectedId: ", selectedId, "=", id);
       setSelectedId(null);
     } else {
-      console.log("selectedId: ", selectedId, "!=", id);
+      // console.log("selectedId: ", selectedId, "!=", id);
       setSelectedId(id);
     }
 
@@ -110,22 +110,18 @@ const Table = () => {
         <p>Loading...</p>
       ) : (
         <ul className={css.table}>
-          <li>
-            {mainCategory.map((element) => (
-              <div key={element._id} className={css.row}>
-                <Category
-                  element={element}
-                  selectCategory={() =>
-                    selectCategory(element._id, element.Code)
-                  }
-                  isSelected={element._id === selectedId}
-                  firstLevel={firstLevel}
-                  secondLevel={secondLevel}
-                  thirdLevel={thirdLevel}
-                />
-              </div>
-            ))}
-          </li>
+          {mainCategory.map((element) => (
+            <li key={element._id} className={css.row}>
+              <Category
+                element={element}
+                selectCategory={() => selectCategory(element._id, element.Code)}
+                isSelected={element._id === selectedId}
+                firstLevel={firstLevel}
+                secondLevel={secondLevel}
+                thirdLevel={thirdLevel}
+              />
+            </li>
+          ))}
         </ul>
       )}
       {error && <p>{error}</p>}

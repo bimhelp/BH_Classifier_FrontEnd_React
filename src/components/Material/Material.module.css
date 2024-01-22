@@ -1,27 +1,27 @@
-.categoryWrapper {
-  background-color: var(--categoryColorAlfa);
+.materialWrapper {
+  background-color: var(--materialColorAlfa);
   display: flex;
   border-radius: 5px;
   /* padding: 2px; */
 }
 
-.categoryWrapper:not(:last-child) {
+.materialWrapper:not(:last-child) {
   margin-bottom: 2px;
 }
-.categoryWrapper:hover {
+.materialWrapper:hover {
   cursor: pointer;
 }
 
-.categoryCode {
+.materialCode {
   padding: 0 10px;
   border-radius: 5px;
   display: inline-block;
-  background-color: var(--categoryColor);
+  background-color: var(--materialColor);
   color: var(--text-white);
   min-width: 90px;
   text-align: center;
 }
 
-.categoryDescription {
+.materialDescription {
   padding-left: 10px;
 }
