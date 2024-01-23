@@ -1,8 +1,6 @@
 .categoryWrapper {
-  background-color: var(--categoryColorAlfa);
-  display: flex;
+  margin-left: 20px;
   border-radius: 5px;
-  /* padding: 2px; */
 }
 
 .categoryWrapper:not(:last-child) {
