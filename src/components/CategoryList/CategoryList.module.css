@@ -1,5 +1,6 @@
 .categoryList {
   margin-left: 15px;
+  border-left: 1px solid rgb(201, 199, 199);
 }
 
 .categoryItem {
@@ -11,21 +12,7 @@
 }
 
 .categoryItem:hover {
-  box-shadow: var(--card-shadow);
-}
-
-.accordion-visible {
-  /* background: #7177ca; */
-  /* width: 100%; */
-  /* color: #fff; */
-  /* cursor: pointer; */
-  /* border: 1px solid #474d9b;; */
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* padding: 7px 15px; */
-  /* border-top-left-radius: 3px; */
-  /* border-top-right-radius: 3px; */
+  /* box-shadow: var(--card-shadow); */
 }
 
 .accordion-toggle {

@@ -3,6 +3,10 @@
   display: flex;
   border-radius: 5px;
   /* padding: 2px; */
+  cursor: initial;
+}
+.materialWrapper:hover {
+  box-shadow: var(--card-shadow);
 }
 
 .materialCode {

@@ -5,12 +5,12 @@
 :root {
   /* Color Palet */
   --categoryColor: #125b56;
-  --categoryColorAlfa: rgba(18, 91, 86, 0.3);
+  --categoryColorAlfa: rgba(18, 91, 86, 0.1);
   --firstLevelColor: #567637;
   --secondLevelColor: #29567f;
   --thirdLevelColor: #44297f;
   --materialColor: #4e4d4f;
-  --materialColorAlfa: rgba(78, 77, 79, 0.3);
+  --materialColorAlfa: rgba(78, 77, 79, 0.1);
 
   --icon-gray: #afb1b8;
   --background-white: #ffffff;

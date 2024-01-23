@@ -1,6 +1,7 @@
 .categoryWrapper {
   background-color: var(--categoryColorAlfa);
   display: flex;
+
   border-radius: 5px;
   /* padding: 2px; */
 }
@@ -10,11 +11,12 @@
 }
 .categoryWrapper:hover {
   /* cursor: pointer; */
+  box-shadow: var(--card-shadow);
 }
 
 .categoryCode {
   padding: 0 10px;
-  border-radius: 5px;
+  border-radius: 0 5px 5px 5px;
   display: inline-block;
   background-color: var(--categoryColor);
   color: var(--text-white);
