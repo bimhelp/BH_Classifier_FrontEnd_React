@@ -1,3 +1,8 @@
+.levelWrapper {
+  margin-left: 20px;
+  margin-bottom: 2px;
+}
+
 .subCategoryWrapper {
   display: flex;
   padding-left: 20px;

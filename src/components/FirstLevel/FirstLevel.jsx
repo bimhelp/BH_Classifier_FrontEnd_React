@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import css from "./FirstLevel.module.css";
 import SecondLevel from "../SecondLevel/SecondLevel";
+import Category from "../Category/Category";
 
 const FirstLevel = ({
   element,
@@ -52,9 +53,8 @@ const FirstLevel = ({
 
   return (
     <>
-      <div onClick={selectFirstLevel} className={css.subCategoryWrapper}>
-        <div className={css.subCategoryCode}> {element.Code}</div>
-        <div>{element.DescriptionUA}</div>
+      <div className={css.levelWrapper}>
+        <Category selectCategory={selectFirstLevel} element={element} />
       </div>
       <div>
         {/* Якщо категорія вибрана то рендеримо підкатегорії */}

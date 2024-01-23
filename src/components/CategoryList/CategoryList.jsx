@@ -1,41 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import css from "./CategoryList.module.css";
-import FirstLevel from "../FirstLevel/FirstLevel";
 import Category from "../Category/Category";
+import { getSubCategory } from "../../services/api";
 
-const CategoryList = ({
-  element,
-  selectCategory,
-  isSelected,
-  firstLevel,
-  secondLevel,
-  thirdLevel,
-}) => {
+const CategoryList = ({ items }) => {
+  const [subCategories, setSubCategories] = useState([]);
+
   const [selectedId, setSelectedId] = useState(null);
-  const [filteredSecondLevel, setFilteredSecondLevel] = useState([]);
+  const [selectedCode, setSelectedCode] = useState(null);
+  const [filteredNextLevel, setFilteredNextLevel] = useState([]);
 
-  // фільтруємо firstLevel відповідно по співпадінню коду stringCpvCode
-  function filterSecondLevel(code) {
-    const filteredSecondLevel = secondLevel.filter(
-      (item) => item.Code.slice(0, 3) === code
-    );
-    // console.log("filteredSecondLevel: ", filteredSecondLevel);
-    // console.log(item.Code.slice(0, 4));
-    setFilteredSecondLevel(filteredSecondLevel);
-  }
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const selectFirstLevel = async (id, code) => {
-    // console.log("id: ", id);
+  useEffect(() => {
+    console.log("selectedCode:", selectedCode);
 
-    // Відкриття-закриття першого рівня
-    if (selectedId === id) {
-      // console.log("selectedId: ", selectedId, "=", id);
-      setSelectedId(null);
-    } else {
-      // console.log("selectedId: ", selectedId, "!=", id);
-      setSelectedId(id);
+    async function subCategory(selectedCode) {
+      setIsLoading(true);
+      try {
+        const response = await getSubCategory(selectedCode);
+        // console.log("response: ", response);
+        setSubCategories(response.data);
+      } catch (error) {
+        setError("error");
+      } finally {
+        setIsLoading(false);
+      }
     }
 
+    if (selectedCode) {
+      subCategory(selectedCode);
+    }
+  }, [selectedCode]);
+
+  // Функція фільтрує
+  function filterNextLevelItems(subCategories, selectedCode) {
+    if (subCategories.length > 0) {
+      const regex = new RegExp(`^${selectedCode}`);
+      const currentLevelItems = subCategories.filter(
+        (item) => item.Code.search(regex) !== -1
+      );
+      console.log("currentLevelItems: ", currentLevelItems);
+
+      setFilteredNextLevel(currentLevelItems);
+    }
+  }
+
+  useEffect(() => {
+    filterNextLevelItems(subCategories, selectedCode);
+  }, [selectedCode, subCategories]);
+
+  // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
+  const selectCategory = async (id, code) => {
     const cpvCode = [];
 
     for (let index = 0; index < code.length; index++) {
@@ -43,41 +60,45 @@ const CategoryList = ({
         break;
       } else {
         cpvCode.push(code[index]);
-        // console.log(code[index]);
       }
     }
 
-    // console.log("cpvCode: ", cpvCode);
     const stringCpvCode = cpvCode.join("");
     // console.log("stringCpvCode: ", stringCpvCode);
+    setSelectedCode(stringCpvCode);
 
-    // фільтруємо firstLevel відповідно по співпадінню коду stringCpvCode
-    filterSecondLevel(stringCpvCode);
+    // Відкриття-закриття категорії
+    if (selectedId === id) {
+      // console.log("selectedId: ", selectedId, "=", id);
+      setSelectedId(null);
+    } else {
+      // console.log("selectedId: ", selectedId, "!=", id);
+      setSelectedId(id);
+    }
   };
 
   return (
     <>
-      <Category element={element} selectCategory={selectCategory} />
-      <div>
-        {/* Якщо категорія вибрана то рендеримо підкатегорії */}
-        {isSelected && (
-          <ul>
-            {firstLevel.map((element) => (
-              <li key={element._id}>
-                <FirstLevel
-                  selectFirstLevel={() =>
-                    selectFirstLevel(element._id, element.Code)
-                  }
-                  element={element}
-                  filteredSecondLevel={filteredSecondLevel}
-                  isSelected={element._id === selectedId}
-                  thirdLevel={thirdLevel}
-                />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <ul>
+        {items.map((item) => (
+          <li key={item._id} className={css.categoryWrapper}>
+            {selectedId === item._id ? (
+              <Category
+                element={item}
+                selectCategory={() => selectCategory(item._id, item.Code)}
+              >
+                <CategoryList items={filteredNextLevel} />
+                <p>Children</p>
+              </Category>
+            ) : (
+              <Category
+                element={item}
+                selectCategory={() => selectCategory(item._id, item.Code)}
+              ></Category>
+            )}
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

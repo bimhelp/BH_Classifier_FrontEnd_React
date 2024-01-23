@@ -9,7 +9,7 @@
   margin-bottom: 2px;
 }
 .categoryWrapper:hover {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .categoryCode {

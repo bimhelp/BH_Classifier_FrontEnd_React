@@ -1,15 +1,12 @@
 .categoryWrapper {
-  background-color: var(--categoryColorAlfa);
-  display: flex;
   border-radius: 5px;
-  /* padding: 2px; */
 }
 
 .categoryWrapper:not(:last-child) {
   margin-bottom: 2px;
 }
 .categoryWrapper:hover {
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .categoryCode {

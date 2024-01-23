@@ -1,12 +1,20 @@
 import React from "react";
 import css from "./Category.module.css";
 
-const Category = ({ element: { Code, DescriptionUA }, selectCategory }) => {
+// Компонент рендерить розмітку категорії і вкладені списки
+const Category = ({
+  element: { Code, DescriptionUA },
+  selectCategory,
+  children,
+}) => {
   return (
-    <div onClick={selectCategory} className={css.categoryWrapper}>
-      <div className={css.categoryCode}>{Code}</div>
-      <div className={css.categoryDescription}>{DescriptionUA}</div>
-    </div>
+    <>
+      <div onClick={selectCategory} className={css.categoryWrapper}>
+        <p className={css.categoryCode}>{Code}</p>
+        <p className={css.categoryDescription}>{DescriptionUA}</p>
+      </div>
+      <div>{children}</div>
+    </>
   );
 };
 
