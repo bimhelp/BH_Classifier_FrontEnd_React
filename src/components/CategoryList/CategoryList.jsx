@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import css from "./CategoryList.module.css";
 import Category from "../Category/Category";
-import { getSubCategory } from "../../services/api";
+import { getSubCategory, searchMaterials } from "../../services/api";
 
 const CategoryList = ({ items }) => {
   const [subCategories, setSubCategories] = useState([]);
+  const [materials, setMaterials] = useState([]);
 
   const [selectedId, setSelectedId] = useState(null);
   const [selectedCode, setSelectedCode] = useState(null);
@@ -13,8 +14,26 @@ const CategoryList = ({ items }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Функція створення змінної (кількості нулів) для регулярного виразу
+  function createQueryString(code) {
+    // Задає початковий рядок
+    // 00000000-0
+    const query = ["0", "0", "0", "0", "0", "0", "0", "0", "-", "."];
+
+    // Заміна елементів у масиві початкового рядка заданим числом
+    const replacedCode = query.splice(0, code.length, ...code);
+    // console.log("replacedCode: ", query);
+
+    const replacedZero = query.splice(code.length, 1, ".");
+    // console.log("replacedDot: ", query);
+
+    const queryString = query.join("");
+    return queryString;
+  }
+
+  // Запит по під категорії
   useEffect(() => {
-    console.log("selectedCode:", selectedCode);
+    // console.log("selectedCode:", selectedCode);
 
     async function subCategory(selectedCode) {
       setIsLoading(true);
@@ -34,37 +53,37 @@ const CategoryList = ({ items }) => {
     }
   }, [selectedCode]);
 
-  // Функція створення змінної (кількості нулів) для регулярного виразу
-  function createQueryString(code) {
-    // Задає початковий рядок
-    // 00000000-0
-    const query = ["0", "0", "0", "0", "0", "0", "0", "0", "-", "."];
+  // Запит по матеріали
+  // useEffect(() => {
+  //   async function getMaterial(selectedCode) {
+  //     try {
+  //       const response = await searchMaterials(selectedCode);
+  //       // setIsLoading(true);
+  //       console.log(response.data.slice(1));
+  //       setMaterials(response.data.slice(1));
+  //     } catch (error) {
+  //       // setError(error);
+  //     } finally {
+  //       // setIsLoading(false);
+  //     }
+  //   }
+  //   getMaterial(selectedCode);
+  // }, [selectedCode]);
 
-    // Заміна елементів у масиві початкового рядка заданим числом
-    const replacedCode = query.splice(0, code.length, ...code);
-    // console.log("replacedCode: ", query);
-
-    const replacedZero = query.splice(code.length, 1, ".");
-    // console.log("replacedDot: ", query);
-
-    const queryString = query.join("");
-    return queryString;
-  }
-
+  // Функція фільтрує елементи для наступної підкатегорії
   useEffect(() => {
-    // Функція фільтрує елементи для наступної підкатегорії
     function filterNextLevelItems(subCategories, selectedCode) {
       if (subCategories.length > 0) {
         const querry = createQueryString(selectedCode);
-        console.log("querry: ", querry);
+        // console.log("querry: ", querry);
 
         const regex = new RegExp(`^${querry}`);
-        console.log("regex: ", regex);
+        // console.log("regex: ", regex);
 
         const currentLevelItems = subCategories.filter(
           (item) => item.Code.search(regex) !== -1
         );
-        console.log("currentLevelItems: ", currentLevelItems);
+        // console.log("currentLevelItems: ", currentLevelItems);
 
         setFilteredNextLevel(currentLevelItems.slice(1));
       }
@@ -101,25 +120,30 @@ const CategoryList = ({ items }) => {
 
   return (
     <>
-      <ul>
-        {items.map((item) => (
-          <li key={item._id} className={css.categoryWrapper}>
-            {selectedId === item._id ? (
-              <Category
-                element={item}
-                selectCategory={() => selectCategory(item._id, item.Code)}
-              >
-                <CategoryList items={filteredNextLevel} />
-              </Category>
-            ) : (
-              <Category
-                element={item}
-                selectCategory={() => selectCategory(item._id, item.Code)}
-              ></Category>
-            )}
-          </li>
-        ))}
-      </ul>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <ul>
+          {items.map((item) => (
+            <li key={item._id} className={css.categoryWrapper}>
+              {selectedId === item._id ? (
+                <Category
+                  element={item}
+                  selectCategory={() => selectCategory(item._id, item.Code)}
+                >
+                  <CategoryList items={filteredNextLevel} />
+                </Category>
+              ) : (
+                <Category
+                  element={item}
+                  selectCategory={() => selectCategory(item._id, item.Code)}
+                ></Category>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+      {error && <p>{error}</p>}
     </>
   );
 };

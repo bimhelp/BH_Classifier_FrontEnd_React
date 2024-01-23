@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Categorylist from "../CategoryList/CategoryList";
-import css from "./Table.module.css";
-import { getMainCategory, getSubCategory } from "../../services/api";
+// import css from "./Table.module.css";
+import { getMainCategory } from "../../services/api";
 
 const Table = () => {
   const [mainCategory, setMainCategory] = useState([]);
-
-  // const [firstLevel, setFirstLevel] = useState([]);
-  // const [secondLevel, setSecondLevel] = useState([]);
-  // const [thirdLevel, setThirdLevel] = useState([]);
-
-  const [isSelected, setIsSelected] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -28,110 +22,15 @@ const Table = () => {
         setIsLoading(false);
       }
     }
-    // викликаємо функцію
     getCategory();
   }, []);
 
-  // Сортування категорій по вкладеності
-  // function sortData(data) {
-  //   const firstLevelItems = [];
-  //   const secondLevelItems = [];
-  //   const thirdLevelItems = [];
-
-  //   data.forEach((element) => {
-  //     // console.log(element.Code.indexOf("0"));
-  //     // потрібно обрізати перші дві цифри тому що бувають категорії які починаються на нуль
-
-  //     switch (element.Code.slice(2, element.Code.length).indexOf("0")) {
-  //       case 0:
-  //         // console.log("level: 0");
-  //         break;
-  //       case 1:
-  //         // console.log("level: 1");
-  //         firstLevelItems.push(element);
-  //         break;
-  //       case 2:
-  //         // console.log("level: 2");
-  //         secondLevelItems.push(element);
-  //         break;
-  //       case 3:
-  //         // console.log("level: 3");
-  //         thirdLevelItems.push(element);
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   });
-  //   // console.log("firstLevelItems: ", firstLevelItems);
-  //   setFirstLevel(firstLevelItems);
-  //   // console.log("secondLevelItems: ", secondLevelItems);
-  //   setSecondLevel(secondLevelItems);
-  //   // console.log("thirdLevelItems: ", thirdLevelItems);
-  //   setThirdLevel(thirdLevelItems);
-  // }
-
-  // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
-
-  // const selectCategory = async (id, code) => {
-  //   // console.log("id: ", id);
-  //   const cpvCode = [];
-
-  //   for (let index = 0; index < code.length; index++) {
-  //     if (code[index] === "0" && index !== 0) {
-  //       break;
-  //     } else {
-  //       cpvCode.push(code[index]);
-  //     }
-  //   }
-
-  //   const stringCpvCode = cpvCode.join("");
-  //   // console.log("stringCpvCode: ", stringCpvCode);
-
-  //   // Відкриття-закриття основної категорії
-  //   if (selectedId === id) {
-  //     // console.log("selectedId: ", selectedId, "=", id);
-  //     setSelectedId(null);
-  //   } else {
-  //     // console.log("selectedId: ", selectedId, "!=", id);
-  //     setSelectedId(id);
-  //   }
-
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await getSubCategory(stringCpvCode);
-  //     // sortData(response.data);
-  //   } catch (error) {
-  //     setError("error");
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
-
   return (
     <>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <Categorylist items={mainCategory} isSelected={isSelected} />
-      )}
+      {isLoading ? <p>Loading...</p> : <Categorylist items={mainCategory} />}
       {error && <p>{error}</p>}
     </>
   );
 };
 
 export default Table;
-
-//  <ul className={css.table}>
-//    {mainCategory.map((element) => (
-//      <li key={element._id} className={css.row}>
-//        <Categorylist
-//          element={element}
-//          selectCategory={() => selectCategory(element._id, element.Code)}
-//          isSelected={element._id === selectedId}
-//          firstLevel={firstLevel}
-//          secondLevel={secondLevel}
-//          thirdLevel={thirdLevel}
-//        />
-//      </li>
-//    ))}
-//  </ul>;
