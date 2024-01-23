@@ -34,22 +34,44 @@ const CategoryList = ({ items }) => {
     }
   }, [selectedCode]);
 
-  // Функція фільтрує
-  function filterNextLevelItems(subCategories, selectedCode) {
-    if (subCategories.length > 0) {
-      const regex = new RegExp(`^${selectedCode}`);
-      const currentLevelItems = subCategories.filter(
-        (item) => item.Code.search(regex) !== -1
-      );
-      console.log("currentLevelItems: ", currentLevelItems);
+  // Функція створення змінної (кількості нулів) для регулярного виразу
+  function createQueryString(code) {
+    // Задає початковий рядок
+    // 00000000-0
+    const query = ["0", "0", "0", "0", "0", "0", "0", "0", "-", "."];
 
-      setFilteredNextLevel(currentLevelItems);
-    }
+    // Заміна елементів у масиві початкового рядка заданим числом
+    const replacedCode = query.splice(0, code.length, ...code);
+    // console.log("replacedCode: ", query);
+
+    const replacedZero = query.splice(code.length, 1, ".");
+    // console.log("replacedDot: ", query);
+
+    const queryString = query.join("");
+    return queryString;
   }
 
   useEffect(() => {
+    // Функція фільтрує елементи для наступної підкатегорії
+    function filterNextLevelItems(subCategories, selectedCode) {
+      if (subCategories.length > 0) {
+        const querry = createQueryString(selectedCode);
+        console.log("querry: ", querry);
+
+        const regex = new RegExp(`^${querry}`);
+        console.log("regex: ", regex);
+
+        const currentLevelItems = subCategories.filter(
+          (item) => item.Code.search(regex) !== -1
+        );
+        console.log("currentLevelItems: ", currentLevelItems);
+
+        setFilteredNextLevel(currentLevelItems.slice(1));
+      }
+    }
+
     filterNextLevelItems(subCategories, selectedCode);
-  }, [selectedCode, subCategories]);
+  }, [subCategories, selectedCode]);
 
   // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
   const selectCategory = async (id, code) => {
@@ -88,7 +110,6 @@ const CategoryList = ({ items }) => {
                 selectCategory={() => selectCategory(item._id, item.Code)}
               >
                 <CategoryList items={filteredNextLevel} />
-                <p>Children</p>
               </Category>
             ) : (
               <Category

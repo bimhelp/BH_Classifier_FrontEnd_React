@@ -10,7 +10,6 @@ const Table = () => {
   // const [secondLevel, setSecondLevel] = useState([]);
   // const [thirdLevel, setThirdLevel] = useState([]);
 
-  const [selectedId, setSelectedId] = useState(null);
   const [isSelected, setIsSelected] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
