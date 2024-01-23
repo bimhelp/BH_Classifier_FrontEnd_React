@@ -1,0 +1,7 @@
+.materialList {
+  margin-left: 15px;
+}
+
+.materialItem:not(:last-child) {
+  margin-bottom: 2px;
+}

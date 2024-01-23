@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+
 import css from "./CategoryList.module.css";
 import Category from "../Category/Category";
+import MaterialList from "../MaterialList/MaterialList";
 import { getSubCategory, searchMaterials } from "../../services/api";
 
 const CategoryList = ({ items }) => {
@@ -21,9 +23,11 @@ const CategoryList = ({ items }) => {
     const query = ["0", "0", "0", "0", "0", "0", "0", "0", "-", "."];
 
     // Заміна елементів у масиві початкового рядка заданим числом
+    // eslint-disable-next-line no-unused-vars
     const replacedCode = query.splice(0, code.length, ...code);
     // console.log("replacedCode: ", query);
 
+    // eslint-disable-next-line no-unused-vars
     const replacedZero = query.splice(code.length, 1, ".");
     // console.log("replacedDot: ", query);
 
@@ -54,21 +58,20 @@ const CategoryList = ({ items }) => {
   }, [selectedCode]);
 
   // Запит по матеріали
-  // useEffect(() => {
-  //   async function getMaterial(selectedCode) {
-  //     try {
-  //       const response = await searchMaterials(selectedCode);
-  //       // setIsLoading(true);
-  //       console.log(response.data.slice(1));
-  //       setMaterials(response.data.slice(1));
-  //     } catch (error) {
-  //       // setError(error);
-  //     } finally {
-  //       // setIsLoading(false);
-  //     }
-  //   }
-  //   getMaterial(selectedCode);
-  // }, [selectedCode]);
+  useEffect(() => {
+    async function getMaterial(selectedCode) {
+      try {
+        const response = await searchMaterials(selectedCode);
+        // console.log(response.data.slice(1));
+        setMaterials(response.data.slice(1));
+      } catch (error) {
+        // setError(error);
+      } finally {
+        // setIsLoading(false);
+      }
+    }
+    getMaterial(selectedCode);
+  }, [selectedCode]);
 
   // Функція фільтрує елементи для наступної підкатегорії
   useEffect(() => {
@@ -123,15 +126,19 @@ const CategoryList = ({ items }) => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
+        <ul className={css.categoryList}>
           {items.map((item) => (
-            <li key={item._id} className={css.categoryWrapper}>
+            <li key={item._id} className={css.categoryItem}>
               {selectedId === item._id ? (
                 <Category
                   element={item}
                   selectCategory={() => selectCategory(item._id, item.Code)}
                 >
-                  <CategoryList items={filteredNextLevel} />
+                  {selectedCode.length > 4 ? (
+                    <MaterialList materials={materials} />
+                  ) : (
+                    <CategoryList items={filteredNextLevel} />
+                  )}
                 </Category>
               ) : (
                 <Category

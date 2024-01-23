@@ -4,7 +4,7 @@ const Material = ({ material }) => {
   return (
     <div className={css.materialWrapper}>
       <p className={css.materialCode}> {material.Code}</p>
-      <p>{material.DescriptionUA}</p>
+      <p className={css.materialDescription}>{material.DescriptionUA}</p>
     </div>
   );
 };
