@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Category from "../Category/Category";
+import Category from "../CategoryList/CategoryList";
 import css from "./Table.module.css";
-import { getCategory, getSubCategory } from "../../services/api";
+import { getMainCategory, getSubCategory } from "../../services/api";
 
 const Table = () => {
   const [mainCategory, setMainCategory] = useState([]);
@@ -18,7 +18,7 @@ const Table = () => {
     async function getAllCategory() {
       setIsLoading(true);
       try {
-        const response = await getCategory();
+        const response = await getMainCategory();
         setMainCategory(response.data);
       } catch {
         setError("error");

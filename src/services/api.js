@@ -10,7 +10,7 @@ export async function getAll() {
     console.log(error);
   }
 }
-export async function getCategory() {
+export async function getMainCategory() {
   try {
     const response = await axios.get(`/elements/category`);
     // console.log(response);
