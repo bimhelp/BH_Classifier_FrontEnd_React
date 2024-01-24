@@ -1,9 +1,8 @@
 .categoryWrapper {
-  background-color: var(--categoryColorAlfa);
+  background-color: var(--materialColorAlfa);
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  /* padding: 2px; */
 }
 
 @media screen and (min-width: 680px) {
@@ -16,8 +15,8 @@
   margin-bottom: 2px;
 }
 .categoryWrapper:hover {
-  /* cursor: pointer; */
   box-shadow: var(--card-shadow);
+  background-color: white;
 }
 
 .categoryCode {
@@ -36,13 +35,17 @@
 
 .main {
   background-color: var(--categoryColor);
+  border-color: var(--categoryColor);
 }
 .first {
   background-color: var(--firstLevelColor);
+  border-color: var(--firstLevelColor);
 }
 .second {
   background-color: var(--secondLevelColor);
+  border-color: var(--secondLevelColor);
 }
 .third {
   background-color: var(--thirdLevelColor);
+  border-color: var(--thirdLevelColor);
 }

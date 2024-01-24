@@ -8,8 +8,13 @@
   --categoryColorAlfa: rgba(18, 91, 86, 0.1);
 
   --firstLevelColor: #567637;
+  --firstLevelColorAlfa: rgba(86, 118, 55, 0.1);
+
   --secondLevelColor: #29567f;
+  --secondLevelColorAlfa: rgba(41, 86, 127, 0.1);
+
   --thirdLevelColor: #44297f;
+  --thirdLevelColorAlfa: rgba(68, 41, 127, 0.1);
 
   --materialColor: #4e4d4f;
   --materialColorAlfa: rgba(78, 77, 79, 0.1);
@@ -42,6 +47,11 @@
     0px 2px 1px rgba(0, 0, 0, 0.2);
   --card-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12),
     0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+
+  --big-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+
+  --all-side-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
   --cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
   --time-animation: 250ms;

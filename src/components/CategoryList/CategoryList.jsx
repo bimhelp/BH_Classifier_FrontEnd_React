@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-
-import css from "./CategoryList.module.css";
-import Category from "../Category/Category";
-import MaterialList from "../MaterialList/MaterialList";
+// functions
 import { getSubCategory, searchMaterials } from "../../services";
 import { cutCpvCode, filterNextLevelItems } from "../../services";
+// components
+import Category from "../Category/Category";
+import MaterialList from "../MaterialList/MaterialList";
+// styles
+import css from "./CategoryList.module.css";
 
 const CategoryList = ({ items }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -42,14 +44,20 @@ const CategoryList = ({ items }) => {
   // Запит по матеріали
   useEffect(() => {
     async function getMaterial(selectedCode) {
+      setIsLoading(true);
       try {
         const response = await searchMaterials(selectedCode);
-        // console.log(response.data.slice(1));
-        setMaterials(response.data.slice(1));
+        // console.log(response.data);
+
+        if (response.data.length < 1) {
+          return;
+        } else {
+          setMaterials(response.data.slice(1));
+        }
       } catch (error) {
         // setError(error);
       } finally {
-        // setIsLoading(false);
+        setIsLoading(false);
       }
     }
     getMaterial(selectedCode);

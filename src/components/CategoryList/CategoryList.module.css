@@ -11,10 +11,6 @@
   margin-bottom: 2px;
 }
 
-.categoryItem:hover {
-  /* box-shadow: var(--card-shadow); */
-}
-
 /* .accordion-toggle {
   height: 0px;
   opacity: 0;
