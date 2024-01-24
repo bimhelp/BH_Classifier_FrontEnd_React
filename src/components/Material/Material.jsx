@@ -1,11 +1,25 @@
 import React from "react";
-import css from "./Material.module.css";
-const Material = ({ material }) => {
+import {
+  MaterialWrapper,
+  MaterialCode,
+  Description,
+  MaterialPrice,
+  MaterialUnit,
+  Extended,
+} from "./Material.styled";
+
+const Material = ({ material: { Code, DescriptionUA, Price, Unit } }) => {
   return (
-    <div className={css.materialWrapper}>
-      <p className={css.materialCode}> {material.Code}</p>
-      <p className={css.materialDescription}>{material.DescriptionUA}</p>
-    </div>
+    <MaterialWrapper>
+      <MaterialCode> {Code}</MaterialCode>
+      <div>
+        <Description>{DescriptionUA}</Description>
+        <Extended>
+          {Price && <MaterialPrice>Price: {Price} &#8372;</MaterialPrice>}
+          {Unit && <MaterialUnit> {Unit} </MaterialUnit>}
+        </Extended>
+      </div>
+    </MaterialWrapper>
   );
 };
 

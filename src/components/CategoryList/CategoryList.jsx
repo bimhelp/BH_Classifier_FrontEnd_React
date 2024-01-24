@@ -47,7 +47,7 @@ const CategoryList = ({ items }) => {
       setIsLoading(true);
       try {
         const response = await searchMaterials(selectedCode);
-        // console.log(response.data);
+        // console.log("materials", response.data);
 
         if (response.data.length < 1) {
           return;

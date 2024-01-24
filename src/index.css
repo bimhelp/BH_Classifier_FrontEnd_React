@@ -19,6 +19,9 @@
   --materialColor: #4e4d4f;
   --materialColorAlfa: rgba(78, 77, 79, 0.1);
 
+  --price-color: #609729;
+  --unit-color: #29567f;
+
   --icon-gray: #afb1b8;
   --background-white: #ffffff;
   --background-white-transperent: rgba(255, 255, 255, 0.1);
@@ -35,7 +38,7 @@
   --accent: #0a73a7;
   --accent-hover: #0d83be;
   --accent-transparent: rgba(33, 149, 243, 0.658);
-  --font-main: Roboto, sans-serif;
+  --font-main: Robotgo, sans-serif;
   --font-decor: Raleway, Segoe UI, sans-serif;
   --border-gray: rgba(236, 236, 236, 1);
 
