@@ -5,7 +5,6 @@ export const MaterialWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  cursor: initial;
 
   &:hover {
     box-shadow: var(--card-shadow);

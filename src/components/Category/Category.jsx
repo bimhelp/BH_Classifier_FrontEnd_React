@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import css from "./Category.module.css";
 import { createCssClass, cutCpvCode } from "../../services";
+import {
+  CategoryWrapper,
+  CategoryCode,
+  CategoryDescription,
+} from "./Category.styled";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -17,13 +21,15 @@ const Category = ({
 
   return (
     <>
-      <div onClick={selectCategory} className={css.categoryWrapper}>
-        <p className={`${css.categoryCode} ${css[cssClass]}`}>{Code}</p>
-        <p className={css.categoryDescription}>{DescriptionUA}</p>
-      </div>
+      <CategoryWrapper onClick={selectCategory}>
+        <CategoryCode cssClass={cssClass}>{Code}</CategoryCode>
+        <CategoryDescription>{DescriptionUA}</CategoryDescription>
+      </CategoryWrapper>
       <div>{children}</div>
     </>
   );
 };
 
 export default Category;
+
+// className={`${css.categoryCode} ${css[cssClass]}`}

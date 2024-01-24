@@ -11,9 +11,6 @@
   }
 }
 
-.categoryWrapper:not(:last-child) {
-  margin-bottom: 2px;
-}
 .categoryWrapper:hover {
   box-shadow: var(--card-shadow);
   background-color: white;

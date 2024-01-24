@@ -15,7 +15,7 @@ const Material = ({ material: { Code, DescriptionUA, Price, Unit } }) => {
       <div>
         <Description>{DescriptionUA}</Description>
         <Extended>
-          {Price && <MaterialPrice>Price: {Price} &#8372;</MaterialPrice>}
+          {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
           {Unit && <MaterialUnit> {Unit} </MaterialUnit>}
         </Extended>
       </div>

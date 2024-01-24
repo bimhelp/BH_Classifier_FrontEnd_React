@@ -5,8 +5,7 @@ import { cutCpvCode, filterNextLevelItems } from "../../services";
 // components
 import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
-// styles
-import css from "./CategoryList.module.css";
+import { List, Item } from "./CategoryList.styled";
 
 const CategoryList = ({ items }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -96,9 +95,9 @@ const CategoryList = ({ items }) => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <ul className={css.categoryList}>
+        <List>
           {items.map((item) => (
-            <li key={item._id} className={css.categoryItem}>
+            <Item key={item._id}>
               {selectedId === item._id ? (
                 <Category
                   element={item}
@@ -116,9 +115,9 @@ const CategoryList = ({ items }) => {
                   selectCategory={() => selectCategory(item._id, item.Code)}
                 ></Category>
               )}
-            </li>
+            </Item>
           ))}
-        </ul>
+        </List>
       )}
       {error && <p>{error}</p>}
     </>
