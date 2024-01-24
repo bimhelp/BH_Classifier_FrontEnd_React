@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import css from "./CategoryList.module.css";
 import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
-import { getSubCategory, searchMaterials } from "../../services/api";
+import { getSubCategory, searchMaterials } from "../../services";
+import { cutCpvCode, filterNextLevelItems } from "../../services";
 
 const CategoryList = ({ items }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -15,25 +16,6 @@ const CategoryList = ({ items }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // Функція створення змінної (кількості нулів) для регулярного виразу
-  function createQueryString(code) {
-    // Задає початковий рядок
-    // 00000000-0
-    const query = ["0", "0", "0", "0", "0", "0", "0", "0", "-", "."];
-
-    // Заміна елементів у масиві початкового рядка заданим числом
-    // eslint-disable-next-line no-unused-vars
-    const replacedCode = query.splice(0, code.length, ...code);
-    // console.log("replacedCode: ", query);
-
-    // eslint-disable-next-line no-unused-vars
-    const replacedZero = query.splice(code.length, 1, ".");
-    // console.log("replacedDot: ", query);
-
-    const queryString = query.join("");
-    return queryString;
-  }
 
   // Запит по під категорії
   useEffect(() => {
@@ -73,45 +55,25 @@ const CategoryList = ({ items }) => {
     getMaterial(selectedCode);
   }, [selectedCode]);
 
-  // Функція фільтрує елементи для наступної підкатегорії
+  // Фільтруємо елементи для наступної підкатегорії
   useEffect(() => {
-    function filterNextLevelItems(subCategories, selectedCode) {
-      if (subCategories.length > 0) {
-        const querry = createQueryString(selectedCode);
-        // console.log("querry: ", querry);
-
-        const regex = new RegExp(`^${querry}`);
-        // console.log("regex: ", regex);
-
-        const currentLevelItems = subCategories.filter(
-          (item) => item.Code.search(regex) !== -1
-        );
-        // console.log("currentLevelItems: ", currentLevelItems);
-
-        setFilteredNextLevel(currentLevelItems.slice(1));
-      }
+    if (subCategories.length > 0) {
+      const currentLevelItems = filterNextLevelItems(
+        subCategories,
+        selectedCode
+      );
+      setFilteredNextLevel(currentLevelItems.slice(1));
     }
-
-    filterNextLevelItems(subCategories, selectedCode);
   }, [subCategories, selectedCode]);
 
-  // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
+  // Функція формує cpv код і тоглить відкриття категорії
   const selectCategory = async (id, code) => {
-    const cpvCode = [];
+    setSelectedCode(cutCpvCode(code));
+    toggleCategory(id);
+  };
 
-    for (let index = 0; index < code.length; index++) {
-      if (code[index] === "0" && index !== 0) {
-        break;
-      } else {
-        cpvCode.push(code[index]);
-      }
-    }
-
-    const stringCpvCode = cpvCode.join("");
-    // console.log("stringCpvCode: ", stringCpvCode);
-    setSelectedCode(stringCpvCode);
-
-    // Відкриття-закриття категорії
+  // Відкриття-закриття категорії
+  function toggleCategory(id) {
     if (selectedId === id) {
       // console.log("selectedId: ", selectedId, "=", id);
       setSelectedId(null);
@@ -119,7 +81,7 @@ const CategoryList = ({ items }) => {
       // console.log("selectedId: ", selectedId, "!=", id);
       setSelectedId(id);
     }
-  };
+  }
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import css from "./Category.module.css";
+import { createCssClass, cutCpvCode } from "../../services";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -9,53 +10,10 @@ const Category = ({
 }) => {
   const [cssClass, setCssClass] = useState(null);
 
-  // Функція створює css клас в залежності від довжини cpvКоду
-  function createCssClass(code) {
-    console.log("code: ", code);
-
-    var cssClass = "";
-    switch (code.length) {
-      case 2:
-        cssClass = "main";
-        break;
-      case 3:
-        cssClass = "first";
-        break;
-      case 4:
-        cssClass = "second";
-        break;
-      case 5:
-        cssClass = "third";
-        break;
-      default:
-        cssClass = "default";
-        break;
-    }
-    setCssClass(cssClass);
-    console.log("cssClass: ", cssClass);
-  }
   useEffect(() => {
     const cutedCpvCode = cutCpvCode(Code);
-    createCssClass(cutedCpvCode);
-    console.log("createColor");
+    setCssClass(createCssClass(cutedCpvCode));
   }, [Code]);
-
-  // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
-  const cutCpvCode = (code) => {
-    const cpvCode = [];
-
-    for (let index = 0; index < code.length; index++) {
-      if (code[index] === "0" && index !== 0) {
-        break;
-      } else {
-        cpvCode.push(code[index]);
-      }
-    }
-
-    const stringCpvCode = cpvCode.join("");
-    console.log("stringCpvCode: ", stringCpvCode);
-    return stringCpvCode;
-  };
 
   return (
     <>
