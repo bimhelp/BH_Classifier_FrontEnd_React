@@ -15,17 +15,13 @@
   /* box-shadow: var(--card-shadow); */
 }
 
-.accordion-toggle {
+/* .accordion-toggle {
   height: 0px;
-  /* font-size: 18px; */
   opacity: 0;
   transition: opacity 0.3s ease-in-out, height 0.3s 0.3s ease-in-out;
-  /* color: #333; */
-  /* border-bottom-left-radius: 3px; */
-  /* border-bottom-right-radius: 3px; */
-}
+} */
 
-.animated {
+/* .animated {
   opacity: 1;
   transition: height 0.3s ease-in-out, opacity 0.3s 0.3s ease-in-out;
-}
+} */

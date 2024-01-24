@@ -1,10 +1,18 @@
 .materialWrapper {
   background-color: var(--materialColorAlfa);
   display: flex;
+  flex-direction: column;
   border-radius: 5px;
   /* padding: 2px; */
   cursor: initial;
 }
+
+@media screen and (min-width: 680px) {
+  .materialWrapper {
+    flex-direction: row;
+  }
+}
+
 .materialWrapper:hover {
   box-shadow: var(--card-shadow);
 }

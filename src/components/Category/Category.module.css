@@ -1,9 +1,15 @@
 .categoryWrapper {
   background-color: var(--categoryColorAlfa);
   display: flex;
-
+  flex-direction: column;
   border-radius: 5px;
   /* padding: 2px; */
+}
+
+@media screen and (min-width: 680px) {
+  .categoryWrapper {
+    flex-direction: row;
+  }
 }
 
 .categoryWrapper:not(:last-child) {
@@ -26,4 +32,17 @@
 
 .categoryDescription {
   padding-left: 10px;
+}
+
+.main {
+  background-color: var(--categoryColor);
+}
+.first {
+  background-color: var(--firstLevelColor);
+}
+.second {
+  background-color: var(--secondLevelColor);
+}
+.third {
+  background-color: var(--thirdLevelColor);
 }
