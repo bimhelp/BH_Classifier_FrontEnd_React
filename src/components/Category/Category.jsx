@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createCssClass, cutCpvCode } from "../../services";
+import { createLevel, cutCpvCode } from "../../services";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -12,17 +12,17 @@ const Category = ({
   selectCategory,
   children,
 }) => {
-  const [cssClass, setCssClass] = useState(null);
+  const [level, setLevel] = useState(null);
 
   useEffect(() => {
     const cutedCpvCode = cutCpvCode(Code);
-    setCssClass(createCssClass(cutedCpvCode));
+    setLevel(createLevel(cutedCpvCode));
   }, [Code]);
 
   return (
     <>
       <CategoryWrapper onClick={selectCategory}>
-        <CategoryCode cssClass={cssClass}>{Code}</CategoryCode>
+        <CategoryCode level={level}>{Code}</CategoryCode>
         <CategoryDescription>{DescriptionUA}</CategoryDescription>
       </CategoryWrapper>
       <div>{children}</div>
@@ -32,4 +32,4 @@ const Category = ({
 
 export default Category;
 
-// className={`${css.categoryCode} ${css[cssClass]}`}
+// className={`${css.categoryCode} ${css[level]}`}

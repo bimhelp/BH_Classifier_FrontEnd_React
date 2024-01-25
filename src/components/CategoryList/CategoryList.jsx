@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 // functions
 import { getSubCategory, searchMaterials } from "../../services";
-import {
-  cutCpvCode,
-  filterNextLevelItems,
-  createCssClass,
-} from "../../services";
+import { cutCpvCode, filterNextLevelItems, createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
@@ -18,7 +14,7 @@ const CategoryList = ({ items }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [selectedCode, setSelectedCode] = useState(null);
   const [filteredNextLevel, setFilteredNextLevel] = useState([]);
-  const [cssClass, setCssClass] = useState(null);
+  const [level, setLevel] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -81,7 +77,7 @@ const CategoryList = ({ items }) => {
   useEffect(() => {
     if (items.length > 0) {
       const cutedCpvCode = cutCpvCode(items[0].Code);
-      setCssClass(createCssClass(cutedCpvCode));
+      setLevel(createLevel(cutedCpvCode));
     }
   }, [items, selectedCode]);
 
@@ -107,7 +103,7 @@ const CategoryList = ({ items }) => {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <List cssClass={cssClass}>
+        <List level={level}>
           {items.map((item) => (
             <Item key={item._id}>
               {selectedId === item._id ? (

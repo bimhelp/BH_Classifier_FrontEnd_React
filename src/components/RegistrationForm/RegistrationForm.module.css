@@ -4,7 +4,7 @@
   /* outline: 1px solid purple; */
   padding: 30px 0;
   width: 288px;
-  background-color: #2a2c36;
+  background-color: #a0a0a0;
   box-shadow: 0px 4px 48px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   padding: 20px;
@@ -46,7 +46,7 @@
 .label {
 }
 .input {
-  background-color: #2a2c36;
+  /* background-color: #2a2c36; */
   border: 1px solid white;
   border-radius: 6px;
   font-weight: 400;
@@ -55,7 +55,7 @@
   letter-spacing: -0.02em;
   /* padding: 12px 12px 12px 40px; */
   padding: 8px;
-  color: white;
+  /* color: white; */
 }
 
 .input:hover,

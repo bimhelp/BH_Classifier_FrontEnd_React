@@ -1,12 +1,15 @@
 import React from "react";
 import { StyledButton } from "./Button.styled";
-import { IoMdRadioButtonOn } from "react-icons/io";
 
-const Button = ({ type = "button", disabled = false, children }) => {
+const Button = ({
+  type = "button",
+  disabled = false,
+  icon: Icon = null,
+  children,
+}) => {
   return (
     <StyledButton type={type} disabled={disabled}>
-      <IoMdRadioButtonOn />
-
+      {Icon && <Icon />}
       {children}
     </StyledButton>
   );

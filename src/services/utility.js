@@ -1,27 +1,26 @@
 // Функція створює css клас в залежності від довжини cpvКоду
-export function createCssClass(code) {
+export function createLevel(code) {
   // console.log("code: ", code);
 
-  var cssClass = "";
+  var level = "";
   switch (code.length) {
     case 2:
-      cssClass = "main";
+      level = "main";
       break;
     case 3:
-      cssClass = "first";
+      level = "first";
       break;
     case 4:
-      cssClass = "second";
+      level = "second";
       break;
     case 5:
-      cssClass = "third";
+      level = "third";
       break;
     default:
-      cssClass = "default";
+      level = "default";
       break;
   }
-  // console.log("cssClass:", cssClass);
-  return cssClass;
+  return level;
 }
 
 // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
@@ -80,9 +79,9 @@ export function filterNextLevelItems(subCategories, selectedCode) {
 }
 
 // Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
-export const setBgColor = ({ cssClass, theme }) => {
+export const setBgColor = ({ level, theme }) => {
   // console.log(theme);
-  switch (cssClass) {
+  switch (level) {
     case "main":
       return theme.colors.mainLevelColor;
     case "first":

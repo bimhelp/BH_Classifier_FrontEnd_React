@@ -38,7 +38,7 @@ export const CategoryDescription = styled.p`
 
 // Можна отримати доступ до пропсівї
 //  ${(props) => {
-//     console.log(props.cssClass);
+//     console.log(props);
 //   }}
 
 // Так можна додати зображення на фон
