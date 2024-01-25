@@ -1,15 +1,20 @@
 import styled from "styled-components";
+import { setBgColor } from "../../services";
 
 export const List = styled.ul`
-  margin-left: 15px;
-  border-left: 1px solid rgb(201, 199, 199);
+  margin-left: ${(props) => props.theme.space[4]}px;
+
+  border-left: 2px solid;
+  border-color: ${setBgColor};
 `;
 
 export const Item = styled.li`
-  &:hover {
+  &:hover,
+  &:focus {
     cursor: pointer;
   }
+
   &:not(:last-child) {
-    margin-bottom: 2px;
+    margin-bottom: ${(props) => props.theme.space[1]}px;
   }
 `;

@@ -78,3 +78,20 @@ export function filterNextLevelItems(subCategories, selectedCode) {
     return currentLevelItems;
   }
 }
+
+// Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
+export const setBgColor = ({ cssClass, theme }) => {
+  // console.log(theme);
+  switch (cssClass) {
+    case "main":
+      return theme.colors.mainLevelColor;
+    case "first":
+      return theme.colors.firstLevelColor;
+    case "second":
+      return theme.colors.secondLevelColor;
+    case "third":
+      return theme.colors.thirdLevelColor;
+    default:
+      return theme.colors.mainLevelColor;
+  }
+};

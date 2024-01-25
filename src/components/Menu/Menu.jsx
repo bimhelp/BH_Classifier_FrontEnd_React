@@ -13,12 +13,12 @@ const Menu = () => {
         Table
       </NavLink>
 
-      {/* <NavLink to="add" className={css.menuItem}>
+      <NavLink to="add" className={css.menuItem}>
         Add Item
       </NavLink>
       <NavLink to="cabinet" className={css.menuItem}>
         Cabinet
-      </NavLink> */}
+      </NavLink>
     </nav>
   );
 };

@@ -25,6 +25,7 @@ export const MaterialCode = styled.p`
   color: var(--text-white);
   min-width: 90px;
   text-align: center;
+  color: ${(props) => props.theme.colors.textWhiteColor};
 `;
 
 export const Description = styled.p`

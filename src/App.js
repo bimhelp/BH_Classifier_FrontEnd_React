@@ -18,14 +18,13 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="welcome" element={<WelcomePage />} />
-        <Route path="registration" element={<RegisterPage />} />
-        <Route path="login" element={<LogInPage />} />
-
         <Route path="/" element={<SharedLayout />}>
+          <Route index element={<WelcomePage />} />
+          <Route path="registration" element={<RegisterPage />} />
+          <Route path="login" element={<LogInPage />} />
+          <Route path="table" element={<TablePage />} />
           <Route path="cabinet" element={<CabinetPage />} />
           <Route path="add" element={<AddItemPage />} />
-          <Route path="table" element={<TablePage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
