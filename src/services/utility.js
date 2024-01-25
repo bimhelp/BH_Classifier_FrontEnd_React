@@ -4,6 +4,9 @@ export function createLevel(code) {
 
   var level = "";
   switch (code.length) {
+    case 1:
+      level = "main";
+      break;
     case 2:
       level = "main";
       break;
@@ -22,6 +25,9 @@ export function createLevel(code) {
     case 7:
       level = "five";
       break;
+    case 8:
+      level = "six";
+      break;
     default:
       level = "default";
       break;
@@ -35,6 +41,9 @@ export const cutCpvCode = (code) => {
 
   for (let index = 0; index < code.length; index++) {
     if (code[index] === "0" && index !== 0) {
+      break;
+    }
+    if (code[index] === "-") {
       break;
     } else {
       cpvCode.push(code[index]);
@@ -99,6 +108,8 @@ export const setBgColor = ({ level, theme }) => {
     case "four":
       return theme.colors.materialColor;
     case "five":
+      return theme.colors.materialColor;
+    case "six":
       return theme.colors.materialColor;
     default:
       return theme.colors.mainLevelColor;
