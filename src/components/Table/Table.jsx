@@ -3,7 +3,7 @@ import Categorylist from "../CategoryList/CategoryList";
 // import css from "./Table.module.css";
 import { getMainCategory } from "../../services/api";
 
-const Table = () => {
+const Table = ({ result }) => {
   const [mainCategory, setMainCategory] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,12 @@ const Table = () => {
 
   return (
     <>
-      {isLoading ? <p>Loading...</p> : <Categorylist items={mainCategory} />}
+      {result.length > 0 ? (
+        <Categorylist items={result} />
+      ) : (
+        <Categorylist items={mainCategory} />
+      )}
+      {/* {isLoading ? <p>Loading...</p> : <Categorylist items={mainCategory} />} */}
       {error && <p>{error}</p>}
     </>
   );

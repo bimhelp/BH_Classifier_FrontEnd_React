@@ -1,6 +1,9 @@
 // Документація як робити тему
 // https://theme-ui.com/theme-spec
 
+// styled-system працює як tailwind
+// https://github.com/styled-system/styled-system
+
 export const theme = Object.freeze({
   colors: {
     mainLevelColor: "#125b56",

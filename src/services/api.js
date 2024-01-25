@@ -44,6 +44,18 @@ export async function searchMaterials(number) {
     console.log(error);
   }
 }
+export async function searchByDescription(description) {
+  try {
+    const response = await axios.get("/elements/search/by-description", {
+      params: {
+        description: description,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function addElement(newElement) {
   try {

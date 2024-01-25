@@ -16,6 +16,12 @@ export function createLevel(code) {
     case 5:
       level = "third";
       break;
+    case 6:
+      level = "four";
+      break;
+    case 7:
+      level = "five";
+      break;
     default:
       level = "default";
       break;
@@ -90,7 +96,13 @@ export const setBgColor = ({ level, theme }) => {
       return theme.colors.secondLevelColor;
     case "third":
       return theme.colors.thirdLevelColor;
+    case "four":
+      return theme.colors.materialColor;
+    case "five":
+      return theme.colors.materialColor;
     default:
       return theme.colors.mainLevelColor;
   }
 };
+
+// Функція отримує результат пошуку і структурує його по вкладеності
