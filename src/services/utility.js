@@ -132,10 +132,11 @@ export function checkIsString(query) {
 
 // Функція повертає число із введеного користувачем рядка
 export function parseNumber(query) {
-  const number = Number.parseInt(query);
-
-  // console.log("number: ", number);
-  return number;
+  // Якщо код починається з нуля то потрібно додати цей нуль, щоб отримати правильний результат пошуку
+  if (query.startsWith("0")) {
+    // console.log("with zero", "0".concat(Number.parseInt(query)));
+    return "0".concat(Number.parseInt(query));
+  } else return Number.parseInt(query);
 }
 
 // Функція фільтрує категорії із результату пошуку
