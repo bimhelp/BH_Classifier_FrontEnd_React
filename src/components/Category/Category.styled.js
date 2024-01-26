@@ -35,6 +35,11 @@ export const CategoryDescription = styled.p`
   padding-left: 10px;
   font-size: ${(props) => props.theme.fontSizes.s};
 `;
+export const HilightDescription = styled.div`
+  padding-left: 10px;
+  font-size: ${(props) => props.theme.fontSizes.s};
+  background-color: ${(props) => props.type === "mark" && "yellow"};
+`;
 
 // Можна отримати доступ до пропсівї
 //  ${(props) => {

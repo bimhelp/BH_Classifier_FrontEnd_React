@@ -12,6 +12,7 @@ import {
 
 const TablePage = () => {
   const [searchResult, setSearchResult] = useState([]);
+  const [query, setQuery] = useState("");
   const [category, setCategory] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +36,8 @@ const TablePage = () => {
     const codeNumber = parseNumber(searchValue);
 
     if (isString) {
-      // console.log("isString: ", isString);
+      setQuery(searchValue);
+
       // console.log(`search ${searchValue} by description`);
       async function search(searchValue) {
         setIsLoading(true);
@@ -83,7 +85,7 @@ const TablePage = () => {
         />
       </Section>
       <Section>
-        <Table category={category} materials={materials} />
+        <Table category={category} materials={materials} query={query} />
       </Section>
       {error && <p>{error.code}</p>}
     </>

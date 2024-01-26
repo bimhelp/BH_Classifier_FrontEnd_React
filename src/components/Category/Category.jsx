@@ -4,13 +4,16 @@ import {
   CategoryWrapper,
   CategoryCode,
   CategoryDescription,
+  HilightDescription,
 } from "./Category.styled";
+import { hiLight } from "../../services";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
   element: { Code, DescriptionUA },
   selectCategory,
   children,
+  query,
 }) => {
   const [level, setLevel] = useState(null);
 
@@ -19,11 +22,21 @@ const Category = ({
     setLevel(createLevel(cutedCpvCode));
   }, [Code]);
 
+  useEffect(() => {
+    console.log("use Effect", query);
+  }, [query]);
+
   return (
     <>
       <CategoryWrapper onClick={selectCategory}>
         <CategoryCode level={level}>{Code}</CategoryCode>
-        <CategoryDescription>{DescriptionUA}</CategoryDescription>
+        {query ? (
+          <HilightDescription>
+            {hiLight(query, DescriptionUA)}
+          </HilightDescription>
+        ) : (
+          <CategoryDescription>{DescriptionUA}</CategoryDescription>
+        )}
       </CategoryWrapper>
       <div>{children}</div>
     </>

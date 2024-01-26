@@ -1,43 +1,3 @@
-// Функція створює css клас в залежності від довжини cpvКоду
-export function createLevel(code) {
-  // console.log("code: ", code);
-
-  var level = "";
-  switch (code.length) {
-    case 1:
-      level = "main";
-      break;
-    case 2:
-      level = "main";
-      break;
-    case 3:
-      level = "first";
-      break;
-    case 4:
-      level = "second";
-      break;
-    case 5:
-      level = "third";
-      break;
-    case 6:
-      level = "four";
-      break;
-    case 7:
-      level = "five";
-      break;
-    case 8:
-      level = "six";
-      break;
-    case 9:
-      level = "seven";
-      break;
-    default:
-      level = "default";
-      break;
-  }
-  return level;
-}
-
 // Функція отримує код вибраного елемента обрізає нулі і записує в стейт
 export const cutCpvCode = (code) => {
   const cpvCode = [];
@@ -96,6 +56,46 @@ export function filterNextLevelItems(subCategories, selectedCode) {
   }
 }
 
+// Колір _____________________________________________________________________________________
+// Функція створює css клас в залежності від довжини cpvКоду
+export function createLevel(code) {
+  // console.log("code: ", code);
+
+  var level = "";
+  switch (code.length) {
+    case 1:
+      level = "main";
+      break;
+    case 2:
+      level = "main";
+      break;
+    case 3:
+      level = "first";
+      break;
+    case 4:
+      level = "second";
+      break;
+    case 5:
+      level = "third";
+      break;
+    case 6:
+      level = "four";
+      break;
+    case 7:
+      level = "five";
+      break;
+    case 8:
+      level = "six";
+      break;
+    case 9:
+      level = "seven";
+      break;
+    default:
+      level = "default";
+      break;
+  }
+  return level;
+}
 // Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
 export const setBgColor = ({ level, theme }) => {
   // console.log(theme);
@@ -121,23 +121,7 @@ export const setBgColor = ({ level, theme }) => {
   }
 };
 
-// Функція фільтрує головні категорії і елементи
-
-export function onLyCategory(items) {
-  const categorys = items.filter(
-    (element) => cutCpvCode(element.Code).length <= 5
-  );
-  // console.log("categorys: ", categorys);
-  return categorys;
-}
-export function onLyMaterial(items) {
-  const materials = items.filter(
-    (element) => cutCpvCode(element.Code).length >= 6
-  );
-  // console.log("materials: ", materials);
-  return materials;
-}
-
+// Пошук _____________________________________________________________________________________
 // Функція перевіряє чи користувач ввів число чи слово
 export function checkIsString(query) {
   const isString = Number.isNaN(Number.parseInt(query));
@@ -152,4 +136,37 @@ export function parseNumber(query) {
 
   // console.log("number: ", number);
   return number;
+}
+
+// Функція фільтрує категорії із результату пошуку
+export function onLyCategory(items) {
+  const categorys = items.filter(
+    (element) => cutCpvCode(element.Code).length <= 5
+  );
+  // console.log("categorys: ", categorys);
+  return categorys;
+}
+
+// Функція фільтрує матеріали  із результату пошуку
+export function onLyMaterial(items) {
+  const materials = items.filter(
+    (element) => cutCpvCode(element.Code).length >= 6
+  );
+  // console.log("materials: ", materials);
+  return materials;
+}
+// Функція підфарбовує слово в результатах пошуку
+export function hiLight(query, text) {
+  const regex = new RegExp(`(${query})`, "gi");
+  console.log("regex: ", regex);
+
+  const parts = text.split(regex);
+  console.log("parts: ", parts);
+
+  const result = parts.map((part, index) =>
+    regex.test(part) ? <mark key={index}>{part}</mark> : part
+  );
+  console.log("result: ", result);
+
+  return result;
 }

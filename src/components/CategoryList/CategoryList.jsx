@@ -7,7 +7,7 @@ import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
 import { List, Item } from "./CategoryList.styled";
 
-const CategoryList = ({ items }) => {
+const CategoryList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [materials, setMaterials] = useState([]);
 
@@ -18,6 +18,9 @@ const CategoryList = ({ items }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  useEffect(() => {
+    // console.log("use Effect", query);
+  }, [query]);
 
   // Запит по під категорії
   useEffect(() => {
@@ -123,6 +126,7 @@ const CategoryList = ({ items }) => {
                 <Category
                   element={item}
                   selectCategory={() => selectCategory(item._id, item.Code)}
+                  query={query}
                 ></Category>
               )}
             </Item>
