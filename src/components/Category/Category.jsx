@@ -31,9 +31,11 @@ const Category = ({
         </CopyToClipboard>
 
         {query ? (
-          <HilightDescription>
-            {hiLight(query, DescriptionUA)}
-          </HilightDescription>
+          <CopyToClipboard text={DescriptionUA}>
+            <HilightDescription>
+              {hiLight(query, DescriptionUA)}
+            </HilightDescription>
+          </CopyToClipboard>
         ) : (
           <CopyToClipboard text={DescriptionUA}>
             <CategoryDescription>{DescriptionUA}</CategoryDescription>
