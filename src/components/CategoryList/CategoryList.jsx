@@ -106,11 +106,13 @@ const CategoryList = ({ items }) => {
         <List level={level}>
           {items.map((item) => (
             <Item key={item._id}>
+              {/* якщо вибраний елемент */}
               {selectedId === item._id ? (
                 <Category
                   element={item}
                   selectCategory={() => selectCategory(item._id, item.Code)}
                 >
+                  {/* якщо код довший то це матеріали */}
                   {selectedCode.length > 4 ? (
                     <MaterialList materials={materials} />
                   ) : (

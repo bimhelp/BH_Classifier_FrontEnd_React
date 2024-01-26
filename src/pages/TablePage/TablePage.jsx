@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../../components/Table/Table";
 import Section from "../../components/Section/Section";
 import Search from "../../components/Search/Search";
 import { searchByDescription, searchMaterials } from "../../services/api";
-import { checkIsString, parseNumber } from "../../services";
+import {
+  checkIsString,
+  parseNumber,
+  onLyCategory,
+  onLyMaterial,
+} from "../../services";
 
 const TablePage = () => {
   const [searchResult, setSearchResult] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
   // Викликається під час відправлення форми
@@ -15,19 +22,29 @@ const TablePage = () => {
     setSearchResult([]);
   };
 
+  // Розділення на категорії і матеріали
+  useEffect(() => {
+    // console.log("category", onLyCategory(searchResult));
+    setCategory(onLyCategory(searchResult));
+    setMaterials(onLyMaterial(searchResult));
+  }, [searchResult]);
+
+  // Пошук елементів
   const submit = (searchValue) => {
     const isString = checkIsString(searchValue);
     const codeNumber = parseNumber(searchValue);
 
     if (isString) {
-      console.log("isString: ", isString);
-      console.log(`search ${searchValue} by description`);
+      // console.log("isString: ", isString);
+      // console.log(`search ${searchValue} by description`);
       async function search(searchValue) {
         setIsLoading(true);
         try {
           const response = await searchByDescription(searchValue);
           // console.log(response.data);
-          setSearchResult(response.data);
+          if (response) {
+            setSearchResult(response.data);
+          }
         } catch {
           setError("error");
         } finally {
@@ -37,12 +54,14 @@ const TablePage = () => {
       search(searchValue);
     } else {
       async function search(codeNumber) {
-        console.log(`search ${codeNumber} by code`);
+        // console.log(`search ${codeNumber} by code`);
         setIsLoading(true);
         try {
           const response = await searchMaterials(codeNumber);
-          console.log(response.data);
-          setSearchResult(response.data);
+          // console.log(response.data);
+          if (response) {
+            setSearchResult(response.data);
+          }
         } catch {
           setError("error");
         } finally {
@@ -52,6 +71,7 @@ const TablePage = () => {
       search(codeNumber);
     }
   };
+
   return (
     <>
       <Section>
@@ -63,7 +83,7 @@ const TablePage = () => {
         />
       </Section>
       <Section>
-        <Table result={searchResult} />
+        <Table category={category} materials={materials} />
       </Section>
       {error && <p>{error.code}</p>}
     </>

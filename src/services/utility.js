@@ -28,6 +28,9 @@ export function createLevel(code) {
     case 8:
       level = "six";
       break;
+    case 9:
+      level = "seven";
+      break;
     default:
       level = "default";
       break;
@@ -111,27 +114,42 @@ export const setBgColor = ({ level, theme }) => {
       return theme.colors.materialColor;
     case "six":
       return theme.colors.materialColor;
+    case "seven":
+      return theme.colors.materialColor;
     default:
       return theme.colors.mainLevelColor;
   }
 };
 
-// Функція отримує результат пошуку і структурує його по вкладеності
+// Функція фільтрує головні категорії і елементи
 
-// Функція фільтрує головні категорії
+export function onLyCategory(items) {
+  const categorys = items.filter(
+    (element) => cutCpvCode(element.Code).length <= 5
+  );
+  // console.log("categorys: ", categorys);
+  return categorys;
+}
+export function onLyMaterial(items) {
+  const materials = items.filter(
+    (element) => cutCpvCode(element.Code).length >= 6
+  );
+  // console.log("materials: ", materials);
+  return materials;
+}
 
-// Функція яка переключає пошук по коду або по слову
-
+// Функція перевіряє чи користувач ввів число чи слово
 export function checkIsString(query) {
   const isString = Number.isNaN(Number.parseInt(query));
 
-  console.log("isString: ", isString);
+  // console.log("isString: ", isString);
   return isString;
 }
 
+// Функція повертає число із введеного користувачем рядка
 export function parseNumber(query) {
-  const number = Number(query);
+  const number = Number.parseInt(query);
 
-  console.log("number: ", number);
+  // console.log("number: ", number);
   return number;
 }

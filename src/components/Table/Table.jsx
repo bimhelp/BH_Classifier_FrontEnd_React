@@ -3,7 +3,7 @@ import Categorylist from "../CategoryList/CategoryList";
 // import css from "./Table.module.css";
 import { getMainCategory } from "../../services/api";
 
-const Table = ({ result }) => {
+const Table = ({ category, materials, clear }) => {
   const [mainCategory, setMainCategory] = useState([]);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +27,12 @@ const Table = ({ result }) => {
 
   return (
     <>
-      {result.length > 0 ? (
-        <Categorylist items={result} />
+      {/* якщо є результати пошуку */}
+      {category.length > 0 ? (
+        <>
+          <Categorylist items={category} />
+          <Categorylist items={materials} />
+        </>
       ) : (
         <Categorylist items={mainCategory} />
       )}

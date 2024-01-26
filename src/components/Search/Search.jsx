@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button/Button";
 
 import { IoSearch } from "react-icons/io5";
+import { IoMdBackspace } from "react-icons/io";
 
 const Search = ({ submit, isLoading, error, back }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -29,10 +30,19 @@ const Search = ({ submit, isLoading, error, back }) => {
       submit(normalizedSearch);
     }
   };
+  const clearQuery = () => {
+    setSearchValue("");
+    back();
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <Button
+          icon={IoMdBackspace}
+          type="button"
+          onClick={clearQuery}
+        ></Button>
         <label>
           <input
             name="search"
