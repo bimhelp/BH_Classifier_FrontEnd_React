@@ -158,15 +158,15 @@ export function onLyMaterial(items) {
 // Функція підфарбовує слово в результатах пошуку
 export function hiLight(query, text) {
   const regex = new RegExp(`(${query})`, "gi");
-  console.log("regex: ", regex);
+  // console.log("regex: ", regex);
 
   const parts = text.split(regex);
-  console.log("parts: ", parts);
+  // console.log("parts: ", parts);
 
   const result = parts.map((part, index) =>
     regex.test(part) ? <mark key={index}>{part}</mark> : part
   );
-  console.log("result: ", result);
+  // console.log("result: ", result);
 
   return result;
 }

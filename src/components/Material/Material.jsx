@@ -6,14 +6,27 @@ import {
   MaterialPrice,
   MaterialUnit,
   Extended,
+  HilightDescription,
 } from "./Material.styled";
 
-const Material = ({ material: { Code, DescriptionUA, Price, Unit } }) => {
+import { hiLight } from "../../services";
+
+const Material = ({
+  material: { Code, DescriptionUA, Price, Unit },
+  query,
+}) => {
   return (
     <MaterialWrapper>
       <MaterialCode> {Code}</MaterialCode>
       <div>
-        <Description>{DescriptionUA}</Description>
+        {query ? (
+          <HilightDescription>
+            {hiLight(query, DescriptionUA)}
+          </HilightDescription>
+        ) : (
+          <Description>{DescriptionUA}</Description>
+        )}
+        {/* <Description>{DescriptionUA}</Description> */}
         <Extended>
           {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
           {Unit && <MaterialUnit> {Unit} </MaterialUnit>}

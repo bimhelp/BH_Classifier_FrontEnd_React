@@ -32,6 +32,12 @@ export const Description = styled.p`
   padding-left: 10px;
 `;
 
+export const HilightDescription = styled.div`
+  padding-left: 10px;
+  font-size: ${(props) => props.theme.fontSizes.s};
+  background-color: ${(props) => props.type === "mark" && "yellow"};
+`;
+
 export const MaterialPrice = styled.p`
   font-size: 12px;
   color: var(--price-color);

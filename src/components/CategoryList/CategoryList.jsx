@@ -18,9 +18,6 @@ const CategoryList = ({ items, query }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  useEffect(() => {
-    // console.log("use Effect", query);
-  }, [query]);
 
   // Запит по під категорії
   useEffect(() => {
@@ -114,12 +111,13 @@ const CategoryList = ({ items, query }) => {
                 <Category
                   element={item}
                   selectCategory={() => selectCategory(item._id, item.Code)}
+                  query={query}
                 >
                   {/* якщо код довший то це матеріали */}
                   {selectedCode.length > 4 ? (
-                    <MaterialList materials={materials} />
+                    <MaterialList materials={materials} query={query} />
                   ) : (
-                    <CategoryList items={filteredNextLevel} />
+                    <CategoryList items={filteredNextLevel} query={query} />
                   )}
                 </Category>
               ) : (

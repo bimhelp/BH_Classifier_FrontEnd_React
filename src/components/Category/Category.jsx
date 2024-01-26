@@ -22,10 +22,6 @@ const Category = ({
     setLevel(createLevel(cutedCpvCode));
   }, [Code]);
 
-  useEffect(() => {
-    console.log("use Effect", query);
-  }, [query]);
-
   return (
     <>
       <CategoryWrapper onClick={selectCategory}>

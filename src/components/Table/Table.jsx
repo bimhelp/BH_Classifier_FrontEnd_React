@@ -9,10 +9,6 @@ const Table = ({ category, materials, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    // console.log("table use Effect", query);
-  }, [query]);
-
   // Запит по всі головні категорії при монтуванні компонента
   useEffect(() => {
     async function getCategory() {
