@@ -117,3 +117,21 @@ export const setBgColor = ({ level, theme }) => {
 };
 
 // Функція отримує результат пошуку і структурує його по вкладеності
+
+// Функція фільтрує головні категорії
+
+// Функція яка переключає пошук по коду або по слову
+
+export function checkIsString(query) {
+  const isString = Number.isNaN(Number.parseInt(query));
+
+  console.log("isString: ", isString);
+  return isString;
+}
+
+export function parseNumber(query) {
+  const number = Number(query);
+
+  console.log("number: ", number);
+  return number;
+}

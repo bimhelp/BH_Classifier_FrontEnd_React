@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Table from "../../components/Table/Table";
 import Section from "../../components/Section/Section";
 import Search from "../../components/Search/Search";
-import { searchByDescription } from "../../services/api";
+import { searchByDescription, searchMaterials } from "../../services/api";
+import { checkIsString, parseNumber } from "../../services";
 
 const TablePage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -15,22 +16,41 @@ const TablePage = () => {
   };
 
   const submit = (searchValue) => {
-    // console.log(searchValue);
+    const isString = checkIsString(searchValue);
+    const codeNumber = parseNumber(searchValue);
 
-    async function search(searchValue) {
-      setIsLoading(true);
-      try {
-        const response = await searchByDescription(searchValue);
-        // console.log(response.data);
-        setSearchResult(response.data);
-      } catch {
-        setError("error");
-      } finally {
-        setIsLoading(false);
+    if (isString) {
+      console.log("isString: ", isString);
+      console.log(`search ${searchValue} by description`);
+      async function search(searchValue) {
+        setIsLoading(true);
+        try {
+          const response = await searchByDescription(searchValue);
+          // console.log(response.data);
+          setSearchResult(response.data);
+        } catch {
+          setError("error");
+        } finally {
+          setIsLoading(false);
+        }
       }
+      search(searchValue);
+    } else {
+      async function search(codeNumber) {
+        console.log(`search ${codeNumber} by code`);
+        setIsLoading(true);
+        try {
+          const response = await searchMaterials(codeNumber);
+          console.log(response.data);
+          setSearchResult(response.data);
+        } catch {
+          setError("error");
+        } finally {
+          setIsLoading(false);
+        }
+      }
+      search(codeNumber);
     }
-
-    search(searchValue);
   };
   return (
     <>
@@ -45,6 +65,7 @@ const TablePage = () => {
       <Section>
         <Table result={searchResult} />
       </Section>
+      {error && <p>{error.code}</p>}
     </>
   );
 };
