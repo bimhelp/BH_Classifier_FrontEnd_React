@@ -9,6 +9,8 @@ import {
   HilightDescription,
 } from "./Material.styled";
 
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import { hiLight } from "../../services";
 
 const Material = ({
@@ -17,16 +19,20 @@ const Material = ({
 }) => {
   return (
     <MaterialWrapper>
-      <MaterialCode> {Code}</MaterialCode>
+      <CopyToClipboard text={Code}>
+        <MaterialCode>{Code}</MaterialCode>
+      </CopyToClipboard>
+
       <div>
         {query ? (
           <HilightDescription>
             {hiLight(query, DescriptionUA)}
           </HilightDescription>
         ) : (
-          <Description>{DescriptionUA}</Description>
+          <CopyToClipboard text={DescriptionUA}>
+            <Description>{DescriptionUA}</Description>
+          </CopyToClipboard>
         )}
-        {/* <Description>{DescriptionUA}</Description> */}
         <Extended>
           {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
           {Unit && <MaterialUnit> {Unit} </MaterialUnit>}

@@ -25,8 +25,9 @@ const TablePage = () => {
 
   // Розділення на категорії і матеріали
   useEffect(() => {
-    // console.log("category", onLyCategory(searchResult));
+    console.log("category", onLyCategory(searchResult));
     setCategory(onLyCategory(searchResult));
+    console.log("materials", onLyMaterial(searchResult));
     setMaterials(onLyMaterial(searchResult));
   }, [searchResult]);
 
@@ -43,8 +44,8 @@ const TablePage = () => {
         setIsLoading(true);
         try {
           const response = await searchByDescription(searchValue);
-          // console.log(response.data);
           if (response) {
+            console.log(response.data);
             setSearchResult(response.data);
           }
         } catch {

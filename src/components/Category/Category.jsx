@@ -7,6 +7,7 @@ import {
   HilightDescription,
 } from "./Category.styled";
 import { hiLight } from "../../services";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -25,13 +26,20 @@ const Category = ({
   return (
     <>
       <CategoryWrapper onClick={selectCategory}>
-        <CategoryCode level={level}>{Code}</CategoryCode>
+        <CopyToClipboard text={Code}>
+          <CategoryCode level={level}>{Code}</CategoryCode>
+        </CopyToClipboard>
+
         {query ? (
           <HilightDescription>
             {hiLight(query, DescriptionUA)}
           </HilightDescription>
         ) : (
-          <CategoryDescription>{DescriptionUA}</CategoryDescription>
+          <CopyToClipboard>
+            <CategoryDescription text={DescriptionUA}>
+              {DescriptionUA}
+            </CategoryDescription>
+          </CopyToClipboard>
         )}
       </CategoryWrapper>
       <div>{children}</div>

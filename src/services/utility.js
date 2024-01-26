@@ -170,3 +170,13 @@ export function hiLight(query, text) {
 
   return result;
 }
+
+// Функція показує елемент при ховері
+// export function showHiden (event) {
+//   onMouseEnter={event => {
+//                      setStyle({display: 'block'});
+//                  }}
+//                  onMouseLeave={e => {
+//                      setStyle({display: 'none'})
+//                  }}
+// }

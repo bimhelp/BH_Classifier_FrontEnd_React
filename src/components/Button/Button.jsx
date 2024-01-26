@@ -7,6 +7,7 @@ const Button = ({
   icon: Icon = null,
   children,
   onClick,
+  hide,
 }) => {
   return (
     <StyledButton type={type} disabled={disabled} onClick={onClick}>

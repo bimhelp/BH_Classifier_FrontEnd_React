@@ -26,10 +26,17 @@ export const MaterialCode = styled.p`
   min-width: 90px;
   text-align: center;
   color: ${(props) => props.theme.colors.textWhiteColor};
+
+  &:hover {
+    cursor: copy;
+  }
 `;
 
 export const Description = styled.p`
   padding-left: 10px;
+  &:hover {
+    cursor: copy;
+  }
 `;
 
 export const HilightDescription = styled.div`
