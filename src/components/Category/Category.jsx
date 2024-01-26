@@ -35,10 +35,8 @@ const Category = ({
             {hiLight(query, DescriptionUA)}
           </HilightDescription>
         ) : (
-          <CopyToClipboard>
-            <CategoryDescription text={DescriptionUA}>
-              {DescriptionUA}
-            </CategoryDescription>
+          <CopyToClipboard text={DescriptionUA}>
+            <CategoryDescription>{DescriptionUA}</CategoryDescription>
           </CopyToClipboard>
         )}
       </CategoryWrapper>

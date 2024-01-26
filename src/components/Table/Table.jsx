@@ -25,12 +25,9 @@ const Table = ({ category, materials, query }) => {
     getCategory();
   }, []);
 
-  useEffect(() => {
-    console.log("Table useEffect", materials);
-  }, [materials]);
-
   return (
     <>
+      {isLoading && <p>Loading...</p>}
       {/* якщо є результати пошуку */}
       {category.length > 0 || materials.length > 0 ? (
         <>
