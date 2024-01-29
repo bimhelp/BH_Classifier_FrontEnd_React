@@ -33,6 +33,8 @@ const TablePage = () => {
 
   // Пошук елементів
   const submit = (searchValue) => {
+    console.log("searchValue: ", searchValue);
+
     const isString = checkIsString(searchValue);
     const codeNumber = parseNumber(searchValue);
 

@@ -21,10 +21,10 @@ const CategoryList = ({ items, query }) => {
 
   // Запит по під категорії
   useEffect(() => {
-    // console.log("selectedCode:", selectedCode);
-
     async function subCategory(selectedCode) {
+      // console.log("selectedCode:", selectedCode);
       setIsLoading(true);
+      // console.log("setIsLoading:  true");
       try {
         const response = await getSubCategory(selectedCode);
         // console.log("response: ", response);
@@ -32,11 +32,13 @@ const CategoryList = ({ items, query }) => {
       } catch (error) {
         setError("error");
       } finally {
+        // console.log("setIsLoading:  false");
         setIsLoading(false);
       }
     }
 
     if (selectedCode) {
+      console.log("get sub categorys");
       subCategory(selectedCode);
     }
   }, [selectedCode]);
@@ -44,6 +46,7 @@ const CategoryList = ({ items, query }) => {
   // Запит по матеріали
   useEffect(() => {
     async function getMaterial(selectedCode) {
+      // console.log("setIsLoading:  true");
       setIsLoading(true);
       try {
         const response = await searchMaterials(selectedCode);
@@ -57,10 +60,15 @@ const CategoryList = ({ items, query }) => {
       } catch (error) {
         // setError(error);
       } finally {
+        // console.log("setIsLoading:  false");
         setIsLoading(false);
       }
     }
-    getMaterial(selectedCode);
+
+    if (selectedCode) {
+      console.log("get materials");
+      getMaterial(selectedCode);
+    }
   }, [selectedCode]);
 
   // Фільтруємо елементи для наступної підкатегорії
@@ -101,7 +109,7 @@ const CategoryList = ({ items, query }) => {
   return (
     <>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>Loading Sub...</p>
       ) : (
         <List level={level}>
           {items.map((item) => (

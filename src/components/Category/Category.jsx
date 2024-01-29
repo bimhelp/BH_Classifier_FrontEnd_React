@@ -8,7 +8,6 @@ import {
 } from "./Category.styled";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
   element: { Code, DescriptionUA },

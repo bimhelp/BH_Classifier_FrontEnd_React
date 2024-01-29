@@ -27,7 +27,7 @@ const Table = ({ category, materials, query }) => {
 
   return (
     <>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p>Loading Main Category...</p>}
       {/* якщо є результати пошуку */}
       {category.length > 0 || materials.length > 0 ? (
         <>
