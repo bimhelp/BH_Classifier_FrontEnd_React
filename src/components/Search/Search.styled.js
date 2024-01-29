@@ -14,4 +14,5 @@ export const Input = styled(Field)`
   border-bottom: ${(props) => props.theme.borders.bold};
   border-left: ${(props) => props.theme.borders.none};
   border-right: ${(props) => props.theme.borders.none};
+  text-decoration: none;
 `;

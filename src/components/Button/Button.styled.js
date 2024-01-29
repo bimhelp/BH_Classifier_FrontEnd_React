@@ -29,21 +29,11 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const StyledBack = styled.button`
-  display: inline-flex;
-  align-items: center;
-  gap: ${(props) => props.theme.space[2]}px;
-
-  /* margin: ${(props) => props.theme.space[2]}px; */
-  padding-top: ${(props) => props.theme.space[2]}px;
-  padding-bottom: ${(props) => props.theme.space[2]}px;
-  padding-left: ${(props) => props.theme.space[3]}px;
-  padding-right: ${(props) => props.theme.space[3]}px;
+export const StyledBack = styled(StyledButton)`
+  margin: ${(props) => props.theme.space[0]}px;
 
   color: ${(props) => props.theme.colors.textWhiteColor};
 
-  border: ${(props) => props.theme.borders.bold};
-  border-radius: ${(props) => props.theme.radii.normal};
   border-top-left-radius: ${(props) => props.theme.radii.normal};
   border-top-right-radius: ${(props) => props.theme.radii.none};
   border-bottom-right-radius: ${(props) => props.theme.radii.none};
@@ -67,16 +57,9 @@ export const StyledBack = styled.button`
   }
 `;
 
-export const StyledSearch = styled.button`
-  display: inline-flex;
-  align-items: center;
-  gap: ${(props) => props.theme.space[2]}px;
+export const StyledSearch = styled(StyledButton)`
+  margin: ${(props) => props.theme.space[0]}px;
 
-  /* margin: ${(props) => props.theme.space[2]}px; */
-  padding-top: ${(props) => props.theme.space[2]}px;
-  padding-bottom: ${(props) => props.theme.space[2]}px;
-  padding-left: ${(props) => props.theme.space[3]}px;
-  padding-right: ${(props) => props.theme.space[3]}px;
   color: ${(props) => props.theme.colors.textWhiteColor};
 
   border: ${(props) => props.theme.borders.bold};
