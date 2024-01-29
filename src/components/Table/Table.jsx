@@ -35,7 +35,7 @@ const Table = ({ category, materials, query }) => {
           <Categorylist items={materials} query={query} />
         </>
       ) : (
-        <Categorylist items={mainCategory} />
+        <Categorylist items={mainCategory} style={{ padding: 0 }} />
       )}
       {/* {isLoading ? <p>Loading...</p> : <Categorylist items={mainCategory} />} */}
       {error && <p>{error}</p>}

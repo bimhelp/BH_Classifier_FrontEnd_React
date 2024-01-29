@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // Компоненти
 // Public Pages
-import WelcomePage from "./pages/WelcomePage/WelcomePage";
+// import WelcomePage from "./pages/WelcomePage/WelcomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
@@ -19,10 +19,10 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<WelcomePage />} />
+          <Route index element={<TablePage />} />
+          {/* <Route index element={<WelcomePage />} /> */}
           <Route path="registration" element={<RegisterPage />} />
           <Route path="login" element={<LogInPage />} />
-          <Route path="table" element={<TablePage />} />
           <Route path="cabinet" element={<CabinetPage />} />
           <Route path="add" element={<AddItemPage />} />
           <Route path="*" element={<ErrorPage />} />

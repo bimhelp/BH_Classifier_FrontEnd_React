@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { Form, Field } from "formik";
 
-export const FormStyled = styled(Form)`
+export const FormStyled = styled.form`
   display: flex;
   align-items: center;
 `;
 
-export const Input = styled(Field)`
+export const Input = styled.input`
   font-size: ${(props) => props.theme.fontSizes.m};
   padding: ${(props) => props.theme.space[1]}px;
   padding-left: ${(props) => props.theme.space[3]}px;

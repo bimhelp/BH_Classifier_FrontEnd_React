@@ -9,6 +9,7 @@ import {
   onLyCategory,
   onLyMaterial,
 } from "../../services";
+import { MainTableWrapper } from "./TablePage.styled";
 
 const TablePage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -33,7 +34,7 @@ const TablePage = () => {
 
   // Пошук елементів
   const submit = (searchValue) => {
-    console.log("searchValue: ", searchValue);
+    // console.log("searchValue: ", searchValue);
 
     const isString = checkIsString(searchValue);
     const codeNumber = parseNumber(searchValue);
@@ -88,7 +89,9 @@ const TablePage = () => {
         />
       </Section>
       <Section>
-        <Table category={category} materials={materials} query={query} />
+        <MainTableWrapper>
+          <Table category={category} materials={materials} query={query} />
+        </MainTableWrapper>
       </Section>
       {error && <p>{error.code}</p>}
     </>
