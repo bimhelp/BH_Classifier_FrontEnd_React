@@ -38,7 +38,7 @@ const CategoryList = ({ items, query }) => {
     }
 
     if (selectedCode) {
-      console.log("get sub categorys");
+      // console.log("get sub categorys");
       subCategory(selectedCode);
     }
   }, [selectedCode]);
@@ -66,7 +66,7 @@ const CategoryList = ({ items, query }) => {
     }
 
     if (selectedCode) {
-      console.log("get materials");
+      // console.log("get materials");
       getMaterial(selectedCode);
     }
   }, [selectedCode]);

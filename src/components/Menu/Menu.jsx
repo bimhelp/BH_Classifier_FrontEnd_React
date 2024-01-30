@@ -18,8 +18,7 @@ const Menu = () => {
     <Navigation>
       <MenuWrapper>
         <StyledNavLink to="/">CPV</StyledNavLink>
-        <StyledNavLink to="build">Building Classifier</StyledNavLink>
-        <StyledNavLink to="user">User Materials</StyledNavLink>
+        <StyledNavLink to="projects">Projects</StyledNavLink>
       </MenuWrapper>
       <UserWrapper>
         <UserButton to="login">

@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
-import { Field } from "formik";
+import { Form, Field } from "formik";
+
+export const StyledForm = styled(Form)`
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+`;
 
 export const InputWrapper = styled.div`
   width: 100%;

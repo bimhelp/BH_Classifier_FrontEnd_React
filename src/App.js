@@ -25,8 +25,7 @@ function App() {
           <Route path="login" element={<LogInPage />} />
           <Route path="cabinet" element={<CabinetPage />} />
           <Route path="add" element={<AddItemPage />} />
-          <Route path="build" element={<p> Building Classifier</p>} />
-          <Route path="user" element={<p> User Materials</p>} />
+          <Route path="projects" element={<p> User Projects</p>} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

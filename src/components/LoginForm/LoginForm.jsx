@@ -5,9 +5,8 @@ import * as yup from "yup";
 import { Button } from "../Button/Button";
 import { NavLink } from "react-router-dom";
 import css from "./LoginForm.module.css";
-import { Input, InputWrapper } from "./LoginForm.styled";
+import { StyledForm, Input, InputWrapper } from "./LoginForm.styled";
 import { validationColor } from "../../services/utility";
-
 const LoginForm = () => {
   const initialValues = {
     email: "",
@@ -26,7 +25,7 @@ const LoginForm = () => {
     const { resetForm } = actions;
 
     console.log("values: ", values);
-    console.log("actions: ", actions);
+    // console.log("actions: ", actions);
 
     // Передача даних в батьківський компонент
 
@@ -35,53 +34,57 @@ const LoginForm = () => {
     // console.log("форма очищена");
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={loginSchema}
-      onSubmit={handleSubmit}
-    >
-      {(props) => (
-        <Form className={css.form}>
-          <h2>LogIn</h2>
-          <InputWrapper>
-            <label htmlFor="email" className={css.label}>
-              Email
-            </label>
-            <Input
-              name="email"
-              type="email"
-              bordercolor={validationColor(
-                props.errors.email,
-                props.values.email,
-                "rgb(0, 0, 0)"
-              )}
-            />
-            <ErrorMessage name="email" />
-          </InputWrapper>
-          <InputWrapper>
-            <label htmlFor="password" className={css.label}>
-              Password
-            </label>
-            <Input
-              name="password"
-              type="password"
-              bordercolor={validationColor(
-                props.errors.password,
-                props.values.password,
-                "rgb(0, 0, 0)"
-              )}
-            />
-            <ErrorMessage name="password" />
-          </InputWrapper>
-          <Button className={css.submitBtn} type="submit">
-            LogIn
-          </Button>
-          <NavLink className={css.button} to={"/registration"}>
-            Registration
-          </NavLink>
-        </Form>
-      )}
-    </Formik>
+    <>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={loginSchema}
+        onSubmit={handleSubmit}
+      >
+        {(props) => (
+          <StyledForm>
+            <h2>LogIn</h2>
+            <InputWrapper>
+              <label htmlFor="email" className={css.label}>
+                Email
+              </label>
+              <Input
+                name="email"
+                type="email"
+                id="email"
+                bordercolor={validationColor(
+                  props.errors.email,
+                  props.values.email,
+                  "rgb(0, 0, 0)"
+                )}
+              />
+              <ErrorMessage name="email" />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="password" className={css.label}>
+                Password
+              </label>
+              <Input
+                name="password"
+                type="password"
+                id="password"
+                bordercolor={validationColor(
+                  props.errors.password,
+                  props.values.password,
+                  "rgb(0, 0, 0)"
+                )}
+              />
+              <ErrorMessage name="password" />
+            </InputWrapper>
+            <Button className={css.submitBtn} type="submit">
+              LogIn
+            </Button>
+            <NavLink className={css.button} to={"/registration"}>
+              Registration
+            </NavLink>
+          </StyledForm>
+        )}
+      </Formik>
+    </>
   );
 };
 
