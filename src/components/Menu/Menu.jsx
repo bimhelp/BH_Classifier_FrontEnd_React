@@ -1,25 +1,17 @@
 import React from "react";
-import css from "./Menu.module.css";
 // Навігація по сайту
 import { NavLink } from "react-router-dom";
-
+import { Navigation, MenuWrapper, StyledNavLink } from "./Menu.styled";
 const Menu = () => {
   return (
-    <nav className={css.navigation}>
-      <NavLink to="/" className={css.menuItem}>
-        Table
-      </NavLink>
-      {/* <NavLink to="table" className={css.menuItem}>
-        Table
-      </NavLink> */}
-
-      <NavLink to="add" className={css.menuItem}>
-        Add Item
-      </NavLink>
-      <NavLink to="cabinet" className={css.menuItem}>
-        Cabinet
-      </NavLink>
-    </nav>
+    <Navigation>
+      <MenuWrapper>
+        <StyledNavLink to="/">CPV</StyledNavLink>
+        <StyledNavLink to="build">Building Classifier</StyledNavLink>
+        <StyledNavLink to="user">User Materials</StyledNavLink>
+      </MenuWrapper>
+      <NavLink to="login">LogIn</NavLink>
+    </Navigation>
   );
 };
 
