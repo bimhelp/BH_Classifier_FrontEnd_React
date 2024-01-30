@@ -1,79 +1,87 @@
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form, ErrorMessage } from "formik";
+import * as yup from "yup";
 // Навігація
+import { Button } from "../Button/Button";
 import { NavLink } from "react-router-dom";
 import css from "./LoginForm.module.css";
+import { Input, InputWrapper } from "./LoginForm.styled";
+import { validationColor } from "../../services/utility";
 
 const LoginForm = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleInputChange = (event) => {
-    // console.log(event.target.value);
-    const { name, value } = event.target;
-    // console.log("input name: ", name);
-
-    switch (name) {
-      case "email":
-        setEmail(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-
-      default:
-        break;
-    }
+  const initialValues = {
+    email: "",
+    password: "",
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("submit:", email, password);
+  const loginSchema = yup.object().shape({
+    email: yup.string().email("Invalid email").required("Required"),
+    password: yup
+      .string()
+      .required("No password provided.")
+      .min(6, "Password is too short - should be 6 chars minimum."),
+  });
+
+  const handleSubmit = (values, actions) => {
+    const { resetForm } = actions;
+
+    console.log("values: ", values);
+    console.log("actions: ", actions);
 
     // Передача даних в батьківський компонент
-    // addStiker(title, email);
 
     // Очистка форми
-    setEmail("");
-    setPassword("");
+    resetForm();
     // console.log("форма очищена");
   };
   return (
-    <div className={css.formWrapper}>
-      <h2>LogIn</h2>
-      <form onSubmit={handleSubmit} className={css.form}>
-        <div className={css.inputWrapper}>
-          <label htmlFor="email" className={css.label}>
-            Email
-          </label>
-          <input
-            name="email"
-            type="text"
-            value={email}
-            onChange={handleInputChange}
-            className={css.input}
-            id="email"
-          />
-        </div>
-        <div className={css.inputWrapper}>
-          <label htmlFor="password" className={css.label}>
-            Password
-          </label>
-          <input
-            name="password"
-            type="text"
-            value={password}
-            onChange={handleInputChange}
-            className={css.input}
-            id="password"
-          />
-        </div>
-      </form>
-      <button className={css.submitBtn} type="submit">
-        Send
-      </button>
-      <NavLink className={css.button} to={"/registration"}>
-        Registration
-      </NavLink>
-    </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={loginSchema}
+      onSubmit={handleSubmit}
+    >
+      {(props) => (
+        <Form className={css.form}>
+          <h2>LogIn</h2>
+          <InputWrapper>
+            <label htmlFor="email" className={css.label}>
+              Email
+            </label>
+            <Input
+              name="email"
+              type="email"
+              bordercolor={validationColor(
+                props.errors.email,
+                props.values.email,
+                "rgb(0, 0, 0)"
+              )}
+            />
+            <ErrorMessage name="email" />
+          </InputWrapper>
+          <InputWrapper>
+            <label htmlFor="password" className={css.label}>
+              Password
+            </label>
+            <Input
+              name="password"
+              type="password"
+              bordercolor={validationColor(
+                props.errors.password,
+                props.values.password,
+                "rgb(0, 0, 0)"
+              )}
+            />
+            <ErrorMessage name="password" />
+          </InputWrapper>
+          <Button className={css.submitBtn} type="submit">
+            LogIn
+          </Button>
+          <NavLink className={css.button} to={"/registration"}>
+            Registration
+          </NavLink>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

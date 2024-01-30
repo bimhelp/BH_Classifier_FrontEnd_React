@@ -4,7 +4,7 @@ import Container from "../Container/Container";
 // import logo from "../../images/Triangle.svg";
 import Menu from "../Menu/Menu";
 
-const Header = () => {
+const Header = ({ user }) => {
   return (
     <div className={css.headerWrapper}>
       <Container>

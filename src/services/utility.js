@@ -121,6 +121,20 @@ export const setBgColor = ({ level, theme }) => {
   }
 };
 
+export const validationColor = (
+  errors,
+  values,
+  defaultColor = "rgb(0, 0, 0)"
+) => {
+  if (
+    errors === "Your password is little secure. Add a number!" ||
+    errors === "Your password is little secure. Add a letter!"
+  ) {
+    return "#F6C23E";
+  }
+  return values ? (errors && "#E74A3B") || "#3CBC81" : defaultColor;
+};
+
 // Пошук _____________________________________________________________________________________
 // Функція перевіряє чи користувач ввів число чи слово
 export function checkIsString(query) {

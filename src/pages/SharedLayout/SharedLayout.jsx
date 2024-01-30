@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 // Компоненти
 import Header from "../../components/Header/Header";
 
-const SharedLayout = () => {
+const SharedLayout = ({ user }) => {
   return (
     <div>
       <Header />
