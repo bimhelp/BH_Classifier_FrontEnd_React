@@ -8,7 +8,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LogInPage from "./pages/LogInPage/LogInPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import TablePage from "./pages/TablePage/TablePage";
-
+import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
 // Private Pages
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
@@ -25,7 +25,7 @@ function App() {
           <Route path="login" element={<LogInPage />} />
           <Route path="cabinet" element={<CabinetPage />} />
           <Route path="add" element={<AddItemPage />} />
-          <Route path="projects" element={<p> User Projects</p>} />
+          <Route path="projects" element={<ProjectsPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
