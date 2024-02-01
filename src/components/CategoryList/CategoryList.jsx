@@ -6,6 +6,7 @@ import { cutCpvCode, filterNextLevelItems, createLevel } from "../../services";
 import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
 import { List, Item } from "./CategoryList.styled";
+import { toast } from "react-toastify";
 
 const CategoryList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -18,6 +19,13 @@ const CategoryList = ({ items, query }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const customId = "custom-id-yes";
+
+  const notify = () => {
+    toast("The value is copied to the clipboard", {
+      toastId: customId,
+    });
+  };
 
   // Запит по під категорії
   useEffect(() => {
@@ -93,6 +101,8 @@ const CategoryList = ({ items, query }) => {
   const selectCategory = async (id, code) => {
     setSelectedCode(cutCpvCode(code));
     toggleCategory(id);
+    notify();
+    // toast("The value is copied to the clipboard");
   };
 
   // Відкриття-закриття категорії

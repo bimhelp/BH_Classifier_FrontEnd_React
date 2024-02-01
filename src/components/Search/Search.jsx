@@ -4,6 +4,7 @@ import { SearchButton, BackButton } from "../Button/Button";
 
 import { IoSearch } from "react-icons/io5";
 import { IoMdBackspace } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const Search = ({ submit, isLoading, error, back }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -17,6 +18,7 @@ const Search = ({ submit, isLoading, error, back }) => {
     event.preventDefault();
 
     if (searchValue.trim().length < 1) {
+      toast.error("Введіть запит в поле пошуку");
       return;
     } else submit(searchValue.trim());
   };

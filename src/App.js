@@ -1,5 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer, Slide } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Компоненти
 // Public Pages
@@ -29,6 +31,20 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
+      <ToastContainer
+        stacked
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+      />
     </>
   );
 }
