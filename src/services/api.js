@@ -1,5 +1,6 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://classifier-imxy.onrender.com/api/v1";
+// axios.defaults.baseURL = "https://classifier-imxy.onrender.com/api/v1";
+axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
 export async function getAll() {
   try {
