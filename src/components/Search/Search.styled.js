@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const FormStyled = styled.form`
   display: flex;
   align-items: center;
+  margin-bottom: ${(props) => props.theme.space[2]}px;
 `;
 
 export const Input = styled.input`

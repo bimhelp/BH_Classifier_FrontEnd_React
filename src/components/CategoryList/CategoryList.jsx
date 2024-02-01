@@ -7,6 +7,7 @@ import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
 import { List, Item } from "./CategoryList.styled";
 import { toast } from "react-toastify";
+import ShowError from "../ShowError/ShowError";
 
 const CategoryList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -21,12 +22,6 @@ const CategoryList = ({ items, query }) => {
   const [error, setError] = useState(null);
   const customId = "custom-id-yes";
 
-  const notify = () => {
-    toast("The value is copied to the clipboard", {
-      toastId: customId,
-    });
-  };
-
   // Запит по під категорії
   useEffect(() => {
     async function subCategory(selectedCode) {
@@ -37,8 +32,9 @@ const CategoryList = ({ items, query }) => {
         const response = await getSubCategory(selectedCode);
         // console.log("response: ", response);
         setSubCategories(response.data);
+        setError(null);
       } catch (error) {
-        setError("error");
+        setError("Не вдалось завантажити підкагеторії");
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
@@ -54,7 +50,6 @@ const CategoryList = ({ items, query }) => {
   // Запит по матеріали
   useEffect(() => {
     async function getMaterial(selectedCode) {
-      // console.log("setIsLoading:  true");
       setIsLoading(true);
       try {
         const response = await searchMaterials(selectedCode);
@@ -64,9 +59,10 @@ const CategoryList = ({ items, query }) => {
           return;
         } else {
           setMaterials(response.data.slice(1));
+          setError(null);
         }
       } catch (error) {
-        // setError(error);
+        setError("Не вдалось завантажити матеріали");
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
@@ -98,6 +94,11 @@ const CategoryList = ({ items, query }) => {
   }, [items, selectedCode]);
 
   // Функція формує cpv код і тоглить відкриття категорії
+  const notify = () => {
+    toast("The value is copied to the clipboard", {
+      toastId: customId,
+    });
+  };
   const selectCategory = async (id, code) => {
     setSelectedCode(cutCpvCode(code));
     toggleCategory(id);
@@ -118,6 +119,7 @@ const CategoryList = ({ items, query }) => {
 
   return (
     <>
+      {error !== null && <ShowError>{error}</ShowError>}
       {isLoading ? (
         <p>Loading Sub...</p>
       ) : (

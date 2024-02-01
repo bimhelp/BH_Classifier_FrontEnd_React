@@ -17,11 +17,12 @@ const TablePage = () => {
   const [category, setCategory] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   // Викликається під час відправлення форми
 
   const backToTable = () => {
     setSearchResult([]);
+    setError(null);
   };
 
   // Розділення на категорії і матеріали
@@ -45,6 +46,7 @@ const TablePage = () => {
       // console.log(`search ${searchValue} by description`);
       async function search(searchValue) {
         setIsLoading(true);
+        setError(null);
         try {
           const response = await searchByDescription(searchValue);
           if (response) {
@@ -52,7 +54,7 @@ const TablePage = () => {
             setSearchResult(response.data);
           }
         } catch {
-          setError("error");
+          setError(`Не вдалось знайти ${searchValue}`);
         } finally {
           setIsLoading(false);
         }
@@ -62,6 +64,7 @@ const TablePage = () => {
       async function search(codeNumber) {
         // console.log(`search ${codeNumber} by code`);
         setIsLoading(true);
+        setError(null);
         try {
           const response = await searchMaterials(codeNumber);
           // console.log(response.data);
@@ -69,7 +72,7 @@ const TablePage = () => {
             setSearchResult(response.data);
           }
         } catch {
-          setError("error");
+          setError(`Не вдалось знайти ${searchValue}`);
         } finally {
           setIsLoading(false);
         }

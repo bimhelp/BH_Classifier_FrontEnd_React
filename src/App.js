@@ -33,7 +33,7 @@ function App() {
       </Routes>
       <ToastContainer
         stacked
-        position="top-right"
+        position="bottom-right"
         autoClose={1500}
         hideProgressBar={false}
         newestOnTop={false}
