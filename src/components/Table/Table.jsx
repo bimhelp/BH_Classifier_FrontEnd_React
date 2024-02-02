@@ -3,10 +3,11 @@ import Categorylist from "../CategoryList/CategoryList";
 // import css from "./Table.module.css";
 import { getMainCategory } from "../../services/api";
 import ShowError from "../ShowError/ShowError";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 // import { ErrorMessage } from "formik";
 
 const Table = ({ category, materials, query }) => {
-  const [mainCategory, setMainCategory] = useState([]);
+  const [mainCategory, setMainCategory] = useLocalStorage("main", []);
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -26,7 +27,7 @@ const Table = ({ category, materials, query }) => {
       }
     }
     getCategory();
-  }, []);
+  }, [setMainCategory]);
 
   return (
     <>

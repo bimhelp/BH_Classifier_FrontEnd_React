@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import css from "./LoginForm.module.css";
 import { StyledForm, Input, InputWrapper } from "./LoginForm.styled";
 import { validationColor } from "../../services/utility";
+
 const LoginForm = () => {
   const initialValues = {
     email: "",

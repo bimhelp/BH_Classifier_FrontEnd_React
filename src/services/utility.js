@@ -1,4 +1,4 @@
-// Функція отримує код вибраного елемента обрізає нулі і записує в стейт
+// Функція отримує код вибраного елемента обрізає нулі і повертає число
 export const cutCpvCode = (code) => {
   const cpvCode = [];
 
@@ -186,12 +186,15 @@ export function hiLight(query, text) {
   return result;
 }
 
-// Функція показує елемент при ховері
-// export function showHiden (event) {
-//   onMouseEnter={event => {
-//                      setStyle({display: 'block'});
-//                  }}
-//                  onMouseLeave={e => {
-//                      setStyle({display: 'none'})
-//                  }}
-// }
+// Функція створює опції для реакт селекта
+
+export function makeOptions(array) {
+  if (array.length < 1) {
+    // console.log("масив пустий");
+    return;
+  }
+  return array.map((category) => ({
+    value: category.Code,
+    label: category.DescriptionUA,
+  }));
+}
