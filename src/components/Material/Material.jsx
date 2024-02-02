@@ -8,7 +8,8 @@ import {
   Extended,
   HilightDescription,
 } from "./Material.styled";
-
+import { checkIsString } from "../../services";
+import { toast } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import { hiLight } from "../../services";
@@ -17,8 +18,15 @@ const Material = ({
   material: { Code, DescriptionUA, Price, Unit },
   query,
 }) => {
+  function handleClick(event) {
+    if (checkIsString(event.target.textContent)) {
+      // console.log(checkIsString(event.target.textContent));
+      toast("Опис скопійовано в буфер омбіну");
+    } else toast("Код скопійовано в буфер омбіну");
+  }
+
   return (
-    <MaterialWrapper>
+    <MaterialWrapper onClick={(event) => handleClick(event)}>
       <CopyToClipboard text={Code}>
         <MaterialCode>{Code}</MaterialCode>
       </CopyToClipboard>

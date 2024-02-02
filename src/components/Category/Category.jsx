@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { createLevel, cutCpvCode } from "../../services";
+import { toast } from "react-toastify";
 import {
   CategoryWrapper,
   CategoryCode,
   CategoryDescription,
   HilightDescription,
 } from "./Category.styled";
-import { hiLight } from "../../services";
+import { hiLight, checkIsString } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -22,9 +23,18 @@ const Category = ({
     setLevel(createLevel(cutedCpvCode));
   }, [Code]);
 
+  function handleClick(event) {
+    if (checkIsString(event.target.textContent)) {
+      // console.log(checkIsString(event.target.textContent));
+      toast("Опис скопійовано в буфер омбіну");
+    } else toast("Код скопійовано в буфер омбіну");
+
+    selectCategory();
+  }
+
   return (
     <>
-      <CategoryWrapper onClick={selectCategory}>
+      <CategoryWrapper onClick={handleClick}>
         <CopyToClipboard text={Code}>
           <CategoryCode level={level}>{Code}</CategoryCode>
         </CopyToClipboard>

@@ -249,7 +249,6 @@ const AddForm = () => {
           </button>
         </form>
         {isLoading && <p>Sending data...</p>}
-        {error && <p>{error}</p>}
       </div>
     </>
   );
