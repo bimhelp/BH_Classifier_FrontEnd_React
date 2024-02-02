@@ -48,6 +48,7 @@ const AddForm = () => {
 
   // Запит по під категорії
   useEffect(() => {
+    setSubCategories([]);
     async function subCategory(selectedCode) {
       console.log("selectedCode:", selectedCode);
       setIsLoading(true);
