@@ -45,6 +45,7 @@ const TablePage = () => {
       // console.log(`search ${searchValue} by description`);
       async function search(searchValue) {
         setIsLoading(true);
+        setSearchResult([]);
         try {
           const response = await searchByDescription(searchValue);
           if (response) {
@@ -52,7 +53,6 @@ const TablePage = () => {
             setSearchResult(response.data);
           }
         } catch {
-          setSearchResult([]);
           toast.error(`Не вдалось знайти ${searchValue}`, { autoClose: 3000 });
         } finally {
           setIsLoading(false);
@@ -63,6 +63,7 @@ const TablePage = () => {
       async function search(codeNumber) {
         // console.log(`search ${codeNumber} by code`);
         setIsLoading(true);
+        setSearchResult([]);
         try {
           const response = await searchMaterials(codeNumber);
           // console.log(response.data);
@@ -70,7 +71,6 @@ const TablePage = () => {
             setSearchResult(response.data);
           }
         } catch {
-          setSearchResult([]);
           toast.error(`Не вдалось знайти ${searchValue}`, { autoClose: 3000 });
         } finally {
           setIsLoading(false);
@@ -83,7 +83,12 @@ const TablePage = () => {
   return (
     <>
       <Section>
-        <Search submit={submit} isLoading={isLoading} back={backToTable} />
+        <Search
+          submit={submit}
+          isLoading={isLoading}
+          back={backToTable}
+          isSubmiting={isLoading}
+        />
       </Section>
       <Section>
         <MainTableWrapper>

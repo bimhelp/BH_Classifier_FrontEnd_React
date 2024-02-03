@@ -7,7 +7,7 @@ import { IoMdBackspace } from "react-icons/io";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
-const Search = ({ submit, isLoading, back }) => {
+const Search = ({ submit, isLoading, back, isSubmiting }) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleChange = (event) => {
@@ -49,6 +49,7 @@ const Search = ({ submit, isLoading, back }) => {
           icon={IoSearch}
           type="submit"
           onClick={handleSubmit}
+          disabled={isSubmiting}
         ></SearchButton>
       </FormStyled>
       {isLoading && <Loader />}
