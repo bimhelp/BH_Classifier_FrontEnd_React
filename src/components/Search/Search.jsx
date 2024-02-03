@@ -5,9 +5,9 @@ import { SearchButton, BackButton } from "../Button/Button";
 import { IoSearch } from "react-icons/io5";
 import { IoMdBackspace } from "react-icons/io";
 import { toast } from "react-toastify";
-import ShowError from "../../components/ShowError/ShowError";
+import Loader from "../Loader/Loader";
 
-const Search = ({ submit, isLoading, error, back }) => {
+const Search = ({ submit, isLoading, back }) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleChange = (event) => {
@@ -51,8 +51,7 @@ const Search = ({ submit, isLoading, error, back }) => {
           onClick={handleSubmit}
         ></SearchButton>
       </FormStyled>
-      {isLoading && <p>Loading...</p>}
-      {error !== null && <ShowError>{error}</ShowError>}
+      {isLoading && <Loader />}
     </>
   );
 };

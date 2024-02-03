@@ -6,7 +6,8 @@ import { cutCpvCode, filterNextLevelItems, createLevel } from "../../services";
 import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
 import { List, Item } from "./CategoryList.styled";
-import ShowError from "../ShowError/ShowError";
+import Loader from "../Loader/Loader";
+import { toast } from "react-toastify";
 
 const CategoryList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -18,7 +19,6 @@ const CategoryList = ({ items, query }) => {
   const [level, setLevel] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   // Запит по під категорії
   useEffect(() => {
@@ -30,9 +30,10 @@ const CategoryList = ({ items, query }) => {
         const response = await getSubCategory(selectedCode);
         // console.log("response: ", response);
         setSubCategories(response.data);
-        setError(null);
       } catch (error) {
-        setError("Не вдалось завантажити підкагеторії");
+        toast.error("Не вдалось завантажити підкагеторії", {
+          autoClose: false,
+        });
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
@@ -57,10 +58,11 @@ const CategoryList = ({ items, query }) => {
           return;
         } else {
           setMaterials(response.data.slice(1));
-          setError(null);
         }
       } catch (error) {
-        setError("Не вдалось завантажити матеріали");
+        toast.error("Не вдалось завантажити матеріали", {
+          autoClose: false,
+        });
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
@@ -110,9 +112,8 @@ const CategoryList = ({ items, query }) => {
 
   return (
     <>
-      {error !== null && <ShowError>{error}</ShowError>}
       {isLoading ? (
-        <p>Loading Sub...</p>
+        <Loader />
       ) : (
         <List level={level}>
           {items.map((item) => (
@@ -142,7 +143,6 @@ const CategoryList = ({ items, query }) => {
           ))}
         </List>
       )}
-      {error && <p>{error}</p>}
     </>
   );
 };

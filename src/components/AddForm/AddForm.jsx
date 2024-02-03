@@ -8,9 +8,10 @@ import {
   getSubCategory,
   searchMaterials,
 } from "../../services/api";
-import ShowError from "../ShowError/ShowError";
 import { cutCpvCode } from "../../services";
 import { filterNextLevelItems } from "../../services";
+import { toast } from "react-toastify";
+import Loader from "../Loader/Loader";
 
 const AddForm = () => {
   const [mainCategory, setMainCategory] = useLocalStorage("main", []);
@@ -23,8 +24,6 @@ const AddForm = () => {
   const [selectedCode, setSelectedCode] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  // const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [description, setDescription] = useLocalStorage("description");
   const [code, setCode] = useLocalStorage("code", "");
@@ -39,13 +38,11 @@ const AddForm = () => {
       // console.log("запит по main category");
       async function getCategory() {
         setIsLoading(true);
-        setError(false);
         try {
           const response = await getMainCategory();
           setMainCategory(response.data);
-          setError(null);
         } catch {
-          setError("Щось пішло не так, спробуйте перезавантажити сторінку");
+          toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
         } finally {
           setIsLoading(false);
         }
@@ -60,14 +57,15 @@ const AddForm = () => {
     async function subCategory(selectedCode) {
       // console.log("selectedCode:", selectedCode);
       setIsLoading(true);
-      setError(null);
       // console.log("setIsLoading:  true");
       try {
         const response = await getSubCategory(selectedCode);
         // console.log("response: ", response);
         setSubCategories(response.data.slice(1));
       } catch (error) {
-        setError("Не вдалось завантажити підкагеторії");
+        toast.error("Не вдалось завантажити підкагеторії", {
+          autoClose: false,
+        });
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
@@ -108,30 +106,12 @@ const AddForm = () => {
 
   async function selectFourLevel(value) {
     console.log("select four", value);
-
-    // try {
-    //   const response = await searchMaterials(cutCpvCode(value));
-    //   console.log("response: ", response);
-    //   //  setSubCategories(response.data.slice(1));
-    // } catch (error) {
-    //   setError("Не вдалось завантажити підкагеторії");
-    // } finally {
-    //   // console.log("setIsLoading:  false");
-    // }
   }
 
   useEffect(() => {
     // console.log(subCategories);
     setFilteredCategories(filterNextLevelItems(subCategories, selectedCode));
   }, [selectedCode, subCategories]);
-
-  // function selectSubCategory(selectCategory) {
-  //   console.log("code: ", selectCategory);
-  //   setLastLevelCode(cutCpvCode(selectCategory));
-  // }
-  // function selectLastCategory(selectCategory) {
-  //   console.log("last code: ", selectCategory);
-  // }
 
   // Відповідає за оновлення стану
   const handleChange = (event) => {
@@ -172,7 +152,9 @@ const AddForm = () => {
         const response = await addElement(data);
         // console.log(response.data);
       } catch {
-        setError("error");
+        toast.error("Не вдалось додати матеріал", {
+          autoClose: false,
+        });
       } finally {
         setIsLoading(false);
       }
@@ -192,7 +174,6 @@ const AddForm = () => {
     <>
       <div className={css.formWrapper}>
         <h2>Add Item</h2>
-        {error && <ShowError>{error}</ShowError>}
         <CategorySelect
           category={mainCategory}
           onSelect={selectCategory}
@@ -305,7 +286,7 @@ const AddForm = () => {
             Send
           </button>
         </form>
-        {isLoading && <p>Sending data...</p>}
+        {isLoading && <Loader />}
       </div>
     </>
   );

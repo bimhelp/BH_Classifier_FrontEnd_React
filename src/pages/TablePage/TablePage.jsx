@@ -10,6 +10,7 @@ import {
   onLyMaterial,
 } from "../../services";
 import { MainTableWrapper } from "./TablePage.styled";
+import { toast } from "react-toastify";
 
 const TablePage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -17,12 +18,10 @@ const TablePage = () => {
   const [category, setCategory] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  // Викликається під час відправлення форми
+  // Виклика8ється під час відправлення форми
 
   const backToTable = () => {
     setSearchResult([]);
-    setError(null);
   };
 
   // Розділення на категорії і матеріали
@@ -46,7 +45,6 @@ const TablePage = () => {
       // console.log(`search ${searchValue} by description`);
       async function search(searchValue) {
         setIsLoading(true);
-        setError(null);
         try {
           const response = await searchByDescription(searchValue);
           if (response) {
@@ -54,7 +52,8 @@ const TablePage = () => {
             setSearchResult(response.data);
           }
         } catch {
-          setError(`Не вдалось знайти ${searchValue}`);
+          setSearchResult([]);
+          toast.error(`Не вдалось знайти ${searchValue}`, { autoClose: 3000 });
         } finally {
           setIsLoading(false);
         }
@@ -64,7 +63,6 @@ const TablePage = () => {
       async function search(codeNumber) {
         // console.log(`search ${codeNumber} by code`);
         setIsLoading(true);
-        setError(null);
         try {
           const response = await searchMaterials(codeNumber);
           // console.log(response.data);
@@ -72,7 +70,8 @@ const TablePage = () => {
             setSearchResult(response.data);
           }
         } catch {
-          setError(`Не вдалось знайти ${searchValue}`);
+          setSearchResult([]);
+          toast.error(`Не вдалось знайти ${searchValue}`, { autoClose: 3000 });
         } finally {
           setIsLoading(false);
         }
@@ -84,19 +83,13 @@ const TablePage = () => {
   return (
     <>
       <Section>
-        <Search
-          submit={submit}
-          isLoading={isLoading}
-          error={error}
-          back={backToTable}
-        />
+        <Search submit={submit} isLoading={isLoading} back={backToTable} />
       </Section>
       <Section>
         <MainTableWrapper>
           <Table category={category} materials={materials} query={query} />
         </MainTableWrapper>
       </Section>
-      {error && <p>{error.code}</p>}
     </>
   );
 };
