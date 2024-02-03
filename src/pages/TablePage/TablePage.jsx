@@ -11,6 +11,7 @@ import {
 } from "../../services";
 import { MainTableWrapper } from "./TablePage.styled";
 import { toast } from "react-toastify";
+import SearchResults from "../../components/SearchResults/SearchResults";
 
 const TablePage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -92,7 +93,15 @@ const TablePage = () => {
       </Section>
       <Section>
         <MainTableWrapper>
-          <Table category={category} materials={materials} query={query} />
+          {category.length > 0 || materials.length > 0 ? (
+            <SearchResults
+              category={category}
+              materials={materials}
+              query={query}
+            />
+          ) : (
+            <Table />
+          )}
         </MainTableWrapper>
       </Section>
     </>

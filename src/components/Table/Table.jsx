@@ -5,7 +5,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
-const Table = ({ category, materials, query }) => {
+const Table = () => {
   const [mainCategory, setMainCategory] = useLocalStorage("main", []);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -31,16 +31,14 @@ const Table = ({ category, materials, query }) => {
     };
   }, [setMainCategory]);
 
+  useEffect(() => {
+    // console.log("main", mainCategory);
+  }, [mainCategory]);
+
   return (
     <>
-      {isLoading && <Loader />}
-
-      {/* якщо є результати пошуку */}
-      {category.length > 0 || materials.length > 0 ? (
-        <>
-          <Categorylist items={category} query={query} />
-          <Categorylist items={materials} query={query} />
-        </>
+      {isLoading ? (
+        <Loader />
       ) : (
         <Categorylist items={mainCategory} style={{ padding: 0 }} />
       )}
