@@ -3,7 +3,11 @@ import css from "./AddForm.module.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { addElement } from "../../services/api";
 import CategorySelect from "../CategorySelect/CategorySelect";
-import { getMainCategory, getSubCategory } from "../../services/api";
+import {
+  getMainCategory,
+  getSubCategory,
+  searchMaterials,
+} from "../../services/api";
 import ShowError from "../ShowError/ShowError";
 import { cutCpvCode } from "../../services";
 import { filterNextLevelItems } from "../../services";
@@ -11,15 +15,19 @@ import { filterNextLevelItems } from "../../services";
 const AddForm = () => {
   const [mainCategory, setMainCategory] = useLocalStorage("main", []);
   const [subCategories, setSubCategories] = useState([]);
-  const [filteredNextLevel, setFilteredNextLevel] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [firstLevel, setFirstLevel] = useState([]);
+  const [secondLevel, setSecondLevel] = useState([]);
+  const [thirdLevel, setThirdLevel] = useState([]);
+
+  const [selectedCode, setSelectedCode] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [selectedCode, setSelectedCode] = useState("");
   // const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [description, setDescription] = useLocalStorage("description");
-  const [code, setCode] = useLocalStorage("code");
+  const [code, setCode] = useLocalStorage("code", "");
   const [price, setPrice] = useLocalStorage("price");
   const [unitcode, setUnitcode] = useLocalStorage("unitcode");
   const [level, setLevel] = useLocalStorage("level");
@@ -50,13 +58,13 @@ const AddForm = () => {
   useEffect(() => {
     setSubCategories([]);
     async function subCategory(selectedCode) {
-      console.log("selectedCode:", selectedCode);
+      // console.log("selectedCode:", selectedCode);
       setIsLoading(true);
       setError(null);
       // console.log("setIsLoading:  true");
       try {
         const response = await getSubCategory(selectedCode);
-        console.log("response: ", response);
+        // console.log("response: ", response);
         setSubCategories(response.data.slice(1));
       } catch (error) {
         setError("Не вдалось завантажити підкагеторії");
@@ -72,27 +80,58 @@ const AddForm = () => {
     }
   }, [selectedCode]);
 
-  // Фільтруємо елементи для наступної підкатегорії
+  function selectCategory(value) {
+    console.log("select category", value);
+    setSelectedCode(cutCpvCode(value));
+  }
+
+  function selectFirstLevel(value) {
+    console.log("select first", value);
+    // console.log(filterNextLevelItems(subCategories, cutCpvCode(value)));
+    setFirstLevel(
+      filterNextLevelItems(subCategories, cutCpvCode(value)).slice(1)
+    );
+  }
+
+  function selectSecondLevel(value) {
+    console.log("select second", value);
+    setSecondLevel(
+      filterNextLevelItems(subCategories, cutCpvCode(value)).slice(1)
+    );
+  }
+  function selectThirdLevel(value) {
+    console.log("select third", value);
+    setThirdLevel(
+      filterNextLevelItems(subCategories, cutCpvCode(value)).slice(1)
+    );
+  }
+
+  async function selectFourLevel(value) {
+    console.log("select four", value);
+
+    // try {
+    //   const response = await searchMaterials(cutCpvCode(value));
+    //   console.log("response: ", response);
+    //   //  setSubCategories(response.data.slice(1));
+    // } catch (error) {
+    //   setError("Не вдалось завантажити підкагеторії");
+    // } finally {
+    //   // console.log("setIsLoading:  false");
+    // }
+  }
+
   useEffect(() => {
-    if (subCategories.length > 0) {
-      const currentLevelItems = filterNextLevelItems(
-        subCategories,
-        selectedCode
-      );
-      setFilteredNextLevel(currentLevelItems);
-    }
-  }, [subCategories, selectedCode]);
+    // console.log(subCategories);
+    setFilteredCategories(filterNextLevelItems(subCategories, selectedCode));
+  }, [selectedCode, subCategories]);
 
-  function selectCategory(code) {
-    setSelectedCode(cutCpvCode(code));
-  }
-
-  function selectSubCategory(code) {
-    console.log("code: ", code);
-  }
-  function selectLastCategory(code) {
-    console.log("last code: ", code);
-  }
+  // function selectSubCategory(selectCategory) {
+  //   console.log("code: ", selectCategory);
+  //   setLastLevelCode(cutCpvCode(selectCategory));
+  // }
+  // function selectLastCategory(selectCategory) {
+  //   console.log("last code: ", selectCategory);
+  // }
 
   // Відповідає за оновлення стану
   const handleChange = (event) => {
@@ -158,22 +197,50 @@ const AddForm = () => {
           category={mainCategory}
           onSelect={selectCategory}
           isLoading={isLoading}
+          isDisabled={false}
         />
-        {subCategories.length > 0 && (
+        {filteredCategories && (
           <CategorySelect
-            category={filteredNextLevel}
-            onSelect={selectSubCategory}
+            category={filteredCategories}
+            onSelect={selectFirstLevel}
             isLoading={isLoading}
           />
         )}
-        {/* {filteredCategories && (
+        {firstLevel.length > 0 && (
           <CategorySelect
-            category={filteredCategories}
-            onSelect={selectLastCategory}
+            category={firstLevel}
+            onSelect={selectSecondLevel}
             isLoading={isLoading}
           />
-        )} */}
+        )}
+        {secondLevel.length > 0 && (
+          <CategorySelect
+            category={secondLevel}
+            onSelect={selectThirdLevel}
+            isLoading={isLoading}
+          />
+        )}
+        {thirdLevel.length > 0 && (
+          <CategorySelect
+            category={thirdLevel}
+            onSelect={selectFourLevel}
+            isLoading={isLoading}
+          />
+        )}
+
+        <p>{code}</p>
         <form onSubmit={handleSubmit} className={css.form}>
+          {/* <div className={css.inputWrapper}>
+            <label className={css.label}>Code</label>
+            <input
+              type="text"
+              placeholder="Enter code"
+              value={code}
+              name="code"
+              className={css.input}
+              onChange={handleChange}
+            />
+          </div> */}
           <div className={css.inputWrapper}>
             <label className={css.label} htmlFor="description">
               Description
@@ -199,17 +266,7 @@ const AddForm = () => {
               onChange={handleChange}
             />
           </div>
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Code</label>
-            <input
-              type="text"
-              placeholder="Enter code"
-              value={code}
-              name="code"
-              className={css.input}
-              onChange={handleChange}
-            />
-          </div>
+
           <div className={css.inputWrapper}>
             <label className={css.label}>Unitcode</label>
             <input

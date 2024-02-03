@@ -5,6 +5,7 @@ import { getMainCategory } from "../../services/api";
 import ShowError from "../ShowError/ShowError";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 // import { ErrorMessage } from "formik";
+import ContentLoader from "react-content-loader";
 
 const Table = ({ category, materials, query }) => {
   const [mainCategory, setMainCategory] = useLocalStorage("main", []);
@@ -32,7 +33,23 @@ const Table = ({ category, materials, query }) => {
   return (
     <>
       {error !== null && <ShowError>{error}</ShowError>}
-      {isLoading && <p>Loading Main Category...</p>}
+      {isLoading && (
+        <ContentLoader
+          speed={2}
+          width={1415}
+          height={78}
+          viewBox="0 0 1415 78"
+          backgroundColor="#e3e3e3"
+          foregroundColor="#c7c7c7"
+        >
+          <rect x="15" y="0" rx="5" ry="5" width="110" height="24" />
+          <rect x="130" y="0" rx="5" ry="5" width="1285" height="24" />
+          <rect x="15" y="27" rx="5" ry="5" width="110" height="24" />
+          <rect x="130" y="27" rx="5" ry="5" width="1285" height="24" />
+          <rect x="15" y="54" rx="5" ry="5" width="110" height="24" />
+          <rect x="130" y="54" rx="5" ry="5" width="1285" height="24" />
+        </ContentLoader>
+      )}
 
       {/* якщо є результати пошуку */}
       {category.length > 0 || materials.length > 0 ? (
