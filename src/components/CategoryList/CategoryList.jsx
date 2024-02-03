@@ -22,12 +22,13 @@ const CategoryList = ({ items, query }) => {
 
   // Запит по під категорії
   useEffect(() => {
+    const controller = new AbortController();
     async function subCategory(selectedCode) {
       // console.log("selectedCode:", selectedCode);
       setIsLoading(true);
       // console.log("setIsLoading:  true");
       try {
-        const response = await getSubCategory(selectedCode);
+        const response = await getSubCategory(selectedCode, controller.signal);
         // console.log("response: ", response);
         setSubCategories(response.data);
       } catch (error) {
@@ -44,6 +45,10 @@ const CategoryList = ({ items, query }) => {
       // console.log("get sub categorys");
       subCategory(selectedCode);
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [selectedCode]);
 
   // Запит по матеріали

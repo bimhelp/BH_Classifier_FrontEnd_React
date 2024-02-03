@@ -13,9 +13,10 @@ export async function getMainCategory() {
   return response.data;
 }
 
-export async function getSubCategory(spvCode) {
+export async function getSubCategory(spvCode, signal) {
   const response = await axios.get(`/elements/subcategory`, {
     params: { code: spvCode },
+    signal,
   });
   return response.data;
 }
