@@ -14,7 +14,7 @@ const CategoryList = ({ items, query }) => {
   const [materials, setMaterials] = useState([]);
 
   const [selectedId, setSelectedId] = useState(null);
-  const [selectedCode, setSelectedCode] = useState(null);
+  const [selectedCode, setSelectedCode] = useState("");
   const [filteredNextLevel, setFilteredNextLevel] = useState([]);
   const [level, setLevel] = useState(null);
 
@@ -32,27 +32,28 @@ const CategoryList = ({ items, query }) => {
         // console.log("response: ", response);
         setSubCategories(response.data);
       } catch (error) {
-        toast.error("Не вдалось завантажити підкагеторії", {
-          autoClose: false,
-        });
+        toast.error("Не вдалось завантажити підкагеторії");
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
       }
     }
 
-    if (selectedCode) {
+    if (selectedCode.length > 0) {
+      // console.log("selectedCode: ", selectedCode);
       // console.log("get sub categorys");
       subCategory(selectedCode);
     }
 
     return () => {
+      console.log("abort");
       controller.abort();
     };
   }, [selectedCode]);
 
   // Запит по матеріали
   useEffect(() => {
+    // console.log("effect category");
     async function getMaterial(selectedCode) {
       setIsLoading(true);
       try {
@@ -65,16 +66,14 @@ const CategoryList = ({ items, query }) => {
           setMaterials(response.data.slice(1));
         }
       } catch (error) {
-        toast.error("Не вдалось завантажити матеріали", {
-          autoClose: false,
-        });
+        toast.error("Не вдалось завантажити матеріали");
       } finally {
         // console.log("setIsLoading:  false");
         setIsLoading(false);
       }
     }
 
-    if (selectedCode) {
+    if (selectedCode.length >= 5) {
       // console.log("get materials");
       getMaterial(selectedCode);
     }
@@ -82,11 +81,15 @@ const CategoryList = ({ items, query }) => {
 
   // Фільтруємо елементи для наступної підкатегорії
   useEffect(() => {
+    // console.log("effect filter");
+    // console.log(subCategories);
     if (subCategories.length > 0) {
       const currentLevelItems = filterNextLevelItems(
         subCategories,
         selectedCode
       );
+
+      // console.log("currentLevelItems", currentLevelItems);
       setFilteredNextLevel(currentLevelItems.slice(1));
     }
   }, [subCategories, selectedCode]);
@@ -100,6 +103,7 @@ const CategoryList = ({ items, query }) => {
 
   // Функція формує cpv код і тоглить відкриття категорії
   const selectCategory = async (id, code) => {
+    // console.log("set code to state");
     setSelectedCode(cutCpvCode(code));
     toggleCategory(id);
   };

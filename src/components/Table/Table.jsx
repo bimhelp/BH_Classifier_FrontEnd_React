@@ -12,20 +12,23 @@ const Table = ({ category, materials, query }) => {
 
   // Запит по всі головні категорії при монтуванні компонента
   useEffect(() => {
+    // console.log("effect main");
     async function getCategory() {
       setIsLoading(true);
       try {
         const response = await getMainCategory();
         setMainCategory(response.data);
       } catch {
-        toast.error("Щось пішло не так, спробуйте перезавантажити сторінку", {
-          autoClose: false,
-        });
+        toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
       } finally {
         setIsLoading(false);
       }
     }
     getCategory();
+    return () => {
+      // console.log("main unmount");
+      setMainCategory([]);
+    };
   }, [setMainCategory]);
 
   return (
