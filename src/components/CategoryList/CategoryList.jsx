@@ -39,14 +39,14 @@ const CategoryList = ({ items, query }) => {
       }
     }
 
-    if (selectedCode.length > 0) {
+    if (selectedCode.length > 0 && selectedCode.length < 5) {
       // console.log("selectedCode: ", selectedCode);
       // console.log("get sub categorys");
       subCategory(selectedCode);
     }
 
     return () => {
-      console.log("abort");
+      // console.log("abort");
       controller.abort();
     };
   }, [selectedCode]);
