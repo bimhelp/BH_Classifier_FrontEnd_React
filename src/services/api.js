@@ -8,8 +8,8 @@ export async function getAll() {
   return response.data;
 }
 
-export async function getMainCategory() {
-  const response = await axios.get(`/elements/category`);
+export async function getMainCategory(signal) {
+  const response = await axios.get(`/elements/category`, { signal });
   return response.data;
 }
 

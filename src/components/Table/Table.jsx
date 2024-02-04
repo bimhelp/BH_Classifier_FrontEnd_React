@@ -13,10 +13,11 @@ const Table = () => {
   // Запит по всі головні категорії при монтуванні компонента
   useEffect(() => {
     // console.log("effect main");
+    const controller = new AbortController();
     async function getCategory() {
       setIsLoading(true);
       try {
-        const response = await getMainCategory();
+        const response = await getMainCategory(controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
@@ -26,8 +27,9 @@ const Table = () => {
     }
     getCategory();
     return () => {
-      // console.log("main unmount");
+      console.log("main unmount");
       setMainCategory([]);
+      controller.abort();
     };
   }, [setMainCategory]);
 
