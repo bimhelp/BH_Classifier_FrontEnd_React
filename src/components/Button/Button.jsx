@@ -1,5 +1,10 @@
 import React from "react";
-import { StyledButton, StyledBack, StyledSearch } from "./Button.styled";
+import {
+  StyledButton,
+  StyledBack,
+  StyledSearch,
+  IconButton,
+} from "./Button.styled";
 
 export const Button = ({
   type = "button",
@@ -42,5 +47,19 @@ export const SearchButton = ({
       {Icon && <Icon size={14} />}
       {children}
     </StyledSearch>
+  );
+};
+
+export const CloseButton = ({
+  type = "button",
+  disabled = false,
+  icon: Icon = null,
+  children,
+  onClick,
+}) => {
+  return (
+    <IconButton type={type} disabled={disabled} onClick={onClick}>
+      {children} {Icon && <Icon size={14} />}
+    </IconButton>
   );
 };

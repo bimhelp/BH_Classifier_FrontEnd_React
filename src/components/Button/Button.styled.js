@@ -85,3 +85,20 @@ export const StyledSearch = styled(StyledButton)`
     background-color: ${(props) => props.theme.colors.primary};
   }
 `;
+
+export const IconButton = styled(StyledButton)`
+  position: absolute;
+  top: ${(props) => props.theme.space[4]}px;
+  right: ${(props) => props.theme.space[4]}px;
+  padding: ${(props) => props.theme.space[2]}px;
+  margin-bottom: ${(props) => props.theme.space[2]}px;
+  &:hover:not(:disabled),
+  &:focus:not(:disabled) {
+    cursor: pointer;
+    color: ${(props) => props.theme.colors.white};
+    border-color: ${(props) => props.theme.colors.black};
+    /* background-color: ${(props) => props.theme.colors.primary}; */
+
+    background-color: ${(props) => props.theme.colors.red};
+  }
+`;

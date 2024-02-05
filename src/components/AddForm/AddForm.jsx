@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import css from "./AddForm.module.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { addElement } from "../../services/api";
-import CategorySelect from "../CategorySelect/CategorySelect";
-import {
-  getMainCategory,
-  getSubCategory,
-  searchMaterials,
-} from "../../services/api";
-import { cutCpvCode } from "../../services";
-import { filterNextLevelItems } from "../../services";
+import Modal from "../../components/Modal/Modal";
+import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
-import Loader from "../Loader/Loader";
+import Table from "../Table/Table";
 
 const AddForm = () => {
-  const [mainCategory, setMainCategory] = useLocalStorage("main", []);
-  const [subCategories, setSubCategories] = useState([]);
-  const [filteredCategories, setFilteredCategories] = useState([]);
-  const [firstLevel, setFirstLevel] = useState([]);
-  const [secondLevel, setSecondLevel] = useState([]);
-  const [thirdLevel, setThirdLevel] = useState([]);
-
-  const [selectedCode, setSelectedCode] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [description, setDescription] = useLocalStorage("description");
@@ -31,87 +16,12 @@ const AddForm = () => {
   const [unitcode, setUnitcode] = useLocalStorage("unitcode");
   const [level, setLevel] = useLocalStorage("level");
   const [unit, setUnit] = useLocalStorage("unit");
+  const [modalOpen, setModalOpen] = useState(false);
 
-  // Запит по всі головні категорії якщо їх немає в localstorage
-  useEffect(() => {
-    if (mainCategory.length < 1) {
-      // console.log("запит по main category");
-      async function getCategory() {
-        setIsLoading(true);
-        try {
-          const response = await getMainCategory();
-          setMainCategory(response.data);
-        } catch {
-          toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
-        } finally {
-          setIsLoading(false);
-        }
-      }
-      getCategory();
-    }
-  }, [mainCategory.length, setMainCategory]);
-
-  // Запит по під категорії
-  useEffect(() => {
-    setSubCategories([]);
-    async function subCategory(selectedCode) {
-      // console.log("selectedCode:", selectedCode);
-      setIsLoading(true);
-      // console.log("setIsLoading:  true");
-      try {
-        const response = await getSubCategory(selectedCode);
-        // console.log("response: ", response);
-        setSubCategories(response.data.slice(1));
-      } catch (error) {
-        toast.error("Не вдалось завантажити підкагеторії", {
-          autoClose: false,
-        });
-      } finally {
-        // console.log("setIsLoading:  false");
-        setIsLoading(false);
-      }
-    }
-
-    if (selectedCode) {
-      // console.log("get sub categorys");
-      subCategory(selectedCode);
-    }
-  }, [selectedCode]);
-
-  function selectCategory(value) {
-    console.log("select category", value);
-    setSelectedCode(cutCpvCode(value));
-  }
-
-  function selectFirstLevel(value) {
-    console.log("select first", value);
-    // console.log(filterNextLevelItems(subCategories, cutCpvCode(value)));
-    setFirstLevel(
-      filterNextLevelItems(subCategories, cutCpvCode(value)).slice(1)
-    );
-  }
-
-  function selectSecondLevel(value) {
-    console.log("select second", value);
-    setSecondLevel(
-      filterNextLevelItems(subCategories, cutCpvCode(value)).slice(1)
-    );
-  }
-  function selectThirdLevel(value) {
-    console.log("select third", value);
-    setThirdLevel(
-      filterNextLevelItems(subCategories, cutCpvCode(value)).slice(1)
-    );
-  }
-
-  async function selectFourLevel(value) {
-    console.log("select four", value);
-  }
-
-  useEffect(() => {
-    // console.log(subCategories);
-    setFilteredCategories(filterNextLevelItems(subCategories, selectedCode));
-  }, [selectedCode, subCategories]);
+  // Показує або приховує модалку
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   // Відповідає за оновлення стану
   const handleChange = (event) => {
@@ -174,44 +84,21 @@ const AddForm = () => {
     <>
       <div className={css.formWrapper}>
         <h2>Add Item</h2>
-        <CategorySelect
-          category={mainCategory}
-          onSelect={selectCategory}
-          isLoading={isLoading}
-          isDisabled={false}
-        />
-        {filteredCategories && (
-          <CategorySelect
-            category={filteredCategories}
-            onSelect={selectFirstLevel}
-            isLoading={isLoading}
-          />
+        <Button onClick={toggleModal}>
+          Виберіть категорію в яку хочете додати матеріал
+        </Button>
+        {modalOpen && (
+          <Modal
+            onClose={toggleModal}
+            title="Виберіть категорію в яку хочете додати матеріал"
+          >
+            <p>Ви вибрали:</p>
+            <Table />
+          </Modal>
         )}
-        {firstLevel.length > 0 && (
-          <CategorySelect
-            category={firstLevel}
-            onSelect={selectSecondLevel}
-            isLoading={isLoading}
-          />
-        )}
-        {secondLevel.length > 0 && (
-          <CategorySelect
-            category={secondLevel}
-            onSelect={selectThirdLevel}
-            isLoading={isLoading}
-          />
-        )}
-        {thirdLevel.length > 0 && (
-          <CategorySelect
-            category={thirdLevel}
-            onSelect={selectFourLevel}
-            isLoading={isLoading}
-          />
-        )}
-
         <p>{code}</p>
         <form onSubmit={handleSubmit} className={css.form}>
-          {/* <div className={css.inputWrapper}>
+          <div className={css.inputWrapper}>
             <label className={css.label}>Code</label>
             <input
               type="text"
@@ -221,7 +108,7 @@ const AddForm = () => {
               className={css.input}
               onChange={handleChange}
             />
-          </div> */}
+          </div>
           <div className={css.inputWrapper}>
             <label className={css.label} htmlFor="description">
               Description
@@ -286,7 +173,7 @@ const AddForm = () => {
             Send
           </button>
         </form>
-        {isLoading && <Loader />}
+        {isLoading && <p>loading...</p>}
       </div>
     </>
   );

@@ -8,16 +8,27 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
 `;
-
-export const Content = styled.div`
+export const ModalWindow = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 300px;
-  max-width: 600px;
+  height: 80%;
+  max-width: 80%;
   width: 100%;
   padding: 12px;
+  padding-top: 30px;
   background-color: #ffffff;
   border-radius: ${(props) => props.theme.radii.normal};
+`;
+export const Title = styled.p`
+  font-size: ${(props) => props.theme.fontSizes.l};
+`;
+export const Content = styled.div`
+  /* outline: 1px solid red; */
+  width: 100%;
+  height: 95%;
+  padding-right: ${(props) => props.theme.space[3]}px;
+  overflow-y: scroll;
 `;

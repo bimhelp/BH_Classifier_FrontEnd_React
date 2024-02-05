@@ -27,7 +27,7 @@ const Table = () => {
     }
     getCategory();
     return () => {
-      console.log("main unmount");
+      // console.log("main unmount");
       setMainCategory([]);
       controller.abort();
     };

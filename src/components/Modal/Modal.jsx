@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Backdrop, Content } from "./Modal.styled";
-
+import { Backdrop, Content, ModalWindow, Title } from "./Modal.styled";
+import { CloseButton } from "../../components/Button/Button";
+import { CgClose } from "react-icons/cg";
 // корінь
 const modalRoot = document.querySelector("#modal-root");
 
-const Modal = ({ children, onClose }) => {
+const Modal = ({ children, title, onClose }) => {
   useEffect(() => {
     function handleKeyDown(e) {
       // console.log(e.code);
@@ -34,7 +35,13 @@ const Modal = ({ children, onClose }) => {
 
   return createPortal(
     <Backdrop onClick={handleBackDropClick}>
-      <Content>{children}</Content>
+      <ModalWindow>
+        <div>
+          <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
+          {title && <Title>{title}</Title>}
+        </div>
+        <Content>{children}</Content>
+      </ModalWindow>
     </Backdrop>,
     modalRoot
   );
