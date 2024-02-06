@@ -14,7 +14,7 @@ const Menu = () => {
         {isLoggedIn && (
           <>
             <StyledNavLink to="projects">Projects</StyledNavLink>
-            <StyledNavLink to="add">Add</StyledNavLink>
+            <StyledNavLink to="materials">Materials</StyledNavLink>
           </>
         )}
       </MenuWrapper>

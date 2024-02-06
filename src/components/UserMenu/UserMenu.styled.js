@@ -23,3 +23,7 @@ export const UserName = styled.p`
   flex-direction: row;
   font-size: ${(props) => props.theme.fontSizes.s};
 `;
+
+export const Avatar = styled.div`
+  width: 30px;
+`;

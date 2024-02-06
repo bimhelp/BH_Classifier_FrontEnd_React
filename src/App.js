@@ -26,7 +26,7 @@ function App() {
           <Route path="registration" element={<RegisterPage />} />
           <Route path="login" element={<LogInPage />} />
           <Route path="cabinet" element={<CabinetPage />} />
-          <Route path="add" element={<AddItemPage />} />
+          <Route path="materials" element={<AddItemPage />} />
           <Route path="projects" element={<ProjectsPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>

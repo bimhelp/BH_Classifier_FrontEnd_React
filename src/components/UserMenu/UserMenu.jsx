@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
-import { UserWrapper, UserButton, UserName } from "./UserMenu.styled";
+import { UserWrapper, UserButton, UserName, Avatar } from "./UserMenu.styled";
 import { FiUser } from "react-icons/fi";
 import { Button } from "../Button/Button";
 
@@ -9,13 +9,16 @@ const UserMenu = () => {
   return (
     <UserWrapper>
       <UserButton to="login">
-        {isLoggedIn && <UserName>{user.name}</UserName>}
         {isLoggedIn ? (
-          <Button onClick={onLogOut}>LogOut</Button>
+          <UserName>{user.name}</UserName>
         ) : (
-          <Button>LogIn</Button>
+          <UserName>LogIn</UserName>
         )}
-        <FiUser />
+        {isLoggedIn && <Button onClick={onLogOut}>LogOut</Button>}
+        <Avatar>
+          <FiUser />
+          {/* {user?.avatar ? <img src={user.avatar} alt="user" /> : <FiUser />} */}
+        </Avatar>
       </UserButton>
     </UserWrapper>
   );

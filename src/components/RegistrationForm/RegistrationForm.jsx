@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -11,31 +11,8 @@ import { NavLink } from "react-router-dom";
 import css from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { onRegister } = useContext(context);
 
-  const handleInputChange = (event) => {
-    // console.log(event.target.value);
-    const { name, value } = event.target;
-    // console.log("input name: ", name);
-
-    switch (name) {
-      case "name":
-        setName(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-
-      default:
-        break;
-    }
-  };
   const initialValues = {
     name: "",
     email: "",
