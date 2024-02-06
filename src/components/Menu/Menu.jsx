@@ -1,41 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import UserMenu from "../UserMenu/UserMenu";
 // Навігація по сайту
-import {
-  Navigation,
-  MenuWrapper,
-  StyledNavLink,
-  UserWrapper,
-  UserButton,
-  UserName,
-} from "./Menu.styled";
-import { FiUser } from "react-icons/fi";
-import { FiPlusSquare } from "react-icons/fi";
+import { Navigation, MenuWrapper, StyledNavLink } from "./Menu.styled";
 
 const Menu = () => {
-  const [userName, setUserName] = useState("Alex");
-
   return (
     <Navigation>
       <MenuWrapper>
         <StyledNavLink to="/">CPV</StyledNavLink>
         <StyledNavLink to="projects">Projects</StyledNavLink>
       </MenuWrapper>
-      <UserWrapper>
-        <UserButton to="login">
-          {userName ? (
-            <UserName>{userName}</UserName>
-          ) : (
-            <UserName> LogIn </UserName>
-          )}
-          <FiUser />
-        </UserButton>
-
-        {userName && (
-          <UserButton to="add">
-            <FiPlusSquare />
-          </UserButton>
-        )}
-      </UserWrapper>
+      <UserMenu />
     </Navigation>
   );
 };

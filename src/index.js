@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 // навігація по сторінках
 import { BrowserRouter } from "react-router-dom";
 // стилі

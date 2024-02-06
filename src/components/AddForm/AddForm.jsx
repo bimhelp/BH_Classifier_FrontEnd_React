@@ -84,22 +84,22 @@ const AddForm = () => {
     <>
       <div className={css.formWrapper}>
         <h2>Add Item</h2>
-        <Button onClick={toggleModal}>
-          Виберіть категорію в яку хочете додати матеріал
-        </Button>
-        {modalOpen && (
-          <Modal
-            onClose={toggleModal}
-            title="Виберіть категорію в яку хочете додати матеріал"
-          >
-            <p>Ви вибрали:</p>
-            <Table />
-          </Modal>
-        )}
-        <p>{code}</p>
+
         <form onSubmit={handleSubmit} className={css.form}>
           <div className={css.inputWrapper}>
             <label className={css.label}>Code</label>
+            <Button onClick={toggleModal}>
+              Виберіть категорію в яку хочете додати матеріал
+            </Button>
+            {modalOpen && (
+              <Modal
+                onClose={toggleModal}
+                title="Виберіть категорію в яку хочете додати матеріал"
+              >
+                <p>Ви вибрали:</p>
+                <Table />
+              </Modal>
+            )}
             <input
               type="text"
               placeholder="Enter code"

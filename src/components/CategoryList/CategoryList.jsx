@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // functions
 import { getSubCategory, searchMaterials } from "../../services";
-import { cutCpvCode, filterNextLevelItems, createLevel } from "../../services";
+import {
+  cutCpvCode,
+  filterNextLevelItems,
+  createLevel,
+  scrollTo,
+} from "../../services";
 // components
 import Category from "../Category/Category";
 import MaterialList from "../MaterialList/MaterialList";
@@ -20,8 +25,11 @@ const CategoryList = ({ items, query }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const categoryRef = useRef();
+
   // Запит по під категорії
   useEffect(() => {
+    // console.log("get subcategory effect");
     const controller = new AbortController();
     async function subCategory(selectedCode) {
       // console.log("selectedCode:", selectedCode);
@@ -53,7 +61,7 @@ const CategoryList = ({ items, query }) => {
 
   // Запит по матеріали
   useEffect(() => {
-    // console.log("effect category");
+    // console.log("effect material");
     async function getMaterial(selectedCode) {
       setIsLoading(true);
       try {
@@ -81,14 +89,13 @@ const CategoryList = ({ items, query }) => {
 
   // Фільтруємо елементи для наступної підкатегорії
   useEffect(() => {
-    // console.log("effect filter");
     // console.log(subCategories);
     if (subCategories.length > 0) {
+      // console.log("effect filter");
       const currentLevelItems = filterNextLevelItems(
         subCategories,
         selectedCode
       );
-
       // console.log("currentLevelItems", currentLevelItems);
       setFilteredNextLevel(currentLevelItems.slice(1));
     }
@@ -102,8 +109,11 @@ const CategoryList = ({ items, query }) => {
   }, [items, selectedCode]);
 
   // Функція формує cpv код і тоглить відкриття категорії
-  const selectCategory = async (id, code) => {
+  const selectCategory = async (id, code, event) => {
+    // console.log("select", event);
     // console.log("set code to state");
+    scrollTo(categoryRef, event);
+
     setSelectedCode(cutCpvCode(code));
     toggleCategory(id);
   };
@@ -143,8 +153,11 @@ const CategoryList = ({ items, query }) => {
                 </Category>
               ) : (
                 <Category
+                  ref={categoryRef}
                   element={item}
-                  selectCategory={() => selectCategory(item._id, item.Code)}
+                  selectCategory={(event) =>
+                    selectCategory(item._id, item.Code, event)
+                  }
                   query={query}
                 ></Category>
               )}

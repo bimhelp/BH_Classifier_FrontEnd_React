@@ -21,8 +21,8 @@ const Material = ({
   function handleClick(event) {
     if (checkIsString(event.target.textContent)) {
       // console.log(checkIsString(event.target.textContent));
-      toast("Опис скопійовано в буфер омбіну");
-    } else toast("Код скопійовано в буфер омбіну");
+      toast.info("Опис скопійовано в буфер омбіну");
+    } else toast.info("Код скопійовано в буфер омбіну");
   }
 
   return (

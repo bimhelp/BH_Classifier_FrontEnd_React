@@ -33,10 +33,6 @@ const Table = () => {
     };
   }, [setMainCategory]);
 
-  useEffect(() => {
-    // console.log("main", mainCategory);
-  }, [mainCategory]);
-
   return (
     <>
       {isLoading ? (
