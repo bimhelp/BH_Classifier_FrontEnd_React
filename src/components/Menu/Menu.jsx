@@ -9,6 +9,7 @@ const Menu = () => {
       <MenuWrapper>
         <StyledNavLink to="/">CPV</StyledNavLink>
         <StyledNavLink to="projects">Projects</StyledNavLink>
+        <StyledNavLink to="add">Add</StyledNavLink>
       </MenuWrapper>
       <UserMenu />
     </Navigation>

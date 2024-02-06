@@ -2,27 +2,22 @@ import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
 import { UserWrapper, UserButton, UserName } from "./UserMenu.styled";
 import { FiUser } from "react-icons/fi";
-import { FiPlusSquare } from "react-icons/fi";
+import { Button } from "../Button/Button";
 
 const UserMenu = () => {
-  const { userName } = useContext(context);
-
+  const { user, isLoggedIn, onLogIn, onLogOut } = useContext(context);
+  // console.log("userMenu: ", authContext);
   return (
     <UserWrapper>
       <UserButton to="login">
-        {userName ? (
-          <UserName>{userName}</UserName>
+        {isLoggedIn && <UserName>{user.name}</UserName>}
+        {isLoggedIn ? (
+          <Button onClick={onLogOut}>LogOut</Button>
         ) : (
-          <UserName> LogIn </UserName>
+          <Button onClick={onLogIn}>LogIn</Button>
         )}
         <FiUser />
       </UserButton>
-
-      {userName && (
-        <UserButton to="add">
-          <FiPlusSquare />
-        </UserButton>
-      )}
     </UserWrapper>
   );
 };

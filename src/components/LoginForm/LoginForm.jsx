@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 // Навігація
@@ -7,8 +7,11 @@ import { NavLink } from "react-router-dom";
 import css from "./LoginForm.module.css";
 import { StyledForm, Input, InputWrapper } from "./LoginForm.styled";
 import { validationColor } from "../../services/utility";
+import { authContext as context } from "../../context/authContext";
 
 const LoginForm = () => {
+  const { onLogIn } = useContext(context);
+
   const initialValues = {
     email: "",
     password: "",
@@ -26,6 +29,7 @@ const LoginForm = () => {
     const { resetForm } = actions;
 
     console.log("values: ", values);
+    onLogIn(values);
     // console.log("actions: ", actions);
 
     // Передача даних в батьківський компонент

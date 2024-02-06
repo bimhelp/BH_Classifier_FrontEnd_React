@@ -200,9 +200,9 @@ export function makeOptions(array) {
 }
 
 export function scrollTo(ref, event) {
-  console.log("event: ", event);
-  console.log("ref", ref.current);
+  // console.log("event: ", event);
+  // console.log("ref", ref.current);
   const { top } = ref.current.getBoundingClientRect();
-  console.log("top: ", top);
+  // console.log("top: ", top);
   window.scrollTo({ behavior: "smooth", top });
 }

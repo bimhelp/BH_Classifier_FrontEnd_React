@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-
+import AuthProvider from "./context/AuthProvider";
 // навігація по сторінках
 import { BrowserRouter } from "react-router-dom";
 // стилі
@@ -16,7 +16,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter basename="/classifier">
       <ThemeProvider theme={theme}>
-        <App />
+        <AuthProvider>
+          <App />
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>

@@ -43,3 +43,9 @@ export async function addElement(newElement) {
   const response = await axios.post("/element", newElement);
   return response.data;
 }
+
+// Auth________________________________________________________
+export async function logIn(credentials) {
+  const response = await axios.post("/auth/login", credentials);
+  return response.data;
+}

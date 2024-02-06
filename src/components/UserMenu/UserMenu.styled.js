@@ -11,6 +11,7 @@ export const UserButton = styled(NavLink)`
   align-items: center;
   gap: 10px;
   font-size: ${(props) => props.theme.fontSizes.l};
+  border: none;
 
   &:hover,
   &:focus {
