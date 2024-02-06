@@ -14,7 +14,7 @@ const UserMenu = () => {
         {isLoggedIn ? (
           <Button onClick={onLogOut}>LogOut</Button>
         ) : (
-          <Button onClick={onLogIn}>LogIn</Button>
+          <Button>LogIn</Button>
         )}
         <FiUser />
       </UserButton>
