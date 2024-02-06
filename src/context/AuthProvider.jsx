@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { authContext } from "./authContext";
-import { logIn } from "../services";
+import { logIn, logOut } from "../services";
 import { toast } from "react-toastify";
 
 const AuthProvider = ({ children }) => {
@@ -32,8 +32,20 @@ const AuthProvider = ({ children }) => {
   };
 
   const onLogOut = () => {
-    setUser(null);
-    setIsLoggedIn(false);
+    async function logout() {
+      try {
+        const responce = await logOut();
+        if (responce) {
+          console.log("responce: ", responce);
+
+          setUser(null);
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        toast.error("Не вдалось вийти із системи");
+      }
+    }
+    logout();
   };
 
   const providerValue = useMemo(() => {

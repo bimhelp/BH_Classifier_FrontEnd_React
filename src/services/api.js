@@ -45,7 +45,30 @@ export async function addElement(newElement) {
 }
 
 // Auth________________________________________________________
+
+// Об'єкт token, має два методи
+const token = {
+  // Передає токен в заголовок для будь-якого (common) запиту
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  // Скидає токен
+  clear() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
+
 export async function logIn(credentials) {
   const response = await axios.post("/auth/login", credentials);
+  // записує токен в об'єкт token
+  token.set(response.data.token);
+  return response.data;
+}
+
+export async function logOut() {
+  const response = await axios.post("/auth/logout");
+  // токен вже є у хедері, тому що юзер вже був залогінений
+  // тому його потрібно обнулити
+  token.clear();
   return response.data;
 }
