@@ -28,11 +28,11 @@ const LoginForm = () => {
   const handleSubmit = (values, actions) => {
     const { resetForm } = actions;
 
-    console.log("values: ", values);
-    onLogIn(values);
+    // console.log("values: ", values);
     // console.log("actions: ", actions);
 
-    // Передача даних в батьківський компонент
+    // Передача даних в контекст (глобальний стейт)
+    onLogIn(values);
 
     // Очистка форми
     resetForm();
@@ -80,9 +80,7 @@ const LoginForm = () => {
               />
               <ErrorMessage name="password" />
             </InputWrapper>
-            <Button className={css.submitBtn} type="submit">
-              LogIn
-            </Button>
+            <Button type="submit">LogIn</Button>
             <NavLink className={css.button} to={"/registration"}>
               Registration
             </NavLink>

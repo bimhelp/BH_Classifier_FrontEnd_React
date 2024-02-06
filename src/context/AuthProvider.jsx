@@ -1,15 +1,38 @@
 import React, { useMemo, useState } from "react";
 import { authContext } from "./authContext";
-import { logIn, logOut } from "../services";
+import { logIn, logOut, registerUser } from "../services";
 import { toast } from "react-toastify";
 
 const AuthProvider = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({
     name: null,
     email: null,
   });
-  const [token, setToken] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const onRegister = (credentials) => {
+    // console.log("register", credentials);
+
+    async function register(credentials) {
+      try {
+        const response = await registerUser(credentials);
+        // console.log("response: ", response);
+        setUser(response);
+        setIsLoggedIn(true);
+      } catch (error) {
+        // console.log("error: ", error.response);
+
+        if (error.response.status === 409) {
+          toast.error(`Email ${credentials.email} вже зареєстровано в системі`);
+        } else
+          toast.error(
+            "Не вдалось зареєструвати користувача, перевірте чи коректно заповнена форма реєстрації"
+          );
+      }
+    }
+
+    register(credentials);
+  };
 
   const onLogIn = (credentials) => {
     async function login(credentials) {
@@ -18,7 +41,6 @@ const AuthProvider = ({ children }) => {
         if (response) {
           // console.log("token", response.token);
           // console.log("username", response.user.name);
-          setToken(response.token);
           setUser(response.user);
           setIsLoggedIn(true);
         }
@@ -36,7 +58,7 @@ const AuthProvider = ({ children }) => {
       try {
         const responce = await logOut();
         if (responce) {
-          console.log("responce: ", responce);
+          // console.log("responce: ", responce);
 
           setUser(null);
           setIsLoggedIn(false);
@@ -49,7 +71,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const providerValue = useMemo(() => {
-    return { user, isLoggedIn, onLogIn, onLogOut };
+    return { user, isLoggedIn, onRegister, onLogIn, onLogOut };
   }, [isLoggedIn, user]);
 
   return (

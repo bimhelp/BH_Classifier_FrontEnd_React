@@ -5,8 +5,7 @@ import { FiUser } from "react-icons/fi";
 import { Button } from "../Button/Button";
 
 const UserMenu = () => {
-  const { user, isLoggedIn, onLogIn, onLogOut } = useContext(context);
-  // console.log("userMenu: ", authContext);
+  const { user, isLoggedIn, onLogOut } = useContext(context);
   return (
     <UserWrapper>
       <UserButton to="login">

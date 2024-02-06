@@ -58,6 +58,13 @@ const token = {
   },
 };
 
+export async function registerUser(credentials) {
+  const response = await axios.post("/auth/register", credentials);
+  // записує токен в об'єкт token
+  token.set(response.data.token);
+  return response.data;
+}
+
 export async function logIn(credentials) {
   const response = await axios.post("/auth/login", credentials);
   // записує токен в об'єкт token
