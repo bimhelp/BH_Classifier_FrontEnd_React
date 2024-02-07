@@ -4,7 +4,7 @@ axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
 export async function getAll() {
   const response = await axios.get(`/elements`);
-  console.log(response);
+  // console.log(response);
   return response.data;
 }
 
@@ -77,5 +77,20 @@ export async function logOut() {
   // токен вже є у хедері, тому що юзер вже був залогінений
   // тому його потрібно обнулити
   token.clear();
+  return response.data;
+}
+
+// Projects___________________________________________________
+
+export async function getProjects(signal) {
+  const response = await axios.get("/projects", { signal });
+  // token засетений при логінізаціїї і доданий до заголовків запиту, тому тут його не додаємо
+  // console.log("response: ", response);
+  return response.data;
+}
+
+export async function getProjectById(id, signal) {
+  const response = await axios.get(`/projects/${id}`, { signal });
+  // console.log("response: ", response);
   return response.data;
 }

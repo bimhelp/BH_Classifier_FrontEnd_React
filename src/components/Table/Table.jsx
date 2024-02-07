@@ -7,7 +7,6 @@ import Loader from "../Loader/Loader";
 
 const Table = () => {
   const [mainCategory, setMainCategory] = useLocalStorage("main", []);
-
   const [isLoading, setIsLoading] = useState(false);
 
   // Запит по всі головні категорії при монтуванні компонента

@@ -11,6 +11,7 @@ import LogInPage from "./pages/LogInPage/LogInPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import TablePage from "./pages/TablePage/TablePage";
 import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
+import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
 // Private Pages
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
@@ -28,6 +29,7 @@ function App() {
           <Route path="cabinet" element={<CabinetPage />} />
           <Route path="materials" element={<AddItemPage />} />
           <Route path="projects" element={<ProjectsPage />} />
+          <Route path="projects/:id" element={<ProjectDetails />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
