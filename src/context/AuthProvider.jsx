@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
       async function getCurrent(token) {
         try {
           const response = await currentUser(token);
-          console.log("response: ", response);
+          // console.log("response: ", response);
           setUser(response.user);
 
           setIsLoggedIn(true);
@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
           toast.error(`Не вдалось автоматично зайти в систему`);
         }
       }
-      console.log("useEffect виконується тільки раз при першому монтуванні");
+      // console.log("useEffect виконується тільки раз при першому монтуванні");
       if (token === "") {
         // console.log("no token");
         return;
