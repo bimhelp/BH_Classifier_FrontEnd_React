@@ -6,6 +6,7 @@ import { Navigation, MenuWrapper, StyledNavLink } from "./Menu.styled";
 import { FaListUl } from "react-icons/fa";
 import { GrProjects } from "react-icons/gr";
 import { HiMiniQueueList } from "react-icons/hi2";
+import User from "../User/User";
 
 const Menu = () => {
   const { isLoggedIn } = useContext(context);
@@ -17,6 +18,7 @@ const Menu = () => {
           <FaListUl />
           CPV
         </StyledNavLink>
+
         {isLoggedIn && (
           <>
             <StyledNavLink to="projects">
@@ -30,7 +32,8 @@ const Menu = () => {
           </>
         )}
       </MenuWrapper>
-      <UserMenu />
+
+      <User />
     </Navigation>
   );
 };

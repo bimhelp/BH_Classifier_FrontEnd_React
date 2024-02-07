@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import css from "./AddForm.module.css";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { addElement } from "../../services/api";
-import Modal from "../../components/Modal/Modal";
+import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import Table from "../Table/Table";

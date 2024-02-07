@@ -3,7 +3,8 @@ import {
   StyledButton,
   StyledBack,
   StyledSearch,
-  IconButton,
+  StyledCloseButton,
+  StyledIconButton,
 } from "./Button.styled";
 
 export const Button = ({
@@ -15,8 +16,8 @@ export const Button = ({
 }) => {
   return (
     <StyledButton type={type} disabled={disabled} onClick={onClick}>
-      {Icon && <Icon size={14} />}
       {children}
+      {Icon && <Icon size={14} />}
     </StyledButton>
   );
 };
@@ -58,8 +59,21 @@ export const CloseButton = ({
   onClick,
 }) => {
   return (
-    <IconButton type={type} disabled={disabled} onClick={onClick}>
+    <StyledCloseButton type={type} disabled={disabled} onClick={onClick}>
       {children} {Icon && <Icon size={14} />}
-    </IconButton>
+    </StyledCloseButton>
+  );
+};
+export const IconButton = ({
+  type = "button",
+  disabled = false,
+  icon: Icon = null,
+  children,
+  onClick,
+}) => {
+  return (
+    <StyledIconButton type={type} disabled={disabled} onClick={onClick}>
+      {children} {Icon && <Icon size={24} />}
+    </StyledIconButton>
   );
 };

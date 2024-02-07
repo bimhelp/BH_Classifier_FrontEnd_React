@@ -1,29 +1,17 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-export const UserWrapper = styled.div`
+export const UserMenuWrapper = styled.div`
   display: flex;
-  gap: 10px;
-`;
-
-export const UserButton = styled(NavLink)`
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  font-size: ${(props) => props.theme.fontSizes.l};
-  border: none;
+  position: absolute;
+  top: 60px;
+  right: 30px;
 
-  &:hover,
-  &:focus {
-    color: ${(props) => props.theme.colors.primary};
-  }
-`;
-
-export const UserName = styled.p`
-  flex-direction: row;
-  font-size: ${(props) => props.theme.fontSizes.s};
-`;
-
-export const Avatar = styled.div`
-  width: 30px;
+  padding: ${(props) => props.theme.space[4]}px;
+  /* outline: 1px solid orangered; */
+  background-color: ${(props) => props.theme.colors.backgroundWhite};
+  border-radius: ${(props) => props.theme.radii.normal};
+  box-shadow: ${(props) => props.theme.shadows.full};
 `;

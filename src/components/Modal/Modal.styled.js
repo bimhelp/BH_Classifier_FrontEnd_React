@@ -14,13 +14,14 @@ export const ModalWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 300px;
+  min-width: 300px;
   height: 80%;
-  max-width: 80%;
-  width: 100%;
+  width: 90%;
   padding: 12px;
   padding-top: 30px;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.backgroundWhite};
   border-radius: ${(props) => props.theme.radii.normal};
+  box-shadow: ${(props) => props.theme.shadows.swadow};
 `;
 export const Title = styled.p`
   font-size: ${(props) => props.theme.fontSizes.l};
