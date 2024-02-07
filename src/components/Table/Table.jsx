@@ -14,8 +14,8 @@ const Table = () => {
     // console.log("effect main");
     const controller = new AbortController();
     async function getCategory() {
-      setIsLoading(true);
       try {
+        setIsLoading(true);
         const response = await getMainCategory(controller.signal);
         setMainCategory(response.data);
       } catch {

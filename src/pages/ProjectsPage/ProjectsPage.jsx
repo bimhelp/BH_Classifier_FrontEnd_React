@@ -5,14 +5,14 @@ import ProjectList from "../../components/ProjectList/ProjectList";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
-  const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
-
     async function projects() {
-      setisLoading(true);
       try {
+        console.log("set true");
+        setIsLoading(true);
         const response = await getProjects(controller.signal);
         console.log("response effect: ", response);
         setProjects(response.data);
@@ -21,10 +21,9 @@ const ProjectsPage = () => {
           "Не вдалось завантажити проекти, спробуйте перезавантажити сторінку"
         );
       } finally {
-        setisLoading(false);
+        setIsLoading(false);
       }
     }
-
     projects();
 
     return () => {
@@ -33,11 +32,17 @@ const ProjectsPage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    console.log("isLoading", isLoading);
+  }, [isLoading]);
+
   return (
     <>
-      {projects && <ProjectList items={projects}></ProjectList>}
-
-      {isLoading && <p>Loaging projects...</p>}
+      {isLoading ? (
+        <p>Loaging projects...</p>
+      ) : (
+        <ProjectList items={projects}></ProjectList>
+      )}
     </>
   );
 };

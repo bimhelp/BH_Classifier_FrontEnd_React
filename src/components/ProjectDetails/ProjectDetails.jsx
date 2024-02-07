@@ -11,9 +11,9 @@ const ProjectDetails = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    setisLoading(true);
     async function getProject(id) {
       try {
+        setisLoading(true);
         const response = await getProjectById(id, controller.signal);
         // console.log("response effect: ", response.data);
         setProject(response.data);
