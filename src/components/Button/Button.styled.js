@@ -6,10 +6,10 @@ export const StyledButton = styled.button`
   gap: ${(props) => props.theme.space[2]}px;
 
   /* margin: ${(props) => props.theme.space[2]}px; */
-  padding-top: ${(props) => props.theme.space[3]}px;
-  padding-bottom: ${(props) => props.theme.space[3]}px;
-  padding-left: ${(props) => props.theme.space[4]}px;
-  padding-right: ${(props) => props.theme.space[4]}px;
+  padding-top: ${(props) => props.theme.space[2]}px;
+  padding-bottom: ${(props) => props.theme.space[2]}px;
+  padding-left: ${(props) => props.theme.space[3]}px;
+  padding-right: ${(props) => props.theme.space[3]}px;
 
   border: ${(props) => props.theme.borders.bold};
   border-radius: ${(props) => props.theme.radii.normal};

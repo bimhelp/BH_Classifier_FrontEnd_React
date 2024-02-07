@@ -32,6 +32,7 @@ const LoginForm = () => {
     // console.log("actions: ", actions);
 
     // Передача даних в контекст (глобальний стейт)
+
     onLogIn(values);
 
     // Очистка форми

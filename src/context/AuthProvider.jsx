@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { authContext } from "./authContext";
 import { logIn, logOut, registerUser, currentUser } from "../services";
 import { toast } from "react-toastify";
@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
       async function getCurrent(token) {
         try {
           const response = await currentUser(token);
-          // console.log("response: ", response);
+          console.log("response: ", response);
           setUser(response.user);
 
           setIsLoggedIn(true);
@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
           toast.error(`Не вдалось автоматично зайти в систему`);
         }
       }
+      console.log("useEffect виконується тільки раз при першому монтуванні");
       if (token === "") {
         // console.log("no token");
         return;
@@ -103,10 +104,11 @@ const AuthProvider = ({ children }) => {
     logout();
   };
 
-  const providerValue = useMemo(() => {
-    return { user, isLoggedIn, onRegister, onLogIn, onLogOut };
-  }, [isLoggedIn, user]);
+  // const providerValue = useMemo(() => {
+  //   return { user, isLoggedIn, onRegister, onLogIn, onLogOut };
+  // }, [isLoggedIn, onLogIn, onLogOut, onRegister, user]);
 
+  const providerValue = { user, isLoggedIn, onRegister, onLogIn, onLogOut };
   return (
     <authContext.Provider value={providerValue}>
       {children}
