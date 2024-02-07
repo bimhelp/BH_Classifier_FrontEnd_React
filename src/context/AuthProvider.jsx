@@ -3,6 +3,7 @@ import { authContext } from "./authContext";
 import { logIn, logOut, registerUser, currentUser } from "../services";
 import { toast } from "react-toastify";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { useNavigate } from "react-router-dom";
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useLocalStorage("token", "");
@@ -12,6 +13,7 @@ const AuthProvider = ({ children }) => {
     email: null,
   });
   const [mounted, setMounted] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!mounted) {
@@ -46,11 +48,13 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await registerUser(credentials);
         // console.log("response: ", response);
+
         setUser(response);
         // записуємо токен в lacalstorage
-
         setToken(response.token);
         setIsLoggedIn(true);
+        // Перенаправляємо на головну сторінку
+        navigate("/", { replace: true });
       } catch (error) {
         // console.log("error: ", error.response);
 
@@ -77,6 +81,8 @@ const AuthProvider = ({ children }) => {
           setToken(response.token);
           setUser(response.user);
           setIsLoggedIn(true);
+          // Перенаправляємо на головну сторінку
+          navigate("/", { replace: true });
         }
       } catch (error) {
         toast.error(

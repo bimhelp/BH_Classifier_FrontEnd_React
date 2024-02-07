@@ -101,6 +101,7 @@ export const StyledCloseButton = styled(StyledButton)`
   right: ${(props) => props.theme.space[4]}px;
   padding: ${(props) => props.theme.space[2]}px;
   margin-bottom: ${(props) => props.theme.space[2]}px;
+  background-color: ${(props) => props.theme.colors.backgroundWhite};
 
   min-width: fit-content;
   &:hover:not(:disabled),

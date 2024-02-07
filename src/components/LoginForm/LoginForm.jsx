@@ -27,12 +27,10 @@ const LoginForm = () => {
 
   const handleSubmit = (values, actions) => {
     const { resetForm } = actions;
-
     // console.log("values: ", values);
     // console.log("actions: ", actions);
 
     // Передача даних в контекст (глобальний стейт)
-
     onLogIn(values);
 
     // Очистка форми
