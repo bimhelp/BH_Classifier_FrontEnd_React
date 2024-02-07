@@ -1,14 +1,42 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { authContext } from "./authContext";
-import { logIn, logOut, registerUser } from "../services";
+import { logIn, logOut, registerUser, currentUser } from "../services";
 import { toast } from "react-toastify";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const AuthProvider = ({ children }) => {
+  const [token, setToken] = useLocalStorage("token", "");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({
     name: null,
     email: null,
   });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    if (!mounted) {
+      // Код, який потрібно виконати тільки при першому монтуванні
+      async function getCurrent(token) {
+        try {
+          const response = await currentUser(token);
+          // console.log("response: ", response);
+          setUser(response.user);
+
+          setIsLoggedIn(true);
+        } catch (error) {
+          // console.log("error: ", error.response);
+
+          toast.error(`Не вдалось автоматично зайти в систему`);
+        }
+      }
+      if (token === "") {
+        // console.log("no token");
+        return;
+      }
+      getCurrent(token);
+      setMounted(true);
+    }
+  }, [mounted, token]);
 
   const onRegister = (credentials) => {
     // console.log("register", credentials);
@@ -18,6 +46,9 @@ const AuthProvider = ({ children }) => {
         const response = await registerUser(credentials);
         // console.log("response: ", response);
         setUser(response);
+        // записуємо токен в lacalstorage
+
+        setToken(response.token);
         setIsLoggedIn(true);
       } catch (error) {
         // console.log("error: ", error.response);
@@ -41,6 +72,8 @@ const AuthProvider = ({ children }) => {
         if (response) {
           // console.log("token", response.token);
           // console.log("username", response.user.name);
+          // console.log(response.token);
+          setToken(response.token);
           setUser(response.user);
           setIsLoggedIn(true);
         }
@@ -59,7 +92,7 @@ const AuthProvider = ({ children }) => {
         const responce = await logOut();
         if (responce) {
           // console.log("responce: ", responce);
-
+          setToken("");
           setUser(null);
           setIsLoggedIn(false);
         }

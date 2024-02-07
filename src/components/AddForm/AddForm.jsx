@@ -82,99 +82,95 @@ const AddForm = () => {
 
   return (
     <>
-      <div className={css.formWrapper}>
-        <h2>Add Item</h2>
+      <h2>Add Item</h2>
 
-        <form onSubmit={handleSubmit} className={css.form}>
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Code</label>
-            <Button onClick={toggleModal}>
-              Виберіть категорію в яку хочете додати матеріал
-            </Button>
-            {modalOpen && (
-              <Modal
-                onClose={toggleModal}
-                title="Виберіть категорію в яку хочете додати матеріал"
-              >
-                <p>Ви вибрали:</p>
-                <Table />
-              </Modal>
-            )}
-            <input
-              type="text"
-              placeholder="Enter code"
-              value={code}
-              name="code"
-              className={css.input}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={css.inputWrapper}>
-            <label className={css.label} htmlFor="description">
-              Description
-            </label>
-            <input
-              type="text"
-              placeholder="Enter description"
-              value={description}
-              name="description"
-              onChange={handleChange}
-              className={css.input}
-              id="description"
-            />
-          </div>
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Price</label>
-            <input
-              type="text"
-              placeholder="Enter price"
-              value={price}
-              name="price"
-              className={css.input}
-              onChange={handleChange}
-            />
-          </div>
+      <form onSubmit={handleSubmit} className={css.form}>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Code</label>
+          <Button onClick={toggleModal}>
+            Виберіть категорію в яку хочете додати матеріал
+          </Button>
+          {modalOpen && (
+            <Modal
+              onClose={toggleModal}
+              title="Виберіть категорію в яку хочете додати матеріал"
+            >
+              <p>Ви вибрали:</p>
+              <Table />
+            </Modal>
+          )}
+          <input
+            type="text"
+            placeholder="Enter code"
+            value={code}
+            name="code"
+            className={css.input}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label} htmlFor="description">
+            Description
+          </label>
+          <input
+            type="text"
+            placeholder="Enter description"
+            value={description}
+            name="description"
+            onChange={handleChange}
+            className={css.input}
+            id="description"
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Price</label>
+          <input
+            type="text"
+            placeholder="Enter price"
+            value={price}
+            name="price"
+            className={css.input}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Unitcode</label>
-            <input
-              type="text"
-              placeholder="Enter unitcode"
-              value={unitcode}
-              name="unitcode"
-              className={css.input}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Level</label>
-            <input
-              type="text"
-              placeholder="Enter level"
-              value={level}
-              name="level"
-              className={css.input}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={css.inputWrapper}>
-            <label className={css.label}>Unit</label>
-            <input
-              type="text"
-              placeholder="Enter unit"
-              value={unit}
-              name="unit"
-              className={css.input}
-              onChange={handleChange}
-            />
-          </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Unitcode</label>
+          <input
+            type="text"
+            placeholder="Enter unitcode"
+            value={unitcode}
+            name="unitcode"
+            className={css.input}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Level</label>
+          <input
+            type="text"
+            placeholder="Enter level"
+            value={level}
+            name="level"
+            className={css.input}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={css.inputWrapper}>
+          <label className={css.label}>Unit</label>
+          <input
+            type="text"
+            placeholder="Enter unit"
+            value={unit}
+            name="unit"
+            className={css.input}
+            onChange={handleChange}
+          />
+        </div>
 
-          <button className={css.submitBtn} type="submit">
-            Send
-          </button>
-        </form>
-        {isLoading && <p>loading...</p>}
-      </div>
+        <Button type="submit">Send</Button>
+      </form>
+      {isLoading && <p>loading...</p>}
     </>
   );
 };

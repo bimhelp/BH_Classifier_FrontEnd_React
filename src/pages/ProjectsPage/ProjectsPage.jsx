@@ -11,10 +11,10 @@ const ProjectsPage = () => {
     const controller = new AbortController();
     async function projects() {
       try {
-        console.log("set true");
+        // console.log("set true");
         setIsLoading(true);
         const response = await getProjects(controller.signal);
-        console.log("response effect: ", response);
+        // console.log("response effect: ", response);
         setProjects(response.data);
       } catch (error) {
         toast.error(
@@ -33,7 +33,7 @@ const ProjectsPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("isLoading", isLoading);
+    // console.log("isLoading", isLoading);
   }, [isLoading]);
 
   return (

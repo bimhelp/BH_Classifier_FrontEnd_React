@@ -1,21 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
+import { StyledNavLink } from "./ProjectList.styled";
+import Section from "../Section/Section";
 const ProjectList = ({ items }) => {
   return (
-    <>
+    <Section>
       {items.length > 0 ? (
         <ul>
           {items.map((item) => (
             <li key={item._id}>
-              <NavLink to={`${item._id}`}>{item.title}</NavLink>
+              <StyledNavLink to={`${item._id}`}>{item.title}</StyledNavLink>
             </li>
           ))}
         </ul>
       ) : (
         <p>У вас ще немає проектів</p>
       )}
-    </>
+    </Section>
   );
 };
 

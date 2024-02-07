@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import Material from "../Material/Material";
+import Section from "../Section/Section";
+
 const ProjectDetails = () => {
   const { id } = useParams();
 
@@ -33,7 +35,7 @@ const ProjectDetails = () => {
   }, [id]);
 
   return (
-    <div>
+    <Section>
       {isLoading && <p>Loading project details...</p>}
       {project && (
         <>
@@ -53,7 +55,7 @@ const ProjectDetails = () => {
           )}
         </>
       )}
-    </div>
+    </Section>
   );
 };
 

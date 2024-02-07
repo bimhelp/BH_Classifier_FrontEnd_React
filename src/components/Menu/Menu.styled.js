@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 export const StyledNavLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  gap: ${(props) => props.theme.space[3]}px;
   text-transform: uppercase;
   font-size: 16px;
   &:hover,

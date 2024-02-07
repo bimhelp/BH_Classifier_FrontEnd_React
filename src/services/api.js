@@ -50,6 +50,8 @@ export async function addElement(newElement) {
 const token = {
   // Передає токен в заголовок для будь-якого (common) запиту
   set(token) {
+    // console.log("token: ", token);
+
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   // Скидає токен
@@ -69,6 +71,13 @@ export async function logIn(credentials) {
   const response = await axios.post("/auth/login", credentials);
   // записує токен в об'єкт token
   token.set(response.data.token);
+  return response.data;
+}
+export async function currentUser(currenttoken) {
+  // console.log("currenttoken: ", currenttoken);
+  token.set(currenttoken);
+  const response = await axios.get("/auth/current");
+
   return response.data;
 }
 
