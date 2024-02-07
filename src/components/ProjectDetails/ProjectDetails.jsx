@@ -4,7 +4,7 @@ import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import Material from "../Material/Material";
 import Section from "../Section/Section";
-import { BackLink } from "./ProjectDetails.styled";
+import { BackLink, List, Item } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ProjectDetails = () => {
@@ -51,13 +51,13 @@ const ProjectDetails = () => {
           {project.materials.length > 0 && (
             <>
               <p>Materials:</p>
-              <ul>
+              <List>
                 {project.materials.map((material) => (
-                  <li key={material._id}>
+                  <Item key={material._id}>
                     <Material material={material} />
-                  </li>
+                  </Item>
                 ))}
-              </ul>
+              </List>
             </>
           )}
         </>

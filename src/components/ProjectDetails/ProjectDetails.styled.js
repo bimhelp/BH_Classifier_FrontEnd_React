@@ -7,7 +7,7 @@ export const BackLink = styled(NavLink)`
   justify-content: center;
   gap: ${(props) => props.theme.space[2]}px;
 
-  min-width: 150px;
+  min-width: 100px;
   /* margin: ${(props) => props.theme.space[2]}px; */
   padding-top: ${(props) => props.theme.space[3]}px;
   padding-bottom: ${(props) => props.theme.space[3]}px;
@@ -27,5 +27,23 @@ export const BackLink = styled(NavLink)`
     color: ${(props) => props.theme.colors.white};
     border-color: ${(props) => props.theme.colors.black};
     background-color: ${(props) => props.theme.colors.hover};
+  }
+`;
+
+export const List = styled.ul`
+  margin-left: ${(props) => props.theme.space[4]}px;
+
+  /* border-left: 2px solid; */
+`;
+
+export const Item = styled.li`
+  /* margin-bottom: ${(props) => props.theme.space[1]}px; */
+  &:hover,
+  &:focus {
+    cursor: pointer;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: ${(props) => props.theme.space[1]}px;
   }
 `;

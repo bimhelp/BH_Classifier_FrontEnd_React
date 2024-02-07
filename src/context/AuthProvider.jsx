@@ -102,6 +102,8 @@ const AuthProvider = ({ children }) => {
           setToken("");
           setUser(null);
           setIsLoggedIn(false);
+          // Перенаправляємо на головну сторінку
+          navigate("/", { replace: true });
         }
       } catch (error) {
         toast.error("Не вдалось вийти із системи");
