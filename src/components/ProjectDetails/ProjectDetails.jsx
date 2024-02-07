@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import Material from "../Material/Material";
 import Section from "../Section/Section";
+import { BackLink } from "./ProjectDetails.styled";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ProjectDetails = () => {
   const { id } = useParams();
 
   const [project, setProject] = useState(null);
   const [isLoading, setisLoading] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -39,7 +42,11 @@ const ProjectDetails = () => {
       {isLoading && <p>Loading project details...</p>}
       {project && (
         <>
-          <p>Project title:</p>
+          <BackLink to={location.state.from}>
+            <IoMdArrowRoundBack />
+            Back
+          </BackLink>
+
           <h2>{project.title}</h2>
           {project.materials.length > 0 && (
             <>
