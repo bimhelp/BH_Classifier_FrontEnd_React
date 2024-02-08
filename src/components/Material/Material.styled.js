@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { setBgColor } from "../../services";
 
 export const MaterialWrapper = styled.div`
   background-color: var(--materialColorAlfa);
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+  margin-bottom: ${(props) => props.theme.space[1]}px;
 
   &:hover,
   &:focus {
@@ -17,26 +19,41 @@ export const MaterialWrapper = styled.div`
   }
 `;
 
-export const MaterialCode = styled.p`
-  padding: 0 10px;
-  border-radius: 5px;
-  display: inline-block;
-  background-color: var(--materialColor);
-  color: var(--text-white);
-  min-width: 90px;
-  text-align: center;
-  color: ${(props) => props.theme.colors.textWhiteColor};
+export const CodeWrapper = styled.div`
+  position: relative;
+  display: flex;
 
-  &:hover {
-    cursor: copy;
+  align-items: center;
+  background-color: ${(props) => props.theme.colors.materialColor};
+  border-radius: 0 5px 5px 0px;
+  justify-content: end;
+
+  @media screen and (min-width: 680px) {
+    display: flex;
   }
 `;
 
+export const MaterialCode = styled.p`
+  padding: ${(props) => props.theme.space[2]}px;
+  padding-left: ${(props) => props.theme.space[3]}px;
+  padding-right: ${(props) => props.theme.space[3]}px;
+  border-radius: 5px;
+  display: inline-block;
+  min-width: 90px;
+  text-align: center;
+  color: ${(props) => props.theme.colors.textWhiteColor};
+  font-size: ${(props) => props.theme.fontSizes.m};
+`;
+
+export const DescriptionWrapper = styled.div`
+  /* outline: 1px solid red; */
+  position: relative;
+`;
+
 export const Description = styled.p`
-  padding-left: 10px;
-  &:hover {
-    cursor: copy;
-  }
+  padding: ${(props) => props.theme.space[2]}px;
+  padding-left: 30px;
+  font-size: ${(props) => props.theme.fontSizes.m};
 `;
 
 export const HilightDescription = styled.div`

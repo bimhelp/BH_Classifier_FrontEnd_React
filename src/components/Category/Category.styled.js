@@ -34,16 +34,11 @@ export const CodeWrapper = styled.div`
 `;
 
 export const CategoryCode = styled.p`
-  /* padding: 5px 10px; */
   padding: ${(props) => props.theme.space[2]}px;
-
-  /* padding-top: ${(props) => props.theme.space[0]}px; */
-  /* padding-bottom: ${(props) => props.theme.space[0]}px; */
   padding-left: ${(props) => props.theme.space[3]}px;
   padding-right: ${(props) => props.theme.space[3]}px;
   border-radius: 0 5px 5px 0px;
   display: inline-block;
-  color: var(--text-white);
   min-width: 90px;
   text-align: center;
   color: ${(props) => props.theme.colors.textWhiteColor};
@@ -58,7 +53,7 @@ export const DescriptionWrapper = styled.div`
 export const CategoryDescription = styled.p`
   padding: ${(props) => props.theme.space[2]}px;
   padding-left: 30px;
-  font-size: ${(props) => props.theme.fontSizes.s};
+  font-size: ${(props) => props.theme.fontSizes.m};
 `;
 export const HilightDescription = styled.div`
   padding-left: 10px;
@@ -66,7 +61,7 @@ export const HilightDescription = styled.div`
   background-color: ${(props) => props.type === "mark" && "yellow"};
 `;
 
-// Можна отримати доступ до пропсівї
+// Можна отримати доступ до пропсів
 //  ${(props) => {
 //     console.log(props);
 //   }}
