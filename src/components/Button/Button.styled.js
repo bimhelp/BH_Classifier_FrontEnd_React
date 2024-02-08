@@ -6,7 +6,7 @@ export const StyledButton = styled.button`
   justify-content: center;
   gap: ${(props) => props.theme.space[2]}px;
 
-  min-width: 150px;
+  min-width: 100px;
   /* margin: ${(props) => props.theme.space[2]}px; */
   padding-top: ${(props) => props.theme.space[3]}px;
   padding-bottom: ${(props) => props.theme.space[3]}px;
@@ -41,9 +41,9 @@ export const StyledButton = styled.button`
 export const StyledBack = styled(StyledButton)`
   margin: ${(props) => props.theme.space[0]}px;
 
-  min-width: fit-content;
-  padding-top: ${(props) => props.theme.space[2]}px;
-  padding-bottom: ${(props) => props.theme.space[2]}px;
+  min-width: 40px;
+  padding-top: ${(props) => props.theme.space[3]}px;
+  padding-bottom: ${(props) => props.theme.space[3]}px;
   padding-left: ${(props) => props.theme.space[3]}px;
   padding-right: ${(props) => props.theme.space[3]}px;
 
@@ -73,9 +73,10 @@ export const StyledBack = styled(StyledButton)`
 
 export const StyledSearch = styled(StyledButton)`
   margin: ${(props) => props.theme.space[0]}px;
-  min-width: fit-content;
-  padding-top: ${(props) => props.theme.space[2]}px;
-  padding-bottom: ${(props) => props.theme.space[2]}px;
+  /* display: inline-blockblock; */
+  min-width: 40px;
+  padding-top: ${(props) => props.theme.space[3]}px;
+  padding-bottom: ${(props) => props.theme.space[3]}px;
   padding-left: ${(props) => props.theme.space[3]}px;
   padding-right: ${(props) => props.theme.space[3]}px;
   color: ${(props) => props.theme.colors.textWhiteColor};
@@ -106,8 +107,8 @@ export const StyledSearch = styled(StyledButton)`
 
 export const StyledCloseButton = styled(StyledButton)`
   position: absolute;
-  top: ${(props) => props.theme.space[4]}px;
-  right: ${(props) => props.theme.space[4]}px;
+  top: ${(props) => props.theme.space[3]}px;
+  right: ${(props) => props.theme.space[3]}px;
   padding: ${(props) => props.theme.space[2]}px;
   margin-bottom: ${(props) => props.theme.space[2]}px;
   background-color: ${(props) => props.theme.colors.backgroundWhite};

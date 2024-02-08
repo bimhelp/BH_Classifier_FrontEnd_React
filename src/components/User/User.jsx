@@ -46,7 +46,7 @@ const User = () => {
         )}
       </UserWrapper>
       {menuOpen && (
-        <ContextMenu>
+        <ContextMenu onClose={toggleMenu}>
           {isLoggedIn && (
             <Button icon={FaArrowRight} onClick={handleConfirm} role="warning">
               Log Out
@@ -56,8 +56,7 @@ const User = () => {
       )}
 
       {confirmOpen && (
-        <Confirm>
-          <p>Ви точно хочете вийти?</p>
+        <Confirm onClose={toggleConfirm} title="Ви точно хочете вийти?">
           <FlexWrapper>
             <Button icon={FaArrowRight} onClick={handleLogOut} role="warning">
               Log Out
