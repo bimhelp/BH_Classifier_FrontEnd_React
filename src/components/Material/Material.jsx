@@ -11,7 +11,6 @@ import {
   CodeWrapper,
   DescriptionWrapper,
 } from "./Material.styled";
-import { checkIsString } from "../../services";
 import { toast } from "react-toastify";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { IconButton } from "../Button/Button";

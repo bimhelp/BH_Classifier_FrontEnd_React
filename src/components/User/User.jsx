@@ -2,11 +2,11 @@ import React, { useContext, useState } from "react";
 import { authContext as context } from "../../context/authContext";
 import { IconButton } from "../Button/Button";
 import { FiUser } from "react-icons/fi";
-import { LogInButton, UserWrapper } from "./User.styled";
+import { LogInButton, UserWrapper, FlexWrapper } from "./User.styled";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import { Button } from "../Button/Button";
-import { FaArrowRight } from "react-icons/fa";
 import Confirm from "../Confirm/Confirm";
+import { FaArrowRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 const User = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -58,14 +58,14 @@ const User = () => {
       {confirmOpen && (
         <Confirm>
           <p>Ви точно хочете вийти?</p>
-          <div>
+          <FlexWrapper>
             <Button icon={FaArrowRight} onClick={handleLogOut} role="warning">
               Log Out
             </Button>
             <Button icon={RxCross2} onClick={toggleConfirm}>
               Cancel
             </Button>
-          </div>
+          </FlexWrapper>
         </Confirm>
       )}
     </>

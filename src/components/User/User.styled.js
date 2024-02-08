@@ -17,3 +17,8 @@ export const LogInButton = styled(NavLink)`
 export const UserWrapper = styled.div`
   display: flex;
 `;
+
+export const FlexWrapper = styled.div`
+  display: flex;
+  gap: ${(props) => props.theme.space[3]}px;
+`;

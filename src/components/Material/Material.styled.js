@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { setBgColor } from "../../services";
 
 export const MaterialWrapper = styled.div`
   background-color: var(--materialColorAlfa);
