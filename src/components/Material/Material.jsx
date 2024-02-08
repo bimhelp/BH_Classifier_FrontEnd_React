@@ -27,6 +27,10 @@ const Material = ({
     } else toast.info("Код скопійовано в буфер омбіну");
   }
 
+  function editPrice() {
+    console.log("edit price");
+  }
+
   return (
     <MaterialWrapper onClick={(event) => handleClick(event)}>
       <CopyToClipboard text={Code}>
@@ -46,6 +50,7 @@ const Material = ({
         <Extended>
           {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
           {userPrice && <UserPrice> {userPrice} &#8372;</UserPrice>}
+          {userPrice && <button onClick={editPrice}>edit price</button>}
           {Unit && <MaterialUnit> {Unit} </MaterialUnit>}
         </Extended>
       </div>

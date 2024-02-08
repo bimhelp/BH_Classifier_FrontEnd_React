@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { createLevel, cutCpvCode } from "../../services";
 import { toast } from "react-toastify";
+import { IconButton } from "../Button/Button";
+import { IoIosCopy } from "react-icons/io";
 import {
   CategoryWrapper,
   CategoryCode,
   CategoryDescription,
   HilightDescription,
+  CodeWrapper,
+  DescriptionWrapper,
 } from "./Category.styled";
-import { hiLight, checkIsString } from "../../services";
+import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = React.forwardRef(
@@ -23,31 +27,65 @@ const Category = React.forwardRef(
     }, [Code]);
 
     function handleClick(event) {
-      if (checkIsString(event.target.textContent)) {
-        // console.log(checkIsString(event.target.textContent));
-        toast.info("Опис скопійовано в буфер омбіну");
-      } else toast.info("Код скопійовано в буфер омбіну");
-
       selectCategory(event);
     }
 
     return (
       <>
         <CategoryWrapper level={level} onClick={handleClick} ref={ref}>
-          <CopyToClipboard text={Code}>
-            <CategoryCode level={level}>{Code}</CategoryCode>
-          </CopyToClipboard>
+          <CodeWrapper level={level}>
+            <CopyToClipboard
+              text={Code}
+              onCopy={() =>
+                toast.info(`Код ${Code} скопійовано в буфер омбіну`)
+              }
+            >
+              <IconButton
+                icon={IoIosCopy}
+                visibility="hide"
+                position="absolute"
+                variant="light"
+              ></IconButton>
+            </CopyToClipboard>
+            <CategoryCode>{Code}</CategoryCode>
+          </CodeWrapper>
 
           {query ? (
-            <CopyToClipboard text={DescriptionUA}>
+            <DescriptionWrapper>
               <HilightDescription>
                 {hiLight(query, DescriptionUA)}
               </HilightDescription>
-            </CopyToClipboard>
+              <CopyToClipboard
+                text={DescriptionUA}
+                onCopy={() =>
+                  toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
+                }
+              >
+                <IconButton
+                  icon={IoIosCopy}
+                  visibility="hide"
+                  position="absolute"
+                  variant="dark"
+                ></IconButton>
+              </CopyToClipboard>
+            </DescriptionWrapper>
           ) : (
-            <CopyToClipboard text={DescriptionUA}>
+            <DescriptionWrapper>
+              <CopyToClipboard
+                text={DescriptionUA}
+                onCopy={() =>
+                  toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
+                }
+              >
+                <IconButton
+                  icon={IoIosCopy}
+                  visibility="hide"
+                  position="absolute"
+                  variant="dark"
+                ></IconButton>
+              </CopyToClipboard>
               <CategoryDescription>{DescriptionUA}</CategoryDescription>
-            </CopyToClipboard>
+            </DescriptionWrapper>
           )}
         </CategoryWrapper>
         <div>{children}</div>

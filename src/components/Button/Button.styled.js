@@ -124,16 +124,27 @@ export const StyledCloseButton = styled(StyledButton)`
   }
 `;
 export const StyledIconButton = styled(StyledButton)`
-  justify-content: end;
+  position: ${(props) => props.position === "absolute" && "absolute"};
+  left: ${(props) => props.position === "absolute" && 0}px;
+  top: 0;
+  min-width: fit-content;
+  width: fit-content;
   font-size: ${(props) => props.theme.fontSizes.m};
   padding: ${(props) => props.theme.space[2]}px;
-  color: ${(props) => props.theme.colors.white};
+  color: white;
+  /* color: ${(props) =>
+    props.variant === "black" && props.theme.colors.black}; */
+
+  opacity: ${(props) => props.visibility === "hide" && 0};
+
   border: ${(props) => props.theme.borders.none};
   background-color: transparent;
+
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     cursor: pointer;
-    color: ${(props) => props.theme.colors.hover};
+    color: ${(props) => props.variant === "dark" && props.theme.colors.black};
     background-color: transparent;
+    opacity: 1;
   }
 `;

@@ -71,9 +71,19 @@ export const IconButton = ({
   icon: Icon = null,
   children,
   onClick,
+  visibility,
+  position,
+  variant,
 }) => {
   return (
-    <StyledIconButton type={type} disabled={disabled} onClick={onClick}>
+    <StyledIconButton
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      visibility={visibility}
+      position={position}
+      variant={variant}
+    >
       {children} {Icon && <Icon size={24} />}
     </StyledIconButton>
   );
