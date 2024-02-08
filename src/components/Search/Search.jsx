@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormStyled, Input } from "./Search.styled";
+import { FormStyled, Input, Label } from "./Search.styled";
 import { SearchButton, BackButton } from "../Button/Button";
 
 import { IoSearch } from "react-icons/io5";
@@ -37,14 +37,14 @@ const Search = ({ submit, isLoading, back, isSubmiting }) => {
           type="button"
           onClick={clearQuery}
         ></BackButton>
-        <label>
+        <Label>
           <Input
             name="search"
             type="text"
             onChange={handleChange}
             value={searchValue}
           ></Input>
-        </label>
+        </Label>
         <SearchButton
           icon={IoSearch}
           type="submit"

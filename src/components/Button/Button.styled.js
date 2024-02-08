@@ -125,10 +125,10 @@ export const StyledCloseButton = styled(StyledButton)`
 `;
 export const StyledIconButton = styled(StyledButton)`
   position: ${(props) => props.position === "absolute" && "absolute"};
-  left: ${(props) => props.position === "absolute" && 0}px;
   top: 50%;
   left: 0;
-  transform: translate(0, -50%);
+  transform: ${(props) =>
+    props.position === "absolute" && "translate(0, -50%)"};
   min-width: fit-content;
   width: fit-content;
   font-size: ${(props) => props.theme.fontSizes.m};

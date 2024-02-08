@@ -12,6 +12,13 @@ export const StyledNavLink = styled(NavLink)`
     color: ${(props) => props.theme.colors.primary};
   }
 `;
+
+export const LinkTitle = styled.span`
+  display: none;
+  @media screen and (min-width: 680px) {
+    display: block;
+  }
+`;
 export const Navigation = styled.nav`
   width: 100%;
   display: flex;

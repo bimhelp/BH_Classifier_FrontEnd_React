@@ -53,7 +53,7 @@ const ProjectDetails = () => {
               <p>Materials:</p>
               <List>
                 {project.materials.map((material) => (
-                  <Item key={material._id}>
+                  <Item key={material._id._id}>
                     <Material
                       material={material._id}
                       userPrice={material.userPrice}

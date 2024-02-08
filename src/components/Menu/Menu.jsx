@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
 // Навігація по сайту
-import { Navigation, MenuWrapper, StyledNavLink } from "./Menu.styled";
+import {
+  Navigation,
+  MenuWrapper,
+  StyledNavLink,
+  LinkTitle,
+} from "./Menu.styled";
 import { FaListUl } from "react-icons/fa";
 import { GrProjects } from "react-icons/gr";
 import { HiMiniQueueList } from "react-icons/hi2";
@@ -15,18 +20,18 @@ const Menu = () => {
       <MenuWrapper>
         <StyledNavLink to="/">
           <FaListUl />
-          CPV
+          <LinkTitle>CPV</LinkTitle>
         </StyledNavLink>
 
         {isLoggedIn && (
           <>
             <StyledNavLink to="projects">
               <GrProjects />
-              Projects
+              <LinkTitle>Projects</LinkTitle>
             </StyledNavLink>
             <StyledNavLink to="materials">
               <HiMiniQueueList />
-              Materials
+              <LinkTitle>Materials</LinkTitle>
             </StyledNavLink>
           </>
         )}
