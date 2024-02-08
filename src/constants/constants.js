@@ -33,6 +33,8 @@ export const theme = Object.freeze({
     hover: "#52A29D",
     muted: "#424242",
     red: "#AB0E0F",
+    green: "#609729",
+    orange: "#cc5506",
 
     textBlackColor: "#000000",
     textWhiteColor: "#ffffff",

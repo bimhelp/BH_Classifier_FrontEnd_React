@@ -47,7 +47,13 @@ export const HilightDescription = styled.div`
 
 export const MaterialPrice = styled.p`
   font-size: 12px;
-  color: var(--price-color);
+  color: ${(props) => props.theme.colors.green};
+  padding-left: 10px;
+`;
+
+export const UserPrice = styled.p`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.orange};
   padding-left: 10px;
 `;
 

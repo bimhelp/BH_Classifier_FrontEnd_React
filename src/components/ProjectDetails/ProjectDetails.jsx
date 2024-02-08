@@ -54,7 +54,10 @@ const ProjectDetails = () => {
               <List>
                 {project.materials.map((material) => (
                   <Item key={material._id}>
-                    <Material material={material} />
+                    <Material
+                      material={material._id}
+                      userPrice={material.userPrice}
+                    />
                   </Item>
                 ))}
               </List>

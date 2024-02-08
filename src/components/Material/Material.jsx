@@ -4,6 +4,7 @@ import {
   MaterialCode,
   Description,
   MaterialPrice,
+  UserPrice,
   MaterialUnit,
   Extended,
   HilightDescription,
@@ -17,6 +18,7 @@ import { hiLight } from "../../services";
 const Material = ({
   material: { Code, DescriptionUA, Price, Unit },
   query,
+  userPrice,
 }) => {
   function handleClick(event) {
     if (checkIsString(event.target.textContent)) {
@@ -43,6 +45,7 @@ const Material = ({
         )}
         <Extended>
           {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
+          {userPrice && <UserPrice> {userPrice} &#8372;</UserPrice>}
           {Unit && <MaterialUnit> {Unit} </MaterialUnit>}
         </Extended>
       </div>
