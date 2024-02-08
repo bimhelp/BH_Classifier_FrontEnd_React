@@ -126,25 +126,29 @@ export const StyledCloseButton = styled(StyledButton)`
 export const StyledIconButton = styled(StyledButton)`
   position: ${(props) => props.position === "absolute" && "absolute"};
   left: ${(props) => props.position === "absolute" && 0}px;
-  top: 0;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
   min-width: fit-content;
   width: fit-content;
   font-size: ${(props) => props.theme.fontSizes.m};
   padding: ${(props) => props.theme.space[2]}px;
   color: white;
-  /* color: ${(props) =>
-    props.variant === "black" && props.theme.colors.black}; */
+  color: ${(props) => props.variant === "dark" && props.theme.colors.black};
 
-  opacity: ${(props) => props.visibility === "hide" && 0};
+  opacity: ${(props) => props.visibility === "hide" && 1};
 
   border: ${(props) => props.theme.borders.none};
   background-color: transparent;
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
-    cursor: pointer;
+    cursor: cell;
     color: ${(props) => props.variant === "dark" && props.theme.colors.black};
     background-color: transparent;
     opacity: 1;
+  }
+  @media screen and (min-width: 680px) {
+    opacity: ${(props) => props.visibility === "hide" && 0};
   }
 `;
