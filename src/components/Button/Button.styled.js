@@ -20,12 +20,21 @@ export const StyledButton = styled.button`
     props.disabled ? props.theme.colors.muted : props.theme.colors.primary};
   font-size: ${(props) => props.theme.fontSizes.m};
 
+  background-color: ${(props) =>
+    props.role === "warning"
+      ? props.theme.colors.red
+      : props.theme.colors.primary};
+
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     cursor: pointer;
     color: ${(props) => props.theme.colors.white};
     border-color: ${(props) => props.theme.colors.black};
     background-color: ${(props) => props.theme.colors.hover};
+    background-color: ${(props) =>
+      props.role === "warning"
+        ? props.theme.colors.red
+        : props.theme.colors.primary};
   }
 `;
 

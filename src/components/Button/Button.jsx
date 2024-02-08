@@ -13,9 +13,10 @@ export const Button = ({
   icon: Icon = null,
   children,
   onClick,
+  role,
 }) => {
   return (
-    <StyledButton type={type} disabled={disabled} onClick={onClick}>
+    <StyledButton type={type} disabled={disabled} onClick={onClick} role={role}>
       {children}
       {Icon && <Icon size={14} />}
     </StyledButton>
