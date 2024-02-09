@@ -23,7 +23,7 @@ const CategoryList = ({ items, query }) => {
   useEffect(() => {
     const controller = new AbortController();
     async function subCategory(selectedCode) {
-      console.log("get subcategory effect");
+      // console.log("get subcategory effect");
       setIsLoading(true);
       try {
         const response = await getSubCategory(selectedCode, controller.signal);
@@ -47,7 +47,7 @@ const CategoryList = ({ items, query }) => {
   // Запит по матеріали
   useEffect(() => {
     async function getMaterial(selectedCode) {
-      console.log("effect material");
+      // console.log("effect material");
       setIsLoading(true);
       try {
         const response = await searchMaterials(selectedCode);
@@ -73,7 +73,7 @@ const CategoryList = ({ items, query }) => {
 
   const filteredNextLevel = useMemo(() => {
     if (subCategories.length > 0) {
-      console.log("memo filteredNextLevel");
+      // console.log("memo filteredNextLevel");
       const currentLevelItems = filterNextLevelItems(
         subCategories,
         selectedCode
@@ -94,7 +94,7 @@ const CategoryList = ({ items, query }) => {
 
   // Функція формує cpv код і тоглить відкриття категорії
   const selectCategory = async (id, code) => {
-    // console.log("handle select category");
+    // console.log(cutCpvCode(code));
     setSelectedCode(cutCpvCode(code));
     toggleCategory(id);
   };
@@ -113,33 +113,35 @@ const CategoryList = ({ items, query }) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <List level={level}>
-          {items.map((item) => (
-            <Item key={item._id}>
-              {/* якщо вибраний елемент */}
-              {selectedId === item._id ? (
-                <Category
-                  element={item}
-                  selectCategory={() => selectCategory(item._id, item.Code)}
-                  query={query}
-                >
-                  {/* якщо код довший то це матеріали */}
-                  {selectedCode.length > 4 ? (
-                    <MaterialList materials={materials} query={query} />
-                  ) : (
-                    <CategoryList items={filteredNextLevel} query={query} />
-                  )}
-                </Category>
-              ) : (
-                <Category
-                  element={item}
-                  selectCategory={() => selectCategory(item._id, item.Code)}
-                  query={query}
-                ></Category>
-              )}
-            </Item>
-          ))}
-        </List>
+        <>
+          <List level={level}>
+            {items.map((item) => (
+              <Item key={item._id}>
+                {/* якщо вибраний елемент */}
+                {selectedId === item._id ? (
+                  <Category
+                    element={item}
+                    selectCategory={() => selectCategory(item._id, item.Code)}
+                    query={query}
+                  >
+                    {/* якщо код довший то це матеріали */}
+                    {selectedCode.length > 4 ? (
+                      <MaterialList materials={materials} query={query} />
+                    ) : (
+                      <CategoryList items={filteredNextLevel} query={query} />
+                    )}
+                  </Category>
+                ) : (
+                  <Category
+                    element={item}
+                    selectCategory={() => selectCategory(item._id, item.Code)}
+                    query={query}
+                  ></Category>
+                )}
+              </Item>
+            ))}
+          </List>
+        </>
       )}
     </>
   );
