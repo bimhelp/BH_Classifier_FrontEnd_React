@@ -19,6 +19,7 @@ const TablePage = () => {
   const [category, setCategory] = useState([]);
   const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
   // Виклика8ється під час відправлення форми
 
   const backToTable = () => {

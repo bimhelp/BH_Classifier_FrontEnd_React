@@ -199,8 +199,7 @@ export function makeOptions(array) {
   }));
 }
 
-export function scrollTo(ref, event) {
-  // console.log("event: ", event);
+export function scrollTo(ref) {
   // console.log("ref", ref.current);
   // const { top } = ref.current.getBoundingClientRect();
   // console.log("top: ", top);

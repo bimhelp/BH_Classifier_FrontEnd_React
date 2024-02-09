@@ -23,11 +23,8 @@ const AuthProvider = ({ children }) => {
           const response = await currentUser(token);
           // console.log("response: ", response);
           setUser(response.user);
-
           setIsLoggedIn(true);
         } catch (error) {
-          // console.log("error: ", error.response);
-
           toast.error(`Не вдалось автоматично зайти в систему`);
         }
       }

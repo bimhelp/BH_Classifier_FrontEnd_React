@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Categorylist from "../CategoryList/CategoryList";
 import { getMainCategory } from "../../services/api";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
 const Table = () => {
-  const [mainCategory, setMainCategory] = useLocalStorage("main", []);
+  const [mainCategory, setMainCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   // Запит по всі головні категорії при монтуванні компонента
   useEffect(() => {
-    // console.log("effect main");
     const controller = new AbortController();
     async function getCategory() {
+      // console.log("effect main");
       try {
         setIsLoading(true);
         const response = await getMainCategory(controller.signal);
