@@ -127,7 +127,7 @@ export const StyledCloseButton = styled(StyledButton)`
 export const StyledIconButton = styled(StyledButton)`
   position: ${(props) => props.position === "absolute" && "absolute"};
   top: 50%;
-  left: 0;
+  left: 0;>
   transform: ${(props) =>
     props.position === "absolute" && "translate(0, -50%)"};
   min-width: fit-content;
@@ -137,7 +137,16 @@ export const StyledIconButton = styled(StyledButton)`
   color: white;
   color: ${(props) => props.variant === "dark" && props.theme.colors.black};
 
-  opacity: ${(props) => props.visibility === "hide" && 1};
+  opacity: ${(props) => {
+    switch (props.visibility) {
+      case "hide":
+        return 1;
+      case "visible":
+        return 1;
+      default:
+        return 1;
+    }
+  }};
 
   border: ${(props) => props.theme.borders.none};
   background-color: transparent;

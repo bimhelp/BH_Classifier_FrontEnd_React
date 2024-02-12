@@ -11,6 +11,11 @@ export const StyledNavLink = styled(NavLink)`
   &:focus {
     color: ${(props) => props.theme.colors.primary};
   }
+
+  &.active {
+    border-bottom: ${(props) => props.theme.borders.hevy};
+    border-color: ${(props) => props.theme.colors.primary};
+  }
 `;
 
 export const LinkTitle = styled.span`

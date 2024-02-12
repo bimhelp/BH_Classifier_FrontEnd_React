@@ -9,16 +9,18 @@ export const BackLink = styled(NavLink)`
 
   min-width: 100px;
   /* margin: ${(props) => props.theme.space[2]}px; */
-  padding-top: ${(props) => props.theme.space[3]}px;
-  padding-bottom: ${(props) => props.theme.space[3]}px;
-  padding-left: ${(props) => props.theme.space[4]}px;
-  padding-right: ${(props) => props.theme.space[4]}px;
+  padding-top: ${(props) => props.theme.space[2]}px;
+  padding-bottom: ${(props) => props.theme.space[2]}px;
+  padding-left: ${(props) => props.theme.space[3]}px;
+  padding-right: ${(props) => props.theme.space[3]}px;
 
   border: ${(props) => props.theme.borders.bold};
   border-radius: ${(props) => props.theme.radii.normal};
 
   background-color: ${(props) =>
-    props.disabled ? props.theme.colors.muted : props.theme.colors.primary};
+    props.disabled
+      ? props.theme.colors.muted
+      : props.theme.colors.backgroundWhite};
   font-size: ${(props) => props.theme.fontSizes.m};
 
   &:hover:not(:disabled),

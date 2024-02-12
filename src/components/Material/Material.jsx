@@ -4,7 +4,6 @@ import {
   MaterialCode,
   Description,
   MaterialPrice,
-  UserPrice,
   MaterialUnit,
   Extended,
   HilightDescription,
@@ -20,12 +19,7 @@ import { IoIosCopy } from "react-icons/io";
 const Material = ({
   material: { Code, DescriptionUA, Price, Unit },
   query,
-  userPrice,
 }) => {
-  function editPrice() {
-    console.log("edit price");
-  }
-
   return (
     <MaterialWrapper>
       <CodeWrapper>
@@ -83,8 +77,6 @@ const Material = ({
         )}
         <Extended>
           {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
-          {userPrice && <UserPrice> {userPrice} &#8372;</UserPrice>}
-          {userPrice && <button onClick={editPrice}>edit price</button>}
           {Unit && <MaterialUnit> {Unit} </MaterialUnit>}
         </Extended>
       </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
-import Material from "../Material/Material";
+import ProjectMaterial from "../ProjectMaterial/ProjectMaterial";
 import Section from "../Section/Section";
 import { BackLink, List, Item } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -54,7 +54,7 @@ const ProjectDetails = () => {
               <List>
                 {project.materials.map((material) => (
                   <Item key={material._id._id}>
-                    <Material
+                    <ProjectMaterial
                       material={material._id}
                       userPrice={material.userPrice}
                     />
