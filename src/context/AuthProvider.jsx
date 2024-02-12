@@ -78,12 +78,15 @@ const AuthProvider = ({ children }) => {
           setToken(response.token);
           setUser(response.user);
           setIsLoggedIn(true);
+          // при успішному логіні видалить всі тости
+          toast.dismiss();
           // Перенаправляємо на головну сторінку
           navigate("/", { replace: true });
         }
       } catch (error) {
         toast.error(
-          "Не вдалось увійти в акаунт, перевірте чи коректний email та пароль"
+          "Не вдалось увійти в акаунт, перевірте чи коректний email та пароль",
+          { autoClose: false }
         );
       }
     }
