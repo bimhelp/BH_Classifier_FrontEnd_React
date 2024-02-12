@@ -5,7 +5,12 @@ import * as yup from "yup";
 import { Button } from "../Button/Button";
 import { NavLink } from "react-router-dom";
 import css from "./LoginForm.module.css";
-import { StyledForm, Input, InputWrapper } from "./LoginForm.styled";
+import {
+  StyledForm,
+  Input,
+  InputWrapper,
+  StyledLink,
+} from "./LoginForm.styled";
 import { validationColor } from "../../services/utility";
 import { authContext as context } from "../../context/authContext";
 
@@ -55,6 +60,7 @@ const LoginForm = () => {
                 name="email"
                 type="email"
                 id="email"
+                autoFocus
                 bordercolor={validationColor(
                   props.errors.email,
                   props.values.email,
@@ -80,9 +86,7 @@ const LoginForm = () => {
               <ErrorMessage name="password" />
             </InputWrapper>
             <Button type="submit">LogIn</Button>
-            <NavLink className={css.button} to={"/registration"}>
-              Registration
-            </NavLink>
+            <StyledLink to={"/registration"}>Registration</StyledLink>
           </StyledForm>
         )}
       </Formik>

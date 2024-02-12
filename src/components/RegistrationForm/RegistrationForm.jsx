@@ -2,7 +2,12 @@ import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
-import { StyledForm, Input, InputWrapper } from "./RegisterForm.styled";
+import {
+  StyledForm,
+  Input,
+  InputWrapper,
+  StyledLink,
+} from "./RegisterForm.styled";
 import { Button } from "../Button/Button";
 import { validationColor } from "../../services/utility";
 
@@ -59,7 +64,7 @@ const RegistrationForm = () => {
         onSubmit={handleSubmit}
       >
         {(props) => (
-          <StyledForm className={css.form}>
+          <StyledForm>
             <h2>Registration</h2>
             <InputWrapper>
               <label htmlFor="name" className={css.label}>
@@ -69,6 +74,7 @@ const RegistrationForm = () => {
                 name="name"
                 type="text"
                 id="name"
+                autoFocus
                 bordercolor={validationColor(
                   props.errors.name,
                   props.values.name,
@@ -110,9 +116,7 @@ const RegistrationForm = () => {
               <ErrorMessage name="password" />
             </InputWrapper>
             <Button type="submit">Send</Button>
-            <NavLink className={css.loginBtn} to={"/login"}>
-              LogIn
-            </NavLink>
+            <StyledLink to={"/login"}>LogIn</StyledLink>
           </StyledForm>
         )}
       </Formik>

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import { Form, Field } from "formik";
+import { NavLink } from "react-router-dom";
 
 export const StyledForm = styled(Form)`
   width: 300px;
@@ -35,8 +36,15 @@ export const Input = styled(Field)`
   &:hover,
   &:focus {
     border: ${(props) => props.theme.borders.bold};
-    /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
+    /* background-color: ${(props) => props.theme.colors.hover}; */
     border-color: ${({ bordercolor }) => bordercolor};
+  }
+`;
+
+export const StyledLink = styled(NavLink)`
+  &:hover,
+  &:focus {
+    color: ${(props) => props.theme.colors.hover};
   }
 `;
 
