@@ -7,6 +7,8 @@ import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import Table from "../Table/Table";
 
+const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
+
 const AddForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,22 +29,37 @@ const AddForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     switch (name) {
+      case "code":
+        setCode(value);
+        break;
+      case "companyCode":
+        setUnit(value);
+        break;
       case "description":
         setDescription(value);
         break;
       case "price":
         setPrice(value);
         break;
-      case "code":
+      case "weight":
         setCode(value);
         break;
-      case "unitcode":
-        setUnitcode(value);
+      case "length":
+        setCode(value);
         break;
-      case "level":
-        setLevel(value);
+      case "width":
+        setCode(value);
+        break;
+      case "hight":
+        setCode(value);
+        break;
+      case "density":
+        setCode(value);
         break;
       case "unit":
+        setUnit(value);
+        break;
+      case "consumption":
         setUnit(value);
         break;
       default:
@@ -60,7 +77,7 @@ const AddForm = () => {
       setIsLoading(true);
       try {
         const response = await addElement(data);
-        // console.log(response.data);
+        console.log(response.data);
       } catch {
         toast.error("Не вдалось додати матеріал", {
           autoClose: false,

@@ -127,7 +127,7 @@ export const StyledCloseButton = styled(StyledButton)`
 export const StyledIconButton = styled(StyledButton)`
   position: ${(props) => props.position === "absolute" && "absolute"};
   top: 50%;
-  left: 0;>
+  left: 0;
   transform: ${(props) =>
     props.position === "absolute" && "translate(0, -50%)"};
   min-width: fit-content;
@@ -153,12 +153,35 @@ export const StyledIconButton = styled(StyledButton)`
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
-    cursor: cell;
+    /* cursor: cell; */
     color: ${(props) => props.variant === "dark" && props.theme.colors.black};
     background-color: transparent;
     opacity: 1;
   }
   @media screen and (min-width: 680px) {
     opacity: ${(props) => props.visibility === "hide" && 0};
+  }
+
+  div {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip {
+    display: none;
+  }
+
+  &:hover .tooltip {
+    z-index: 100;
+    color: black;
+    display: unset;
+    position: absolute;
+    bottom: 120%;
+    left: 0;
+    background-color: ${(props) => props.theme.colors.backgroundSticker};
+    padding: ${(props) => props.theme.space[2]}px;
+    border-radius: 4px;
+    box-shadow: ${(props) => props.theme.shadows.shadow};
+    /* Ваші стилі для підказки */
   }
 `;

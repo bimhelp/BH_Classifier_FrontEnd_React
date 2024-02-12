@@ -8,6 +8,7 @@ export const StyledNavLink = styled(NavLink)`
 
   border: ${(props) => props.theme.borders.bold};
   border-radius: ${(props) => props.theme.radii.normal};
+  background-color: ${(props) => props.theme.colors.primary};
 
   /* text-transform: uppercase; */
   font-size: 16px;
@@ -15,6 +16,6 @@ export const StyledNavLink = styled(NavLink)`
   &:focus {
     color: ${(props) => props.theme.colors.white};
     border-color: ${(props) => props.theme.colors.black};
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.hover};
   }
 `;

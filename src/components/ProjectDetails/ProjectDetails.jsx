@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
@@ -37,6 +37,12 @@ const ProjectDetails = () => {
     };
   }, [id]);
 
+  const totalPrice = useMemo(() => {
+    return project?.materials.reduce((total, material) => {
+      return total + material.userPrice;
+    }, 0);
+  }, [project]);
+
   return (
     <Section>
       {isLoading && <p>Loading project details...</p>}
@@ -48,7 +54,7 @@ const ProjectDetails = () => {
           </BackLink>
 
           <h2>{project.title}</h2>
-          {project.materials.length > 0 && (
+          {project.materials.length > 0 ? (
             <>
               <p>Materials:</p>
               <List>
@@ -61,7 +67,20 @@ const ProjectDetails = () => {
                   </Item>
                 ))}
               </List>
+              {project?.materials.length > 0 && (
+                <div>
+                  <p>
+                    Кількість матеріалів:
+                    <span>{project.materials.length}</span>
+                  </p>
+                  <p>
+                    Загальна вартість: <span>{totalPrice} &#8372;</span>
+                  </p>
+                </div>
+              )}
             </>
+          ) : (
+            <p>У вашому проекті немає матеріалів</p>
           )}
         </>
       )}

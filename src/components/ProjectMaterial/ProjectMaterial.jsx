@@ -40,6 +40,7 @@ const ProjectMaterial = ({
             visibility="hide"
             position="absolute"
             variant="light"
+            tooltip="Копіювати"
           ></IconButton>
         </CopyToClipboard>
         <MaterialCode>{Code}</MaterialCode>
@@ -65,12 +66,14 @@ const ProjectMaterial = ({
               visibility="visible"
               position="normal"
               variant="dark"
+              tooltip="Копіювати"
             ></IconButton>
           </CopyToClipboard>
           <IconButton
             icon={RiFileEditFill}
             onClick={editPrice}
             variant="dark"
+            tooltip="Редагувати ціну"
           ></IconButton>
         </MaterialMenu>
       </DescriptionWrapper>

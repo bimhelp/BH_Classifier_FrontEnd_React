@@ -44,6 +44,7 @@ const Category = ({
               visibility="hide"
               position="absolute"
               variant="light"
+              tooltip="Копіювати"
             ></IconButton>
           </CopyToClipboard>
           <CategoryCode>{Code}</CategoryCode>
@@ -65,6 +66,7 @@ const Category = ({
                 visibility="hide"
                 position="absolute"
                 variant="dark"
+                tooltip="Копіювати"
               ></IconButton>
             </CopyToClipboard>
           </DescriptionWrapper>
@@ -81,6 +83,7 @@ const Category = ({
                 visibility="hide"
                 position="absolute"
                 variant="dark"
+                tooltip="Копіювати"
               ></IconButton>
             </CopyToClipboard>
             <CategoryDescription>{DescriptionUA}</CategoryDescription>

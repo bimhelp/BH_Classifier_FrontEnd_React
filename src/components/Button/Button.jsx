@@ -74,6 +74,7 @@ export const IconButton = ({
   visibility,
   position,
   variant,
+  tooltip,
 }) => {
   return (
     <StyledIconButton
@@ -83,8 +84,12 @@ export const IconButton = ({
       visibility={visibility}
       position={position}
       variant={variant}
+      tooltip={tooltip}
     >
-      {children} {Icon && <Icon size={24} />}
+      <div>
+        {children} {Icon && <Icon size={24} />}
+        {tooltip && <span className="tooltip">{tooltip}</span>}
+      </div>
     </StyledIconButton>
   );
 };
