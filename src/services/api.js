@@ -3,18 +3,18 @@ import axios from "axios";
 axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
 export async function getAll() {
-  const response = await axios.get(`/elements`);
+  const response = await axios.get(`/category`);
   // console.log(response);
   return response.data;
 }
 
 export async function getMainCategory(signal) {
-  const response = await axios.get(`/elements/category`, { signal });
+  const response = await axios.get(`/main/category`, { signal });
   return response.data;
 }
 
 export async function getSubCategory(spvCode, signal) {
-  const response = await axios.get(`/elements/subcategory`, {
+  const response = await axios.get(`/sub/category`, {
     params: { code: spvCode },
     signal,
   });
@@ -22,7 +22,7 @@ export async function getSubCategory(spvCode, signal) {
 }
 
 export async function searchMaterials(number) {
-  const response = await axios.get("/elements/search/by-code", {
+  const response = await axios.get("/category/search/by-code", {
     params: {
       number: number,
     },
@@ -31,7 +31,7 @@ export async function searchMaterials(number) {
 }
 
 export async function searchByDescription(description) {
-  const response = await axios.get("/elements/search/by-description", {
+  const response = await axios.get("/category/search/by-description", {
     params: {
       description: description,
     },
@@ -40,7 +40,7 @@ export async function searchByDescription(description) {
 }
 
 export async function addElement(newElement) {
-  const response = await axios.post("/element", newElement);
+  const response = await axios.post("/category", newElement);
   return response.data;
 }
 
