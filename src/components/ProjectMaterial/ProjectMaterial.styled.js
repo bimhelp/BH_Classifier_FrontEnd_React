@@ -54,7 +54,6 @@ export const DescriptionWrapper = styled.div`
 
 export const Description = styled.p`
   padding: ${(props) => props.theme.space[2]}px;
-  padding-left: 30px;
   font-size: ${(props) => props.theme.fontSizes.m};
   width: 300px;
   /* outline: 1px solid teal; */
@@ -67,23 +66,27 @@ export const Description = styled.p`
 // `;
 
 export const MaterialPrice = styled.p`
-  font-size: 12px;
+  font-size: 14px;
   color: ${(props) => props.theme.colors.green};
   padding-left: 10px;
+  width: 50px;
+  /* outline: 1px solid green; */
 `;
 
-export const UserPrice = styled.p`
-  font-size: 12px;
+export const StyledUserPrice = styled.p`
+  font-size: 14px;
   color: ${(props) => props.theme.colors.orange};
   padding-left: 10px;
-  width: 30px;
-  /* outline: 1px solid teal; */
+  width: 50px;
+  /* outline: 1px solid orangered; */
 `;
 
 export const MaterialUnit = styled.p`
   font-size: 12px;
   color: var(--unit-color);
   padding-left: 10px;
+  width: 50px;
+  /* outline: 1px solid blue; */
 `;
 
 export const Extended = styled.div`

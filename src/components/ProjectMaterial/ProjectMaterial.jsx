@@ -4,7 +4,7 @@ import {
   MaterialCode,
   Description,
   MaterialPrice,
-  UserPrice,
+  StyledUserPrice,
   MaterialUnit,
   Extended,
   // HilightDescription,
@@ -20,10 +20,17 @@ import { IoIosCopy } from "react-icons/io";
 import { RiFileEditFill } from "react-icons/ri";
 
 const ProjectMaterial = ({
-  material: { Code, DescriptionUA, Price, Unit },
-  query,
-  userPrice,
+  material: {
+    Code,
+    DescriptionUA,
+    Price = 0,
+    UserPrice = 0,
+    Consumption = 1,
+    UserConsumption = 1,
+    Unit = "",
+  },
 }) => {
+  // console.log("material: ", material);
   function editPrice() {
     console.log("edit material");
   }
@@ -46,29 +53,30 @@ const ProjectMaterial = ({
         <MaterialCode>{Code}</MaterialCode>
       </CodeWrapper>
       <DescriptionWrapper>
+        <CopyToClipboard
+          text={DescriptionUA}
+          onCopy={() =>
+            toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
+          }
+        >
+          <IconButton
+            icon={IoIosCopy}
+            visibility="hide"
+            position="normal"
+            variant="dark"
+            tooltip="Копіювати"
+          ></IconButton>
+        </CopyToClipboard>
         <Description>{DescriptionUA}</Description>
 
         <Extended>
-          {Price && <MaterialPrice> {Price} &#8372;</MaterialPrice>}
-          {userPrice && <UserPrice> {userPrice} &#8372;</UserPrice>}
-
-          {Unit && <MaterialUnit> {Unit} </MaterialUnit>}
+          <MaterialPrice> {Price} &#8372;</MaterialPrice>
+          {UserPrice && <StyledUserPrice> {UserPrice} &#8372;</StyledUserPrice>}
+          <MaterialUnit> {Unit} </MaterialUnit>
+          <MaterialUnit> {Consumption} </MaterialUnit>
+          <MaterialUnit> {UserConsumption} </MaterialUnit>
         </Extended>
         <MaterialMenu>
-          <CopyToClipboard
-            text={DescriptionUA}
-            onCopy={() =>
-              toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
-            }
-          >
-            <IconButton
-              icon={IoIosCopy}
-              visibility="visible"
-              position="normal"
-              variant="dark"
-              tooltip="Копіювати"
-            ></IconButton>
-          </CopyToClipboard>
           <IconButton
             icon={RiFileEditFill}
             onClick={editPrice}

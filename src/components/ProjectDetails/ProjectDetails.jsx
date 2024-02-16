@@ -4,7 +4,7 @@ import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import ProjectMaterial from "../ProjectMaterial/ProjectMaterial";
 import Section from "../Section/Section";
-import { BackLink, List, Item } from "./ProjectDetails.styled";
+import { BackLink, List, Item, MaterialHeader } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ProjectDetails = () => {
@@ -13,6 +13,15 @@ const ProjectDetails = () => {
   const [project, setProject] = useState(null);
   const [isLoading, setisLoading] = useState(false);
   const location = useLocation();
+  const tableHeader = {
+    Code: "Код",
+    DescriptionUA: "Опис",
+    Price: "Ціна",
+    UserPrice: "Ціна",
+    Consumption: "Витрата",
+    UserConsumption: "Витрата",
+    Unit: "Одиниці",
+  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -38,8 +47,8 @@ const ProjectDetails = () => {
   }, [id]);
 
   const totalPrice = useMemo(() => {
-    return project?.materials.reduce((total, material) => {
-      return total + material.userPrice;
+    return project?.Materials.reduce((total, material) => {
+      return total + material.UserPrice;
     }, 0);
   }, [project]);
 
@@ -53,25 +62,28 @@ const ProjectDetails = () => {
             Back
           </BackLink>
 
-          <h2>{project.title}</h2>
-          {project.materials.length > 0 ? (
+          <h2>{project.Title}</h2>
+          {project.Materials.length > 0 ? (
             <>
-              <p>Materials:</p>
+              <div
+                style={{
+                  marginLeft: 16,
+                }}
+              >
+                <ProjectMaterial material={tableHeader} />
+              </div>
               <List>
-                {project.materials.map((material) => (
-                  <Item key={material._id._id}>
-                    <ProjectMaterial
-                      material={material._id}
-                      userPrice={material.userPrice}
-                    />
+                {project.Materials.map((material) => (
+                  <Item key={material._id}>
+                    <ProjectMaterial material={material} />
                   </Item>
                 ))}
               </List>
-              {project?.materials.length > 0 && (
+              {project?.Materials.length > 0 && (
                 <div>
                   <p>
                     Кількість матеріалів:
-                    <span>{project.materials.length}</span>
+                    <span>{project.Materials.length}</span>
                   </p>
                   <p>
                     Загальна вартість: <span>{totalPrice} &#8372;</span>

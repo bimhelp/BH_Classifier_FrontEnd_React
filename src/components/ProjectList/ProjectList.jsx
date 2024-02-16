@@ -13,7 +13,7 @@ const ProjectList = ({ items }) => {
           {items.map((item) => (
             <li key={item._id}>
               <StyledNavLink to={`${item._id}`} state={{ from: location }}>
-                {item.title}
+                {item.Title}
               </StyledNavLink>
             </li>
           ))}

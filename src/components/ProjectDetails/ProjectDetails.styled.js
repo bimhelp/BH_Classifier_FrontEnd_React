@@ -49,3 +49,8 @@ export const Item = styled.li`
     margin-bottom: ${(props) => props.theme.space[1]}px;
   }
 `;
+
+export const MaterialHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
