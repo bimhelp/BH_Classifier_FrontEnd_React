@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Categorylist from "../CategoryList/CategoryList";
-import { getMainCategory } from "../../services/api";
+import { getByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
@@ -12,10 +12,9 @@ const Table = () => {
   useEffect(() => {
     const controller = new AbortController();
     async function getCategory() {
-      // console.log("effect main");
       try {
         setIsLoading(true);
-        const response = await getMainCategory("47000000-6", controller.signal);
+        const response = await getByParentCode("47000000-6", controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
@@ -25,7 +24,6 @@ const Table = () => {
     }
     getCategory();
     return () => {
-      // console.log("main unmount");
       setMainCategory([]);
       controller.abort();
     };

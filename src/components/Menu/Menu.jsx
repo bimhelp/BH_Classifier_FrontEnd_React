@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { authContext as context } from "../../context/authContext";
+// import React, { useContext } from "react";
+// import { authContext as context } from "../../context/authContext";
 // Навігація по сайту
 import {
   Navigation,
@@ -8,12 +8,12 @@ import {
   LinkTitle,
 } from "./Menu.styled";
 import { FaListUl } from "react-icons/fa";
-import { GrProjects } from "react-icons/gr";
-import { HiMiniQueueList } from "react-icons/hi2";
+// import { GrProjects } from "react-icons/gr";
+// import { HiMiniQueueList } from "react-icons/hi2";
 import User from "../User/User";
 
 const Menu = () => {
-  const { isLoggedIn } = useContext(context);
+  // const { isLoggedIn } = useContext(context);
 
   return (
     <Navigation>
@@ -23,7 +23,7 @@ const Menu = () => {
           <LinkTitle>CPV</LinkTitle>
         </StyledNavLink>
 
-        {isLoggedIn && (
+        {/* {isLoggedIn && (
           <>
             <StyledNavLink to="projects">
               <GrProjects />
@@ -34,7 +34,7 @@ const Menu = () => {
               <LinkTitle>Materials</LinkTitle>
             </StyledNavLink>
           </>
-        )}
+        )} */}
       </MenuWrapper>
 
       <User />

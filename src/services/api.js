@@ -8,31 +8,15 @@ export async function getAll() {
   return response.data;
 }
 
-export async function getMainCategory(parentCode, signal) {
+export async function getByParentCode(parentCode, signal) {
   const response = await axios.get(`/material-by-parent/${parentCode}`, {
     signal,
   });
   return response.data;
 }
 
-export async function getSubCategory(spvCode, signal) {
-  // console.log("spvCode: ", spvCode);
-
-  const response = await axios.get(`/material-by-parent/${spvCode}`, {
-    signal,
-  });
-  return response.data;
-}
-// export async function getSubCategory(spvCode, signal) {
-//   const response = await axios.get(`/sub/category`, {
-//     params: { code: spvCode },
-//     signal,
-//   });
-//   return response.data;
-// }
-
 export async function searchMaterials(number) {
-  const response = await axios.get("/category/search/by-code", {
+  const response = await axios.get("/material/search/by-code", {
     params: {
       number: number,
     },
@@ -41,7 +25,7 @@ export async function searchMaterials(number) {
 }
 
 export async function searchByDescription(description) {
-  const response = await axios.get("/category/search/by-description", {
+  const response = await axios.get("/material/search/by-description", {
     params: {
       description: description,
     },

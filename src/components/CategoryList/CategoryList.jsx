@@ -1,23 +1,20 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 // functions
-import { getSubCategory, searchMaterials } from "../../services";
-import { cutCpvCode, filterNextLevelItems, createLevel } from "../../services";
+import { getByParentCode } from "../../services";
+import { cutCpvCode, createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
-import MaterialList from "../MaterialList/MaterialList";
 import { List, Item } from "./CategoryList.styled";
 import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
 
 const CategoryList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
-  const [materials, setMaterials] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [selectedCode, setSelectedCode] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [scrollPosition, setScrollPosition] = useState(0);
 
   // Запит по під категорії
   useEffect(() => {
@@ -26,7 +23,7 @@ const CategoryList = ({ items, query }) => {
       // console.log("get subcategory effect");
       setIsLoading(true);
       try {
-        const response = await getSubCategory(selectedCode, controller.signal);
+        const response = await getByParentCode(selectedCode, controller.signal);
         // console.log("response: ", response.data);
 
         setSubCategories(response.data);
@@ -37,9 +34,6 @@ const CategoryList = ({ items, query }) => {
       }
     }
 
-    // if (selectedCode.length > 0 && selectedCode.length < 5) {
-    //   subCategory(selectedCode);
-    // }
     if (selectedCode === "") {
       return;
     }
@@ -49,48 +43,6 @@ const CategoryList = ({ items, query }) => {
       controller.abort();
     };
   }, [selectedCode]);
-
-  // Запит по матеріали
-  // useEffect(() => {
-  //   async function getMaterial(selectedCode) {
-  //     // console.log("effect material");
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await searchMaterials(selectedCode);
-  //       // console.log("materials", response.data);
-
-  //       if (response.data.length < 1) {
-  //         return;
-  //       } else {
-  //         // setMaterials(response.data.slice(1));
-  //         setMaterials(response.data);
-  //       }
-  //     } catch (error) {
-  //       toast.error("Не вдалось завантажити матеріали");
-  //     } finally {
-  //       // console.log("setIsLoading:  false");
-  //       setIsLoading(false);
-  //     }
-  //   }
-
-  //   // getMaterial(selectedCode);
-
-  //   // if (selectedCode.length >= 5) {
-  //   //   getMaterial(selectedCode);
-  //   // }
-  // }, [selectedCode]);
-
-  // const filteredNextLevel = useMemo(() => {
-  //   if (subCategories.length > 0) {
-  //     // console.log("memo filteredNextLevel");
-  //     const currentLevelItems = filterNextLevelItems(
-  //       subCategories,
-  //       selectedCode
-  //     );
-  //     return currentLevelItems.slice(1);
-  //   }
-  //   return [];
-  // }, [subCategories, selectedCode]);
 
   const level = useMemo(() => {
     if (items.length > 0) {
@@ -103,9 +55,6 @@ const CategoryList = ({ items, query }) => {
 
   // Функція формує cpv код і тоглить відкриття категорії
   const selectCategory = async (id, code) => {
-    // console.log("code: ", code);
-    // console.log(cutCpvCode(code));
-    // setSelectedCode(cutCpvCode(code));
     setSelectedCode(code);
     toggleCategory(id);
   };
@@ -136,11 +85,6 @@ const CategoryList = ({ items, query }) => {
                     query={query}
                   >
                     <CategoryList items={subCategories} query={query} />
-                    {/* якщо код довший то це матеріали */}
-                    {/* {selectedCode.length > 4 ? (
-                      <MaterialList materials={materials} query={query} />
-                    ) : (
-                    )} */}
                   </Category>
                 ) : (
                   <Category

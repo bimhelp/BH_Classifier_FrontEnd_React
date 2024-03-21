@@ -5,5 +5,5 @@ export const MainTableWrapper = styled.div`
   max-height: 85vh;
   margin-left: -${(props) => props.theme.space[4]}px;
 
-  overflow: scroll;
+  /* overflow: scroll; */
 `;

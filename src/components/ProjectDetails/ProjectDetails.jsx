@@ -4,7 +4,7 @@ import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import ProjectMaterial from "../ProjectMaterial/ProjectMaterial";
 import Section from "../Section/Section";
-import { BackLink, List, Item, MaterialHeader } from "./ProjectDetails.styled";
+import { BackLink, List, Item } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ProjectDetails = () => {
