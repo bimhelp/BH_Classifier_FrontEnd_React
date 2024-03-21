@@ -15,7 +15,7 @@ const Table = () => {
       // console.log("effect main");
       try {
         setIsLoading(true);
-        const response = await getMainCategory(controller.signal);
+        const response = await getMainCategory("47000000-6", controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");

@@ -3,23 +3,33 @@ import axios from "axios";
 axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
 export async function getAll() {
-  const response = await axios.get(`/category`);
+  const response = await axios.get(`/all-material`);
   // console.log(response);
   return response.data;
 }
 
-export async function getMainCategory(signal) {
-  const response = await axios.get(`/main/category`, { signal });
-  return response.data;
-}
-
-export async function getSubCategory(spvCode, signal) {
-  const response = await axios.get(`/sub/category`, {
-    params: { code: spvCode },
+export async function getMainCategory(parentCode, signal) {
+  const response = await axios.get(`/material-by-parent/${parentCode}`, {
     signal,
   });
   return response.data;
 }
+
+export async function getSubCategory(spvCode, signal) {
+  // console.log("spvCode: ", spvCode);
+
+  const response = await axios.get(`/material-by-parent/${spvCode}`, {
+    signal,
+  });
+  return response.data;
+}
+// export async function getSubCategory(spvCode, signal) {
+//   const response = await axios.get(`/sub/category`, {
+//     params: { code: spvCode },
+//     signal,
+//   });
+//   return response.data;
+// }
 
 export async function searchMaterials(number) {
   const response = await axios.get("/category/search/by-code", {

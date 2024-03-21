@@ -7,7 +7,7 @@ import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import Table from "../Table/Table";
 
-const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
+// const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
 
 const AddForm = () => {
   const [isLoading, setIsLoading] = useState(false);
