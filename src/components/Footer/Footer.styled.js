@@ -11,8 +11,13 @@ export const FooterWrapper = styled.div`
 `;
 
 export const ContactList = styled.ul`
-  display: flex;
-  gap: 30px;
+  display: block;
+  font-size: ${(props) => props.theme.fontSizes.s};
+
+  @media screen and (min-width: 680px) {
+    display: flex;
+    gap: 30px;
+  }
 `;
 
 export const Contact = styled.li`

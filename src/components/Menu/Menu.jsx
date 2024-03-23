@@ -7,7 +7,9 @@ import {
   StyledNavLink,
   LinkTitle,
 } from "./Menu.styled";
-import { FaListUl } from "react-icons/fa";
+// import { FaListUl } from "react-icons/fa";
+import { GiBrickWall } from "react-icons/gi";
+import { IoHammer } from "react-icons/io5";
 // import { GrProjects } from "react-icons/gr";
 // import { HiMiniQueueList } from "react-icons/hi2";
 import User from "../User/User";
@@ -19,12 +21,13 @@ const Menu = () => {
     <Navigation>
       <MenuWrapper>
         <StyledNavLink to="/">
-          <FaListUl />
+          {/* <FaListUl /> */}
+          <GiBrickWall />
           <LinkTitle>Матеріали</LinkTitle>
         </StyledNavLink>
 
         <StyledNavLink to="services">
-          <FaListUl />
+          <IoHammer />
           <LinkTitle>Послуги</LinkTitle>
         </StyledNavLink>
 

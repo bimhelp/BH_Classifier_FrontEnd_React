@@ -19,7 +19,7 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const LinkTitle = styled.span`
-  display: none;
+  display: block;
   @media screen and (min-width: 680px) {
     display: block;
   }
