@@ -5,7 +5,7 @@ import { getByParentCode } from "../../services";
 import { cutCpvCode, createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
-import { List, Item } from "./CategoryList.styled";
+import { List, Item } from "./MaterialList.styled";
 import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
 
