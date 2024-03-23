@@ -3,6 +3,7 @@ import ServiceList from "../ServiceList/ServiceList";
 import { getServiceByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import { ListWrapper } from "./ServiceTable.styled";
 
 const ServiceTable = () => {
   const [mainCategory, setMainCategory] = useState([]);
@@ -37,7 +38,10 @@ const ServiceTable = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <ServiceList items={mainCategory} style={{ padding: 0 }} />
+        <ListWrapper>
+          {" "}
+          <ServiceList items={mainCategory} style={{ padding: 0 }} />
+        </ListWrapper>
       )}
     </>
   );

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Categorylist from "../MaterialList/MaterialList";
+import MaterialList from "../MaterialList/MaterialList";
 import { getByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
+import { ListWrapper } from "./MaterialTable.styled";
 
 const MaterialTable = () => {
   const [mainCategory, setMainCategory] = useState([]);
@@ -34,7 +35,9 @@ const MaterialTable = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Categorylist items={mainCategory} style={{ padding: 0 }} />
+        <ListWrapper>
+          <MaterialList items={mainCategory} style={{ padding: 0 }} />
+        </ListWrapper>
       )}
     </>
   );

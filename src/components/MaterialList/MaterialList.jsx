@@ -74,29 +74,31 @@ const MaterialList = ({ items, query }) => {
         <Loader />
       ) : (
         <>
-          <List level={level}>
-            {items.map((item) => (
-              <Item key={item._id}>
-                {/* якщо вибраний елемент */}
-                {selectedId === item._id ? (
-                  <Category
-                    element={item}
-                    selectCategory={() => selectCategory(item._id, item.Code)}
-                    query={query}
-                    isSelected={selectedId === item._id}
-                  >
-                    <MaterialList items={subCategories} query={query} />
-                  </Category>
-                ) : (
-                  <Category
-                    element={item}
-                    selectCategory={() => selectCategory(item._id, item.Code)}
-                    query={query}
-                  ></Category>
-                )}
-              </Item>
-            ))}
-          </List>
+          <div>
+            <List level={level}>
+              {items.map((item) => (
+                <Item key={item._id}>
+                  {/* якщо вибраний елемент */}
+                  {selectedId === item._id ? (
+                    <Category
+                      element={item}
+                      selectCategory={() => selectCategory(item._id, item.Code)}
+                      query={query}
+                      isSelected={selectedId === item._id}
+                    >
+                      <MaterialList items={subCategories} query={query} />
+                    </Category>
+                  ) : (
+                    <Category
+                      element={item}
+                      selectCategory={() => selectCategory(item._id, item.Code)}
+                      query={query}
+                    ></Category>
+                  )}
+                </Item>
+              ))}
+            </List>
+          </div>
         </>
       )}
     </>
