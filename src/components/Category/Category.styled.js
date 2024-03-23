@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { setBgColor } from "../../services";
 
 export const CategoryWrapper = styled.div`
@@ -90,3 +90,53 @@ export const Extended = styled.div`
 
 // Так можна додати зображення на фон
 // background-image: ${props => `url(${props.img})`}
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const expandHeight = keyframes`
+from {
+    max-height: 0;
+  }
+  to {
+    max-height: 1000px; /* Замініть це значення на максимальну можливу висоту вашого елемента */
+  }
+`;
+
+export const SubList = styled.div`
+  /* animation: 2s ${fadeIn} ease-in; */
+  animation: ${expandHeight} 0.5s ease-in-out;
+  overflow: hidden;
+`;
+
+// .accordion-toggle {
+//     height: 0px;
+//     font-size: 18px;
+//     opacity: 0;
+//     transition:
+//     opacity 0.3s ease-in-out,
+//     height 0.3s 0.3s ease-in-out;
+//     color: #333;
+//     border-bottom-left-radius: 3px;
+//     border-bottom-right-radius: 3px;
+// }
+
+// .animated {
+//     opacity: 1;
+//     transition:
+//     height 0.3s ease-in-out,
+//     opacity 0.3s 0.3s ease-in-out;
+// }
+
+// .accordion-toggle p {
+//     margin: 0;
+//     padding: 22px 15px;
+//     pointer-events: none;
+//     line-height: 1.3;
+// }

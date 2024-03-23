@@ -8,5 +8,5 @@ export const Layout = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  overflow-y: auto;
+  overflow-y: scroll;
 `;

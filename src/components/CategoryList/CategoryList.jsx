@@ -83,6 +83,7 @@ const CategoryList = ({ items, query }) => {
                     element={item}
                     selectCategory={() => selectCategory(item._id, item.Code)}
                     query={query}
+                    isSelected={selectedId === item._id}
                   >
                     <CategoryList items={subCategories} query={query} />
                   </Category>

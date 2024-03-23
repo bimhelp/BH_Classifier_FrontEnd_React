@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { createLevel, cutCpvCode } from "../../services";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
@@ -13,15 +13,18 @@ import {
   MaterialPrice,
   MaterialUnit,
   Extended,
+  SubList,
 } from "./Category.styled";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
   element: { Code, DescriptionUA, PriceUAH, Unit },
   selectCategory,
   children,
   query,
+  isSelected,
 }) => {
   const [level, setLevel] = useState(null);
 
@@ -101,7 +104,7 @@ const Category = ({
           </Extended>
         </div>
       </CategoryWrapper>
-      <div>{children}</div>
+      {isSelected && <SubList>{children}</SubList>}
     </>
   );
 };

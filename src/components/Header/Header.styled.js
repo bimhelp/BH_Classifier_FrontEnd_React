@@ -6,6 +6,8 @@ export const HeaderWrapper = styled.div`
   position: sticky;
   top: 0;
   z-index: 1000;
+  padding-top: ${(props) => props.theme.space[2]}px;
+  padding-bottom: ${(props) => props.theme.space[2]}px;
 `;
 export const MenuWrapper = styled.div`
   display: flex;
