@@ -20,7 +20,7 @@ const Menu = () => {
       <MenuWrapper>
         <StyledNavLink to="/">
           <FaListUl />
-          <LinkTitle>CPV</LinkTitle>
+          <LinkTitle>Матеріали</LinkTitle>
         </StyledNavLink>
 
         {/* {isLoggedIn && (

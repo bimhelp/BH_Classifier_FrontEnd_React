@@ -1,6 +1,7 @@
 .headerWrapper {
   width: 100%;
   background-color: black;
+  /* padding-bottom: 5px; */
 }
 .header {
   display: flex;

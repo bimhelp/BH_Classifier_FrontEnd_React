@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const FormStyled = styled.form`
+  padding-top: 5px;
   display: flex;
   align-items: center;
   justify-content: center;

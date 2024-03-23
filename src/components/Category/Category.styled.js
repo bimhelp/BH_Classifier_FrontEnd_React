@@ -61,6 +61,28 @@ export const HilightDescription = styled.div`
   background-color: ${(props) => props.type === "mark" && "yellow"};
 `;
 
+export const MaterialPrice = styled.p`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.green};
+  padding-left: 10px;
+`;
+
+export const UserPrice = styled.p`
+  font-size: 12px;
+  color: ${(props) => props.theme.colors.orange};
+  padding-left: 10px;
+`;
+
+export const MaterialUnit = styled.p`
+  font-size: 12px;
+  color: var(--unit-color);
+  padding-left: 10px;
+`;
+
+export const Extended = styled.div`
+  padding-left: 24px;
+  display: flex;
+`;
 // Можна отримати доступ до пропсів
 //  ${(props) => {
 //     console.log(props);

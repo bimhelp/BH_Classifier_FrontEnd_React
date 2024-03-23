@@ -10,12 +10,15 @@ import {
   HilightDescription,
   CodeWrapper,
   DescriptionWrapper,
+  MaterialPrice,
+  MaterialUnit,
+  Extended,
 } from "./Category.styled";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
-  element: { Code, DescriptionUA },
+  element: { Code, DescriptionUA, PriceUAH, Unit },
   selectCategory,
   children,
   query,
@@ -50,45 +53,53 @@ const Category = ({
           <CategoryCode>{Code}</CategoryCode>
         </CodeWrapper>
 
-        {query ? (
-          <DescriptionWrapper>
-            <HilightDescription>
-              {hiLight(query, DescriptionUA)}
-            </HilightDescription>
-            <CopyToClipboard
-              text={DescriptionUA}
-              onCopy={() =>
-                toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
-              }
-            >
-              <IconButton
-                icon={IoIosCopy}
-                visibility="hide"
-                position="absolute"
-                variant="dark"
-                tooltip="Копіювати"
-              ></IconButton>
-            </CopyToClipboard>
-          </DescriptionWrapper>
-        ) : (
-          <DescriptionWrapper>
-            <CopyToClipboard
-              text={DescriptionUA}
-              onCopy={() =>
-                toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
-              }
-            >
-              <IconButton
-                icon={IoIosCopy}
-                visibility="hide"
-                position="absolute"
-                variant="dark"
-                tooltip="Копіювати"
-              ></IconButton>
-            </CopyToClipboard>
-            <CategoryDescription>{DescriptionUA}</CategoryDescription>
-          </DescriptionWrapper>
-        )}
+        <div>
+          {query ? (
+            <DescriptionWrapper>
+              <HilightDescription>
+                {hiLight(query, DescriptionUA)}
+              </HilightDescription>
+              <CopyToClipboard
+                text={DescriptionUA}
+                onCopy={() =>
+                  toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
+                }
+              >
+                <IconButton
+                  icon={IoIosCopy}
+                  visibility="hide"
+                  position="absolute"
+                  variant="dark"
+                  tooltip="Копіювати"
+                ></IconButton>
+              </CopyToClipboard>
+            </DescriptionWrapper>
+          ) : (
+            <DescriptionWrapper>
+              <CopyToClipboard
+                text={DescriptionUA}
+                onCopy={() =>
+                  toast.info(`${DescriptionUA} скопійовано в буфер омбіну`)
+                }
+              >
+                <IconButton
+                  icon={IoIosCopy}
+                  visibility="hide"
+                  position="absolute"
+                  variant="dark"
+                  tooltip="Копіювати"
+                ></IconButton>
+              </CopyToClipboard>
+              <CategoryDescription>{DescriptionUA}</CategoryDescription>
+            </DescriptionWrapper>
+          )}
+          <Extended>
+            {Unit && <MaterialUnit>Одиниця виміру: {Unit} </MaterialUnit>}
+            {PriceUAH && (
+              <MaterialPrice>Ціна: {PriceUAH} &#8372;</MaterialPrice>
+            )}
+          </Extended>
+        </div>
       </CategoryWrapper>
       <div>{children}</div>
     </>

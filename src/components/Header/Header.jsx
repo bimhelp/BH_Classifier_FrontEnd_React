@@ -1,19 +1,17 @@
 import React from "react";
-import css from "./Header.module.css";
 import Container from "../Container/Container";
-// import logo from "../../images/Triangle.svg";
 import Menu from "../Menu/Menu";
+import { HeaderWrapper, MenuWrapper } from "./Header.styled";
 
-const Header = ({ user }) => {
+const Header = () => {
   return (
-    <div className={css.headerWrapper}>
+    <HeaderWrapper>
       <Container>
-        <div className={css.header}>
-          {/* <img src={logo} className={css.headerLogo} alt="logo" /> */}
+        <MenuWrapper>
           <Menu />
-        </div>
+        </MenuWrapper>
       </Container>
-    </div>
+    </HeaderWrapper>
   );
 };
 
