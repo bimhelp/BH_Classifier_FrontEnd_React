@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Categorylist from "../CategoryList/CategoryList";
+import ServiceList from "../ServiceList/ServiceList";
 import { getServiceByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
@@ -37,7 +37,7 @@ const ServiceTable = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Categorylist items={mainCategory} style={{ padding: 0 }} />
+        <ServiceList items={mainCategory} style={{ padding: 0 }} />
       )}
     </>
   );

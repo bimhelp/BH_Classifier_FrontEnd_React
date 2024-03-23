@@ -25,10 +25,10 @@ const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
 const MaterialPage = lazy(() => import("./pages/MaterialPage/MaterialPage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage/ProjectsPage"));
+const ServicePage = lazy(() => import("./pages/ServicePage/ServicePage"));
 const ProjectDetails = lazy(() =>
   import("./components/ProjectDetails/ProjectDetails")
 );
-const ServicePage = lazy(() => import("./pages/ServicePage/ServicePage"));
 
 function App() {
   return (
@@ -36,10 +36,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MaterialPage />} />
-          <Route
-            path="services"
-            element={<PublicRoute component={<ServicePage />} />}
-          />
+          <Route path="services" element={<ServicePage />} />
           <Route
             path="registration"
             element={<PublicRoute component={<RegisterPage />} />}

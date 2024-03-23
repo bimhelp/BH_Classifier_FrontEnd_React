@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 // functions
-import { getByParentCode } from "../../services";
+import { getServiceByParentCode } from "../../services";
 import { cutCpvCode, createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
-import { List, Item } from "./MaterialList.styled";
+import { List, Item } from "./ServiceList.styled";
 import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
 
-const CategoryList = ({ items, query }) => {
+const ServiceList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [selectedCode, setSelectedCode] = useState("");
@@ -23,7 +23,10 @@ const CategoryList = ({ items, query }) => {
       // console.log("get subcategory effect");
       setIsLoading(true);
       try {
-        const response = await getByParentCode(selectedCode, controller.signal);
+        const response = await getServiceByParentCode(
+          selectedCode,
+          controller.signal
+        );
         // console.log("response: ", response.data);
 
         setSubCategories(response.data);
@@ -85,7 +88,7 @@ const CategoryList = ({ items, query }) => {
                     query={query}
                     isSelected={selectedId === item._id}
                   >
-                    <CategoryList items={subCategories} query={query} />
+                    <ServiceList items={subCategories} query={query} />
                   </Category>
                 ) : (
                   <Category
@@ -103,4 +106,4 @@ const CategoryList = ({ items, query }) => {
   );
 };
 
-export default CategoryList;
+export default ServiceList;

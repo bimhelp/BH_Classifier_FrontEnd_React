@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Categorylist from "../CategoryList/MaterialList";
+import Categorylist from "../MaterialList/MaterialList";
 import { getByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
