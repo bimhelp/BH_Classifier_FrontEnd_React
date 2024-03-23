@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { createLevel, cutCpvCode } from "../../services";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
@@ -110,5 +110,3 @@ const Category = ({
 };
 
 export default Category;
-
-// className={`${css.categoryCode} ${css[level]}`}

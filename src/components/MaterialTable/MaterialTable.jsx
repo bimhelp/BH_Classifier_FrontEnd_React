@@ -4,7 +4,7 @@ import { getByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 
-const Table = () => {
+const MaterialTable = () => {
   const [mainCategory, setMainCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,4 +40,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default MaterialTable;

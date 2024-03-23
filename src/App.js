@@ -23,18 +23,23 @@ import AddItemPage from "./pages/AddItemPage/AddItemPage";
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
-const TablePage = lazy(() => import("./pages/TablePage/TablePage"));
+const MaterialPage = lazy(() => import("./pages/MaterialPage/MaterialPage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage/ProjectsPage"));
 const ProjectDetails = lazy(() =>
   import("./components/ProjectDetails/ProjectDetails")
 );
+const ServicePage = lazy(() => import("./pages/ServicePage/ServicePage"));
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route index element={<TablePage />} />
+          <Route index element={<MaterialPage />} />
+          <Route
+            path="services"
+            element={<PublicRoute component={<ServicePage />} />}
+          />
           <Route
             path="registration"
             element={<PublicRoute component={<RegisterPage />} />}

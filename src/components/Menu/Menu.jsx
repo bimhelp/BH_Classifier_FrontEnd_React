@@ -23,6 +23,11 @@ const Menu = () => {
           <LinkTitle>Матеріали</LinkTitle>
         </StyledNavLink>
 
+        <StyledNavLink to="services">
+          <FaListUl />
+          <LinkTitle>Послуги</LinkTitle>
+        </StyledNavLink>
+
         {/* {isLoggedIn && (
           <>
             <StyledNavLink to="projects">

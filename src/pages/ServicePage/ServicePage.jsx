@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Table from "../../components/Table/Table";
+import ServiceTable from "../../components/ServiceTable/ServiceTable";
 import Section from "../../components/Section/Section";
 import Search from "../../components/Search/Search";
 import { searchByDescription, searchMaterials } from "../../services/api";
@@ -9,11 +9,11 @@ import {
   onLyCategory,
   onLyMaterial,
 } from "../../services";
-import { MainTableWrapper } from "./TablePage.styled";
+import { MainTableWrapper } from "./ServicePage.styled";
 import { toast } from "react-toastify";
 import SearchResults from "../../components/SearchResults/SearchResults";
 
-const TablePage = () => {
+const ServicePage = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState([]);
@@ -101,7 +101,7 @@ const TablePage = () => {
               query={query}
             />
           ) : (
-            <Table />
+            <ServiceTable />
           )}
         </MainTableWrapper>
       </Section>
@@ -109,4 +109,4 @@ const TablePage = () => {
   );
 };
 
-export default TablePage;
+export default ServicePage;

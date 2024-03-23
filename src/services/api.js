@@ -38,6 +38,14 @@ export async function addElement(newElement) {
   return response.data;
 }
 
+// Services________________________________________________________
+export async function getServiceByParentCode(parentCode, signal) {
+  const response = await axios.get(`/service-by-parent/${parentCode}`, {
+    signal,
+  });
+  return response.data;
+}
+
 // Auth________________________________________________________
 
 // Об'єкт token, має два методи

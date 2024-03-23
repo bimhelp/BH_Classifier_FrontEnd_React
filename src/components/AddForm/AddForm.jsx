@@ -5,7 +5,7 @@ import { addElement } from "../../services/api";
 import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
-import Table from "../Table/Table";
+import Table from "../MaterialTable/MaterialTable";
 
 // const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
 
