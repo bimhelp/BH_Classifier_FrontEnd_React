@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import MaterialTable from "../../components/MaterialTable/MaterialTable";
 import Section from "../../components/Section/Section";
 import Search from "../../components/Search/Search";
-import { searchByDescription, searchMaterials } from "../../services/api";
+import {
+  searchMaterialByDescription,
+  searchMaterialByCode,
+} from "../../services/api";
 import {
   checkIsString,
   parseNumber,
@@ -49,7 +52,7 @@ const MaterialPage = () => {
         setIsLoading(true);
         setSearchResult([]);
         try {
-          const response = await searchByDescription(searchValue);
+          const response = await searchMaterialByDescription(searchValue);
           if (response) {
             // console.log(response.data);
             setSearchResult(response.data);
@@ -67,7 +70,7 @@ const MaterialPage = () => {
         setIsLoading(true);
         setSearchResult([]);
         try {
-          const response = await searchMaterials(codeNumber);
+          const response = await searchMaterialByCode(codeNumber);
           // console.log(response.data);
           if (response) {
             setSearchResult(response.data);

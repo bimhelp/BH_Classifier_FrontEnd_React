@@ -15,7 +15,7 @@ export async function getByParentCode(parentCode, signal) {
   return response.data;
 }
 
-export async function searchMaterials(number) {
+export async function searchMaterialByCode(number) {
   const response = await axios.get("/material/search/by-code", {
     params: {
       number: number,
@@ -24,8 +24,26 @@ export async function searchMaterials(number) {
   return response.data;
 }
 
-export async function searchByDescription(description) {
+export async function searchMaterialByDescription(description) {
   const response = await axios.get("/material/search/by-description", {
+    params: {
+      description: description,
+    },
+  });
+  return response.data;
+}
+
+export async function searchServiceByCode(number) {
+  const response = await axios.get("/service/search/by-code", {
+    params: {
+      number: number,
+    },
+  });
+  return response.data;
+}
+
+export async function searchServiceByDescription(description) {
+  const response = await axios.get("/service/search/by-description", {
     params: {
       description: description,
     },
