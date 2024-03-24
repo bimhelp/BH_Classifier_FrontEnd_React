@@ -59,7 +59,7 @@ const Category = ({
 
         <DescriptionWrapper>
           {query ? (
-            <CopyParent>
+            <div>
               <HilightDescription>
                 {hiLight(query, DescriptionUA)}
               </HilightDescription>
@@ -77,9 +77,9 @@ const Category = ({
                   tooltip="Копіювати"
                 ></IconButton>
               </CopyToClipboard>
-            </CopyParent>
+            </div>
           ) : (
-            <CopyParent>
+            <div>
               <CopyToClipboard
                 text={DescriptionUA}
                 onCopy={() =>
@@ -95,7 +95,7 @@ const Category = ({
                 ></IconButton>
               </CopyToClipboard>
               <CategoryDescription>{DescriptionUA}</CategoryDescription>
-            </CopyParent>
+            </div>
           )}
           <Extended>
             {Unit && <MaterialUnit>Одиниця виміру: {Unit} </MaterialUnit>}

@@ -6,13 +6,14 @@ export const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  margin-bottom: ${(props) => props.theme.space[1]}px;
+  margin-bottom: ${(props) => props.theme.space[2]}px;
 
   &:hover,
   &:focus {
     box-shadow: var(--card-shadow);
     background-color: white;
   }
+  /* outline: 1px solid red; */
 
   @media screen and (min-width: 680px) {
     flex-direction: row;
@@ -49,11 +50,13 @@ export const CategoryCode = styled.p`
 
 export const DescriptionWrapper = styled.div`
   padding: ${(props) => props.theme.space[2]}px;
+  /* outline: 1px solid red; */
+  position: relative;
 `;
 
 export const CopyParent = styled.div`
-  /* outline: 1px solid green; */
-  position: relative;
+  /* position: relative; */
+  outline: 1px solid green;
 `;
 
 export const CategoryDescription = styled.p`
