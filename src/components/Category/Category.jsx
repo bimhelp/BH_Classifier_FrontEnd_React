@@ -10,7 +10,6 @@ import {
   HilightDescription,
   CodeWrapper,
   DescriptionWrapper,
-  CopyParent,
   MaterialPrice,
   MaterialUnit,
   Extended,
@@ -21,7 +20,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
-  element: { Code, DescriptionUA, PriceUAH, Unit },
+  element: { Code, DescriptionUA, PriceUAH, Unit, ElementNestingLevel },
   selectCategory,
   children,
   query,
@@ -30,9 +29,12 @@ const Category = ({
   const [level, setLevel] = useState(null);
 
   useEffect(() => {
-    const cutedCpvCode = cutCpvCode(Code);
-    setLevel(createLevel(cutedCpvCode));
-  }, [Code]);
+    // const cutedCpvCode = cutCpvCode(Code);
+    // console.log("ElementNestingLevel", ElementNestingLevel);
+    // setLevel(createLevel(cutedCpvCode));
+    // console.log("CreateLevel", createLevel(ElementNestingLevel));
+    setLevel(createLevel(ElementNestingLevel));
+  }, [ElementNestingLevel]);
 
   function handleClick(event) {
     selectCategory(event);

@@ -49,9 +49,7 @@ const ServiceList = ({ items, query }) => {
 
   const level = useMemo(() => {
     if (items.length > 0) {
-      // console.log("memo level");
-      const cutedCpvCode = cutCpvCode(items[0].Code);
-      return createLevel(cutedCpvCode);
+      return createLevel(items[0].ElementNestingLevel);
     }
     return null;
   }, [items]);
