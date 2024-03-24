@@ -14,8 +14,9 @@ export const ContactList = styled.ul`
   display: block;
   font-size: ${(props) => props.theme.fontSizes.s};
 
-  @media screen and (min-width: 680px) {
+  @media screen and (min-width: 425px) {
     display: flex;
+    align-items: baseline;
     gap: 30px;
   }
 `;

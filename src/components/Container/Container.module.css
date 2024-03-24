@@ -42,11 +42,11 @@
 }
 @media screen and (min-width: 1400px) {
   .container {
-    width: 1380px;
+    width: 1180px;
   }
 }
 @media screen and (min-width: 2560px) {
   .container {
-    width: 2000px;
+    width: 1180px;
   }
 }

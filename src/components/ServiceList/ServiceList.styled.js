@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { setBgColor } from "../../services";
 
 export const List = styled.ul`
-  margin-left: ${(props) => props.theme.space[4]}px;
+  margin-left: ${(props) => props.theme.space[3]}px;
 
   border-left: 2px solid;
   border-color: ${setBgColor};

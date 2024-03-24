@@ -7,8 +7,10 @@ const Footer = () => {
   return (
     <FooterWrapper>
       <Container>
-        <h3>Контакти:</h3>
         <ContactList>
+          <Contact>
+            <h3>Контакти:</h3>
+          </Contact>
           <Contact>
             <MdEmail />
             <a href="mailto:info@bimhelp.com.ua">info@bimhelp.com.ua</a>

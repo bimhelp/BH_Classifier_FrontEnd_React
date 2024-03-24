@@ -16,6 +16,7 @@ export const CategoryWrapper = styled.div`
 
   @media screen and (min-width: 680px) {
     flex-direction: row;
+    align-items: center;
   }
 `;
 
@@ -46,13 +47,17 @@ export const CategoryCode = styled.p`
 `;
 
 export const DescriptionWrapper = styled.div`
-  /* outline: 1px solid red; */
+  padding: ${(props) => props.theme.space[2]}px;
+`;
+
+export const CopyParent = styled.div`
+  /* outline: 1px solid green; */
   position: relative;
 `;
 
 export const CategoryDescription = styled.p`
-  padding: ${(props) => props.theme.space[2]}px;
   padding-left: 30px;
+  line-height: 1;
   font-size: ${(props) => props.theme.fontSizes.m};
 `;
 export const HilightDescription = styled.div`
@@ -80,6 +85,8 @@ export const MaterialUnit = styled.p`
 `;
 
 export const Extended = styled.div`
+  line-height: 1;
+  /* outline: 1px red solid; */
   padding-left: 24px;
   display: flex;
 `;

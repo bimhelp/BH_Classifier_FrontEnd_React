@@ -10,6 +10,7 @@ import {
   HilightDescription,
   CodeWrapper,
   DescriptionWrapper,
+  CopyParent,
   MaterialPrice,
   MaterialUnit,
   Extended,
@@ -56,9 +57,9 @@ const Category = ({
           <CategoryCode>{Code}</CategoryCode>
         </CodeWrapper>
 
-        <div>
+        <DescriptionWrapper>
           {query ? (
-            <DescriptionWrapper>
+            <CopyParent>
               <HilightDescription>
                 {hiLight(query, DescriptionUA)}
               </HilightDescription>
@@ -76,9 +77,9 @@ const Category = ({
                   tooltip="Копіювати"
                 ></IconButton>
               </CopyToClipboard>
-            </DescriptionWrapper>
+            </CopyParent>
           ) : (
-            <DescriptionWrapper>
+            <CopyParent>
               <CopyToClipboard
                 text={DescriptionUA}
                 onCopy={() =>
@@ -94,7 +95,7 @@ const Category = ({
                 ></IconButton>
               </CopyToClipboard>
               <CategoryDescription>{DescriptionUA}</CategoryDescription>
-            </DescriptionWrapper>
+            </CopyParent>
           )}
           <Extended>
             {Unit && <MaterialUnit>Одиниця виміру: {Unit} </MaterialUnit>}
@@ -102,7 +103,7 @@ const Category = ({
               <MaterialPrice>Ціна: {PriceUAH} &#8372;</MaterialPrice>
             )}
           </Extended>
-        </div>
+        </DescriptionWrapper>
       </CategoryWrapper>
       {isSelected && <SubList>{children}</SubList>}
     </>

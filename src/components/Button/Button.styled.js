@@ -126,7 +126,7 @@ export const StyledCloseButton = styled(StyledButton)`
 `;
 export const StyledIconButton = styled(StyledButton)`
   position: ${(props) => props.position === "absolute" && "absolute"};
-  top: 50%;
+  top: 60%;
   left: 0;
   transform: ${(props) =>
     props.position === "absolute" && "translate(0, -50%)"};
