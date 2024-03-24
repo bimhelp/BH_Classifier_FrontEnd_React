@@ -22,15 +22,16 @@ export const CategoryWrapper = styled.div`
 
 export const CodeWrapper = styled.div`
   position: relative;
-  display: flex;
+  text-align: end;
 
-  align-items: center;
+  height: 100%;
   background-color: ${setBgColor};
   border-radius: 0 5px 5px 0px;
   justify-content: end;
 
   @media screen and (min-width: 680px) {
-    display: flex;
+    /* display: flex; */
+    text-align: start;
   }
 `;
 
@@ -61,7 +62,7 @@ export const CategoryDescription = styled.p`
   font-size: ${(props) => props.theme.fontSizes.m};
 `;
 export const HilightDescription = styled.div`
-  padding-left: 10px;
+  padding-left: 30px;
   font-size: ${(props) => props.theme.fontSizes.s};
   background-color: ${(props) => props.type === "mark" && "yellow"};
 `;
@@ -112,7 +113,7 @@ from {
     max-height: 0;
   }
   to {
-    max-height: 1000px; /* Замініть це значення на максимальну можливу висоту вашого елемента */
+    max-height: 1000px; 
   }
 `;
 
@@ -121,29 +122,3 @@ export const SubList = styled.div`
   animation: ${expandHeight} 0.5s ease-in-out;
   overflow: hidden;
 `;
-
-// .accordion-toggle {
-//     height: 0px;
-//     font-size: 18px;
-//     opacity: 0;
-//     transition:
-//     opacity 0.3s ease-in-out,
-//     height 0.3s 0.3s ease-in-out;
-//     color: #333;
-//     border-bottom-left-radius: 3px;
-//     border-bottom-right-radius: 3px;
-// }
-
-// .animated {
-//     opacity: 1;
-//     transition:
-//     height 0.3s ease-in-out,
-//     opacity 0.3s 0.3s ease-in-out;
-// }
-
-// .accordion-toggle p {
-//     margin: 0;
-//     padding: 22px 15px;
-//     pointer-events: none;
-//     line-height: 1.3;
-// }
