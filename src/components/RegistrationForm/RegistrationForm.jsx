@@ -7,6 +7,8 @@ import {
   Input,
   InputWrapper,
   StyledLink,
+  ErrorMessageStyled,
+  FormButtonWrapper,
 } from "./RegisterForm.styled";
 import { Button } from "../Button/Button";
 import { validationColor } from "../../services/utility";
@@ -101,7 +103,10 @@ const RegistrationForm = () => {
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="name" />
+              <ErrorMessage
+                name="name"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="lastName" className={css.label}>
@@ -111,14 +116,17 @@ const RegistrationForm = () => {
                 name="lastName"
                 type="text"
                 id="lastName"
-                autoFocus
+                // autoFocus
                 bordercolor={validationColor(
                   props.errors.lastName,
                   props.values.lastName,
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="lastName" />
+              <ErrorMessage
+                name="lastName"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="company" className={css.label}>
@@ -128,14 +136,17 @@ const RegistrationForm = () => {
                 name="company"
                 type="text"
                 id="company"
-                autoFocus
+                // autoFocus
                 bordercolor={validationColor(
                   props.errors.company,
                   props.values.company,
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="company" />
+              <ErrorMessage
+                name="company"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="jobRole" className={css.label}>
@@ -145,14 +156,17 @@ const RegistrationForm = () => {
                 name="jobRole"
                 type="text"
                 id="jobRole"
-                autoFocus
+                // autoFocus
                 bordercolor={validationColor(
                   props.errors.jobRole,
                   props.values.jobRole,
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="jobRole" />
+              <ErrorMessage
+                name="jobRole"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="phone" className={css.label}>
@@ -168,7 +182,10 @@ const RegistrationForm = () => {
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="phone" />
+              <ErrorMessage
+                name="phone"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="email" className={css.label}>
@@ -184,7 +201,10 @@ const RegistrationForm = () => {
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="email" />
+              <ErrorMessage
+                name="email"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="password" className={css.label}>
@@ -200,10 +220,15 @@ const RegistrationForm = () => {
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="password" />
+              <ErrorMessage
+                name="password"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
-            <Button type="submit">Send</Button>
-            <StyledLink to={"/login"}>LogIn</StyledLink>
+            <FormButtonWrapper>
+              <Button type="submit">Send</Button>
+              <StyledLink to={"/login"}>LogIn</StyledLink>
+            </FormButtonWrapper>
           </StyledForm>
         )}
       </Formik>

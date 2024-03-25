@@ -9,7 +9,7 @@ export const StyledForm = styled(Form)`
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
 `;
 
@@ -17,6 +17,7 @@ export const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const Input = styled(Field)`
@@ -49,3 +50,17 @@ export const StyledLink = styled(NavLink)`
 `;
 
 export const Label = styled.label``;
+
+export const ErrorMessageStyled = styled.div`
+  color: ${(props) => props.theme.colors.invalid};
+  position: absolute;
+  right: 0;
+`;
+
+export const FormButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding-top: 20px;
+`;

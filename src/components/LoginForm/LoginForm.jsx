@@ -3,13 +3,14 @@ import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
 // Навігація
 import { Button } from "../Button/Button";
-import { NavLink } from "react-router-dom";
 import css from "./LoginForm.module.css";
 import {
   StyledForm,
   Input,
   InputWrapper,
   StyledLink,
+  ErrorMessageStyled,
+  FormButtonWrapper,
 } from "./LoginForm.styled";
 import { validationColor } from "../../services/utility";
 import { authContext as context } from "../../context/authContext";
@@ -67,7 +68,10 @@ const LoginForm = () => {
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="email" />
+              <ErrorMessage
+                name="email"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="password" className={css.label}>
@@ -83,10 +87,15 @@ const LoginForm = () => {
                   "rgb(0, 0, 0)"
                 )}
               />
-              <ErrorMessage name="password" />
+              <ErrorMessage
+                name="password"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
             </InputWrapper>
-            <Button type="submit">LogIn</Button>
-            <StyledLink to={"/registration"}>Registration</StyledLink>
+            <FormButtonWrapper>
+              <Button type="submit">LogIn</Button>
+              <StyledLink to={"/registration"}>Registration</StyledLink>
+            </FormButtonWrapper>
           </StyledForm>
         )}
       </Formik>
