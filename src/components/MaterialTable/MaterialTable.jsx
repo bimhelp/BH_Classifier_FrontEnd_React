@@ -4,6 +4,7 @@ import { getByParentCode } from "../../services/api";
 import { toast } from "react-toastify";
 import Loader from "../Loader/Loader";
 import { ListWrapper } from "./MaterialTable.styled";
+import ScrollToTopBtn from "../ScrollToTopBtn/ScrollToTopBtn";
 
 const MaterialTable = () => {
   const [mainCategory, setMainCategory] = useState([]);
@@ -37,6 +38,7 @@ const MaterialTable = () => {
       ) : (
         <ListWrapper>
           <MaterialList items={mainCategory} style={{ padding: 0 }} />
+          <ScrollToTopBtn />
         </ListWrapper>
       )}
     </>

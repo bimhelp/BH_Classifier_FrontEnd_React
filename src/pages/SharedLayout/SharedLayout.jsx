@@ -6,15 +6,17 @@ import { Outlet } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import { Layout, Content } from "./SharedLayout.styled";
+import ScrollToTopBtn from "../../components/ScrollToTopBtn/ScrollToTopBtn";
 
 const SharedLayout = ({ user }) => {
   return (
     <Layout>
       <Header />
-      <Content>
+      <Content id="content">
         <Suspense fallback={<p>Loading page...</p>}>
           <Outlet />
         </Suspense>
+        <ScrollToTopBtn />
       </Content>
       <Footer />
     </Layout>

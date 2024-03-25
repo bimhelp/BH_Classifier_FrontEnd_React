@@ -8,7 +8,7 @@ export const FormStyled = styled.form`
   width: 100%;
   margin-bottom: ${(props) => props.theme.space[2]}px;
   @media screen and (min-width: 680px) {
-    width: 25%;
+    width: 40%;
   }
 `;
 

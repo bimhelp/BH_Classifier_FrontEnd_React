@@ -7,17 +7,17 @@ export const FooterWrapper = styled.div`
   bottom: 0;
   z-index: 1000;
   padding-top: ${(props) => props.theme.space[2]}px;
-  padding-bottom: ${(props) => props.theme.space[3]}px;
+  padding-bottom: ${(props) => props.theme.space[2]}px;
 `;
 
 export const ContactList = styled.ul`
   display: block;
   font-size: ${(props) => props.theme.fontSizes.s};
+  gap: 20px;
 
-  @media screen and (min-width: 425px) {
+  @media screen and (min-width: 480px) {
     display: flex;
     align-items: baseline;
-    gap: 30px;
   }
 `;
 

@@ -7,6 +7,7 @@ export const Layout = styled.div`
 `;
 
 export const Content = styled.div`
+  position: relative;
   flex: 1;
   overflow-y: scroll;
 `;
