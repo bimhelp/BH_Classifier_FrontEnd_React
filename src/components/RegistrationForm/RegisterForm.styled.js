@@ -24,7 +24,7 @@ export const Input = styled(Field)`
   border: ${(props) => props.theme.borders.bold};
   border-color: ${({ bordercolor }) => bordercolor};
   border-radius: ${(props) => props.theme.radii.normal};
-  font-weight: 200;
+  font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.02em;
@@ -33,7 +33,6 @@ export const Input = styled(Field)`
   color: ${(props) => props.theme.colors.black};
 
   @media screen and (min-width: 480px) {
-    font-weight: 400;
     font-size: 14px;
     padding: 8px;
   }
