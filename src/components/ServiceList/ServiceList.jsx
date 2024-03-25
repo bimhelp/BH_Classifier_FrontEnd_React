@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 
 // functions
 import { getServiceByParentCode } from "../../services";
-import { cutCpvCode, createLevel } from "../../services";
+import { createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
 import { List, Item } from "./ServiceList.styled";

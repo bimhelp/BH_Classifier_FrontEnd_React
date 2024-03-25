@@ -12,7 +12,6 @@ import { Button } from "../Button/Button";
 import { validationColor } from "../../services/utility";
 
 // Навігація
-import { NavLink } from "react-router-dom";
 import css from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
@@ -30,7 +29,28 @@ const RegistrationForm = () => {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
+    lastName: yup
+      .string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    company: yup
+      .string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    jobRole: yup
+      .string()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
     email: yup.string().email("Invalid email").required("Required"),
+    phone: yup
+      .string()
+      .matches(/^\d+$/, "Invalid phone number") // Перевірка на наявність тільки цифр
+      .min(10, "Too short phone number") // Мінімальна довжина номера
+      .max(15, "Too long phone number") // Максимальна довжина номера
+      .required("Required"), // Обов'язкове поле
     password: yup
       .string()
       .min(6, "Your password is short")
@@ -82,6 +102,73 @@ const RegistrationForm = () => {
                 )}
               />
               <ErrorMessage name="name" />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="lastName" className={css.label}>
+                Last Name
+              </label>
+              <Input
+                name="lastName"
+                type="text"
+                id="lastName"
+                autoFocus
+                bordercolor={validationColor(
+                  props.errors.lastName,
+                  props.values.lastName,
+                  "rgb(0, 0, 0)"
+                )}
+              />
+              <ErrorMessage name="lastName" />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="company" className={css.label}>
+                Company
+              </label>
+              <Input
+                name="company"
+                type="text"
+                id="company"
+                autoFocus
+                bordercolor={validationColor(
+                  props.errors.company,
+                  props.values.company,
+                  "rgb(0, 0, 0)"
+                )}
+              />
+              <ErrorMessage name="company" />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="jobRole" className={css.label}>
+                Job Role
+              </label>
+              <Input
+                name="jobRole"
+                type="text"
+                id="jobRole"
+                autoFocus
+                bordercolor={validationColor(
+                  props.errors.jobRole,
+                  props.values.jobRole,
+                  "rgb(0, 0, 0)"
+                )}
+              />
+              <ErrorMessage name="jobRole" />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="phone" className={css.label}>
+                Phone
+              </label>
+              <Input
+                name="phone"
+                type="phone"
+                id="phone"
+                bordercolor={validationColor(
+                  props.errors.phone,
+                  props.values.phone,
+                  "rgb(0, 0, 0)"
+                )}
+              />
+              <ErrorMessage name="phone" />
             </InputWrapper>
             <InputWrapper>
               <label htmlFor="email" className={css.label}>
