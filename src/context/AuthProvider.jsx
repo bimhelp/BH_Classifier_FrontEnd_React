@@ -25,7 +25,7 @@ const AuthProvider = ({ children }) => {
           setUser(response.user);
           setIsLoggedIn(true);
         } catch (error) {
-          toast.error(`Не вдалось автоматично зайти в систему`);
+          // toast.error(`Не вдалось автоматично зайти в систему`);
         }
       }
       // console.log("useEffect виконується тільки раз при першому монтуванні");
