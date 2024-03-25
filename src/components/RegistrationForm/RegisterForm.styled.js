@@ -24,13 +24,19 @@ export const Input = styled(Field)`
   border: ${(props) => props.theme.borders.bold};
   border-color: ${({ bordercolor }) => bordercolor};
   border-radius: ${(props) => props.theme.radii.normal};
-  font-weight: 400;
+  font-weight: 200;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.02em;
   /* padding: 12px 12px 12px 40px; */
-  padding: 8px;
+  padding: 4px;
   color: ${(props) => props.theme.colors.black};
+
+  @media screen and (min-width: 480px) {
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px;
+  }
 
   &:hover,
   &:focus {
@@ -47,8 +53,6 @@ export const StyledLink = styled(NavLink)`
   }
 `;
 
-export const Label = styled.label``;
-
 export const ErrorMessageStyled = styled.div`
   color: ${(props) => props.theme.colors.invalid};
   position: absolute;
@@ -60,5 +64,10 @@ export const FormButtonWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  padding-top: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  @media screen and (min-width: 480px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 `;

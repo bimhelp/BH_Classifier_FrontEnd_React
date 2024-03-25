@@ -16,10 +16,12 @@ export const StyledButton = styled.button`
   border: ${(props) => props.theme.borders.bold};
   border-radius: ${(props) => props.theme.radii.normal};
 
+  color: ${(props) => props.theme.colors.white};
   background-color: ${(props) =>
     props.disabled ? props.theme.colors.muted : props.theme.colors.primary};
   font-size: ${(props) => props.theme.fontSizes.m};
 
+  border-color: ${(props) => props.theme.colors.black};
   background-color: ${(props) =>
     props.role === "warning"
       ? props.theme.colors.red
@@ -28,13 +30,13 @@ export const StyledButton = styled.button`
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     cursor: pointer;
-    color: ${(props) => props.theme.colors.white};
+    box-shadow: var(--card-shadow);
     border-color: ${(props) => props.theme.colors.black};
     background-color: ${(props) => props.theme.colors.hover};
     background-color: ${(props) =>
       props.role === "warning"
         ? props.theme.colors.red
-        : props.theme.colors.primary};
+        : props.theme.colors.hover};
   }
 `;
 
