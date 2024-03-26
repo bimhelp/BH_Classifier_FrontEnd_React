@@ -27,7 +27,7 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer noopener"
             >
-              Плагін для Revit
+              Завантажити плагін для Revit
             </a>
           </Contact>
         </ContactList>
