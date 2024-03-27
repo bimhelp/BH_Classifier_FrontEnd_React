@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     name: null,
     email: null,
+    role: null,
   });
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
@@ -100,7 +101,11 @@ const AuthProvider = ({ children }) => {
         if (responce) {
           // console.log("responce: ", responce);
           setToken("");
-          setUser(null);
+          setUser({
+            name: null,
+            email: null,
+            role: null,
+          });
           setIsLoggedIn(false);
           // Перенаправляємо на головну сторінку
           navigate("/", { replace: true });

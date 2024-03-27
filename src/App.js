@@ -29,6 +29,7 @@ const ServicePage = lazy(() => import("./pages/ServicePage/ServicePage"));
 const ProjectDetails = lazy(() =>
   import("./components/ProjectDetails/ProjectDetails")
 );
+const AdminPage = lazy(() => import("./pages/AdminPage/AdminPage"));
 
 function App() {
   return (
@@ -53,6 +54,10 @@ function App() {
           <Route
             path="projects"
             element={<PrivateRoute component={<ProjectsPage />} />}
+          />
+          <Route
+            path="admin-panel"
+            element={<PrivateRoute component={<AdminPage />} />}
           />
 
           <Route path="projects/:id" element={<ProjectDetails />} />
