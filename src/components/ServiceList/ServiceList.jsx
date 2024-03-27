@@ -71,35 +71,33 @@ const ServiceList = ({ items, query }) => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <List level={level}>
-            {items.map((item) => (
-              <Item key={item._id}>
-                {/* якщо вибраний елемент */}
-                {selectedId === item._id ? (
-                  <Category
-                    element={item}
-                    selectCategory={() => selectCategory(item._id, item.Code)}
-                    query={query}
-                    isSelected={selectedId === item._id}
-                  >
-                    <ServiceList items={subCategories} query={query} />
-                  </Category>
+      <List level={level}>
+        {items.map((item) => (
+          <Item key={item._id}>
+            {/* якщо вибраний елемент */}
+            {selectedId === item._id ? (
+              <Category
+                element={item}
+                selectCategory={() => selectCategory(item._id, item.Code)}
+                query={query}
+                isSelected={selectedId === item._id}
+              >
+                {isLoading ? (
+                  <Loader />
                 ) : (
-                  <Category
-                    element={item}
-                    selectCategory={() => selectCategory(item._id, item.Code)}
-                    query={query}
-                  ></Category>
+                  <ServiceList items={subCategories} query={query} />
                 )}
-              </Item>
-            ))}
-          </List>
-        </>
-      )}
+              </Category>
+            ) : (
+              <Category
+                element={item}
+                selectCategory={() => selectCategory(item._id, item.Code)}
+                query={query}
+              ></Category>
+            )}
+          </Item>
+        ))}
+      </List>
     </>
   );
 };

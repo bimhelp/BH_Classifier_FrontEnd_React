@@ -21,6 +21,7 @@ const MaterialList = ({ items, query }) => {
     const controller = new AbortController();
     async function subCategory(selectedCode) {
       // console.log("get subcategory effect");
+      console.log("loading");
       setIsLoading(true);
       try {
         const response = await getByParentCode(selectedCode, controller.signal);
@@ -30,6 +31,7 @@ const MaterialList = ({ items, query }) => {
       } catch (error) {
         toast.error("Не вдалось завантажити підкагеторії");
       } finally {
+        console.log("finish loading");
         setIsLoading(false);
       }
     }
@@ -73,37 +75,35 @@ const MaterialList = ({ items, query }) => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <div>
-            <List level={level}>
-              {items.map((item) => (
-                <Item key={item._id}>
-                  {/* якщо вибраний елемент */}
-                  {selectedId === item._id ? (
-                    <Category
-                      element={item}
-                      selectCategory={() => selectCategory(item._id, item.Code)}
-                      query={query}
-                      isSelected={selectedId === item._id}
-                    >
-                      <MaterialList items={subCategories} query={query} />
-                    </Category>
+      <div>
+        <List level={level}>
+          {items.map((item) => (
+            <Item key={item._id}>
+              {/* якщо вибраний елемент */}
+              {selectedId === item._id ? (
+                <Category
+                  element={item}
+                  selectCategory={() => selectCategory(item._id, item.Code)}
+                  query={query}
+                  isSelected={selectedId === item._id}
+                >
+                  {isLoading ? (
+                    <Loader />
                   ) : (
-                    <Category
-                      element={item}
-                      selectCategory={() => selectCategory(item._id, item.Code)}
-                      query={query}
-                    ></Category>
+                    <MaterialList items={subCategories} query={query} />
                   )}
-                </Item>
-              ))}
-            </List>
-          </div>
-        </>
-      )}
+                </Category>
+              ) : (
+                <Category
+                  element={item}
+                  selectCategory={() => selectCategory(item._id, item.Code)}
+                  query={query}
+                ></Category>
+              )}
+            </Item>
+          ))}
+        </List>
+      </div>
     </>
   );
 };
