@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createLevel, cutCpvCode } from "../../services";
+import { createLevel } from "../../services";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
 import { IoIosCopy } from "react-icons/io";

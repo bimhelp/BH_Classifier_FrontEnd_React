@@ -30,7 +30,7 @@ const Footer = () => {
             <SiAutodeskrevit />
             {user?.name ? (
               <a
-                href="https://drive.google.com/drive/folders/17y6FYQ_if2LSBmSmSpJhtAmb-G_2casa?usp=sharing"
+                href="https://drive.google.com/uc?id=13ibti5yxLyhZ7USv-QNnA9rj5Ky8i0jJ&export=download"
                 target="_blank"
                 rel="noreferrer noopener"
               >
