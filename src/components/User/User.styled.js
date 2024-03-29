@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export const LogInButton = styled(NavLink)`
   display: flex;
   align-items: center;
-  /* gap: 10px; */
+  gap: 10px;
   font-size: ${(props) => props.theme.fontSizes.m};
   border: none;
 

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { authContext as context } from "../../context/authContext";
-import { IconButton } from "../Button/Button";
 import { FiUser } from "react-icons/fi";
+import { Button } from "../Button/Button";
 import {
   LogInButton,
   UserWrapper,
@@ -10,7 +10,6 @@ import {
   Plugin,
 } from "./User.styled";
 import ContextMenu from "../ContextMenu/ContextMenu";
-import { Button } from "../Button/Button";
 import Confirm from "../Confirm/Confirm";
 import { FaArrowRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
@@ -43,11 +42,11 @@ const User = () => {
     <>
       <UserWrapper>
         {isLoggedIn ? (
-          <IconButton onClick={toggleMenu} type="button" icon={FiUser}>
-            {user.name}
-          </IconButton>
+          <LogInButton onClick={toggleMenu} type="button">
+            {user.name} <FiUser />
+          </LogInButton>
         ) : (
-          <LogInButton to="login">
+          <LogInButton to="login" icon={FiUser}>
             LogIn <FiUser />
           </LogInButton>
         )}
