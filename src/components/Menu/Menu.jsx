@@ -18,13 +18,12 @@ import User from "../User/User";
 const Menu = () => {
   // const { isLoggedIn } = useContext(context);
   const { user } = useContext(context);
-  console.log("user: ", user.role);
+  // console.log("user: ", user.role);
 
   return (
     <Navigation>
       <MenuWrapper>
         <StyledNavLink to="/">
-          {/* <FaListUl /> */}
           <GiBrickWall />
           <LinkTitle>Матеріали</LinkTitle>
         </StyledNavLink>
@@ -33,7 +32,7 @@ const Menu = () => {
           <IoHammer />
           <LinkTitle>Послуги</LinkTitle>
         </StyledNavLink>
-        {user.role === "admin" && (
+        {user?.role === "admin" && (
           <StyledNavLink to="admin-panel">
             <FaGear />
             <LinkTitle>Admin panel</LinkTitle>

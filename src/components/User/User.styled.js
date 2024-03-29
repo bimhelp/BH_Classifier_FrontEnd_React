@@ -22,3 +22,20 @@ export const FlexWrapper = styled.div`
   display: flex;
   gap: ${(props) => props.theme.space[3]}px;
 `;
+
+export const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+export const Plugin = styled.div`
+  display: flex;
+
+  gap: 10px;
+  align-items: baseline;
+  margin-right: 15px;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.hover};
+  }
+`;
