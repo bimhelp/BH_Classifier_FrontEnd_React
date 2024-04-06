@@ -123,3 +123,11 @@ export async function getProjectById(id, signal) {
   // console.log("response: ", response);
   return response.data;
 }
+
+// Admin ___________________________________________________
+
+export async function getAllUsers(signal) {
+  const response = await axios.get("/auth/manage", { signal });
+  // console.log("response: ", response);
+  return response.data;
+}

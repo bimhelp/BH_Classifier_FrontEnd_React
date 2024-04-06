@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
       async function getCurrent(token) {
         try {
           const response = await currentUser(token);
-          console.log("response: ", response);
+          // console.log("response: ", response);
           setUser(response.user);
           setRole(response.user.role);
           setIsLoggedIn(true);
@@ -34,7 +34,7 @@ const AuthProvider = ({ children }) => {
       }
       // console.log("useEffect виконується тільки раз при першому монтуванні");
       if (token === "") {
-        console.log("no token");
+        // console.log("no token");
         setRole("");
         return;
       }

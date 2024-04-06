@@ -21,7 +21,6 @@ const MaterialList = ({ items, query }) => {
     const controller = new AbortController();
     async function subCategory(selectedCode) {
       // console.log("get subcategory effect");
-      console.log("loading");
       setIsLoading(true);
       try {
         const response = await getByParentCode(selectedCode, controller.signal);
@@ -31,7 +30,7 @@ const MaterialList = ({ items, query }) => {
       } catch (error) {
         toast.error("Не вдалось завантажити підкагеторії");
       } finally {
-        console.log("finish loading");
+        // console.log("finish loading");
         setIsLoading(false);
       }
     }

@@ -13,14 +13,14 @@ import { GiBrickWall } from "react-icons/gi";
 import { IoHammer } from "react-icons/io5";
 import { FaGear } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
-// import { GrProjects } from "react-icons/gr";
+import { GrProjects } from "react-icons/gr";
 // import { HiMiniQueueList } from "react-icons/hi2";
 import User from "../User/User";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { role } = useContext(context);
-  console.log("user: ", role);
+  // console.log("user: ", role);
 
   const menuToggle = () => {
     setIsOpen(!isOpen);
@@ -39,11 +39,18 @@ const Menu = () => {
           <LinkTitle>Послуги</LinkTitle>
         </StyledNavLink>
         {role === "admin" && (
+          <StyledNavLink to="projects">
+            <GrProjects />
+            <LinkTitle>Projects</LinkTitle>
+          </StyledNavLink>
+        )}
+        {role === "admin" && (
           <StyledNavLink to="admin-panel" onClick={() => setIsOpen(false)}>
             <FaGear />
             <LinkTitle>Admin panel</LinkTitle>
           </StyledNavLink>
         )}
+
         {/* {isLoggedIn && (
           <>
             <StyledNavLink to="projects">

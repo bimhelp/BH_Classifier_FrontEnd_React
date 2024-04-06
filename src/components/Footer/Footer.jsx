@@ -9,7 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { SiAutodeskrevit } from "react-icons/si";
 const Footer = () => {
   const { user } = useContext(context);
-  console.log("user.name: ", user.name);
+  // console.log("user.name: ", user.name);
 
   return (
     <FooterWrapper>

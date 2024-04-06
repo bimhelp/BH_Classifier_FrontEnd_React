@@ -1,15 +1,14 @@
 import React from "react";
+import Users from "../../components/Users/Users";
 import SideBar from "../../components/SideBar/SideBar";
 
 const AdminPage = () => {
   return (
     <div>
-      <SideBar>
-        <p>Users</p>
-        <p>Char</p>
-        <p>Calendar</p>
-      </SideBar>
-      <div>Content</div>
+      <SideBar></SideBar>
+      <div>
+        <Users />
+      </div>
     </div>
   );
 };
