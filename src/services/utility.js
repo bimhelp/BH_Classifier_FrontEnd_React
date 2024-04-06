@@ -120,6 +120,27 @@ export const setBgColor = ({ level, theme }) => {
       return theme.colors.mainLevelColor;
   }
 };
+// Функція отримує проп із назвою ролі користувача і повертає колір із констант
+export const setRoleColor = ({ role, theme }) => {
+  console.log("role: ", role);
+  // console.log(theme);
+  switch (role) {
+    case "admin":
+      return theme.colors.mainLevelColor;
+    case "user":
+      return theme.colors.firstLevelColor;
+    case "designer":
+      return theme.colors.secondLevelColor;
+    case "creator":
+      return theme.colors.thirdLevelColor;
+    case "service":
+      return theme.colors.fourLevelColor;
+    case "rental":
+      return theme.colors.fiveLevelColor;
+    default:
+      return theme.colors.mainLevelColor;
+  }
+};
 
 export const validationColor = (
   errors,

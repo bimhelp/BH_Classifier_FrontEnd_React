@@ -32,7 +32,7 @@ export const theme = Object.freeze({
     black: "#000000",
     backgroundWhite: "#ffffff",
     backgroundBlack: "#000000",
-    backgroundGrey: "#757373",
+    backgroundGrey: "#EDEDED",
     backgroundSticker: "#fcf6c0",
     primary: "#3b7572",
     hover: "#52A29D",
@@ -73,5 +73,6 @@ export const theme = Object.freeze({
     shadow:
       "0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16)",
     full: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    inside: "rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;",
   },
 });

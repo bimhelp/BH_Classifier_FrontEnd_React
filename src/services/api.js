@@ -131,3 +131,15 @@ export async function getAllUsers(signal) {
   // console.log("response: ", response);
   return response.data;
 }
+
+export async function updateRole(id, selectedRole, signal) {
+  const response = await axios.patch(
+    `/auth/manage/${id}`,
+    { role: selectedRole },
+    {
+      signal,
+    }
+  );
+  console.log(response);
+  return response;
+}
