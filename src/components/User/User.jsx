@@ -46,7 +46,7 @@ const User = () => {
             {user.name} <FiUser />
           </LogInButton>
         ) : (
-          <LogInButton to="login" icon={FiUser}>
+          <LogInButton to="login">
             LogIn <FiUser />
           </LogInButton>
         )}

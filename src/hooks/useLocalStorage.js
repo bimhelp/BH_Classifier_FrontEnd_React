@@ -4,9 +4,11 @@ export const useLocalStorage = (key, initialState = "") => {
   const [data, setData] = useState(
     () => JSON.parse(localStorage.getItem(key)) ?? initialState
   );
+  // console.log("Get From LocalStorage", key, data);
 
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(data));
+    // console.log("Set LocalStorage", key, data);
   }, [data, key]);
   return [data, setData];
 };

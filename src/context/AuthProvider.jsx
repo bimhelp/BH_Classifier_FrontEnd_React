@@ -11,8 +11,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     name: null,
     email: null,
-    role: null,
   });
+
+  const [role, setRole] = useLocalStorage("role", "");
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
 
@@ -22,22 +23,25 @@ const AuthProvider = ({ children }) => {
       async function getCurrent(token) {
         try {
           const response = await currentUser(token);
-          // console.log("response: ", response);
+          console.log("response: ", response);
           setUser(response.user);
+          setRole(response.user.role);
           setIsLoggedIn(true);
         } catch (error) {
           // toast.error(`Не вдалось автоматично зайти в систему`);
+          setRole("");
         }
       }
       // console.log("useEffect виконується тільки раз при першому монтуванні");
       if (token === "") {
-        // console.log("no token");
+        console.log("no token");
+        setRole("");
         return;
       }
       getCurrent(token);
       setMounted(true);
     }
-  }, [mounted, token]);
+  }, [mounted, setRole, setUser, token]);
 
   const onRegister = (credentials) => {
     // console.log("register", credentials);
@@ -48,6 +52,7 @@ const AuthProvider = ({ children }) => {
         // console.log("response: ", response);
 
         setUser(response);
+
         // записуємо токен в lacalstorage
         setToken(response.token);
         setIsLoggedIn(true);
@@ -77,6 +82,7 @@ const AuthProvider = ({ children }) => {
           // console.log("username", response.user.name);
           // console.log(response.token);
           setToken(response.token);
+          setRole(response.user.role);
           setUser(response.user);
           setIsLoggedIn(true);
           // при успішному логіні видалить всі тости
@@ -104,8 +110,8 @@ const AuthProvider = ({ children }) => {
           setUser({
             name: null,
             email: null,
-            role: null,
           });
+          setRole("");
           setIsLoggedIn(false);
           // Перенаправляємо на головну сторінку
           navigate("/", { replace: true });
@@ -121,7 +127,14 @@ const AuthProvider = ({ children }) => {
   //   return { user, isLoggedIn, onRegister, onLogIn, onLogOut };
   // }, [isLoggedIn, onLogIn, onLogOut, onRegister, user]);
 
-  const providerValue = { user, isLoggedIn, onRegister, onLogIn, onLogOut };
+  const providerValue = {
+    user,
+    isLoggedIn,
+    onRegister,
+    onLogIn,
+    onLogOut,
+    role,
+  };
   return (
     <authContext.Provider value={providerValue}>
       {children}

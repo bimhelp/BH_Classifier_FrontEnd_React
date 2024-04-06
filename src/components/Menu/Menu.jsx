@@ -19,8 +19,8 @@ import User from "../User/User";
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useContext(context);
-  console.log("user: ", user.role);
+  const { role } = useContext(context);
+  console.log("user: ", role);
 
   const menuToggle = () => {
     setIsOpen(!isOpen);
@@ -38,7 +38,7 @@ const Menu = () => {
           <IoHammer />
           <LinkTitle>Послуги</LinkTitle>
         </StyledNavLink>
-        {user?.role === "admin" && (
+        {role === "admin" && (
           <StyledNavLink to="admin-panel" onClick={() => setIsOpen(false)}>
             <FaGear />
             <LinkTitle>Admin panel</LinkTitle>
