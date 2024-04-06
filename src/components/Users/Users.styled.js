@@ -1,22 +1,19 @@
 import styled from "styled-components";
 
-export const UserItem = styled.div`
-  display: flex;
-  gap: 20px;
-`;
+export const Table = styled.table`
+  border-collapse: collapse;
 
-export const Item = styled.li`
-  padding-bottom: 10px;
-`;
-export const UserName = styled.p`
-  background-color: ${(props) => props.theme.colors.mainLevelColor};
-  min-width: max-content;
-  padding: 5px 15px;
-  color: white;
-  border-radius: ${(props) => props.theme.radii.normal};
-`;
+  & caption {
+    text-align: left;
+  }
 
-export const UserEmail = styled.p`
-  width: max-content;
-  padding: 0 5px;
+  & th,
+  & td {
+    padding: 10px;
+    border: 1px solid #2a2a2a;
+  }
+
+  & tr:hover {
+    background-color: ${(props) => props.theme.colors.hover};
+  }
 `;

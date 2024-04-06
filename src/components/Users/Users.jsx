@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAllUsers } from "../../services";
 import { toast } from "react-toastify";
-import { UserItem, UserName, UserEmail, Item } from "./Users.styled";
+import { Table } from "./Users.styled";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -28,21 +28,34 @@ const Users = () => {
     <>
       {!isLoading && (
         <div>
-          <ul>
-            {users.map((user) => (
-              <Item key={user._id}>
-                <UserItem>
-                  <UserName>
-                    {user.name} {user.lastName}
-                  </UserName>
-                  <UserEmail>{user.email}</UserEmail>
-                  <p>{user.phone}</p>
-                  <p>{user.company}</p>
-                  <p>{user.jobRole}</p>
-                </UserItem>
-              </Item>
-            ))}
-          </ul>
+          <Table>
+            <caption>Список зареєстрованих користувачів</caption>
+            <thead>
+              <tr>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Компанія</th>
+                <th>Посада</th>
+                <th>Роль</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.name}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.company}</td>
+                  <td>{user.jobRole}</td>
+                  <td>{user.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+
           <p>Кількість користувачів: {users.length}</p>
         </div>
       )}
