@@ -58,7 +58,7 @@ const User = () => {
               <Plugin>
                 <SiAutodeskrevit />
                 <a
-                  href="https://drive.google.com/uc?id=13ibti5yxLyhZ7USv-QNnA9rj5Ky8i0jJ&export=download"
+                  href="https://bimhelp.com.ua/bimstore/bh_classifier/"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
