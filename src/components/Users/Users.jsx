@@ -16,7 +16,9 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
+  const [sortDirection, setSortDirection] = useState("asc");
 
+  // запит по всіх користувачів
   useEffect(() => {
     const controller = new AbortController();
 
@@ -34,23 +36,7 @@ const Users = () => {
     allUsers();
   }, []);
 
-  // function handleChange(selectedRole, id) {
-  //   // console.log("User id: ", id);
-  //   setSelectedRole(selectedRole);
-  //   // console.log("selectedRole: ", selectedRole.value);
-
-  //   // запит на зміну ролі
-  //   const controller = new AbortController();
-
-  //   async function updateUserRole(id) {
-  //     try {
-  //       await updateRole(id, selectedRole.value, controller.signal);
-  //     } catch (error) {
-  //       toast.error("Не вдалось оновити роль");
-  //     }
-  //   }
-  //   updateUserRole(id, selectedRole);
-  // }
+  // функція зміни ролі
   async function handleChange(selectedRole, id) {
     setSelectedRole(selectedRole);
     // Запит на зміну ролі
@@ -94,6 +80,21 @@ const Users = () => {
     updateUserRole(id);
   }
 
+  // Сортування таблиці
+  const sortData = (param) => {
+    const sortedData =
+      sortDirection === "asc"
+        ? [...users].sort((a, b) =>
+            a[param] < b[param] ? -1 : a[param] > b[param] ? 1 : 0
+          )
+        : [...users].sort((a, b) =>
+            b[param] < a[param] ? -1 : b[param] > a[param] ? 1 : 0
+          );
+
+    setUsers(sortedData);
+    setSortDirection(sortDirection === "asc" ? "desc" : "asc");
+  };
+
   return (
     <>
       {!isLoading && (
@@ -102,13 +103,13 @@ const Users = () => {
             <caption>Список зареєстрованих користувачів</caption>
             <thead>
               <tr>
-                <th>Ім'я</th>
-                <th>Прізвище</th>
-                <th>Email</th>
-                <th>Телефон</th>
-                <th>Компанія</th>
-                <th>Посада</th>
-                <th>Змінити роль</th>
+                <th onClick={() => sortData("name")}>Ім'я</th>
+                <th onClick={() => sortData("lastName")}>Прізвище</th>
+                <th onClick={() => sortData("email")}>Email</th>
+                <th onClick={() => sortData("phone")}>Телефон</th>
+                <th onClick={() => sortData("company")}>Компанія</th>
+                <th onClick={() => sortData("jobRole")}>Посада</th>
+                <th onClick={() => sortData("role")}>Змінити роль</th>
               </tr>
             </thead>
             <tbody>
