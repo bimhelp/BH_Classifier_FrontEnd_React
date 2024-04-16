@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
 import { NavLink } from "react-router-dom";
-
+import { PLUGIN_URL } from "../../services";
 import { FooterWrapper, Contact, ContactList } from "./Footer.styled";
 import Container from "../Container/Container";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -29,11 +29,7 @@ const Footer = () => {
           <Contact>
             <SiAutodeskrevit />
             {user?.name ? (
-              <a
-                href="https://bimhelp.com.ua/bimstore/bh_classifier/"
-                target="_blank"
-                rel="noreferrer noopener"
-              >
+              <a href={PLUGIN_URL} target="_blank" rel="noreferrer noopener">
                 Завантажити плагін для Revit
               </a>
             ) : (

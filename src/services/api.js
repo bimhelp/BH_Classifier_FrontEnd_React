@@ -2,6 +2,9 @@ import axios from "axios";
 // axios.defaults.baseURL = "https://classifier-imxy.onrender.com/api/v1";
 axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
+export const PLUGIN_URL =
+  "https://bimhelp.com.ua/bimstore/construction-cost-management/";
+
 export async function getAll() {
   const response = await axios.get(`/all-material`);
   // console.log(response);

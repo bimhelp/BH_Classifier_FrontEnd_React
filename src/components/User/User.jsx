@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { authContext as context } from "../../context/authContext";
 import { FiUser } from "react-icons/fi";
 import { Button } from "../Button/Button";
+import { PLUGIN_URL } from "../../services";
 import {
   LogInButton,
   UserWrapper,
@@ -57,11 +58,7 @@ const User = () => {
             <Menu>
               <Plugin>
                 <SiAutodeskrevit />
-                <a
-                  href="https://bimhelp.com.ua/bimstore/bh_classifier/"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
+                <a href={PLUGIN_URL} target="_blank" rel="noreferrer noopener">
                   Завантажити плагін для Revit
                 </a>
               </Plugin>
