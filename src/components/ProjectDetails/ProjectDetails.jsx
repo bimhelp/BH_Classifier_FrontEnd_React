@@ -2,10 +2,10 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
-import ProjectMaterial from "../ProjectMaterial/ProjectMaterial";
 import Section from "../Section/Section";
-import { BackLink, List, Item } from "./ProjectDetails.styled";
+import { BackLink } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { Table, Row } from "./ProjectDetails.styled";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -13,15 +13,6 @@ const ProjectDetails = () => {
   const [project, setProject] = useState(null);
   const [isLoading, setisLoading] = useState(false);
   const location = useLocation();
-  const tableHeader = {
-    Code: "Код",
-    DescriptionUA: "Опис",
-    Price: "Ціна",
-    UserPrice: "Ціна",
-    Consumption: "Витрата",
-    UserConsumption: "Витрата",
-    Unit: "Одиниці",
-  };
 
   useEffect(() => {
     const controller = new AbortController();
@@ -46,11 +37,26 @@ const ProjectDetails = () => {
     };
   }, [id]);
 
-  const totalPrice = useMemo(() => {
-    return project?.Materials.reduce((total, material) => {
-      return total + material.UserPrice;
-    }, 0);
-  }, [project]);
+  // const totalMaterialPrice = useMemo(() => {
+  //   return project?.Materials.reduce((total, material) => {
+  //     return total + material.PriceInProject;
+  //   }, 0);
+  // }, [project]);
+
+  // const totalServicePrice = useMemo(() => {
+  //   return project?.Services.reduce((total, service) => {
+  //     return total + service.PriceInProject;
+  //   }, 0);
+  // }, [project]);
+
+  //   if (project.Services.Materials.length > 0) {
+  //     const totalServiceMaterialPrice =
+  //       project?.Services?.Materials.reduce((total, material) => {
+  //         return total + material.PriceInProject;
+  //       }, 0);
+  //     return totalServiceMaterialPrice;
+  //   }
+  // };
 
   return (
     <Section>
@@ -63,7 +69,79 @@ const ProjectDetails = () => {
           </BackLink>
 
           <h2>{project.Title}</h2>
-          {project.Materials.length > 0 ? (
+
+          <div>
+            <Table>
+              <caption>матеріали і послуги даного проекту</caption>
+              <thead>
+                <tr>
+                  <th>Код</th>
+                  <th>Опис</th>
+                  <th>Ціна ринкова</th>
+                  <th>Ціна в даному проекті</th>
+                  <th>Одиниці</th>
+                  <th>Витрата</th>
+                  <th>Витрата в даному проекті</th>
+                </tr>
+              </thead>
+              <tbody>
+                {project.Services &&
+                  project.Services.map((service) => {
+                    return (
+                      <Row key={service._id}>
+                        <td>{service.Code}</td>
+                        <td>{service.DescriptionUA}</td>
+                        <td>{service.PriceUAH}</td>
+                        <td>{service.PriceInProject}</td>
+                        <td>{service.Unit}</td>
+                        <td>{service.Consumption}</td>
+                        <td>{service.ConsumptionInProject}</td>
+                        {service.Materials?.length > 0 &&
+                          service.Materials.map((material) => {
+                            return (
+                              <Row key={material._id}>
+                                <td>{material.Code}</td>
+                                <td>{material.DescriptionUA}</td>
+                                <td>{material.PriceUAH}</td>
+                                <td>{material.PriceInProject}</td>
+                                <td>{material.Unit}</td>
+                                <td>{material.Consumption}</td>
+                                <td>{material.ConsumptionInProject}</td>
+                              </Row>
+                            );
+                          })}
+                      </Row>
+                    );
+                  })}
+
+                {project.Materials &&
+                  project.Materials.map((material) => {
+                    return (
+                      <Row key={material._id}>
+                        <td>{material.Code}</td>
+                        <td>{material.DescriptionUA}</td>
+                        <td>{material.PriceUAH}</td>
+                        <td>{material.PriceInProject}</td>
+                        <td>{material.Unit}</td>
+                        <td>{material.Consumption}</td>
+                        <td>{material.ConsumptionInProject}</td>
+                      </Row>
+                    );
+                  })}
+              </tbody>
+              <tfoot>
+                <td>Сума:</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tfoot>
+            </Table>
+          </div>
+
+          {/* {project.Materials.length > 0 ? (
             <>
               <div
                 style={{
@@ -93,7 +171,7 @@ const ProjectDetails = () => {
             </>
           ) : (
             <p>У вашому проекті немає матеріалів</p>
-          )}
+          )} */}
         </>
       )}
     </Section>

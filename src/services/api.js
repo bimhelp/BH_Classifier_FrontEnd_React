@@ -1,5 +1,5 @@
 import axios from "axios";
-// axios.defaults.baseURL = "https://classifier-imxy.onrender.com/api/v1";
+// axios.defaults.baseURL = "localhost:5000/api/v1";
 axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
 export const PLUGIN_URL =

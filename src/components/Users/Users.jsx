@@ -80,7 +80,7 @@ const Users = () => {
     updateUserRole(id);
   }
 
-  // Сортування таблиці
+  // функція Сортування таблиці
   const sortData = (param) => {
     const sortedData =
       sortDirection === "asc"

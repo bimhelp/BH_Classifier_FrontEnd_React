@@ -21,10 +21,10 @@ const AuthProvider = ({ children }) => {
     if (!mounted) {
       // Код, який потрібно виконати тільки при першому монтуванні
       async function getCurrent(token) {
-        console.log("token: ", token);
+        // console.log("token: ", token);
         try {
           const response = await currentUser(token);
-          console.log("response: ", response);
+          // console.log("response: ", response);
           setUser(response.user);
           setRole(response.user.role);
           setIsLoggedIn(true);

@@ -122,7 +122,7 @@ export const setBgColor = ({ level, theme }) => {
 };
 // Функція отримує проп із назвою ролі користувача і повертає колір із констант
 export const setRoleColor = ({ role, theme }) => {
-  console.log("role: ", role);
+  // console.log("role: ", role);
   // console.log(theme);
   switch (role) {
     case "admin":
