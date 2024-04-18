@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
@@ -14,9 +14,9 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ProjectDetails = () => {
   const { id } = useParams();
-
   const [project, setProject] = useState(null);
   const [isLoading, setisLoading] = useState(false);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -63,6 +63,11 @@ const ProjectDetails = () => {
   //   }
   // };
 
+  // функція зміни ціни матеріалу або сервісу в даному проекті
+  // function handleChange() {
+  //   console.log("handle change");
+  // }
+
   return (
     <Section>
       {isLoading && <p>Loading project details...</p>}
@@ -70,7 +75,7 @@ const ProjectDetails = () => {
         <>
           <BackLink to={location.state.from}>
             <IoMdArrowRoundBack />
-            Back
+            До проектів
           </BackLink>
 
           <h2>{project.Title}</h2>
@@ -93,14 +98,26 @@ const ProjectDetails = () => {
                 {project.Services &&
                   project.Services.map((service) => {
                     return (
-                      <ServiceRow key={service._id}>
-                        <Code>{service.Code}</Code>
-                        <td>{service.DescriptionUA}</td>
-                        <td>{service.PriceUAH}</td>
-                        <td>{service.PriceInProject}</td>
-                        <td>{service.Unit}</td>
-                        <td>{service.Consumption}</td>
-                        <td>{service.ConsumptionInProject}</td>
+                      <>
+                        <ServiceRow key={service._id}>
+                          <Code>{service.Code}</Code>
+                          <td>{service.DescriptionUA}</td>
+                          <td>{service.PriceUAH}</td>
+
+                          {/* <td>
+                            <input
+                              type="text"
+                              value={service.PriceInProject}
+                              onChange={handleChange}
+                            />
+                          </td> */}
+                          <td>{service.PriceInProject}</td>
+
+                          <td>{service.Unit}</td>
+                          <td>{service.Consumption}</td>
+                          <td>{service.ConsumptionInProject}</td>
+                        </ServiceRow>
+
                         {service.Materials?.length > 0 &&
                           service.Materials.map((material) => {
                             return (
@@ -115,7 +132,7 @@ const ProjectDetails = () => {
                               </MaterialRow>
                             );
                           })}
-                      </ServiceRow>
+                      </>
                     );
                   })}
 
@@ -136,38 +153,6 @@ const ProjectDetails = () => {
               </tbody>
             </Table>
           </div>
-
-          {/* {project.Materials.length > 0 ? (
-            <>
-              <div
-                style={{
-                  marginLeft: 16,
-                }}
-              >
-                <ProjectMaterial material={tableHeader} />
-              </div>
-              <List>
-                {project.Materials.map((material) => (
-                  <Item key={material._id}>
-                    <ProjectMaterial material={material} />
-                  </Item>
-                ))}
-              </List>
-              {project?.Materials.length > 0 && (
-                <div>
-                  <p>
-                    Кількість матеріалів:
-                    <span>{project.Materials.length}</span>
-                  </p>
-                  <p>
-                    Загальна вартість: <span>{totalPrice} &#8372;</span>
-                  </p>
-                </div>
-              )}
-            </>
-          ) : (
-            <p>У вашому проекті немає матеріалів</p>
-          )} */}
         </>
       )}
     </Section>

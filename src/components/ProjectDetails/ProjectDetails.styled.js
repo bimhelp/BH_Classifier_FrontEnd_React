@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { setBgColor } from "../../services";
 
 export const BackLink = styled(NavLink)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: ${(props) => props.theme.space[2]}px;
+  margin-bottom: 15px;
 
   min-width: 100px;
   /* margin: ${(props) => props.theme.space[2]}px; */
@@ -47,7 +47,8 @@ export const Table = styled.table`
   }
 
   & tr:hover {
-    background-color: ${(props) => props.theme.colors.backgroundGrey};
+    /* background-color: ${(props) => props.theme.colors.white}; */
+    /* box-shadow: ${(props) => props.theme.shadows.shadow}; */
   }
 `;
 
