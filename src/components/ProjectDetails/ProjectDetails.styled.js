@@ -51,7 +51,13 @@ export const Table = styled.table`
   }
 `;
 
-export const Row = styled.tr``;
+export const ServiceRow = styled.tr`
+  background-color: bisque;
+`;
+
+export const MaterialRow = styled.tr`
+  background-color: ${(props) => props.theme.colors.backgroundMain};
+`;
 
 export const Code = styled.td`
   white-space: nowrap;

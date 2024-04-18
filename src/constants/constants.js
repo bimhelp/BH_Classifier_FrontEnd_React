@@ -34,6 +34,8 @@ export const theme = Object.freeze({
     backgroundBlack: "#000000",
     backgroundGrey: "#EDEDED",
     backgroundSticker: "#fcf6c0",
+    backgroundMain: "#d5e8e6",
+
     primary: "#3b7572",
     hover: "#52A29D",
     muted: "#424242",

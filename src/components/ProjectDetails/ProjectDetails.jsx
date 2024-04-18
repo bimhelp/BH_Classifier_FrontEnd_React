@@ -3,9 +3,14 @@ import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import Section from "../Section/Section";
-import { BackLink, Code } from "./ProjectDetails.styled";
+import {
+  Table,
+  BackLink,
+  Code,
+  MaterialRow,
+  ServiceRow,
+} from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { Table, Row } from "./ProjectDetails.styled";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -88,7 +93,7 @@ const ProjectDetails = () => {
                 {project.Services &&
                   project.Services.map((service) => {
                     return (
-                      <Row key={service._id}>
+                      <ServiceRow key={service._id}>
                         <Code>{service.Code}</Code>
                         <td>{service.DescriptionUA}</td>
                         <td>{service.PriceUAH}</td>
@@ -99,7 +104,7 @@ const ProjectDetails = () => {
                         {service.Materials?.length > 0 &&
                           service.Materials.map((material) => {
                             return (
-                              <Row key={material._id}>
+                              <MaterialRow key={material._id}>
                                 <td>{material.Code}</td>
                                 <td>{material.DescriptionUA}</td>
                                 <td>{material.PriceUAH}</td>
@@ -107,17 +112,17 @@ const ProjectDetails = () => {
                                 <td>{material.Unit}</td>
                                 <td>{material.Consumption}</td>
                                 <td>{material.ConsumptionInProject}</td>
-                              </Row>
+                              </MaterialRow>
                             );
                           })}
-                      </Row>
+                      </ServiceRow>
                     );
                   })}
 
                 {project.Materials &&
                   project.Materials.map((material) => {
                     return (
-                      <Row key={material._id}>
+                      <MaterialRow key={material._id}>
                         <Code>{material.Code}</Code>
                         <td>{material.DescriptionUA}</td>
                         <td>{material.PriceUAH}</td>
@@ -125,7 +130,7 @@ const ProjectDetails = () => {
                         <td>{material.Unit}</td>
                         <td>{material.Consumption}</td>
                         <td>{material.ConsumptionInProject}</td>
-                      </Row>
+                      </MaterialRow>
                     );
                   })}
               </tbody>
