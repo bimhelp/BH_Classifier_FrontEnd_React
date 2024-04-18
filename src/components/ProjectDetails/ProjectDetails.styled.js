@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { setBgColor } from "../../services";
 
 export const BackLink = styled(NavLink)`
   display: inline-flex;
@@ -51,6 +52,11 @@ export const Table = styled.table`
 `;
 
 export const Row = styled.tr``;
+
+export const Code = styled.td`
+  white-space: nowrap;
+  /* width: 100px; */
+`;
 
 export const List = styled.ul`
   margin-left: ${(props) => props.theme.space[4]}px;

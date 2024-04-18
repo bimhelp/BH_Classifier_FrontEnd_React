@@ -3,7 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import Section from "../Section/Section";
-import { BackLink } from "./ProjectDetails.styled";
+import { BackLink, Code } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Table, Row } from "./ProjectDetails.styled";
 
@@ -89,7 +89,7 @@ const ProjectDetails = () => {
                   project.Services.map((service) => {
                     return (
                       <Row key={service._id}>
-                        <td>{service.Code}</td>
+                        <Code>{service.Code}</Code>
                         <td>{service.DescriptionUA}</td>
                         <td>{service.PriceUAH}</td>
                         <td>{service.PriceInProject}</td>
@@ -118,7 +118,7 @@ const ProjectDetails = () => {
                   project.Materials.map((material) => {
                     return (
                       <Row key={material._id}>
-                        <td>{material.Code}</td>
+                        <Code>{material.Code}</Code>
                         <td>{material.DescriptionUA}</td>
                         <td>{material.PriceUAH}</td>
                         <td>{material.PriceInProject}</td>
@@ -129,15 +129,6 @@ const ProjectDetails = () => {
                     );
                   })}
               </tbody>
-              <tfoot>
-                <td>Сума:</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tfoot>
             </Table>
           </div>
 
