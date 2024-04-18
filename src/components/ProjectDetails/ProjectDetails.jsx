@@ -8,9 +8,13 @@ import {
   BackLink,
   Code,
   MaterialRow,
+  SubMaterialRow,
   ServiceRow,
 } from "./ProjectDetails.styled";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoHammer } from "react-icons/io5";
+import { FaTrowelBricks } from "react-icons/fa6";
+import { GoSquareFill } from "react-icons/go";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -85,6 +89,7 @@ const ProjectDetails = () => {
               <caption>матеріали і послуги даного проекту</caption>
               <thead>
                 <tr>
+                  <th></th>
                   <th>Код</th>
                   <th>Опис</th>
                   <th>Ціна ринкова</th>
@@ -100,6 +105,9 @@ const ProjectDetails = () => {
                     return (
                       <>
                         <ServiceRow key={service._id}>
+                          <td>
+                            <IoHammer />
+                          </td>
                           <Code>{service.Code}</Code>
                           <td>{service.DescriptionUA}</td>
                           <td>{service.PriceUAH}</td>
@@ -121,7 +129,10 @@ const ProjectDetails = () => {
                         {service.Materials?.length > 0 &&
                           service.Materials.map((material) => {
                             return (
-                              <MaterialRow key={material._id}>
+                              <SubMaterialRow key={material._id}>
+                                <td>
+                                  <GoSquareFill />
+                                </td>
                                 <td>{material.Code}</td>
                                 <td>{material.DescriptionUA}</td>
                                 <td>{material.PriceUAH}</td>
@@ -129,7 +140,7 @@ const ProjectDetails = () => {
                                 <td>{material.Unit}</td>
                                 <td>{material.Consumption}</td>
                                 <td>{material.ConsumptionInProject}</td>
-                              </MaterialRow>
+                              </SubMaterialRow>
                             );
                           })}
                       </>
@@ -140,6 +151,9 @@ const ProjectDetails = () => {
                   project.Materials.map((material) => {
                     return (
                       <MaterialRow key={material._id}>
+                        <td>
+                          <FaTrowelBricks />
+                        </td>
                         <Code>{material.Code}</Code>
                         <td>{material.DescriptionUA}</td>
                         <td>{material.PriceUAH}</td>

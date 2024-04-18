@@ -56,6 +56,10 @@ export const ServiceRow = styled.tr`
   background-color: bisque;
 `;
 
+export const SubMaterialRow = styled.tr`
+  background-color: ${(props) => props.theme.colors.backgroundMain};
+`;
+
 export const MaterialRow = styled.tr`
   background-color: ${(props) => props.theme.colors.backgroundMain};
 `;
