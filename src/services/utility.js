@@ -70,25 +70,25 @@ export function createLevel(code) {
       level = "main";
       break;
     case 3:
-      level = "main";
-      break;
-    case 4:
       level = "first";
       break;
-    case 5:
+    case 4:
       level = "second";
       break;
-    case 6:
+    case 5:
       level = "third";
       break;
-    case 7:
+    case 6:
       level = "four";
       break;
-    case 8:
+    case 7:
       level = "five";
       break;
-    case 9:
+    case 8:
       level = "six";
+      break;
+    case 9:
+      level = "seven";
       break;
     default:
       level = "default";
@@ -100,21 +100,21 @@ export function createLevel(code) {
 export const setBgColor = ({ level, theme }) => {
   // console.log(theme);
   switch (level) {
-    case "main" || 1 || 2 || 3:
+    case "main" || 1 || 2:
       return theme.colors.mainLevelColor;
-    case "first" || 4:
+    case "first" || 3:
       return theme.colors.firstLevelColor;
-    case "second" || 5:
+    case "second" || 4:
       return theme.colors.secondLevelColor;
-    case "third" || 6:
+    case "third" || 5:
       return theme.colors.thirdLevelColor;
-    case "four" || 7:
+    case "four" || 6:
       return theme.colors.fourLevelColor;
-    case "five" || 8:
+    case "five" || 7:
       return theme.colors.fiveLevelColor;
-    case "six" || 9:
+    case "six" || 8:
       return theme.colors.materialColor;
-    case "seven" || 10:
+    case "seven" || 9:
       return theme.colors.materialColor;
     default:
       return theme.colors.mainLevelColor;
