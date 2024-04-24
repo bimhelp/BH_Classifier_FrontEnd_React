@@ -16,7 +16,7 @@ const ServiceTable = () => {
       try {
         setIsLoading(true);
         const response = await getServiceByParentCode(
-          "46000000-2",
+          "services",
           controller.signal
         );
         setMainCategory(response.data);
