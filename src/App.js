@@ -19,6 +19,8 @@ import { PrivateRoute, PublicRoute } from "./services";
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import Users from "./components/Users/Users";
+import Script from "./components/Script/Script";
 // Динамічне завантаження додатку
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage"));
@@ -58,7 +60,16 @@ function App() {
           <Route
             path="admin-panel"
             element={<PrivateRoute component={<AdminPage />} />}
-          />
+          >
+            <Route
+              path="users"
+              element={<PrivateRoute component={<Users />} />}
+            />
+            <Route
+              path="script"
+              element={<PrivateRoute component={<Script />} />}
+            />
+          </Route>
 
           <Route path="projects/:id" element={<ProjectDetails />} />
           <Route path="*" element={<ErrorPage />} />

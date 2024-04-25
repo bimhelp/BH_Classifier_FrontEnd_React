@@ -3,6 +3,7 @@ import { getAllUsers, updateRole } from "../../services";
 import { toast } from "react-toastify";
 import { Table, Row, Name, Role } from "./Users.styled";
 import Select from "react-select";
+import Section from "../Section/Section";
 
 const options = [
   { value: "user", label: "user" },
@@ -98,7 +99,7 @@ const Users = () => {
   return (
     <>
       {!isLoading && (
-        <div>
+        <Section>
           <Table>
             <caption>Список зареєстрованих користувачів</caption>
             <thead>
@@ -138,7 +139,7 @@ const Users = () => {
           </Table>
 
           <p>Кількість користувачів: {users.length}</p>
-        </div>
+        </Section>
       )}
     </>
   );

@@ -1,11 +1,12 @@
 import React from "react";
 import { Navigation } from "./SideBar.styled";
+import { NavList } from "./SideBar.styled";
 
 const SideBar = ({ children }) => {
   return (
     <>
       <Navigation>
-        <ul>{children}</ul>
+        <NavList>{children}</NavList>
       </Navigation>
     </>
   );

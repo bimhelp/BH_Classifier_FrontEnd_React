@@ -1,15 +1,21 @@
 import React from "react";
-import Users from "../../components/Users/Users";
 import SideBar from "../../components/SideBar/SideBar";
 import Section from "../../components/Section/Section";
+import { Outlet } from "react-router-dom";
+import { Layout, StyledNavLink } from "./AdminPage.styled";
 const AdminPage = () => {
   return (
-    <Section>
-      <SideBar></SideBar>
-      <div>
-        <Users />
-      </div>
-    </Section>
+    <>
+      <Layout>
+        <SideBar>
+          <StyledNavLink to="users">Users</StyledNavLink>
+          <StyledNavLink to="script">Script</StyledNavLink>
+        </SideBar>
+        <Section>
+          <Outlet />
+        </Section>
+      </Layout>
+    </>
   );
 };
 
