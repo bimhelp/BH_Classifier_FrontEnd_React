@@ -1,8 +1,13 @@
 import styled, { keyframes } from "styled-components";
 import { setBgColor } from "../../services";
 
-export const CategoryWrapper = styled.div`
+export const Card = styled.div`
+  display: flex;
+  justify-content: space-between;
   background-color: var(--materialColorAlfa);
+`;
+
+export const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
