@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Categorylist from "../MaterialList/MaterialList";
-import { getByParentCode } from "../../services/api";
+import { getByParentId } from "../../services/api";
 import { toast } from "react-toastify";
-import Loader from "../Loader/Loader";
+import { BarLoader } from "react-spinners";
 
 const MaterialTable = () => {
   const [mainCategory, setMainCategory] = useState([]);
@@ -14,7 +14,7 @@ const MaterialTable = () => {
     async function getCategory() {
       try {
         setIsLoading(true);
-        const response = await getByParentCode("47000000-6", controller.signal);
+        const response = await getByParentId("47000000-6", controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
@@ -32,7 +32,7 @@ const MaterialTable = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <BarLoader color="#125b56" width="100%" />
       ) : (
         <Categorylist items={mainCategory} style={{ padding: 0 }} />
       )}

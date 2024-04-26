@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MaterialList from "../MaterialList/MaterialList";
-import { getByParentCode } from "../../services/api";
+import { getByLevel } from "../../services/api";
 import { toast } from "react-toastify";
-import Loader from "../Loader/Loader";
+import { BarLoader } from "react-spinners";
 import { ListWrapper } from "./MaterialTable.styled";
 import ScrollToTopBtn from "../ScrollToTopBtn/ScrollToTopBtn";
 
@@ -16,7 +16,7 @@ const MaterialTable = () => {
     async function getCategory() {
       try {
         setIsLoading(true);
-        const response = await getByParentCode("materials", controller.signal);
+        const response = await getByLevel(0, controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
@@ -34,7 +34,7 @@ const MaterialTable = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <BarLoader color="#125b56" width="100%" />
       ) : (
         <ListWrapper>
           <MaterialList items={mainCategory} style={{ padding: 0 }} />

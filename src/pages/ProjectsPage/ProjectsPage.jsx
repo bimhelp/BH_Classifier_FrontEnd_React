@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getProjects } from "../../services";
 import { toast } from "react-toastify";
 import ProjectList from "../../components/ProjectList/ProjectList";
+import { BarLoader } from "react-spinners";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
@@ -11,7 +12,6 @@ const ProjectsPage = () => {
     const controller = new AbortController();
     async function projects() {
       try {
-        // console.log("set true");
         setIsLoading(true);
         const response = await getProjects(controller.signal);
         // console.log("response effect: ", response);
@@ -33,13 +33,13 @@ const ProjectsPage = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("isLoading", isLoading);
+    console.log("isLoading", isLoading);
   }, [isLoading]);
 
   return (
     <>
       {isLoading ? (
-        <p>Loaging projects...</p>
+        <BarLoader color="#125b56" width="100%" />
       ) : (
         <ProjectList items={projects}></ProjectList>
       )}

@@ -6,6 +6,7 @@ import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import Table from "../MaterialTable/MaterialTable";
+import { BarLoader } from "react-spinners";
 
 // const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
 
@@ -187,7 +188,7 @@ const AddForm = () => {
 
         <Button type="submit">Send</Button>
       </form>
-      {isLoading && <p>loading...</p>}
+      {isLoading && <BarLoader color="#125b56" width="100%" />}
     </>
   );
 };

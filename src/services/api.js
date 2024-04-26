@@ -5,19 +5,26 @@ axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 export const PLUGIN_URL =
   "https://bimhelp.com.ua/bimstore/construction-cost-management/";
 
-export async function getAll() {
-  const response = await axios.get(`/all-material`);
+// Materials ________________________________________________________
+export async function getAll(signal) {
+  const response = await axios.get(`/all-material`, { signal });
   // console.log(response);
   return response.data;
 }
 
-export async function getByParentCode(parentCode, signal) {
+export async function getByLevel(level, signal) {
+  const response = await axios.get(`/material-by-level/${level}`, { signal });
+  return response.data;
+}
+
+export async function getByParentId(parentCode, signal) {
   const response = await axios.get(`/material-by-parent/${parentCode}`, {
     signal,
   });
   return response.data;
 }
 
+// Пошук матеріалу по коду
 export async function searchMaterialByCode(number) {
   const response = await axios.get("/material/search/by-code", {
     params: {
@@ -27,6 +34,7 @@ export async function searchMaterialByCode(number) {
   return response.data;
 }
 
+// Пошук матеріалу по опису
 export async function searchMaterialByDescription(description) {
   const response = await axios.get("/material/search/by-description", {
     params: {
@@ -36,6 +44,58 @@ export async function searchMaterialByDescription(description) {
   return response.data;
 }
 
+// Додати матеріал
+export async function addElement(newElement) {
+  const response = await axios.post("/category", newElement);
+  return response.data;
+}
+
+// Оновити матеріалам parentId
+export async function updateParentId(id) {
+  const response = await axios.patch(`/material/${id}/ParentElementId`);
+  // console.log("response data: ", response.data.data.ParentElementId);
+  return response.data.data;
+}
+
+// Services________________________________________________________
+
+// Отримати всі сервіси
+export async function getAllServices(signal) {
+  const responce = await axios.get("/all-service", { signal });
+  return responce.data;
+}
+
+// Ортимати матеріали по level
+export async function getServiceByLevel(level, signal) {
+  const response = await axios.get(`/service-by-level/${level}`, {
+    signal,
+  });
+  return response.data;
+}
+
+// // Ортимати сервіси по parent Code
+// export async function getServiceByParentCode(parentCode, signal) {
+//   const response = await axios.get(`/service-by-parent/${parentCode}`, {
+//     signal,
+//   });
+//   return response.data;
+// }
+// Ортимати сервіси по parent Id
+export async function getServiceByParentId(id, signal) {
+  const response = await axios.get(`/service-by-parent/${id}`, {
+    signal,
+  });
+  return response.data;
+}
+
+// Оновити сервісам parentId
+export async function updateServiceParentId(id) {
+  const response = await axios.patch(`/service/${id}/ParentElementId`);
+  // console.log("response data: ", response.data.data.ParentElementId);
+  return response.data.data;
+}
+
+// Пошук сервісів по коду
 export async function searchServiceByCode(number) {
   const response = await axios.get("/service/search/by-code", {
     params: {
@@ -45,24 +105,12 @@ export async function searchServiceByCode(number) {
   return response.data;
 }
 
+// Пошук сервісів по опису
 export async function searchServiceByDescription(description) {
   const response = await axios.get("/service/search/by-description", {
     params: {
       description: description,
     },
-  });
-  return response.data;
-}
-
-export async function addElement(newElement) {
-  const response = await axios.post("/category", newElement);
-  return response.data;
-}
-
-// Services________________________________________________________
-export async function getServiceByParentCode(parentCode, signal) {
-  const response = await axios.get(`/service-by-parent/${parentCode}`, {
-    signal,
   });
   return response.data;
 }
@@ -143,6 +191,6 @@ export async function updateRole(id, selectedRole, signal) {
       signal,
     }
   );
-  console.log(response);
+  // console.log(response);
   return response;
 }

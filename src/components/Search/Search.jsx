@@ -5,7 +5,7 @@ import { SearchButton, BackButton } from "../Button/Button";
 import { IoSearch } from "react-icons/io5";
 import { IoMdBackspace } from "react-icons/io";
 import { toast } from "react-toastify";
-import Loader from "../Loader/Loader";
+import { BarLoader } from "react-spinners";
 
 const Search = ({ submit, isLoading, back, isSubmiting }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -52,7 +52,7 @@ const Search = ({ submit, isLoading, back, isSubmiting }) => {
           disabled={isSubmiting}
         ></SearchButton>
       </FormStyled>
-      {isLoading && <Loader />}
+      {isLoading && <BarLoader color="#125b56" width="100%" />}
     </>
   );
 };

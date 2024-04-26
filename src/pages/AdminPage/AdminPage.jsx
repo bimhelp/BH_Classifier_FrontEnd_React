@@ -9,7 +9,7 @@ const AdminPage = () => {
       <Layout>
         <SideBar>
           <StyledNavLink to="users">Users</StyledNavLink>
-          <StyledNavLink to="script">Script</StyledNavLink>
+          <StyledNavLink to="script">Update parentId</StyledNavLink>
         </SideBar>
         <Section>
           <Outlet />

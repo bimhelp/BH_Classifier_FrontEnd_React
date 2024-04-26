@@ -4,7 +4,7 @@ export const Navigation = styled.nav`
   /* border: 1px solid tomato; */
   box-shadow: ${(props) => props.theme.shadows.shadow};
   padding: 5px;
-  width: 150px;
+  width: 200px;
 
   /* background-color: ${(props) => props.theme.colors.backgroundMain}; */
 `;

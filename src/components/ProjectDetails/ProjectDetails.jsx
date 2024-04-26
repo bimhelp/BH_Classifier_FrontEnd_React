@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { getProjectById } from "../../services";
 import { toast } from "react-toastify";
 import Section from "../Section/Section";
+import { BarLoader } from "react-spinners";
 import {
   Table,
   BackLink,
@@ -74,7 +75,7 @@ const ProjectDetails = () => {
 
   return (
     <Section>
-      {isLoading && <p>Loading project details...</p>}
+      {isLoading && <BarLoader color="#125b56" width="100%" />}
       {project && (
         <>
           <BackLink to={location.state.from}>

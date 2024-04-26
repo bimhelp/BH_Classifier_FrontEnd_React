@@ -1,29 +1,29 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 // functions
-import { getByParentCode } from "../../services";
+import { getByParentId } from "../../services";
 import { createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
 import { List, Item } from "./MaterialList.styled";
-import Loader from "../Loader/Loader";
 import { toast } from "react-toastify";
+import { BarLoader } from "react-spinners";
 
 const MaterialList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  const [selectedCode, setSelectedCode] = useState("");
+  // const [selectedCode, setSelectedCode] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
   // Запит по під категорії
   useEffect(() => {
     const controller = new AbortController();
-    async function subCategory(selectedCode) {
+    async function subCategory(selectedId) {
       // console.log("get subcategory effect");
       setIsLoading(true);
       try {
-        const response = await getByParentCode(selectedCode, controller.signal);
+        const response = await getByParentId(selectedId, controller.signal);
         // console.log("response: ", response.data);
 
         setSubCategories(response.data);
@@ -35,15 +35,15 @@ const MaterialList = ({ items, query }) => {
       }
     }
 
-    if (selectedCode === "") {
+    if (!selectedId) {
       return;
     }
-    subCategory(selectedCode);
+    subCategory(selectedId);
 
     return () => {
       controller.abort();
     };
-  }, [selectedCode]);
+  }, [selectedId]);
 
   const level = useMemo(() => {
     if (items.length > 0) {
@@ -59,7 +59,7 @@ const MaterialList = ({ items, query }) => {
 
   // Функція формує cpv код і тоглить відкриття категорії
   const selectCategory = async (id, code) => {
-    setSelectedCode(code);
+    // setSelectedCode(code);
     toggleCategory(id);
   };
 
@@ -87,7 +87,7 @@ const MaterialList = ({ items, query }) => {
                   isSelected={selectedId === item._id}
                 >
                   {isLoading ? (
-                    <Loader />
+                    <BarLoader color="#125b56" width="100%" />
                   ) : (
                     <MaterialList items={subCategories} query={query} />
                   )}

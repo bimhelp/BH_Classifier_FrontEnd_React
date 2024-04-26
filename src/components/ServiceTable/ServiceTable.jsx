@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ServiceList from "../ServiceList/ServiceList";
-import { getServiceByParentCode } from "../../services/api";
+import { getServiceByLevel } from "../../services/api";
 import { toast } from "react-toastify";
-import Loader from "../Loader/Loader";
+import { BarLoader } from "react-spinners";
 import { ListWrapper } from "./ServiceTable.styled";
 
 const ServiceTable = () => {
@@ -15,10 +15,7 @@ const ServiceTable = () => {
     async function getCategory() {
       try {
         setIsLoading(true);
-        const response = await getServiceByParentCode(
-          "services",
-          controller.signal
-        );
+        const response = await getServiceByLevel(0, controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");
@@ -36,10 +33,9 @@ const ServiceTable = () => {
   return (
     <>
       {isLoading ? (
-        <Loader />
+        <BarLoader color="#125b56" width="100%" />
       ) : (
         <ListWrapper>
-          {" "}
           <ServiceList items={mainCategory} style={{ padding: 0 }} />
         </ListWrapper>
       )}

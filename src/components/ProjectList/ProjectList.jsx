@@ -8,7 +8,9 @@ const ProjectList = ({ items }) => {
   // console.log("location: ", location);
   return (
     <Section>
-      {items.length > 0 ? (
+      {items.length === 0 ? (
+        <p>У вас ще немає проектів</p>
+      ) : (
         <ul>
           {items.map((item) => (
             <li key={item._id}>
@@ -18,8 +20,6 @@ const ProjectList = ({ items }) => {
             </li>
           ))}
         </ul>
-      ) : (
-        <p>У вас ще немає проектів</p>
       )}
     </Section>
   );

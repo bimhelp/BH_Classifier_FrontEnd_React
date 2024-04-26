@@ -29,10 +29,6 @@ const Category = ({
   const [level, setLevel] = useState(null);
 
   useEffect(() => {
-    // const cutedCpvCode = cutCpvCode(Code);
-    // console.log("ElementNestingLevel", ElementNestingLevel);
-    // setLevel(createLevel(cutedCpvCode));
-    // console.log("CreateLevel", createLevel(ElementNestingLevel));
     setLevel(createLevel(ElementNestingLevel));
   }, [ElementNestingLevel]);
 
