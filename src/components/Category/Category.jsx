@@ -113,7 +113,7 @@ const Category = ({
         {role === "admin" && (
           <IconButton
             icon={FaSquarePlus}
-            visibility="show"
+            visibility="hide"
             variant="dark"
             tooltip="Додати"
           ></IconButton>
