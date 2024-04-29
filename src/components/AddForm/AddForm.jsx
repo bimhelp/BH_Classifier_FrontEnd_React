@@ -1,34 +1,41 @@
-import React, { useState } from "react";
-import css from "./AddForm.module.css";
+import React, { useState, useRef } from "react";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { addElement } from "../../services/api";
-import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
-import Table from "../MaterialTable/MaterialTable";
 import { BarLoader } from "react-spinners";
-
+import {
+  InputWrapper,
+  StyledForm,
+  TextArea,
+  InputGroup,
+  Input,
+  DescriptionWrapper,
+} from "./AddForm.styled";
 // const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
-
+// import { validationColor } from "../../services/utility";
 const AddForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [description, setDescription] = useLocalStorage("description");
   const [code, setCode] = useLocalStorage("code", "");
   const [price, setPrice] = useLocalStorage("price");
-  const [unitcode, setUnitcode] = useLocalStorage("unitcode");
   const [level, setLevel] = useLocalStorage("level");
   const [unit, setUnit] = useLocalStorage("unit");
-  // const [modalOpen, setModalOpen] = useState(false);
-
-  // Показує або приховує модалку
-  // const toggleModal = () => {
-  //   setModalOpen(!modalOpen);
-  // };
+  const textAreaRef = useRef(null);
 
   // Відповідає за оновлення стану
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+    // Оновлення вмісту і розміру текстового блоку
+    // Перевірка наявності посилання на DOM-елемент
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = 0; // Автоматична висота
+      textAreaRef.current.style.height = `${
+        textAreaRef.current.scrollHeight - 16
+      }px`; // Встановлення висоти
+    }
     switch (name) {
       case "code":
         setCode(value);
@@ -71,9 +78,10 @@ const AddForm = () => {
   // Викликається під час відправлення форми
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newElement = { description, price, code, unitcode, level, unit };
-    // console.log(newElement);
+    const newElement = { description, price, code, level, unit };
+    console.log(newElement);
 
+    // Запит в базу даних
     async function addNewElement(data) {
       setIsLoading(true);
       try {
@@ -87,84 +95,73 @@ const AddForm = () => {
         setIsLoading(false);
       }
     }
+
     // викликаємо функцію
     addNewElement(newElement);
 
+    // Очистка форми
     setDescription("");
     setCode("");
     setLevel("");
     setPrice("");
     setUnit("");
-    setUnitcode("");
   };
 
   return (
     <>
-      <h2>Add Item</h2>
+      <h3>Створити новий матеріал</h3>
 
-      <form onSubmit={handleSubmit} className={css.form}>
-        <div className={css.inputWrapper}>
-          <label className={css.label} htmlFor="description">
-            Description
-          </label>
-          <input
+      <StyledForm onSubmit={handleSubmit}>
+        <DescriptionWrapper>
+          <label htmlFor="description">Description</label>
+          <TextArea
+            ref={textAreaRef}
             type="text"
             placeholder="Enter description"
             value={description}
             name="description"
             onChange={handleChange}
-            className={css.input}
             id="description"
           />
-        </div>
-        <div className={css.inputWrapper}>
-          <label className={css.label}>Price</label>
-          <input
-            type="text"
-            placeholder="Enter price"
-            value={price}
-            name="price"
-            className={css.input}
-            onChange={handleChange}
-          />
-        </div>
+        </DescriptionWrapper>
+        <InputGroup>
+          <InputWrapper>
+            <label>Price</label>
+            <Input
+              type="text"
+              placeholder="Enter price"
+              value={price}
+              name="price"
+              onChange={handleChange}
+            />
+          </InputWrapper>
 
-        <div className={css.inputWrapper}>
-          <label className={css.label}>Unitcode</label>
-          <input
-            type="text"
-            placeholder="Enter unitcode"
-            value={unitcode}
-            name="unitcode"
-            className={css.input}
-            onChange={handleChange}
-          />
-        </div>
-        <div className={css.inputWrapper}>
-          <label className={css.label}>Level</label>
-          <input
-            type="text"
-            placeholder="Enter level"
-            value={level}
-            name="level"
-            className={css.input}
-            onChange={handleChange}
-          />
-        </div>
-        <div className={css.inputWrapper}>
-          <label className={css.label}>Unit</label>
-          <input
-            type="text"
-            placeholder="Enter unit"
-            value={unit}
-            name="unit"
-            className={css.input}
-            onChange={handleChange}
-          />
-        </div>
+          <InputWrapper>
+            <label>Level</label>
+            <Input
+              type="text"
+              placeholder="Enter level"
+              value={level}
+              name="level"
+              onChange={handleChange}
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <label>Unit</label>
+            <Input
+              type="text"
+              placeholder="Enter unit"
+              value={unit}
+              name="unit"
+              onChange={handleChange}
+            />
+          </InputWrapper>
+        </InputGroup>
 
-        <Button type="submit">Send</Button>
-      </form>
+        <Button type="submit" style={{ marginLeft: "auto" }}>
+          Додати
+        </Button>
+      </StyledForm>
       {isLoading && <BarLoader color="#125b56" width="100%" />}
     </>
   );

@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { authContext as context } from "../../context/authContext";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
+import { validationColor } from "../../services/utility";
+import { Button } from "../Button/Button";
+import css from "./RegistrationForm.module.css";
 import {
   StyledForm,
   Input,
@@ -10,11 +13,6 @@ import {
   ErrorMessageStyled,
   FormButtonWrapper,
 } from "./RegisterForm.styled";
-import { Button } from "../Button/Button";
-import { validationColor } from "../../services/utility";
-
-// Навігація
-import css from "./RegistrationForm.module.css";
 
 const RegistrationForm = () => {
   const { onRegister } = useContext(context);
