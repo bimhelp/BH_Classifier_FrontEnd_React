@@ -109,7 +109,7 @@ const Script = () => {
           ))}
         </ul>
       </div>
-      <h2>Serivices without parentId</h2>
+      <h2>Services without parentId</h2>
 
       <div>
         <p>{filteredServices.length}</p>

@@ -47,11 +47,6 @@ const MaterialList = ({ items, query }) => {
 
   const level = useMemo(() => {
     if (items.length > 0) {
-      // console.log("NestingLevel: ", items[0].ElementNestingLevel);
-
-      // const cutedCpvCode = cutCpvCode(items[0].Code);
-      // console.log(createLevel(cutedCpvCode));
-      // return createLevel(cutedCpvCode);
       return createLevel(items[0].ElementNestingLevel);
     }
     return null;

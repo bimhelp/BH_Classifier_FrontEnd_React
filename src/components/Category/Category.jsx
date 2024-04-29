@@ -42,8 +42,8 @@ const Category = ({
 
   return (
     <>
-      <Card>
-        <CategoryWrapper level={level} onClick={handleClick}>
+      <Card onClick={handleClick}>
+        <CategoryWrapper level={level}>
           <CodeWrapper level={level}>
             <CopyToClipboard
               text={Code}
@@ -113,7 +113,7 @@ const Category = ({
         {role === "admin" && (
           <IconButton
             icon={FaSquarePlus}
-            visibility="hide"
+            visibility="visible"
             variant="dark"
             tooltip="Додати"
           ></IconButton>

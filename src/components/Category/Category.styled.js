@@ -5,6 +5,11 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: var(--materialColorAlfa);
+  &:hover,
+  &:focus {
+    box-shadow: var(--card-shadow);
+    background-color: white;
+  }
 `;
 
 export const CategoryWrapper = styled.div`
@@ -13,11 +18,6 @@ export const CategoryWrapper = styled.div`
   border-radius: 5px;
   margin-bottom: ${(props) => props.theme.space[2]}px;
 
-  &:hover,
-  &:focus {
-    box-shadow: var(--card-shadow);
-    background-color: white;
-  }
   /* outline: 1px solid red; */
 
   @media screen and (min-width: 680px) {
