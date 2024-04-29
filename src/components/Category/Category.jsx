@@ -24,7 +24,15 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
-  element: { _id, Code, DescriptionUA, PriceUAH, Unit, ElementNestingLevel },
+  element: {
+    _id,
+    ParentElementId,
+    Code,
+    DescriptionUA,
+    PriceUAH,
+    Unit,
+    ElementNestingLevel,
+  },
   selectCategory,
   children,
   query,
@@ -134,15 +142,22 @@ const Category = ({
           <IconButton
             id="add"
             icon={FaSquarePlus}
-            visibility="hide"
-            variant="dark"
+            visibility="visible"
+            variant="neutral"
             tooltip="Додати"
-            onClick={(event) => addItem(event, _id, Code)}
+            onClick={(event) => addItem(event, _id, Code, ParentElementId)}
           ></IconButton>
         )}
       </Card>
 
-      {addFormVisible && <AddForm onClose={() => closeForm()}></AddForm>}
+      {addFormVisible && (
+        <AddForm
+          id={_id}
+          Code={Code}
+          ParentElementId={ParentElementId}
+          onClose={() => closeForm()}
+        ></AddForm>
+      )}
       {isSelected && <SubList>{children}</SubList>}
     </>
   );

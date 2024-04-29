@@ -139,7 +139,7 @@ export const StyledIconButton = styled(StyledButton)`
   padding: ${(props) => props.theme.space[2]}px;
   color: white;
   color: ${(props) => props.variant === "dark" && props.theme.colors.black};
-
+  color: ${(props) => props.variant === "neutral" && props.theme.colors.grey};
   opacity: ${(props) => {
     switch (props.visibility) {
       case "hide":
