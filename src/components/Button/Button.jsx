@@ -68,6 +68,7 @@ export const CloseButton = ({
 export const IconButton = ({
   type = "button",
   disabled = false,
+  id,
   icon: Icon = null,
   children,
   onClick,
@@ -78,6 +79,7 @@ export const IconButton = ({
 }) => {
   return (
     <StyledIconButton
+      id={id}
       type={type}
       disabled={disabled}
       onClick={onClick}

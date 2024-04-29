@@ -53,9 +53,10 @@ const MaterialList = ({ items, query }) => {
   }, [items]);
 
   // Функція формує cpv код і тоглить відкриття категорії
-  const selectCategory = async (id, code) => {
-    // setSelectedCode(code);
-    toggleCategory(id);
+  const selectCategory = async (event, id) => {
+    if (event.target.tagName !== "path" && event.target.tagName !== "svg") {
+      toggleCategory(id);
+    }
   };
 
   // Відкриття-закриття категорії
@@ -77,7 +78,7 @@ const MaterialList = ({ items, query }) => {
               {selectedId === item._id ? (
                 <Category
                   element={item}
-                  selectCategory={() => selectCategory(item._id, item.Code)}
+                  selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
                   isSelected={selectedId === item._id}
                 >
@@ -90,7 +91,7 @@ const MaterialList = ({ items, query }) => {
               ) : (
                 <Category
                   element={item}
-                  selectCategory={() => selectCategory(item._id, item.Code)}
+                  selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
                 ></Category>
               )}

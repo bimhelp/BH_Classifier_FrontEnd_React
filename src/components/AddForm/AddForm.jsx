@@ -19,12 +19,12 @@ const AddForm = () => {
   const [unitcode, setUnitcode] = useLocalStorage("unitcode");
   const [level, setLevel] = useLocalStorage("level");
   const [unit, setUnit] = useLocalStorage("unit");
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
 
   // Показує або приховує модалку
-  const toggleModal = () => {
-    setModalOpen(!modalOpen);
-  };
+  // const toggleModal = () => {
+  //   setModalOpen(!modalOpen);
+  // };
 
   // Відповідає за оновлення стану
   const handleChange = (event) => {
@@ -103,29 +103,6 @@ const AddForm = () => {
       <h2>Add Item</h2>
 
       <form onSubmit={handleSubmit} className={css.form}>
-        <div className={css.inputWrapper}>
-          <label className={css.label}>Code</label>
-          <Button onClick={toggleModal}>
-            Виберіть категорію в яку хочете додати матеріал
-          </Button>
-          {modalOpen && (
-            <Modal
-              onClose={toggleModal}
-              title="Виберіть категорію в яку хочете додати матеріал"
-            >
-              <p>Ви вибрали:</p>
-              <Table />
-            </Modal>
-          )}
-          <input
-            type="text"
-            placeholder="Enter code"
-            value={code}
-            name="code"
-            className={css.input}
-            onChange={handleChange}
-          />
-        </div>
         <div className={css.inputWrapper}>
           <label className={css.label} htmlFor="description">
             Description

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
 import { IoIosCopy } from "react-icons/io";
 import { FaSquarePlus } from "react-icons/fa6";
+import AddForm from "../AddForm/AddForm";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -23,13 +24,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
-  element: { Code, DescriptionUA, PriceUAH, Unit, ElementNestingLevel },
+  element: { _id, Code, DescriptionUA, PriceUAH, Unit, ElementNestingLevel },
   selectCategory,
   children,
   query,
   isSelected,
 }) => {
   const [level, setLevel] = useState(null);
+  const [addFormVisible, setAddFormVisible] = useState(false);
   const { role } = useContext(context);
 
   useEffect(() => {
@@ -38,6 +40,21 @@ const Category = ({
 
   function handleClick(event) {
     selectCategory(event);
+  }
+
+  function addItem(event, id) {
+    // console.log("event: ", event.currentTarget.id);
+
+    toggleAddForm(id);
+  }
+
+  // Відкриття-закриття форми додавання
+  function toggleAddForm(id) {
+    if (addFormVisible === id) {
+      setAddFormVisible(null);
+    } else {
+      setAddFormVisible(id);
+    }
   }
 
   return (
@@ -112,13 +129,17 @@ const Category = ({
         </CategoryWrapper>
         {role === "admin" && (
           <IconButton
+            id="add"
             icon={FaSquarePlus}
-            visibility="visible"
+            visibility="hide"
             variant="dark"
             tooltip="Додати"
+            onClick={(event) => addItem(event, _id, Code)}
           ></IconButton>
         )}
       </Card>
+
+      {addFormVisible && <AddForm></AddForm>}
       {isSelected && <SubList>{children}</SubList>}
     </>
   );
