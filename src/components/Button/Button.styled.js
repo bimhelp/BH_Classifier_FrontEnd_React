@@ -18,25 +18,26 @@ export const StyledButton = styled.button`
 
   color: ${(props) => props.theme.colors.white};
   background-color: ${(props) =>
-    props.disabled ? props.theme.colors.muted : props.theme.colors.primary};
+    props.disabled ? props.theme.colors.muted : props.theme.colors.accent};
   font-size: ${(props) => props.theme.fontSizes.m};
 
   border-color: ${(props) => props.theme.colors.black};
   background-color: ${(props) =>
     props.role === "warning"
       ? props.theme.colors.red
-      : props.theme.colors.primary};
+      : props.theme.colors.accent};
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     cursor: pointer;
+    color: black;
     box-shadow: var(--card-shadow);
     border-color: ${(props) => props.theme.colors.black};
-    background-color: ${(props) => props.theme.colors.hover};
+    background-color: ${(props) => props.theme.colors.accentHover};
     background-color: ${(props) =>
       props.role === "warning"
         ? props.theme.colors.red
-        : props.theme.colors.hover};
+        : props.theme.colors.accentHover};
   }
 `;
 

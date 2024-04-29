@@ -2,11 +2,17 @@ import styled from "styled-components";
 // import { Form, Field } from "formik";
 
 export const StyledForm = styled.form`
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 15px;
+  margin-left: 15px;
+  margin-right: 15px;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin-bottom: 15px;
+  padding: 15px;
+  padding-left: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: ${(props) => props.theme.shadows.full};
+  position: relative;
 `;
 
 export const DescriptionWrapper = styled.div`

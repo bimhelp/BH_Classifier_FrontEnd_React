@@ -56,6 +56,9 @@ const Category = ({
       setAddFormVisible(id);
     }
   }
+  function closeForm() {
+    setAddFormVisible(null);
+  }
 
   return (
     <>
@@ -139,7 +142,7 @@ const Category = ({
         )}
       </Card>
 
-      {addFormVisible && <AddForm></AddForm>}
+      {addFormVisible && <AddForm onClose={() => closeForm()}></AddForm>}
       {isSelected && <SubList>{children}</SubList>}
     </>
   );

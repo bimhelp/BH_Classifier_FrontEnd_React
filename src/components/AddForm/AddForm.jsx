@@ -4,6 +4,8 @@ import { addElement } from "../../services/api";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
+import { CloseButton } from "../../components/Button/Button";
+import { CgClose } from "react-icons/cg";
 import {
   InputWrapper,
   StyledForm,
@@ -14,7 +16,7 @@ import {
 } from "./AddForm.styled";
 // const units = ["kg", "m", "m2", "m3", "m4", "pcs", "t"];
 // import { validationColor } from "../../services/utility";
-const AddForm = () => {
+const AddForm = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [description, setDescription] = useLocalStorage("description");
@@ -109,9 +111,10 @@ const AddForm = () => {
 
   return (
     <>
-      <h3>Створити новий матеріал</h3>
+      {/* <h3>Створити новий матеріал</h3> */}
 
       <StyledForm onSubmit={handleSubmit}>
+        <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
         <DescriptionWrapper>
           <label htmlFor="description">Description</label>
           <TextArea
