@@ -1,7 +1,7 @@
 import styled from "styled-components";
-// import { Form, Field } from "formik";
+import { Form, Field } from "formik";
 
-export const StyledForm = styled.form`
+export const StyledForm = styled(Form)`
   margin-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
@@ -21,10 +21,10 @@ export const DescriptionWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-export const TextArea = styled.textarea`
+export const TextArea = styled(Field)`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
-  /* border-color: ${({ bordercolor }) => bordercolor}; */
+  border-color: ${({ bordercolor }) => bordercolor};
   border-radius: ${(props) => props.theme.radii.normal};
   font-weight: 400;
 
@@ -44,8 +44,8 @@ export const TextArea = styled.textarea`
   &:hover,
   &:focus {
     border: ${(props) => props.theme.borders.bold};
-    /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
-    /* border-color: ${({ bordercolor }) => bordercolor}; */
+    background-color: ${(props) => props.theme.colors.backgroundWhite};
+    border-color: ${({ bordercolor }) => bordercolor};
   }
 `;
 
@@ -56,10 +56,10 @@ export const InputWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
-  /* border-color: ${({ bordercolor }) => bordercolor}; */
+  border-color: ${({ bordercolor }) => bordercolor};
   border-radius: ${(props) => props.theme.radii.normal};
   font-weight: 400;
   font-size: 14px;
@@ -78,7 +78,7 @@ export const Input = styled.input`
   &:focus {
     border: ${(props) => props.theme.borders.bold};
     /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
-    /* border-color: ${({ bordercolor }) => bordercolor}; */
+    border-color: ${({ bordercolor }) => bordercolor};
   }
 `;
 
@@ -90,4 +90,10 @@ export const InputGroup = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+`;
+
+export const ErrorMessageStyled = styled.div`
+  color: ${(props) => props.theme.colors.invalid};
+  position: absolute;
+  right: 0;
 `;

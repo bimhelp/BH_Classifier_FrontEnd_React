@@ -76,9 +76,11 @@ export const IconButton = ({
   position,
   variant,
   tooltip,
+  left,
 }) => {
   return (
     <StyledIconButton
+      left={left}
       id={id}
       type={type}
       disabled={disabled}

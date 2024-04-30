@@ -4,7 +4,9 @@ import { createLevel } from "../../services";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
 import { IoIosCopy } from "react-icons/io";
+import { MdModeEditOutline } from "react-icons/md";
 import { FaSquarePlus } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
 import AddForm from "../AddForm/AddForm";
 import {
   CategoryWrapper,
@@ -18,6 +20,7 @@ import {
   Extended,
   SubList,
   Card,
+  ItemMenu,
 } from "./Category.styled";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -139,14 +142,28 @@ const Category = ({
           </DescriptionWrapper>
         </CategoryWrapper>
         {role === "admin" && (
-          <IconButton
-            id="add"
-            icon={FaSquarePlus}
-            visibility="visible"
-            variant="neutral"
-            tooltip="Додати"
-            onClick={(event) => addItem(event, _id, Code, ParentElementId)}
-          ></IconButton>
+          <ItemMenu>
+            <IconButton
+              id="add"
+              icon={FaSquarePlus}
+              visibility="visible"
+              variant="neutral"
+              tooltip="Додати"
+              onClick={(event) => addItem(event, _id, Code, ParentElementId)}
+            ></IconButton>
+            <IconButton
+              icon={MdModeEditOutline}
+              visibility="visible"
+              variant="neutral"
+              tooltip="Редагувати"
+            ></IconButton>
+            <IconButton
+              icon={MdDelete}
+              visibility="visible"
+              variant="neutral"
+              tooltip="Видалити"
+            ></IconButton>
+          </ItemMenu>
         )}
       </Card>
 

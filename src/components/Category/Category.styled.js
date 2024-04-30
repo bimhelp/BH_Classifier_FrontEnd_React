@@ -1,6 +1,13 @@
 import styled, { keyframes } from "styled-components";
 import { setBgColor } from "../../services";
 
+export const ItemMenu = styled.div`
+  /* outline: 1px solid tomato; */
+  display: flex;
+  transition: opacity 0.3s ease; /* Плавна анімація зміни прозорості */
+  opacity: 0; /* Початкова прозорість */
+`;
+
 export const Card = styled.div`
   display: flex;
   justify-content: space-between;
@@ -9,6 +16,11 @@ export const Card = styled.div`
   &:focus {
     box-shadow: var(--card-shadow);
     background-color: white;
+
+    /* Зміна прозорості у ItemMenu при ховері на Card */
+    & ${ItemMenu} {
+      opacity: 1; /* Нове значення прозорості */
+    }
   }
 `;
 
@@ -128,5 +140,5 @@ from {
 export const SubList = styled.div`
   /* animation: 2s ${fadeIn} ease-in; */
   animation: ${expandHeight} 0.5s ease-in-out;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
