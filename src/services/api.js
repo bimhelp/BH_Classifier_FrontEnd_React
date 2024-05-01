@@ -1,5 +1,4 @@
 import axios from "axios";
-// axios.defaults.baseURL = "localhost:5000/api/v1";
 axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 
 export const PLUGIN_URL =
@@ -13,6 +12,7 @@ export async function getAll(signal) {
 }
 
 export async function getByLevel(level, signal) {
+  // console.log("level: ", level);
   const response = await axios.get(`/material-by-level/${level}`, { signal });
   return response.data;
 }
@@ -45,8 +45,10 @@ export async function searchMaterialByDescription(description) {
 }
 
 // Додати матеріал
-export async function addElement(newElement) {
-  const response = await axios.post("/category", newElement);
+export async function addMaterial(newElement, signal) {
+  const response = await axios.post("/material", newElement, { signal });
+  console.log("response: ", response);
+
   return response.data;
 }
 
@@ -57,6 +59,13 @@ export async function updateParentId(id) {
   return response.data.data;
 }
 
+// Видалити матеріал
+export async function removeMaterial(id) {
+  const response = await axios.delete(`/material/${id}`);
+  // console.log("response: ", response);
+  return response.data;
+}
+
 // Services________________________________________________________
 
 // Отримати всі сервіси
@@ -65,7 +74,7 @@ export async function getAllServices(signal) {
   return responce.data;
 }
 
-// Ортимати матеріали по level
+// Ортимати сервіси по level
 export async function getServiceByLevel(level, signal) {
   const response = await axios.get(`/service-by-level/${level}`, {
     signal,

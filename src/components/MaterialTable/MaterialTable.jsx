@@ -16,7 +16,7 @@ const MaterialTable = () => {
     async function getCategory() {
       try {
         setIsLoading(true);
-        const response = await getByLevel(0, controller.signal);
+        const response = await getByLevel(2, controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");

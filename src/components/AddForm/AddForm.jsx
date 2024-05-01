@@ -1,10 +1,12 @@
-import React, { useRef } from "react";
-import { Formik, ErrorMessage } from "formik";
+import React, { useState } from "react";
+import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { validationColor } from "../../services/utility";
-import { Button } from "../../components/Button/Button";
+import { Button, IconButton } from "../../components/Button/Button";
 import { CloseButton } from "../../components/Button/Button";
 import { CgClose } from "react-icons/cg";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropupCircle } from "react-icons/io";
 import {
   InputWrapper,
   StyledForm,
@@ -13,14 +15,23 @@ import {
   Input,
   DescriptionWrapper,
   ErrorMessageStyled,
+  Select,
 } from "./AddForm.styled";
 // import { toast } from "react-toastify";
 // import { addElement } from "../../services/api";
 // import { BarLoader } from "react-spinners";
 
-const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
-  const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
+const AddForm = ({ onClose, id, createMaterial }) => {
+  // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
+
+  const [additionalFields, setAdditionalFields] = useState(false);
+
   const unitTypes = ["m", "m2", "m3", "t", "kg", "pcs."];
+
+  // Показує апо приховує додаткові параметри
+  function toggleAdditionalFields() {
+    setAdditionalFields(!additionalFields);
+  }
 
   // Початкові значення
   const initialValues = {
@@ -46,11 +57,8 @@ const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
     OwnerBarcode: "",
   };
 
+  // Масив для рендеру інпутів
   const inputs = [
-    {
-      label: "Опис",
-      id: "DescriptionEN",
-    },
     {
       label: "Розміри",
       id: "Dimensions",
@@ -115,21 +123,31 @@ const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
       .string()
       .min(3, "Занадто кородкий опис")
       .max(500, "Занадто довкий опис")
-      .required("Обов'язкове поле"),
+      .required("Опис обов'язкове поле"),
     DescriptionEN: yup
       .string()
       .min(3, "Занадто кородкий опис")
       .max(500, "Занадто довкий опис"),
     PriceUAH: yup
-      .number()
-      .typeError("Введіть число")
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число")
-      .required("Обов'язкове поле"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      })
+      .required("Ціна обов'язкове поле"),
     Unit: yup
       .string()
       .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
-      .required('Поле "unit" обов\'язкове для заповнення'),
+      .required("Одиниці виміру обов'язкове поле"),
     Dimensions: yup
       .number()
       .min(1, "Мінімум один символ")
@@ -197,159 +215,53 @@ const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
   });
 
   // Відповідає за оновлення стану (значення в інпуті)
-  const handleChange = () => {
-    // const { name, value } = event.target;
-
-    // Функція зміни розміру інпута description
-    if (textAreaRef.current) {
-      textAreaRef.current.style.height = 0; // Автоматична висота
-      textAreaRef.current.style.height = `${
-        textAreaRef.current.scrollHeight - 16
-      }px`; // Встановлення висоти
-    }
-
-    // switch (name) {
-    //   case "descriptionUA":
-    //     setDescriptionUA(value);
-    //     break;
-    //   case "descriptionEN":
-    //     setDescriptionEN(value);
-    //     break;
-    //   case "priceUAH":
-    //     setPriceUAH(value);
-    //     break;
-    //   case "unit":
-    //     setUnit(value);
-    //     break;
-    //   case "dimensions":
-    //     setDimensions(value);
-    //     break;
-    //   case "length":
-    //     setLength(value);
-    //     break;
-    //   case "width":
-    //     setWidth(value);
-    //     break;
-    //   case "height":
-    //     setHeight(value);
-    //     break;
-    //   case "density":
-    //     setDensity(value);
-    //     break;
-    //   case "weightElement":
-    //     setWeightElement(value);
-    //     break;
-    //   case "perimeter":
-    //     setPerimeter(value);
-    //     break;
-    //   case "area":
-    //     setArea(value);
-    //     break;
-    //   case "volume":
-    //     setVolume(value);
-    //     break;
-    //   case "writeOffCoefficient":
-    //     setWriteOffCoefficient(value);
-    //     break;
-    //   case "consumption":
-    //     setConsumption(value);
-    //     break;
-    //   case "consumptionPer1m2":
-    //     setConsumptionPer1m2(value);
-    //     break;
-    //   case "consumptionPer1m3":
-    //     setConsumptionPer1m3(value);
-    //     break;
-    //   case "consumptionPer1m":
-    //     setConsumptionPer1m1(value);
-    //     break;
-    //   case "consumptionPer1t":
-    //     setConsumptionPer1t(value);
-    //     break;
-    //   case "ownerBarcode":
-    //     setOwnerBarcode(value);
-    //     break;
-
-    //   default:
-    //     return;
-    // }
-  };
-
-  // Викликається під час відправлення форми
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const newElement = {
-  //     ParentElementId,
-  //     DescriptionUA: descriptionUA,
-  //     DescriptionEN: descriptionEN,
-  //     PriceUAH: priceUAH,
-  //     Unit: unit,
-  //     Dimensions: dimensions,
-  //     Length: length,
-  //     Width: width,
-  //     Height: height,
-  //     Density: density,
-  //     WeightElement: weightElement,
-  //     Perimeter: perimeter,
-  //     Area: area,
-  //     Volume: volume,
-  //     WriteOffCoefficient: writeOffCoefficient,
-  //     Consumption: consumption,
-  //     ConsumptionPer1m2: consumptionPer1m2,
-  //     ConsumptionPer1m3: consumptionPer1m3,
-  //     ConsumptionPer1m: consumptionPer1m1,
-  //     ConsumptionPer1t: consumptionPer1t,
-  //     OwnerBarcode: ownerBarcode,
-  //   };
-  //   console.log(newElement);
-
-  //   // Запит в базу даних
-  //   async function addNewElement(data) {
-  //     setIsLoading(true);
-  //     try {
-  //       const response = await addElement(data);
-  //       console.log(response.data);
-  //     } catch {
-  //       toast.error("Не вдалось додати матеріал", {
-  //         autoClose: false,
-  //       });
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
+  // const handleChange = () => {
+  //   // Функція зміни розміру інпута description
+  //   if (textAreaRef.current) {
+  //     textAreaRef.current.style.height = 0; // Автоматична висота
+  //     textAreaRef.current.style.height = `${
+  //       textAreaRef.current.scrollHeight - 16
+  //     }px`; // Встановлення висоти
   //   }
-
-  //   // викликаємо функцію
-  //   addNewElement(newElement);
-
-  //   // Очистка форми
-  //   setDescriptionUA("");
-  //   setDescriptionEN("");
-  //   setPriceUAH("");
-  //   setUnit("");
-  //   setDimensions("");
-  //   setLength("");
-  //   setWidth("");
-  //   setHeight("");
-  //   setDensity("");
-  //   setWeightElement("");
-  //   setPerimeter("");
-  //   setArea("");
-  //   setVolume("");
-  //   setWriteOffCoefficient("");
-  //   setConsumption("");
-  //   setConsumptionPer1m2("");
-  //   setConsumptionPer1m3("");
-  //   setConsumptionPer1m1("");
-  //   setConsumptionPer1t("");
-  //   setOwnerBarcode("");
   // };
+
+  // // Запит в базу на додавання матеріалу
+  // async function addMaterial(newMaterial) {
+  //   const controller = new AbortController();
+  //   try {
+  //     const response = await addElement(newMaterial, controller.signal);
+  //     console.log("response: ", response);
+  //   } catch (error) {
+  //     toast.error("Не вдалось додати матеріал");
+  //   }
+  //   addElement(newMaterial);
+  //   return () => {
+  //     controller.abort();
+  //   };
+  // }
+
   const handleSubmit = (values, actions) => {
-    // const { resetForm } = actions;
-    // Передача даних в контекст (глобальний стейт)
-    // onRegister(values);
+    console.log("values: ", values);
+    console.log("notEmptyInputs:");
+    const { resetForm } = actions;
+
+    const filteredValues = Object.fromEntries(
+      Object.entries(values).filter(([key, value]) => value !== "")
+    );
+    console.log("filteredValues: ", filteredValues);
+
+    const additionalElement = {
+      ParentElementId: id,
+      ...filteredValues,
+    };
+
+    console.log("additionalElement: ", additionalElement);
+    createMaterial(additionalElement);
+
     // Очистка форми
-    // resetForm();
+    resetForm();
   };
+
   return (
     <>
       <Formik
@@ -358,19 +270,16 @@ const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
         onSubmit={handleSubmit}
       >
         {(props) => (
-          <StyledForm onSubmit={handleSubmit}>
+          <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
 
             <DescriptionWrapper>
               <label htmlFor="DescriptionUA">Опис</label>
               <TextArea
-                as="textarea" // Вказуємо, що це textarea
-                ref={textAreaRef}
                 name="DescriptionUA"
                 id="DescriptionUA"
-                placeholder="Введіть опис"
+                placeholder="Введіть опис українською мовою"
                 type="text"
-                onChange={handleChange}
                 bordercolor={validationColor(
                   props.errors.DescriptionUA,
                   props.values.DescriptionUA,
@@ -384,7 +293,7 @@ const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
             </DescriptionWrapper>
             <InputGroup>
               <InputWrapper>
-                <label htmlFor="PriseUAH">Price</label>
+                <label htmlFor="PriseUAH">Ціна в грн.</label>
                 <Input
                   type="text"
                   placeholder="Ціна"
@@ -403,29 +312,95 @@ const AddForm = ({ onClose, _id, Code, ParentElementId }) => {
                   )}
                 />
               </InputWrapper>
+              <InputWrapper>
+                <label htmlFor="Unit">Одиниці виміру</label>
+                <Field
+                  as={Select}
+                  name="Unit"
+                  bordercolor={validationColor(
+                    props.errors.Unit,
+                    props.values.Unit,
+                    "rgb(26, 50, 0)"
+                  )}
+                >
+                  <option value="" disabled hidden>
+                    Оберіть одиницю виміру
+                  </option>
+                  <option value="pcs.">Штука</option>
+                  <option value="m">Метр</option>
+                  <option value="m2">Метр квадратний</option>
+                  <option value="m3">Метр кубічний</option>
+                  <option value="t">Тона</option>
+                  <option value="kg">Кілограм</option>
+                </Field>
 
-              {inputs.map(({ id, label }) => (
-                <InputWrapper key={id}>
-                  <label htmlFor={id}>{label}</label>
-                  <Input
+                <ErrorMessage
+                  name="Unit"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </InputWrapper>
+            </InputGroup>
+            <IconButton
+              type="button"
+              visibility="visible"
+              variant="neutral"
+              tooltip={"Додаткові властивості"}
+              icon={
+                additionalFields
+                  ? IoMdArrowDropupCircle
+                  : IoMdArrowDropdownCircle
+              }
+              onClick={() => toggleAdditionalFields()}
+            ></IconButton>
+            {additionalFields && (
+              <>
+                <DescriptionWrapper>
+                  <label htmlFor="DescriptionEN">Опис</label>
+                  <TextArea
+                    name="DescriptionEN"
+                    id="DescriptionEN"
+                    placeholder="Введіть опис англійською мовою"
                     type="text"
-                    placeholder={id}
-                    name={id}
-                    id={id}
                     bordercolor={validationColor(
-                      props.errors[{ id }],
-                      props.values[{ id }]
+                      props.errors.DescriptionEN,
+                      props.values.DescriptionEN,
+                      "rgb(0, 0, 0)"
                     )}
                   />
                   <ErrorMessage
-                    name={id}
+                    name="DescriptionEN"
                     render={(msg) => (
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}
                   />
-                </InputWrapper>
-              ))}
-            </InputGroup>
+                </DescriptionWrapper>
+                <InputGroup>
+                  {inputs.map(({ id, label }) => (
+                    <InputWrapper key={id}>
+                      <label htmlFor={id}>{label}</label>
+                      <Input
+                        type="text"
+                        placeholder={label}
+                        name={id}
+                        id={id}
+                        bordercolor={validationColor(
+                          props.errors[{ id }],
+                          props.values[{ id }]
+                        )}
+                      />
+                      <ErrorMessage
+                        name={id}
+                        render={(msg) => (
+                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                        )}
+                      />
+                    </InputWrapper>
+                  ))}
+                </InputGroup>
+              </>
+            )}
             <Button type="submit">Додати</Button>
           </StyledForm>
         )}

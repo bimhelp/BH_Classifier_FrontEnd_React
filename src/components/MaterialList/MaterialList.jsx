@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 
 // functions
-import { getByParentId } from "../../services";
+import { addMaterial, getByParentId, removeMaterial } from "../../services";
 import { createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
@@ -12,9 +12,12 @@ import { BarLoader } from "react-spinners";
 const MaterialList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  // const [selectedCode, setSelectedCode] = useState("");
-
+  const [newMaterial, setNewMaterial] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    console.log(subCategories);
+  }, [subCategories]);
 
   // Запит по під категорії
   useEffect(() => {
@@ -43,7 +46,7 @@ const MaterialList = ({ items, query }) => {
     return () => {
       controller.abort();
     };
-  }, [selectedId]);
+  }, [selectedId, newMaterial]);
 
   const level = useMemo(() => {
     if (items.length > 0) {
@@ -68,6 +71,40 @@ const MaterialList = ({ items, query }) => {
     }
   }
 
+  // Додавання матеріалу
+  function createMaterial(material) {
+    const controller = new AbortController();
+    async function createMaterial(newMaterial) {
+      try {
+        const response = await addMaterial(newMaterial, controller.signal);
+        // console.log("new material: ", response.data);
+        setNewMaterial(response.data);
+      } catch (error) {
+        toast.error("Не вдалось додати матеріал");
+      }
+    }
+    createMaterial(material);
+    return () => {
+      controller.abort();
+    };
+
+    // setMaterialCandidate(material);
+  }
+  // Видалення матеріалу
+  async function handleDelete(id) {
+    // console.log("id: ", id);
+
+    try {
+      const result = await removeMaterial(id);
+
+      if (result) {
+        // console.log("deleted material: ", result.data);
+      }
+    } catch (error) {
+      toast.error("Не вдалось завантажити підкагеторії");
+    }
+  }
+
   return (
     <>
       <div>
@@ -81,6 +118,8 @@ const MaterialList = ({ items, query }) => {
                   selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
                   isSelected={selectedId === item._id}
+                  handleDelete={handleDelete}
+                  createMaterial={createMaterial}
                 >
                   {isLoading ? (
                     <BarLoader color="#125b56" width="100%" />
@@ -93,6 +132,8 @@ const MaterialList = ({ items, query }) => {
                   element={item}
                   selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
+                  handleDelete={handleDelete}
+                  createMaterial={createMaterial}
                 ></Category>
               )}
             </Item>

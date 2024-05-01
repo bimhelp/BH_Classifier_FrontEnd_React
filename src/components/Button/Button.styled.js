@@ -128,6 +128,7 @@ export const StyledCloseButton = styled(StyledButton)`
   }
 `;
 export const StyledIconButton = styled(StyledButton)`
+  display: block;
   position: ${(props) => props.position === "absolute" && "absolute"};
   top: 60%;
   left: ${(props) => props.left}px;
@@ -157,6 +158,7 @@ export const StyledIconButton = styled(StyledButton)`
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     /* cursor: cell; */
+    box-shadow: none;
     color: ${(props) => props.variant === "dark" && props.theme.colors.black};
     background-color: transparent;
     opacity: 1;

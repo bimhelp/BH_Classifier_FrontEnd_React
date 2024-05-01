@@ -15,7 +15,7 @@ const ServiceTable = () => {
     async function getCategory() {
       try {
         setIsLoading(true);
-        const response = await getServiceByLevel(0, controller.signal);
+        const response = await getServiceByLevel(2, controller.signal);
         setMainCategory(response.data);
       } catch {
         toast.error("Щось пішло не так, спробуйте перезавантажити сторінку");

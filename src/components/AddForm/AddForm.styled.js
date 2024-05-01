@@ -45,12 +45,12 @@ export const TextArea = styled(Field)`
   &:focus {
     border: ${(props) => props.theme.borders.bold};
     background-color: ${(props) => props.theme.colors.backgroundWhite};
-    border-color: ${({ bordercolor }) => bordercolor};
+    /* border-color: ${({ bordercolor }) => bordercolor}; */
   }
 `;
 
 export const InputWrapper = styled.div`
-  width: 100px;
+  /* width: 100px; */
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
@@ -78,11 +78,35 @@ export const Input = styled(Field)`
   &:focus {
     border: ${(props) => props.theme.borders.bold};
     /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
-    border-color: ${({ bordercolor }) => bordercolor};
+    /* border-color: ${({ bordercolor }) => bordercolor}; */
   }
 `;
+export const Select = styled.select`
+  background-color: ${(props) => props.theme.colors.backgroundWhite};
+  border: ${(props) => props.theme.borders.bold};
+  border-color: ${({ bordercolor }) => bordercolor};
+  border-radius: ${(props) => props.theme.radii.normal};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  height: 41px;
+  letter-spacing: -0.02em;
+  /* padding: 12px 12px 12px 40px; */
+  padding: 4px;
+  color: ${(props) => props.theme.colors.black};
 
-export const Label = styled.label``;
+  @media screen and (min-width: 480px) {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  &:hover,
+  &:focus {
+    border: ${(props) => props.theme.borders.bold};
+    /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
+    /* border-color: ${({ bordercolor }) => bordercolor}; */
+  }
+`;
 
 export const InputGroup = styled.div`
   width: 100%;
@@ -95,5 +119,5 @@ export const InputGroup = styled.div`
 export const ErrorMessageStyled = styled.div`
   color: ${(props) => props.theme.colors.invalid};
   position: absolute;
-  right: 0;
+  right: 50px;
 `;

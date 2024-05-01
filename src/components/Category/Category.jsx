@@ -40,6 +40,8 @@ const Category = ({
   children,
   query,
   isSelected,
+  handleDelete,
+  createMaterial,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
@@ -67,6 +69,7 @@ const Category = ({
       setAddFormVisible(id);
     }
   }
+
   function closeForm() {
     setAddFormVisible(null);
   }
@@ -162,6 +165,7 @@ const Category = ({
               visibility="visible"
               variant="neutral"
               tooltip="Видалити"
+              onClick={() => handleDelete(_id)}
             ></IconButton>
           </ItemMenu>
         )}
@@ -173,6 +177,7 @@ const Category = ({
           Code={Code}
           ParentElementId={ParentElementId}
           onClose={() => closeForm()}
+          createMaterial={createMaterial}
         ></AddForm>
       )}
       {isSelected && <SubList>{children}</SubList>}

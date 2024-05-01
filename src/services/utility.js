@@ -142,9 +142,9 @@ export const setRoleColor = ({ role, theme }) => {
   }
 };
 
-export const validationColor = (errors, values, defaultColor = "#355614") => {
-  console.log("values: ", values);
-  console.log("errors: ", errors);
+export const validationColor = (errors, values, defaultColor = "#000000") => {
+  // console.log("values: ", values);
+  // console.log("errors: ", errors);
   if (
     errors === "Your password is little secure. Add a number!" ||
     errors === "Your password is little secure. Add a letter!"
