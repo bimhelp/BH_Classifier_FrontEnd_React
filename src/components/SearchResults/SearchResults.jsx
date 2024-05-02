@@ -1,16 +1,10 @@
 import React from "react";
-import MaterialListList from "../MaterialList/MaterialList";
+import MaterialList from "../MaterialList/MaterialList";
 
-const SearchResults = ({ category, materials, query }) => {
+const SearchResults = ({ results, query }) => {
   return (
     <div>
-      {category.length > 0 && (
-        <MaterialListList items={category} query={query} />
-      )}
-
-      {materials.length > 0 && (
-        <MaterialListList items={materials} query={query} />
-      )}
+      {results.length > 0 && <MaterialList items={results} query={query} />}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ServiceTable from "../../components/ServiceTable/ServiceTable";
 import Section from "../../components/Section/Section";
 import Search from "../../components/Search/Search";
@@ -6,12 +6,7 @@ import {
   searchServiceByDescription,
   searchServiceByCode,
 } from "../../services/api";
-import {
-  checkIsString,
-  parseNumber,
-  onLyCategory,
-  onLyMaterial,
-} from "../../services";
+import { checkIsString, parseNumber } from "../../services";
 import { MainTableWrapper } from "./ServicePage.styled";
 import { toast } from "react-toastify";
 import SearchResults from "../../components/SearchResults/SearchResults";
@@ -19,8 +14,6 @@ import SearchResults from "../../components/SearchResults/SearchResults";
 const ServicePage = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState([]);
-  const [materials, setMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   // Виклика8ється під час відправлення форми
@@ -28,14 +21,6 @@ const ServicePage = () => {
   const backToTable = () => {
     setSearchResult([]);
   };
-
-  // Розділення на категорії і матеріали
-  useEffect(() => {
-    // console.log("category", onLyCategory(searchResult));
-    setCategory(onLyCategory(searchResult));
-    // console.log("materials", onLyMaterial(searchResult));
-    setMaterials(onLyMaterial(searchResult));
-  }, [searchResult]);
 
   // Пошук елементів
   const submit = (searchValue) => {
@@ -97,12 +82,8 @@ const ServicePage = () => {
       </Section>
       <Section>
         <MainTableWrapper>
-          {category.length > 0 || materials.length > 0 ? (
-            <SearchResults
-              category={category}
-              materials={materials}
-              query={query}
-            />
+          {searchResult.length > 0 ? (
+            <SearchResults results={searchResult} query={query} />
           ) : (
             <ServiceTable />
           )}

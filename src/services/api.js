@@ -47,7 +47,7 @@ export async function searchMaterialByDescription(description) {
 // Додати матеріал
 export async function addMaterial(newElement, signal) {
   const response = await axios.post("/material", newElement, { signal });
-  console.log("response: ", response);
+  // console.log("response: ", response.data);
 
   return response.data;
 }
@@ -62,7 +62,7 @@ export async function updateParentId(id) {
 // Видалити матеріал
 export async function removeMaterial(id) {
   const response = await axios.delete(`/material/${id}`);
-  // console.log("response: ", response);
+  // console.log("response: ", response.data);
   return response.data;
 }
 

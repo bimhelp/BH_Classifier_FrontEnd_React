@@ -14,10 +14,11 @@ const MaterialList = ({ items, query }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [newMaterial, setNewMaterial] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
-    console.log("subCategories: ", subCategories);
-  }, [subCategories]);
+    console.log("Mouting phase: Material List");
+  }, []);
 
   // Запит по під категорії
   useEffect(() => {
@@ -39,6 +40,7 @@ const MaterialList = ({ items, query }) => {
     }
 
     if (!selectedId) {
+      console.log("return");
       return;
     }
     subCategory(selectedId);
@@ -46,8 +48,9 @@ const MaterialList = ({ items, query }) => {
     return () => {
       controller.abort();
     };
-  }, [selectedId, newMaterial]);
+  }, [selectedId, newMaterial, setSubCategories, isDeleted]);
 
+  // Створення класів для кольорів
   const level = useMemo(() => {
     if (items.length > 0) {
       return createLevel(items[0].ElementNestingLevel);
@@ -55,7 +58,7 @@ const MaterialList = ({ items, query }) => {
     return null;
   }, [items]);
 
-  // Функція формує cpv код і тоглить відкриття категорії
+  // Функція  тоглить відкриття категорії
   const selectCategory = async (event, id) => {
     if (event.target.tagName !== "path" && event.target.tagName !== "svg") {
       toggleCategory(id);
@@ -92,16 +95,16 @@ const MaterialList = ({ items, query }) => {
   }
   // Видалення матеріалу
   async function handleDelete(id) {
-    // console.log("id: ", id);
-
     try {
       const result = await removeMaterial(id);
-
+      console.log("result: ", result.data);
       if (result) {
-        // console.log("deleted material: ", result.data);
+        toast.info("Матеріал успішно видалений");
+        setIsDeleted(true);
       }
     } catch (error) {
-      toast.error("Не вдалось завантажити підкагеторії");
+      toast.error("Не вдалось видалити  матеріал");
+      setIsDeleted(false);
     }
   }
 
@@ -145,3 +148,87 @@ const MaterialList = ({ items, query }) => {
 };
 
 export default MaterialList;
+
+// import React, { useState, useMemo } from "react";
+// import { getByParentId, removeMaterial } from "../../services";
+// import { createLevel } from "../../services";
+// import Category from "../Category/Category";
+// import { List, Item } from "./MaterialList.styled";
+// import { toast } from "react-toastify";
+// import { BarLoader } from "react-spinners";
+// import { useEffect } from "react";
+
+// const MaterialList = ({ items, query }) => {
+//   const [subCategories, setSubCategories] = useState([]);
+//   const [selectedId, setSelectedId] = useState(null);
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   useEffect(() => {
+//     console.log("Mouting phase: same when componentDidMount runs");
+//   }, []);
+
+//   // Створення класів для кольорів
+//   const level = useMemo(() => {
+//     if (items.length > 0) {
+//       return createLevel(items[0].ElementNestingLevel);
+//     }
+//     return null;
+//   }, [items]);
+
+//   // Обробник події кліку на елементі списку
+//   const handleItemClick = async (id) => {
+//     if (id === selectedId) {
+//       // Закриття відкритого елемента
+//       setSelectedId(null);
+//       setSubCategories([]);
+//     } else {
+//       // Відкриття нового елемента
+//       setSelectedId(id);
+//       setIsLoading(true);
+//       try {
+//         const response = await getByParentId(id);
+//         setSubCategories(response.data);
+//       } catch (error) {
+//         toast.error("Не вдалось завантажити підкагеторії");
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     }
+//   };
+
+//   // Видалення матеріалу
+//   const handleDelete = async (id) => {
+//     try {
+//       const result = await removeMaterial(id);
+//       if (result) {
+//         // Оновлення списку після видалення
+//         setSubCategories(subCategories.filter((element) => element._id !== id));
+//       }
+//     } catch (error) {
+//       toast.error("Не вдалось видалити матеріал");
+//     }
+//   };
+
+//   return (
+//     <List level={level}>
+//       {items.map((item) => (
+//         <Item key={item._id}>
+//           <Category
+//             element={item}
+//             isSelected={selectedId === item._id}
+//             handleItemClick={() => handleItemClick(item._id)}
+//             query={query}
+//             handleDelete={() => handleDelete(item._id)}
+//           >
+//             {isLoading ? <BarLoader color="#125b56" width="100%" /> : null}
+//             {selectedId === item._id ? (
+//               <MaterialList items={subCategories} query={query} />
+//             ) : null}
+//           </Category>
+//         </Item>
+//       ))}
+//     </List>
+//   );
+// };
+
+// export default MaterialList;

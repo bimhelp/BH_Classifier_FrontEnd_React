@@ -57,7 +57,7 @@ export function filterNextLevelItems(subCategories, selectedCode) {
 }
 
 // Колір _____________________________________________________________________________________
-// Функція створює css клас в залежності від довжини cpvКоду
+// Функція створює css клас в залежності від властивості ElementNestingLevel
 export function createLevel(code) {
   // console.log("code: ", code);
 
@@ -174,23 +174,6 @@ export function parseNumber(query) {
   } else return Number.parseInt(query);
 }
 
-// Функція фільтрує категорії із результату пошуку
-export function onLyCategory(items) {
-  const categorys = items.filter(
-    (element) => cutCpvCode(element.Code).length <= 5
-  );
-  // console.log("categorys: ", categorys);
-  return categorys;
-}
-
-// Функція фільтрує матеріали  із результату пошуку
-export function onLyMaterial(items) {
-  const materials = items.filter(
-    (element) => cutCpvCode(element.Code).length >= 6
-  );
-  // console.log("materials: ", materials);
-  return materials;
-}
 // Функція підфарбовує слово в результатах пошуку
 export function hiLight(query, text) {
   const regex = new RegExp(`(${query})`, "gi");

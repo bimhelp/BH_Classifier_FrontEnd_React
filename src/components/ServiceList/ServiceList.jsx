@@ -12,9 +12,11 @@ import { toast } from "react-toastify";
 const ServiceList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  // const [selectedCode, setSelectedCode] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    console.log("selectedId: ", selectedId);
+  }, [selectedId]);
 
   // Запит по під категорії
   useEffect(() => {
@@ -38,6 +40,7 @@ const ServiceList = ({ items, query }) => {
     }
 
     if (!selectedId) {
+      console.log("return");
       return;
     }
     subCategory(selectedId);
@@ -63,8 +66,10 @@ const ServiceList = ({ items, query }) => {
   // Відкриття-закриття категорії
   function toggleCategory(id) {
     if (selectedId === id) {
+      console.log("set null");
       setSelectedId(null);
     } else {
+      console.log("set", id);
       setSelectedId(id);
     }
   }

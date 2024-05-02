@@ -241,21 +241,21 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   // }
 
   const handleSubmit = (values, actions) => {
-    console.log("values: ", values);
-    console.log("notEmptyInputs:");
+    // console.log("values: ", values);
+    // console.log("notEmptyInputs:");
     const { resetForm } = actions;
 
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(([key, value]) => value !== "")
     );
-    console.log("filteredValues: ", filteredValues);
+    // console.log("filteredValues: ", filteredValues);
 
     const additionalElement = {
       ParentElementId: id,
       ...filteredValues,
     };
 
-    console.log("additionalElement: ", additionalElement);
+    // console.log("additionalElement: ", additionalElement);
     createMaterial(additionalElement);
 
     // Очистка форми
