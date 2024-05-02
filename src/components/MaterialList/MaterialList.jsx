@@ -16,7 +16,7 @@ const MaterialList = ({ items, query }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    console.log(subCategories);
+    console.log("subCategories: ", subCategories);
   }, [subCategories]);
 
   // Запит по під категорії

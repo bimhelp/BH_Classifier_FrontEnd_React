@@ -3,15 +3,25 @@ import { setBgColor } from "../../services";
 
 export const ItemMenu = styled.div`
   /* outline: 1px solid tomato; */
+  position: absolute;
   display: flex;
   transition: opacity 0.3s ease; /* Плавна анімація зміни прозорості */
-  opacity: 0; /* Початкова прозорість */
+  opacity: 1; /* Початкова прозорість */
+  top: 0;
+  right: 0;
+
+  @media screen and (min-width: 680px) {
+    opacity: 0;
+  }
 `;
 
 export const Card = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   background-color: var(--materialColorAlfa);
+  /* outline: 1px solid tomato; */
+  margin-bottom: ${(props) => props.theme.space[2]}px;
   &:hover,
   &:focus {
     box-shadow: var(--card-shadow);
@@ -27,10 +37,12 @@ export const Card = styled.div`
 export const CategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: start;
   border-radius: 5px;
-  margin-bottom: ${(props) => props.theme.space[2]}px;
 
-  /* outline: 1px solid red; */
+  width: 100%;
+
+  /* outline: 1px solid blue; */
 
   @media screen and (min-width: 680px) {
     flex-direction: row;
@@ -40,22 +52,23 @@ export const CategoryWrapper = styled.div`
 
 export const CodeWrapper = styled.div`
   position: relative;
-  text-align: end;
-
+  text-align: start;
   height: 100%;
+  width: 100%;
   background-color: ${setBgColor};
   border-radius: 0 5px 5px 0px;
   justify-content: end;
 
   @media screen and (min-width: 680px) {
     /* display: flex; */
+    width: auto;
     text-align: start;
   }
 `;
 
 export const CategoryCode = styled.p`
   padding: ${(props) => props.theme.space[2]}px;
-  padding-left: ${(props) => props.theme.space[3]}px;
+  padding-left: ${(props) => props.theme.space[5]}px;
   padding-right: ${(props) => props.theme.space[3]}px;
   border-radius: 0 5px 5px 0px;
   display: inline-block;
@@ -63,6 +76,9 @@ export const CategoryCode = styled.p`
   text-align: center;
   color: ${(props) => props.theme.colors.textWhiteColor};
   font-size: ${(props) => props.theme.fontSizes.m};
+  @media screen and (min-width: 680px) {
+    padding-left: ${(props) => props.theme.space[3]}px;
+  }
 `;
 
 export const DescriptionWrapper = styled.div`
@@ -73,7 +89,7 @@ export const DescriptionWrapper = styled.div`
 
 export const CopyParent = styled.div`
   /* position: relative; */
-  outline: 1px solid green;
+  /* outline: 1px solid green; */
 `;
 
 export const CategoryDescription = styled.p`
