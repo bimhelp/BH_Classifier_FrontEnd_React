@@ -282,8 +282,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                 type="text"
                 bordercolor={validationColor(
                   props.errors.DescriptionUA,
-                  props.values.DescriptionUA,
-                  "rgb(0, 0, 0)"
+                  props.values.DescriptionUA
                 )}
               />
               <ErrorMessage
@@ -301,8 +300,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                   id="PriceUAH"
                   bordercolor={validationColor(
                     props.errors.PriceUAH,
-                    props.values.PriceUAH,
-                    "rgb(26, 50, 0)"
+                    props.values.PriceUAH
                   )}
                 />
                 <ErrorMessage
@@ -319,8 +317,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                   name="Unit"
                   bordercolor={validationColor(
                     props.errors.Unit,
-                    props.values.Unit,
-                    "rgb(26, 50, 0)"
+                    props.values.Unit
                   )}
                 >
                   <option value="" disabled hidden>
@@ -365,8 +362,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                     type="text"
                     bordercolor={validationColor(
                       props.errors.DescriptionEN,
-                      props.values.DescriptionEN,
-                      "rgb(0, 0, 0)"
+                      props.values.DescriptionEN
                     )}
                   />
                   <ErrorMessage

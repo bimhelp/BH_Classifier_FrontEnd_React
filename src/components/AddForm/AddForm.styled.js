@@ -45,7 +45,9 @@ export const TextArea = styled(Field)`
   &:focus {
     border: ${(props) => props.theme.borders.bold};
     background-color: ${(props) => props.theme.colors.backgroundWhite};
-    /* border-color: ${({ bordercolor }) => bordercolor}; */
+    box-shadow: ${(props) => props.theme.shadows.shadow};
+    border-color: ${({ bordercolor }) => bordercolor};
+    outline: 0px solid white;
   }
 `;
 
@@ -78,7 +80,9 @@ export const Input = styled(Field)`
   &:focus {
     border: ${(props) => props.theme.borders.bold};
     /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
-    /* border-color: ${({ bordercolor }) => bordercolor}; */
+    border-color: ${({ bordercolor }) => bordercolor};
+    box-shadow: ${(props) => props.theme.shadows.shadow};
+    outline: 0px solid white;
   }
 `;
 export const Select = styled.select`
@@ -104,7 +108,8 @@ export const Select = styled.select`
   &:focus {
     border: ${(props) => props.theme.borders.bold};
     /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
-    /* border-color: ${({ bordercolor }) => bordercolor}; */
+    border-color: ${({ bordercolor }) => bordercolor};
+    box-shadow: ${(props) => props.theme.shadows.shadow};
   }
 `;
 

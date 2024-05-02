@@ -151,6 +151,7 @@ export const validationColor = (errors, values, defaultColor = "#000000") => {
   ) {
     return "#F6C23E";
   }
+  // console.log(values ? (errors && "#E74A3B") || "#3CBC81" : defaultColor);
   // Перевіряє чи є щось у інпуті, якщо є то перевіряємо чи є помилка
   return values ? (errors && "#E74A3B") || "#3CBC81" : defaultColor;
 };
