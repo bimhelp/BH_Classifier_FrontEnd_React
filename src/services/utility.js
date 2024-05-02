@@ -202,10 +202,3 @@ export function makeOptions(array) {
     label: category.DescriptionUA,
   }));
 }
-
-export function scrollTo(ref) {
-  // console.log("ref", ref.current);
-  // const { top } = ref.current.getBoundingClientRect();
-  // console.log("top: ", top);
-  // window.scrollTo({ behavior: "smooth", top });
-}
