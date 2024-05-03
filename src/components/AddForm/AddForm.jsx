@@ -39,7 +39,6 @@ const AddForm = ({ onClose, id, createMaterial }) => {
     DescriptionEN: "",
     PriceUAH: "",
     Unit: "",
-    Dimensions: "",
     Length: "",
     Width: "",
     Height: "",
@@ -55,40 +54,45 @@ const AddForm = ({ onClose, id, createMaterial }) => {
     ConsumptionPer1m: "",
     ConsumptionPer1t: "",
     OwnerBarcode: "",
+    Comment: "",
   };
 
   // Масив для рендеру інпутів
   const inputs = [
     {
-      label: "Розміри",
-      id: "Dimensions",
-    },
-    {
-      label: "Довжина",
+      label: "Довжина, мм",
       id: "Length",
     },
     {
-      label: "Щільність",
+      label: "Ширина, мм",
+      id: "Width",
+    },
+    {
+      label: "Висота, мм",
+      id: "Height",
+    },
+    {
+      label: "Щільність, кг/м3",
       id: "Density",
     },
     {
-      label: "Вага",
+      label: "Вага, кг",
       id: "WeightElement",
     },
     {
-      label: "Периметр",
+      label: "Периметр, мм",
       id: "Perimeter",
     },
     {
-      label: "Площа",
+      label: "Площа, м2",
       id: "Area",
     },
     {
-      label: "Об'єм",
+      label: "Об'єм, м3",
       id: "Volume",
     },
     {
-      label: "Коефіціент",
+      label: "Коефіціент витрати",
       id: "WriteOffCoefficient",
     },
     {
@@ -121,12 +125,12 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   const addElementSchema = yup.object().shape({
     DescriptionUA: yup
       .string()
-      .min(3, "Занадто кородкий опис")
+      .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис")
       .required("Опис обов'язкове поле"),
     DescriptionEN: yup
       .string()
-      .min(3, "Занадто кородкий опис")
+      .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
     PriceUAH: yup
       .mixed()
@@ -165,52 +169,173 @@ const AddForm = ({ onClose, id, createMaterial }) => {
       .min(1, "Мінімум один символ")
       .max(1000000, "Занадто велике число"),
     Density: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     WeightElement: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     Perimeter: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     Area: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     Volume: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     WriteOffCoefficient: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     Consumption: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     ConsumptionPer1m2: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     ConsumptionPer1m3: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     ConsumptionPer1m: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     ConsumptionPer1t: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
+      .mixed()
+      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
+        // Перевірка чи value є числом або строкою, яку можна перетворити на число
+        if (isNaN(value) || value === "" || value === null) {
+          return false; // Повертає false якщо значення не є числом або пусте
+        }
+
+        // Перевірка чи value є десятковим або цілим числом
+        const isDecimalOrInteger =
+          typeof value === "number" ||
+          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
+
+        return isDecimalOrInteger;
+      }),
     OwnerBarcode: yup
       .string()
-      .min(3, "Занадто кородкий опис")
+      .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
   });
 
@@ -324,7 +449,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                     Оберіть одиницю виміру
                   </option>
                   <option value="pcs.">Штука</option>
-                  <option value="m">Метр</option>
+                  <option value="m">Метр погонний</option>
                   <option value="m2">Метр квадратний</option>
                   <option value="m3">Метр кубічний</option>
                   <option value="t">Тона</option>
@@ -395,6 +520,25 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                     </InputWrapper>
                   ))}
                 </InputGroup>
+                <DescriptionWrapper>
+                  <label htmlFor="Comment">Коментар</label>
+                  <TextArea
+                    name="Comment"
+                    id="Comment"
+                    placeholder="Введіть коментар"
+                    type="text"
+                    bordercolor={validationColor(
+                      props.errors.Comment,
+                      props.values.Comment
+                    )}
+                  />
+                  <ErrorMessage
+                    name="Comment"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </DescriptionWrapper>
               </>
             )}
             <Button type="submit">Додати</Button>
