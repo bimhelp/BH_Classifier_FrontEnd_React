@@ -19,6 +19,7 @@ export const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  outline: 1px solid teal;
 `;
 
 export const TextArea = styled(Field)`
@@ -52,10 +53,11 @@ export const TextArea = styled(Field)`
 `;
 
 export const InputWrapper = styled.div`
-  /* width: 100px; */
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
+  /* outline: 1px solid grey; */
+  position: relative;
 `;
 
 export const Input = styled(Field)`
@@ -118,11 +120,15 @@ export const InputGroup = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
+  /* outline: 1px solid tomato; */
+  margin-bottom: 20px;
+  justify-content: start;
 `;
 
 export const ErrorMessageStyled = styled.div`
   color: ${(props) => props.theme.colors.invalid};
   position: absolute;
-  right: 50px;
+  font-size: ${(props) => props.theme.fontSizes.s};
+  bottom: -25px;
 `;

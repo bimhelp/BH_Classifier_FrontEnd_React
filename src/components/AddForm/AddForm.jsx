@@ -133,237 +133,33 @@ const AddForm = ({ onClose, id, createMaterial }) => {
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
     PriceUAH: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      })
+      .number()
+      .typeError("Введіть число")
+      .positive()
       .required("Ціна обов'язкове поле"),
     Unit: yup
       .string()
       .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
       .required("Одиниці виміру обов'язкове поле"),
-    Dimensions: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
-    Length: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
-    Width: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
-    Height: yup
-      .number()
-      .min(1, "Мінімум один символ")
-      .max(1000000, "Занадто велике число"),
-    Density: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    WeightElement: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    Perimeter: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    Area: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    Volume: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    WriteOffCoefficient: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    Consumption: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    ConsumptionPer1m2: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    ConsumptionPer1m3: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    ConsumptionPer1m: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
-    ConsumptionPer1t: yup
-      .mixed()
-      .test("is-valid-number", "Введіть число (розділювач крапка)", (value) => {
-        // Перевірка чи value є числом або строкою, яку можна перетворити на число
-        if (isNaN(value) || value === "" || value === null) {
-          return false; // Повертає false якщо значення не є числом або пусте
-        }
-
-        // Перевірка чи value є десятковим або цілим числом
-        const isDecimalOrInteger =
-          typeof value === "number" ||
-          (typeof value === "string" && /^\d+(\.\d+)?$/.test(value));
-
-        return isDecimalOrInteger;
-      }),
+    Length: yup.number().typeError("Введіть число").positive(),
+    Width: yup.number().typeError("Введіть число").positive(),
+    Height: yup.number().typeError("Введіть число").positive(),
+    Density: yup.number().typeError("Введіть число").positive(),
+    WeightElement: yup.number().typeError("Введіть число").positive(),
+    Perimeter: yup.number().typeError("Введіть число").positive(),
+    Area: yup.number().typeError("Введіть число").positive(),
+    Volume: yup.number().typeError("Введіть число").positive(),
+    WriteOffCoefficient: yup.number().typeError("Введіть число").positive(),
+    Consumption: yup.number().typeError("Введіть число").positive(),
+    ConsumptionPer1m2: yup.number().typeError("Введіть число").positive(),
+    ConsumptionPer1m3: yup.number().typeError("Введіть число").positive(),
+    ConsumptionPer1m: yup.number().typeError("Введіть число").positive(),
+    ConsumptionPer1t: yup.number().typeError("Введіть число").positive(),
     OwnerBarcode: yup
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
   });
-
-  // Відповідає за оновлення стану (значення в інпуті)
-  // const handleChange = () => {
-  //   // Функція зміни розміру інпута description
-  //   if (textAreaRef.current) {
-  //     textAreaRef.current.style.height = 0; // Автоматична висота
-  //     textAreaRef.current.style.height = `${
-  //       textAreaRef.current.scrollHeight - 16
-  //     }px`; // Встановлення висоти
-  //   }
-  // };
-
-  // // Запит в базу на додавання матеріалу
-  // async function addMaterial(newMaterial) {
-  //   const controller = new AbortController();
-  //   try {
-  //     const response = await addElement(newMaterial, controller.signal);
-  //     console.log("response: ", response);
-  //   } catch (error) {
-  //     toast.error("Не вдалось додати матеріал");
-  //   }
-  //   addElement(newMaterial);
-  //   return () => {
-  //     controller.abort();
-  //   };
-  // }
 
   const handleSubmit = (values, actions) => {
     // console.log("values: ", values);
