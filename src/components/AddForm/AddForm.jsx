@@ -141,20 +141,62 @@ const AddForm = ({ onClose, id, createMaterial }) => {
       .string()
       .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
       .required("Одиниці виміру обов'язкове поле"),
-    Length: yup.number().typeError("Введіть число").positive(),
-    Width: yup.number().typeError("Введіть число").positive(),
-    Height: yup.number().typeError("Введіть число").positive(),
-    Density: yup.number().typeError("Введіть число").positive(),
-    WeightElement: yup.number().typeError("Введіть число").positive(),
-    Perimeter: yup.number().typeError("Введіть число").positive(),
-    Area: yup.number().typeError("Введіть число").positive(),
-    Volume: yup.number().typeError("Введіть число").positive(),
-    WriteOffCoefficient: yup.number().typeError("Введіть число").positive(),
-    Consumption: yup.number().typeError("Введіть число").positive(),
-    ConsumptionPer1m2: yup.number().typeError("Введіть число").positive(),
-    ConsumptionPer1m3: yup.number().typeError("Введіть число").positive(),
-    ConsumptionPer1m: yup.number().typeError("Введіть число").positive(),
-    ConsumptionPer1t: yup.number().typeError("Введіть число").positive(),
+    Length: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Width: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Height: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Density: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    WeightElement: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Perimeter: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Area: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Volume: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    WriteOffCoefficient: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    Consumption: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    ConsumptionPer1m2: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    ConsumptionPer1m3: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    ConsumptionPer1m: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
+    ConsumptionPer1t: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
     OwnerBarcode: yup
       .string()
       .min(3, "Занадто короткий опис")
@@ -303,8 +345,8 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                         name={id}
                         id={id}
                         bordercolor={validationColor(
-                          props.errors[{ id }],
-                          props.values[{ id }]
+                          props.errors[id],
+                          props.values[id]
                         )}
                       />
                       <ErrorMessage
@@ -337,7 +379,12 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                 </DescriptionWrapper>
               </>
             )}
-            <Button type="submit">Додати</Button>
+            <Button
+              type="submit"
+              disabled={Object.keys(props.errors).length > 0}
+            >
+              Додати
+            </Button>
           </StyledForm>
         )}
       </Formik>
