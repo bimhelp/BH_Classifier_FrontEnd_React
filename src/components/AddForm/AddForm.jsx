@@ -144,15 +144,19 @@ const AddForm = ({ onClose, id, createMaterial }) => {
     Length: yup
       .number()
       .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
+      .positive("Число повинне бути додатним")
+      .integer("Число повинне бути цілим"),
     Width: yup
       .number()
       .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
+      .positive("Число повинне бути додатним")
+      .integer("Число повинне бути цілим"),
+
     Height: yup
       .number()
       .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
+      .positive("Число повинне бути додатним")
+      .integer("Число повинне бути цілим"),
     Density: yup
       .number()
       .typeError("Введіть число")
@@ -164,7 +168,8 @@ const AddForm = ({ onClose, id, createMaterial }) => {
     Perimeter: yup
       .number()
       .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
+      .positive("Число повинне бути додатним")
+      .integer("Число повинне бути цілим"),
     Area: yup
       .number()
       .typeError("Введіть число")
