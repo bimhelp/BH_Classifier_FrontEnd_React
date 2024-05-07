@@ -8,7 +8,8 @@ export const StyledForm = styled(Form)`
   align-items: center;
   margin-bottom: 15px;
   padding: 15px;
-  padding-left: 30px;
+  padding-left: 15px;
+  padding-top: 25px;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: ${(props) => props.theme.shadows.full};
@@ -60,7 +61,10 @@ export const InputWrapper = styled.div`
   margin-bottom: 10px;
   /* outline: 1px solid grey; */
   position: relative;
-  /* flex-basis: calc((100% - 3 * 10px) / 4); */
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    width: auto;
+  }
 `;
 
 export const Input = styled(Field)`

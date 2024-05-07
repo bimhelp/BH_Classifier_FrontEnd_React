@@ -140,7 +140,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
     Unit: yup
       .string()
       .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
-      .required("Одиниці виміру обов'язкове поле"),
+      .required("Оберіть одиниці виміру"),
     Length: yup
       .number()
       .typeError("Введіть число")

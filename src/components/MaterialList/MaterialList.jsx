@@ -81,6 +81,7 @@ const MaterialList = ({ items, query }) => {
       try {
         const response = await addMaterial(newMaterial, controller.signal);
         // console.log("new material: ", response.data);
+        toast.success("Матеріал успішно створено");
         setNewMaterial(response.data);
       } catch (error) {
         toast.error("Не вдалось додати матеріал");
