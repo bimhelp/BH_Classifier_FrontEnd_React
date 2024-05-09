@@ -14,11 +14,7 @@ const MaterialList = ({ items, query }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [newMaterial, setNewMaterial] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDeleted, setIsDeleted] = useState(false);
-
-  useEffect(() => {
-    console.log("Mouting phase: Material List");
-  }, []);
+  const [curentItems, setCurrentItems] = useState(items);
 
   // Запит по під категорії
   useEffect(() => {
@@ -40,7 +36,6 @@ const MaterialList = ({ items, query }) => {
     }
 
     if (!selectedId) {
-      console.log("return");
       return;
     }
     subCategory(selectedId);
@@ -48,7 +43,7 @@ const MaterialList = ({ items, query }) => {
     return () => {
       controller.abort();
     };
-  }, [selectedId, newMaterial, setSubCategories, isDeleted]);
+  }, [selectedId, newMaterial, setSubCategories]);
 
   // Створення класів для кольорів
   const level = useMemo(() => {
@@ -98,14 +93,14 @@ const MaterialList = ({ items, query }) => {
   async function handleDelete(id) {
     try {
       const result = await removeMaterial(id);
-      console.log("result: ", result.data);
       if (result) {
         toast.info("Матеріал успішно видалений");
-        setIsDeleted(true);
+        setCurrentItems(
+          curentItems.filter((category) => category._id !== result.data._id)
+        );
       }
     } catch (error) {
       toast.error("Не вдалось видалити  матеріал");
-      setIsDeleted(false);
     }
   }
 
@@ -113,7 +108,7 @@ const MaterialList = ({ items, query }) => {
     <>
       <div>
         <List level={level}>
-          {items.map((item) => (
+          {curentItems.map((item) => (
             <Item key={item._id}>
               {/* якщо вибраний елемент */}
               {selectedId === item._id ? (

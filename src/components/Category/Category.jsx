@@ -48,10 +48,6 @@ const Category = ({
   const { role } = useContext(context);
 
   useEffect(() => {
-    console.log("Mouting phase: Category");
-  }, []);
-
-  useEffect(() => {
     setLevel(createLevel(ElementNestingLevel));
   }, [ElementNestingLevel]);
 
