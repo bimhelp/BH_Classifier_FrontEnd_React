@@ -52,6 +52,15 @@ export async function addMaterial(newElement, signal) {
   return response.data;
 }
 
+// Оновити матеріал
+export async function updateMaterial(id, editedMaterial, signal) {
+  const response = await axios.put(`/material/${id}`, editedMaterial, {
+    signal,
+  });
+  // console.log("response: ", response);
+  return response.data;
+}
+
 // Оновити матеріалам parentId
 export async function updateParentId(id) {
   const response = await axios.patch(`/material/${id}/ParentElementId`);

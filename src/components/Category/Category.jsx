@@ -10,6 +10,7 @@ import { FaSquarePlus } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -27,6 +28,7 @@ import {
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
+  element,
   element: {
     _id,
     ParentElementId,
@@ -42,10 +44,11 @@ const Category = ({
   isSelected,
   handleDelete,
   createMaterial,
+  editMaterial,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
-  const [editForm, setEditForm] = useState(false);
+  const [editFormVisible, setEditFormVisible] = useState(false);
   const { role } = useContext(context);
 
   useEffect(() => {
@@ -62,24 +65,24 @@ const Category = ({
       setAddFormVisible(null);
     } else {
       setAddFormVisible(id);
-      setEditForm(false);
     }
   }
   // Відкриття-закриття форми редагування
   function toggleEditeForm(id) {
-    console.log("edit");
-    if (addFormVisible === id) {
-      setAddFormVisible(null);
-      setEditForm(false);
+    if (editFormVisible === id) {
+      setEditFormVisible(null);
     } else {
-      setAddFormVisible(id);
-      setEditForm(true);
+      setEditFormVisible(id);
     }
   }
 
-  // Закриття форми
-  function closeForm() {
+  // Закриття форми додавання
+  function closeAddForm() {
     setAddFormVisible(null);
+  }
+  // Закриття форми редагування
+  function closeEditForm() {
+    setEditFormVisible(null);
   }
 
   return (
@@ -185,10 +188,20 @@ const Category = ({
           id={_id}
           Code={Code}
           ParentElementId={ParentElementId}
-          onClose={() => closeForm()}
+          onClose={() => closeAddForm()}
           createMaterial={createMaterial}
-          isEdit={editForm}
+          element={element}
         ></AddForm>
+      )}
+      {editFormVisible && (
+        <EditMaterialForm
+          id={_id}
+          Code={Code}
+          ParentElementId={ParentElementId}
+          onClose={() => closeEditForm()}
+          editMaterial={editMaterial}
+          element={element}
+        ></EditMaterialForm>
       )}
       {isSelected && <SubList>{children}</SubList>}
     </>

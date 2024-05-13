@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 // functions
-import { addMaterial, getByParentId, removeMaterial } from "../../services";
+import {
+  addMaterial,
+  updateMaterial,
+  getByParentId,
+  removeMaterial,
+} from "../../services";
 import { createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
@@ -88,13 +93,49 @@ const MaterialList = ({ items, query }) => {
     };
   }
 
+  // Редагування матеріалу
+  function editMaterial(id, editedMaterial) {
+    const controller = new AbortController();
+    async function edit(id, editedMaterial) {
+      try {
+        const response = await updateMaterial(
+          id,
+          editedMaterial,
+          controller.signal
+        );
+        setCurrentItems(
+          curentItems.map((item) => {
+            if (item._id === id) {
+              return {
+                ...response.data,
+              };
+            }
+            return item;
+          })
+        );
+        // console.log("response.data: ", response.data);
+        toast.success("Матеріал успішно оновлено");
+      } catch (error) {
+        toast.error("Не вдалось оновити матеріал");
+      }
+    }
+    edit(id, editedMaterial);
+    return () => {
+      controller.abort();
+    };
+  }
+  // Відкриття меню підтвердження
+  const confirmDelete = (id) => {
+    setConfirmOpen(id);
+  };
+
+  // Тогл меню підтвердження
   const toggleConfirm = () => {
     setConfirmOpen(!confirmOpen);
   };
 
   // Видалення матеріалу
   async function handleDelete(id) {
-    console.log(id);
     try {
       const result = await removeMaterial(id);
       if (result) {
@@ -106,12 +147,9 @@ const MaterialList = ({ items, query }) => {
       }
     } catch (error) {
       toast.error("Не вдалось видалити  матеріал");
+    } finally {
     }
   }
-
-  const confirmDelete = (id) => {
-    setConfirmOpen(id);
-  };
 
   return (
     <>
@@ -128,6 +166,7 @@ const MaterialList = ({ items, query }) => {
                   isSelected={selectedId === item._id}
                   handleDelete={confirmDelete}
                   createMaterial={createMaterial}
+                  editMaterial={editMaterial}
                 >
                   {isLoading ? (
                     <BarLoader color="#125b56" width="100%" />
@@ -142,6 +181,7 @@ const MaterialList = ({ items, query }) => {
                   query={query}
                   handleDelete={confirmDelete}
                   createMaterial={createMaterial}
+                  editMaterial={editMaterial}
                 ></Category>
               )}
             </Item>

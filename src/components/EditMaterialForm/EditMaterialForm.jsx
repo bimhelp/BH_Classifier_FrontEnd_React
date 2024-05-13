@@ -16,9 +16,9 @@ import {
   DescriptionWrapper,
   ErrorMessageStyled,
   Select,
-} from "./AddForm.styled";
+} from "./EditMaterialForm.styled";
 
-const AddForm = ({ onClose, id, createMaterial }) => {
+const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
   // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
 
   const [additionalFields, setAdditionalFields] = useState(false);
@@ -28,30 +28,6 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   function toggleAdditionalFields() {
     setAdditionalFields(!additionalFields);
   }
-
-  // Початкові значення
-  const initialValues = {
-    DescriptionUA: "",
-    DescriptionEN: "",
-    PriceUAH: "",
-    Unit: "",
-    Length: "",
-    Width: "",
-    Height: "",
-    Density: "",
-    WeightElement: "",
-    Perimeter: "",
-    Area: "",
-    Volume: "",
-    WriteOffCoefficient: "",
-    Consumption: "",
-    ConsumptionPer1m2: "",
-    ConsumptionPer1m3: "",
-    ConsumptionPer1m: "",
-    ConsumptionPer1t: "",
-    OwnerBarcode: "",
-    Comment: "",
-  };
 
   // Масив для рендеру інпутів
   const inputs = [
@@ -216,7 +192,8 @@ const AddForm = ({ onClose, id, createMaterial }) => {
       ...filteredValues,
     };
 
-    createMaterial(additionalElement);
+    editMaterial(id, additionalElement);
+
     // Очистка форми
     resetForm();
     onClose();
@@ -224,9 +201,9 @@ const AddForm = ({ onClose, id, createMaterial }) => {
 
   return (
     <>
-      <h2>Додати</h2>
+      <h2>Редагувати</h2>
       <Formik
-        initialValues={initialValues}
+        initialValues={element}
         validationSchema={addElementSchema}
         onSubmit={handleSubmit}
       >
@@ -382,7 +359,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
               type="submit"
               disabled={Object.keys(props.errors).length > 0}
             >
-              Додати
+              Редагувати
             </Button>
           </StyledForm>
         )}
@@ -392,4 +369,4 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   );
 };
 
-export default AddForm;
+export default EditMaterialForm;
