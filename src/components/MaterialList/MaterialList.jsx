@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-
 // functions
 import { addMaterial, getByParentId, removeMaterial } from "../../services";
 import { createLevel } from "../../services";
@@ -8,6 +7,8 @@ import Category from "../Category/Category";
 import { List, Item } from "./MaterialList.styled";
 import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
+import { Button } from "../Button/Button";
+import Confirm from "../Confirm/Confirm";
 
 const MaterialList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -15,6 +16,7 @@ const MaterialList = ({ items, query }) => {
   const [newMaterial, setNewMaterial] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [curentItems, setCurrentItems] = useState(items);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   // Запит по під категорії
   useEffect(() => {
@@ -25,7 +27,6 @@ const MaterialList = ({ items, query }) => {
       try {
         const response = await getByParentId(selectedId, controller.signal);
         // console.log("response: ", response.data);
-
         setSubCategories(response.data);
       } catch (error) {
         toast.error("Не вдалось завантажити підкагеторії");
@@ -75,7 +76,6 @@ const MaterialList = ({ items, query }) => {
     async function createMaterial(newMaterial) {
       try {
         const response = await addMaterial(newMaterial, controller.signal);
-        // console.log("new material: ", response.data);
         toast.success("Матеріал успішно створено");
         setNewMaterial(response.data);
       } catch (error) {
@@ -86,11 +86,15 @@ const MaterialList = ({ items, query }) => {
     return () => {
       controller.abort();
     };
-
-    // setMaterialCandidate(material);
   }
+
+  const toggleConfirm = () => {
+    setConfirmOpen(!confirmOpen);
+  };
+
   // Видалення матеріалу
   async function handleDelete(id) {
+    console.log(id);
     try {
       const result = await removeMaterial(id);
       if (result) {
@@ -98,11 +102,16 @@ const MaterialList = ({ items, query }) => {
         setCurrentItems(
           curentItems.filter((category) => category._id !== result.data._id)
         );
+        setConfirmOpen(false);
       }
     } catch (error) {
       toast.error("Не вдалось видалити  матеріал");
     }
   }
+
+  const confirmDelete = (id) => {
+    setConfirmOpen(id);
+  };
 
   return (
     <>
@@ -117,7 +126,7 @@ const MaterialList = ({ items, query }) => {
                   selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
                   isSelected={selectedId === item._id}
-                  handleDelete={handleDelete}
+                  handleDelete={confirmDelete}
                   createMaterial={createMaterial}
                 >
                   {isLoading ? (
@@ -131,7 +140,7 @@ const MaterialList = ({ items, query }) => {
                   element={item}
                   selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
-                  handleDelete={handleDelete}
+                  handleDelete={confirmDelete}
                   createMaterial={createMaterial}
                 ></Category>
               )}
@@ -139,92 +148,18 @@ const MaterialList = ({ items, query }) => {
           ))}
         </List>
       </div>
+      {confirmOpen && (
+        <Confirm onClose={toggleConfirm} title="Ви точно хочете видалити?">
+          <>
+            <Button onClick={() => handleDelete(confirmOpen)} role="warning">
+              Delete
+            </Button>
+            <Button onClick={toggleConfirm}>Cancel</Button>
+          </>
+        </Confirm>
+      )}
     </>
   );
 };
 
 export default MaterialList;
-
-// import React, { useState, useMemo } from "react";
-// import { getByParentId, removeMaterial } from "../../services";
-// import { createLevel } from "../../services";
-// import Category from "../Category/Category";
-// import { List, Item } from "./MaterialList.styled";
-// import { toast } from "react-toastify";
-// import { BarLoader } from "react-spinners";
-// import { useEffect } from "react";
-
-// const MaterialList = ({ items, query }) => {
-//   const [subCategories, setSubCategories] = useState([]);
-//   const [selectedId, setSelectedId] = useState(null);
-//   const [isLoading, setIsLoading] = useState(false);
-
-//   useEffect(() => {
-//     console.log("Mouting phase: same when componentDidMount runs");
-//   }, []);
-
-//   // Створення класів для кольорів
-//   const level = useMemo(() => {
-//     if (items.length > 0) {
-//       return createLevel(items[0].ElementNestingLevel);
-//     }
-//     return null;
-//   }, [items]);
-
-//   // Обробник події кліку на елементі списку
-//   const handleItemClick = async (id) => {
-//     if (id === selectedId) {
-//       // Закриття відкритого елемента
-//       setSelectedId(null);
-//       setSubCategories([]);
-//     } else {
-//       // Відкриття нового елемента
-//       setSelectedId(id);
-//       setIsLoading(true);
-//       try {
-//         const response = await getByParentId(id);
-//         setSubCategories(response.data);
-//       } catch (error) {
-//         toast.error("Не вдалось завантажити підкагеторії");
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     }
-//   };
-
-//   // Видалення матеріалу
-//   const handleDelete = async (id) => {
-//     try {
-//       const result = await removeMaterial(id);
-//       if (result) {
-//         // Оновлення списку після видалення
-//         setSubCategories(subCategories.filter((element) => element._id !== id));
-//       }
-//     } catch (error) {
-//       toast.error("Не вдалось видалити матеріал");
-//     }
-//   };
-
-//   return (
-//     <List level={level}>
-//       {items.map((item) => (
-//         <Item key={item._id}>
-//           <Category
-//             element={item}
-//             isSelected={selectedId === item._id}
-//             handleItemClick={() => handleItemClick(item._id)}
-//             query={query}
-//             handleDelete={() => handleDelete(item._id)}
-//           >
-//             {isLoading ? <BarLoader color="#125b56" width="100%" /> : null}
-//             {selectedId === item._id ? (
-//               <MaterialList items={subCategories} query={query} />
-//             ) : null}
-//           </Category>
-//         </Item>
-//       ))}
-//     </List>
-//   );
-// };
-
-// export default MaterialList;

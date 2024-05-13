@@ -20,7 +20,6 @@ export const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
-  /* outline: 1px solid teal; */
   position: relative;
 `;
 
@@ -37,7 +36,6 @@ export const TextArea = styled(Field)`
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: ${(props) => props.theme.colors.black};
-  /* min-height: 10px; */
   height: 21px;
   resize: none;
   /* @media screen and (min-width: 480px) {
@@ -59,7 +57,6 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-  /* outline: 1px solid grey; */
   position: relative;
   width: 100%;
   @media screen and (min-width: 480px) {
@@ -76,7 +73,6 @@ export const Input = styled(Field)`
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.02em;
-  /* padding: 12px 12px 12px 40px; */
   padding: 8px;
   color: ${(props) => props.theme.colors.black};
 
@@ -88,7 +84,6 @@ export const Input = styled(Field)`
   &:hover,
   &:focus {
     border: ${(props) => props.theme.borders.bold};
-    /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
     border-color: ${({ bordercolor }) => bordercolor};
     box-shadow: ${(props) => props.theme.shadows.shadow};
     outline: 0px solid white;
@@ -104,7 +99,6 @@ export const Select = styled.select`
   line-height: 1.5;
   height: 41px;
   letter-spacing: -0.02em;
-  /* padding: 12px 12px 12px 40px; */
   padding: 4px;
   color: ${(props) => props.theme.colors.black};
 
@@ -116,7 +110,6 @@ export const Select = styled.select`
   &:hover,
   &:focus {
     border: ${(props) => props.theme.borders.bold};
-    /* background-color: ${(props) => props.theme.colors.backgroundWhite}; */
     border-color: ${({ bordercolor }) => bordercolor};
     box-shadow: ${(props) => props.theme.shadows.shadow};
   }
@@ -129,8 +122,6 @@ export const InputGroup = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
-  /* outline: 1px solid tomato; */
-  margin-bottom: 20px;
 `;
 
 export const ErrorMessageStyled = styled.div`

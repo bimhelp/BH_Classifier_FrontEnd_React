@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import AddForm from "../AddForm/AddForm";
 import { authContext as context } from "../../context/authContext";
 import { createLevel } from "../../services";
 import { toast } from "react-toastify";
@@ -7,7 +8,8 @@ import { IoIosCopy } from "react-icons/io";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaSquarePlus } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
-import AddForm from "../AddForm/AddForm";
+import { hiLight } from "../../services";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -22,8 +24,6 @@ import {
   Card,
   ItemMenu,
 } from "./Category.styled";
-import { hiLight } from "../../services";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -45,6 +45,7 @@ const Category = ({
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
+  const [editForm, setEditForm] = useState(false);
   const { role } = useContext(context);
 
   useEffect(() => {
@@ -55,21 +56,28 @@ const Category = ({
     selectCategory(event);
   }
 
-  function addItem(event, id) {
-    // console.log("event: ", event.currentTarget.id);
-
-    toggleAddForm(id);
-  }
-
   // Відкриття-закриття форми додавання
   function toggleAddForm(id) {
     if (addFormVisible === id) {
       setAddFormVisible(null);
     } else {
       setAddFormVisible(id);
+      setEditForm(false);
+    }
+  }
+  // Відкриття-закриття форми редагування
+  function toggleEditeForm(id) {
+    console.log("edit");
+    if (addFormVisible === id) {
+      setAddFormVisible(null);
+      setEditForm(false);
+    } else {
+      setAddFormVisible(id);
+      setEditForm(true);
     }
   }
 
+  // Закриття форми
   function closeForm() {
     setAddFormVisible(null);
   }
@@ -152,13 +160,14 @@ const Category = ({
               visibility="visible"
               variant="neutral"
               tooltip="Додати"
-              onClick={(event) => addItem(event, _id, Code, ParentElementId)}
+              onClick={() => toggleAddForm(_id)}
             ></IconButton>
             <IconButton
               icon={MdModeEditOutline}
               visibility="visible"
               variant="neutral"
               tooltip="Редагувати"
+              onClick={() => toggleEditeForm(_id)}
             ></IconButton>
             <IconButton
               icon={MdDelete}
@@ -178,6 +187,7 @@ const Category = ({
           ParentElementId={ParentElementId}
           onClose={() => closeForm()}
           createMaterial={createMaterial}
+          isEdit={editForm}
         ></AddForm>
       )}
       {isSelected && <SubList>{children}</SubList>}

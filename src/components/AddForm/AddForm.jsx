@@ -21,7 +21,7 @@ import {
 // import { addElement } from "../../services/api";
 // import { BarLoader } from "react-spinners";
 
-const AddForm = ({ onClose, id, createMaterial }) => {
+const AddForm = ({ onClose, id, createMaterial, isEdit }) => {
   // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
 
   const [additionalFields, setAdditionalFields] = useState(false);
@@ -209,29 +209,27 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   });
 
   const handleSubmit = (values, actions) => {
-    // console.log("values: ", values);
-    // console.log("notEmptyInputs:");
     const { resetForm } = actions;
 
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(([key, value]) => value !== "")
     );
-    // console.log("filteredValues: ", filteredValues);
 
     const additionalElement = {
       ParentElementId: id,
       ...filteredValues,
     };
 
-    // console.log("additionalElement: ", additionalElement);
     createMaterial(additionalElement);
 
     // Очистка форми
     resetForm();
+    onClose();
   };
 
   return (
     <>
+      {isEdit ? <h2>Редагувати</h2> : <h2>Додати</h2>}
       <Formik
         initialValues={initialValues}
         validationSchema={addElementSchema}
