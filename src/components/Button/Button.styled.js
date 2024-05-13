@@ -25,12 +25,8 @@ export const StyledButton = styled.button`
 
   border-color: ${(props) => props.theme.colors.black};
   background-color: ${(props) =>
-    props.role === "warning"
-      ? props.theme.colors.red
-      : props.theme.colors.accent};
-
-  background-color: ${(props) =>
-    props.disabled ? props.theme.colors.muted : props.theme.colors.accent};
+    (props.role === "warning" && props.theme.colors.red) ||
+    (props.disabled ? props.theme.colors.muted : props.theme.colors.accent)};
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
