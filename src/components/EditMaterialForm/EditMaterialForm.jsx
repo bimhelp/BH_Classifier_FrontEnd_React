@@ -16,6 +16,8 @@ import {
   DescriptionWrapper,
   ErrorMessageStyled,
   Select,
+  ButtonWrapper,
+  FormTitle,
 } from "./EditMaterialForm.styled";
 
 const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
@@ -141,11 +143,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
-    PriceUAH: yup
-      .number()
-      .typeError("Введіть число")
-      .positive()
-      .required("Ціна обов'язкове поле"),
+    PriceUAH: yup.number().typeError("Введіть число").positive(),
     Unit: yup
       .string()
       .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
@@ -218,9 +216,6 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
 
   const handleSubmit = (values, actions) => {
     const { resetForm } = actions;
-    console.log("id: ", id);
-    console.log("values: ", values);
-
     editMaterial(id, values);
 
     // Очистка форми
@@ -230,7 +225,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
 
   return (
     <>
-      <h2>Редагувати</h2>
+      <FormTitle>Редагувати</FormTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={addElementSchema}
@@ -257,55 +252,51 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-            <InputGroup>
-              <InputWrapper>
-                <label htmlFor="PriseUAH">Ціна в грн.</label>
-                <Input
-                  type="text"
-                  placeholder="Ціна"
-                  name="PriceUAH"
-                  id="PriceUAH"
-                  bordercolor={validationColor(
-                    props.errors.PriceUAH,
-                    props.values.PriceUAH
-                  )}
-                />
-                <ErrorMessage
-                  name="PriceUAH"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <label htmlFor="Unit">Одиниці виміру</label>
-                <Field
-                  as={Select}
-                  name="Unit"
-                  bordercolor={validationColor(
-                    props.errors.Unit,
-                    props.values.Unit
-                  )}
-                >
-                  <option value="" disabled hidden>
-                    Оберіть одиницю виміру
-                  </option>
-                  <option value="pcs.">Штука</option>
-                  <option value="m">Метр погонний</option>
-                  <option value="m2">Метр квадратний</option>
-                  <option value="m3">Метр кубічний</option>
-                  <option value="t">Тона</option>
-                  <option value="kg">Кілограм</option>
-                </Field>
 
-                <ErrorMessage
-                  name="Unit"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
-              </InputWrapper>
-            </InputGroup>
+            <InputWrapper>
+              <label htmlFor="Unit">Одиниці виміру</label>
+              <Field
+                as={Select}
+                name="Unit"
+                bordercolor={validationColor(
+                  props.errors.Unit,
+                  props.values.Unit
+                )}
+              >
+                <option value="" disabled hidden>
+                  Оберіть одиницю виміру
+                </option>
+                <option value="pcs.">Штука</option>
+                <option value="m">Метр погонний</option>
+                <option value="m2">Метр квадратний</option>
+                <option value="m3">Метр кубічний</option>
+                <option value="t">Тона</option>
+                <option value="kg">Кілограм</option>
+              </Field>
+
+              <ErrorMessage
+                name="Unit"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="PriseUAH">Ціна в грн.</label>
+              <Input
+                type="text"
+                placeholder="Ціна"
+                name="PriceUAH"
+                id="PriceUAH"
+                bordercolor={validationColor(
+                  props.errors.PriceUAH,
+                  props.values.PriceUAH
+                )}
+              />
+              <ErrorMessage
+                name="PriceUAH"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
+
             <IconButton
               type="button"
               visibility="visible"
@@ -384,12 +375,14 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
               </>
             )}
 
-            <Button
-              type="submit"
-              disabled={Object.keys(props.errors).length > 0}
-            >
-              Редагувати
-            </Button>
+            <ButtonWrapper>
+              <Button
+                type="submit"
+                disabled={Object.keys(props.errors).length > 0}
+              >
+                Редагувати
+              </Button>
+            </ButtonWrapper>
           </StyledForm>
         )}
       </Formik>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Form, Field } from "formik";
 
 export const StyledForm = styled(Form)`
-  margin-top: 15px;
+  margin-top: 5px;
   margin-left: 15px;
   margin-right: 15px;
   align-items: center;
@@ -16,6 +16,9 @@ export const StyledForm = styled(Form)`
   position: relative;
 `;
 
+export const FormTitle = styled.h2`
+  margin-left: 20px;
+`;
 export const DescriptionWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -129,4 +132,9 @@ export const ErrorMessageStyled = styled.div`
   position: absolute;
   font-size: ${(props) => props.theme.fontSizes.s};
   top: 65px;
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: end;
 `;

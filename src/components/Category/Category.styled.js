@@ -158,3 +158,26 @@ export const SubList = styled.div`
   animation: ${expandHeight} 0.5s ease-in-out;
   /* overflow: hidden; */
 `;
+
+export const Animation = styled.div`
+  &.fade-enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  &.fade-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  /* Використання спеціальних імен класів для анімації зникнення */
+  &.fade-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.fade-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+`;

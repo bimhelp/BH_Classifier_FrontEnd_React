@@ -11,6 +11,7 @@ import { MdDelete } from "react-icons/md";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -24,6 +25,7 @@ import {
   SubList,
   Card,
   ItemMenu,
+  Animation,
 } from "./Category.styled";
 
 // Компонент рендерить розмітку категорії і вкладені списки
@@ -183,27 +185,62 @@ const Category = ({
         )}
       </Card>
 
-      {addFormVisible && (
-        <AddForm
-          id={_id}
-          Code={Code}
-          ParentElementId={ParentElementId}
-          onClose={() => closeAddForm()}
-          createMaterial={createMaterial}
-          element={element}
-        ></AddForm>
-      )}
-      {editFormVisible && (
-        <EditMaterialForm
-          id={_id}
-          Code={Code}
-          ParentElementId={ParentElementId}
-          onClose={() => closeEditForm()}
-          editMaterial={editMaterial}
-          element={element}
-        ></EditMaterialForm>
-      )}
-      {isSelected && <SubList>{children}</SubList>}
+      <TransitionGroup>
+        {addFormVisible && (
+          <CSSTransition
+            in={addFormVisible}
+            classNames="fade"
+            timeout={300}
+            unmountOnExit
+          >
+            <Animation>
+              <AddForm
+                id={_id}
+                Code={Code}
+                ParentElementId={ParentElementId}
+                onClose={() => closeAddForm()}
+                createMaterial={createMaterial}
+                element={element}
+              />
+            </Animation>
+          </CSSTransition>
+        )}
+      </TransitionGroup>
+      <TransitionGroup>
+        {editFormVisible && (
+          <CSSTransition
+            in={addFormVisible}
+            classNames="fade"
+            timeout={300}
+            unmountOnExit
+          >
+            <Animation>
+              <EditMaterialForm
+                id={_id}
+                Code={Code}
+                ParentElementId={ParentElementId}
+                onClose={() => closeEditForm()}
+                editMaterial={editMaterial}
+                element={element}
+              />
+            </Animation>
+          </CSSTransition>
+        )}
+      </TransitionGroup>
+      <TransitionGroup>
+        {isSelected && (
+          <CSSTransition
+            in={addFormVisible}
+            classNames="fade"
+            timeout={300}
+            unmountOnExit
+          >
+            <Animation>
+              <SubList>{children}</SubList>
+            </Animation>
+          </CSSTransition>
+        )}
+      </TransitionGroup>
     </>
   );
 };
