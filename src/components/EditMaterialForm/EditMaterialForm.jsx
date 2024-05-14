@@ -24,6 +24,43 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["m", "m2", "m3", "t", "kg", "pcs."];
 
+  // Функція, що перевіряє значення на undefined і встановлює пустий рядок в разі потреби
+  const getFieldValue = (obj, fieldName) => {
+    if (
+      !obj ||
+      typeof obj[fieldName] === "undefined" ||
+      obj[fieldName] === null
+    ) {
+      return "";
+    } else {
+      return obj[fieldName];
+    }
+  };
+
+  // Створення об'єкта initialValues на основі element з пустими значеннями для undefined полів
+  const initialValues = {
+    DescriptionUA: getFieldValue(element, "DescriptionUA"),
+    DescriptionEN: getFieldValue(element, "DescriptionEN"),
+    PriceUAH: getFieldValue(element, "PriceUAH"),
+    Unit: getFieldValue(element, "Unit"),
+    Length: getFieldValue(element, "Length"),
+    Width: getFieldValue(element, "Width"),
+    Height: getFieldValue(element, "Height"),
+    Density: getFieldValue(element, "Density"),
+    WeightElement: getFieldValue(element, "WeightElement"),
+    Perimeter: getFieldValue(element, "Perimeter"),
+    Area: getFieldValue(element, "Area"),
+    Volume: getFieldValue(element, "Volume"),
+    WriteOffCoefficient: getFieldValue(element, "WriteOffCoefficient"),
+    Consumption: getFieldValue(element, "Consumption"),
+    ConsumptionPer1m2: getFieldValue(element, "ConsumptionPer1m2"),
+    ConsumptionPer1m3: getFieldValue(element, "ConsumptionPer1m3"),
+    ConsumptionPer1m: getFieldValue(element, "ConsumptionPer1m"),
+    ConsumptionPer1t: getFieldValue(element, "ConsumptionPer1t"),
+    OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
+    Comment: getFieldValue(element, "Comment"),
+  };
+
   // Показує апо приховує додаткові параметри
   function toggleAdditionalFields() {
     setAdditionalFields(!additionalFields);
@@ -123,7 +160,6 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
       .typeError("Введіть число")
       .positive("Число повинне бути додатним")
       .integer("Число повинне бути цілим"),
-
     Height: yup
       .number()
       .typeError("Введіть число")
@@ -182,17 +218,10 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
 
   const handleSubmit = (values, actions) => {
     const { resetForm } = actions;
+    console.log("id: ", id);
+    console.log("values: ", values);
 
-    const filteredValues = Object.fromEntries(
-      Object.entries(values).filter(([key, value]) => value !== "")
-    );
-
-    const additionalElement = {
-      ParentElementId: id,
-      ...filteredValues,
-    };
-
-    editMaterial(id, additionalElement);
+    editMaterial(id, values);
 
     // Очистка форми
     resetForm();
@@ -203,7 +232,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
     <>
       <h2>Редагувати</h2>
       <Formik
-        initialValues={element}
+        initialValues={initialValues}
         validationSchema={addElementSchema}
         onSubmit={handleSubmit}
       >
