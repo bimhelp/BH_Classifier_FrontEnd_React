@@ -12,6 +12,7 @@ import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+// import { IoCheckbox } from "react-icons/io5";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -150,7 +151,12 @@ const Category = ({
               </div>
             )}
             <Extended>
-              {Unit && <MaterialUnit>Одиниця виміру: {Unit} </MaterialUnit>}
+              {/* {Unit && <MaterialUnit>Одиниця виміру: {Unit} </MaterialUnit>} */}
+              {Unit && Unit !== "category" && (
+                <MaterialUnit>Одиниця виміру: {Unit}</MaterialUnit>
+              )}
+              {/* {Unit && Unit === "category" && <IoCheckbox />} */}
+
               {PriceUAH && (
                 <MaterialPrice>Ціна: {PriceUAH} &#8372;</MaterialPrice>
               )}

@@ -24,7 +24,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
 
   const [additionalFields, setAdditionalFields] = useState(false);
-  const unitTypes = ["m", "m2", "m3", "t", "kg", "pcs."];
+  const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
 
   // Показує апо приховує додаткові параметри
   function toggleAdditionalFields() {
@@ -263,6 +263,7 @@ const AddForm = ({ onClose, id, createMaterial }) => {
                 <option value="" disabled hidden>
                   Оберіть одиницю виміру
                 </option>
+                <option value="category">Категорія</option>
                 <option value="pcs.">Штука</option>
                 <option value="m">Метр погонний</option>
                 <option value="m2">Метр квадратний</option>

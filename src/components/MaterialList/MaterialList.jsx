@@ -103,6 +103,7 @@ const MaterialList = ({ items, query }) => {
           editedMaterial,
           controller.signal
         );
+        console.log("response: ", response);
         setCurrentItems(
           curentItems.map((item) => {
             if (item._id === id) {

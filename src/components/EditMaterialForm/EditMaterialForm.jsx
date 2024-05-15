@@ -24,7 +24,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
   // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
 
   const [additionalFields, setAdditionalFields] = useState(false);
-  const unitTypes = ["m", "m2", "m3", "t", "kg", "pcs."];
+  const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
 
   // Функція, що перевіряє значення на undefined і встановлює пустий рядок в разі потреби
   const getFieldValue = (obj, fieldName) => {
@@ -216,8 +216,18 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
 
   const handleSubmit = (values, actions) => {
     const { resetForm } = actions;
-    editMaterial(id, values);
+    const changedValues = Object.keys(values).reduce((acc, key) => {
+      if (values[key] !== initialValues[key]) {
+        acc[key] = values[key];
+      }
+      return acc;
+    }, {});
 
+    // console.log("values: ", values);
+    console.log("Змінені значення:", changedValues);
+
+    editMaterial(id, changedValues);
+    actions.setSubmitting(false); // Позначити, що обробка завершена
     // Очистка форми
     resetForm();
     onClose();
@@ -266,6 +276,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
                 <option value="" disabled hidden>
                   Оберіть одиницю виміру
                 </option>
+                <option value="category">Категорія</option>
                 <option value="pcs.">Штука</option>
                 <option value="m">Метр погонний</option>
                 <option value="m2">Метр квадратний</option>
