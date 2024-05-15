@@ -142,7 +142,9 @@ const MaterialList = ({ items, query }) => {
       if (result) {
         toast.info("Матеріал успішно видалений");
         setCurrentItems(
-          curentItems.filter((category) => category._id !== result.data._id)
+          curentItems.filter(
+            (category) => category._id !== result.data.material._id
+          )
         );
         setConfirmOpen(false);
       }

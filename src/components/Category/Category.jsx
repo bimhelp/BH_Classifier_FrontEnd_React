@@ -151,12 +151,10 @@ const Category = ({
               </div>
             )}
             <Extended>
-              {/* {Unit && <MaterialUnit>Одиниця виміру: {Unit} </MaterialUnit>} */}
               {Unit && Unit !== "category" && (
                 <MaterialUnit>Одиниця виміру: {Unit}</MaterialUnit>
               )}
               {/* {Unit && Unit === "category" && <IoCheckbox />} */}
-
               {PriceUAH && (
                 <MaterialPrice>Ціна: {PriceUAH} &#8372;</MaterialPrice>
               )}
