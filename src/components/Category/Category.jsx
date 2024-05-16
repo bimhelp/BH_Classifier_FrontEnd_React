@@ -200,7 +200,7 @@ const Category = ({
                 Code={Code}
                 ParentElementId={ParentElementId}
                 onClose={() => closeAddForm()}
-                createMaterial={create}
+                create={create}
                 element={element}
               />
             </Animation>
@@ -220,7 +220,7 @@ const Category = ({
                 Code={Code}
                 ParentElementId={ParentElementId}
                 onClose={() => closeEditForm()}
-                editMaterial={edit}
+                edit={edit}
                 element={element}
               />
             </Animation>

@@ -71,11 +71,16 @@ export async function updateParentId(id) {
 // Видалити матеріал
 export async function removeMaterial(id) {
   const response = await axios.delete(`/material/${id}`);
-  // console.log("response: ", response.data);
   return response.data;
 }
 
 // Services________________________________________________________
+
+// Додати сервіс
+export async function addService(newElement, signal) {
+  const response = await axios.post("/service", newElement, { signal });
+  return response.data;
+}
 
 // Отримати всі сервіси
 export async function getAllServices(signal) {

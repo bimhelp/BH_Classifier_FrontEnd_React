@@ -20,14 +20,9 @@ import {
   FormTitle,
 } from "./AddMaterialForm.styled";
 
-const AddMaterialForm = ({ onClose, id, createMaterial }) => {
+const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
-
-  // Показує апо приховує додаткові параметри
-  function toggleAdditionalFields() {
-    setAdditionalFields(!additionalFields);
-  }
 
   // Початкові значення
   const initialValues = {
@@ -118,7 +113,7 @@ const AddMaterialForm = ({ onClose, id, createMaterial }) => {
   ];
 
   // Схема валідації
-  const addElementSchema = yup.object().shape({
+  const addMaterialSchema = yup.object().shape({
     DescriptionUA: yup
       .string()
       .min(3, "Занадто короткий опис")
@@ -200,9 +195,16 @@ const AddMaterialForm = ({ onClose, id, createMaterial }) => {
       .max(500, "Занадто довкий опис"),
   });
 
+  // Показує апо приховує додаткові параметри
+  function toggleAdditionalFields() {
+    setAdditionalFields(!additionalFields);
+  }
+
   const handleSubmit = (values, actions) => {
+    // formik метод очистки форми
     const { resetForm } = actions;
 
+    // фільтрація заповнених полів
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(([key, value]) => value !== "")
     );
@@ -212,7 +214,7 @@ const AddMaterialForm = ({ onClose, id, createMaterial }) => {
       ...filteredValues,
     };
 
-    createMaterial(additionalElement);
+    create(additionalElement);
     // Очистка форми
     resetForm();
     onClose();
@@ -220,10 +222,10 @@ const AddMaterialForm = ({ onClose, id, createMaterial }) => {
 
   return (
     <>
-      <FormTitle>Додати</FormTitle>
+      <FormTitle>Додати матеріал</FormTitle>
       <Formik
         initialValues={initialValues}
-        validationSchema={addElementSchema}
+        validationSchema={addMaterialSchema}
         onSubmit={handleSubmit}
       >
         {(props) => (

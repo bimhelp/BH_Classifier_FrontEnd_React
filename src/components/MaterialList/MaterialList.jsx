@@ -78,7 +78,7 @@ const MaterialList = ({ items, query }) => {
     }
   }
 
-  // Додавання матеріалу
+  // Створення матеріалу
   function createMaterial(material) {
     const controller = new AbortController();
     async function createMaterial(newMaterial) {
@@ -87,7 +87,7 @@ const MaterialList = ({ items, query }) => {
         toast.success("Матеріал успішно створено");
         setNewMaterial(response.data);
       } catch (error) {
-        toast.error("Не вдалось додати матеріал");
+        toast.error("Не вдалось створити матеріал");
       }
     }
     createMaterial(material);

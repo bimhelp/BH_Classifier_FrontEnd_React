@@ -3,6 +3,8 @@ import React, { useState, useEffect, useMemo } from "react";
 // functions
 import { getServiceByParentId } from "../../services";
 import { createLevel } from "../../services";
+import { addService } from "../../services";
+
 // components
 import Category from "../Category/Category";
 import { List, Item } from "./ServiceList.styled";
@@ -15,9 +17,10 @@ const ServiceList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [newService, setNewService] = useState(null);
 
   useEffect(() => {
-    console.log("selectedId: ", selectedId);
+    // console.log("selectedId: ", selectedId);
   }, [selectedId]);
 
   // Запит по під категорії
@@ -42,7 +45,7 @@ const ServiceList = ({ items, query }) => {
     }
 
     if (!selectedId) {
-      console.log("return");
+      // console.log("return");
       return;
     }
     subCategory(selectedId);
@@ -50,7 +53,7 @@ const ServiceList = ({ items, query }) => {
     return () => {
       controller.abort();
     };
-  }, [selectedId]);
+  }, [selectedId, newService, setSubCategories]);
 
   const level = useMemo(() => {
     if (items.length > 0) {
@@ -69,10 +72,10 @@ const ServiceList = ({ items, query }) => {
   // Відкриття-закриття категорії
   function toggleCategory(id) {
     if (selectedId === id) {
-      console.log("set null");
+      // console.log("set null");
       setSelectedId(null);
     } else {
-      console.log("set", id);
+      // console.log("set", id);
       setSelectedId(id);
     }
   }
@@ -80,6 +83,21 @@ const ServiceList = ({ items, query }) => {
   // Створення сервісу
   function createService(service) {
     console.log("create service");
+
+    const controller = new AbortController();
+    async function createService(newService) {
+      try {
+        const response = await addService(newService, controller.signal);
+        toast.success("Послугу успішно створено");
+        setNewService(response.data);
+      } catch (error) {
+        toast.error("Не вдалось створити послугу");
+      }
+    }
+    createService(service);
+    return () => {
+      controller.abort();
+    };
   }
 
   // Редагування сервісу

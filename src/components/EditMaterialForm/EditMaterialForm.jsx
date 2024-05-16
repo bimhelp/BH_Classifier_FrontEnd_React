@@ -20,7 +20,7 @@ import {
   FormTitle,
 } from "./EditMaterialForm.styled";
 
-const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
+const EditMaterialForm = ({ element, onClose, id, edit }) => {
   // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
 
   const [additionalFields, setAdditionalFields] = useState(false);
@@ -226,7 +226,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
     // console.log("values: ", values);
     console.log("Змінені значення:", changedValues);
 
-    editMaterial(id, changedValues);
+    edit(id, changedValues);
     actions.setSubmitting(false); // Позначити, що обробка завершена
     // Очистка форми
     resetForm();
@@ -235,7 +235,7 @@ const EditMaterialForm = ({ element, onClose, id, editMaterial }) => {
 
   return (
     <>
-      <FormTitle>Редагувати</FormTitle>
+      <FormTitle>Редагувати матеріал: {element.DescriptionUA}</FormTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={addElementSchema}
