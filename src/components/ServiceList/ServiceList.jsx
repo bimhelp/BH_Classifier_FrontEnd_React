@@ -8,6 +8,8 @@ import Category from "../Category/Category";
 import { List, Item } from "./ServiceList.styled";
 import { BarLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import AddServiceForm from "../AddServiceForm/AddServiceForm";
+import EditServiceForm from "../EditServiceForm/EditServiceForm";
 
 const ServiceList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -58,9 +60,10 @@ const ServiceList = ({ items, query }) => {
   }, [items]);
 
   // Функція формує cpv код і тоглить відкриття категорії
-  const selectCategory = async (id, code) => {
-    // setSelectedCode(code);
-    toggleCategory(id);
+  const selectCategory = async (event, id) => {
+    if (event.target.tagName !== "path" && event.target.tagName !== "svg") {
+      toggleCategory(id);
+    }
   };
 
   // Відкриття-закриття категорії
@@ -74,6 +77,16 @@ const ServiceList = ({ items, query }) => {
     }
   }
 
+  // Створення сервісу
+  function createService(service) {
+    console.log("create service");
+  }
+
+  // Редагування сервісу
+  function editService() {
+    console.log("edit service");
+  }
+
   return (
     <>
       <List level={level}>
@@ -83,9 +96,13 @@ const ServiceList = ({ items, query }) => {
             {selectedId === item._id ? (
               <Category
                 element={item}
-                selectCategory={() => selectCategory(item._id, item.Code)}
+                selectCategory={(event) => selectCategory(event, item._id)}
                 query={query}
                 isSelected={selectedId === item._id}
+                addForm={AddServiceForm}
+                editForm={EditServiceForm}
+                create={createService}
+                edit={editService}
               >
                 {isLoading ? (
                   <BarLoader color="#125b56" width="100%" />
@@ -96,8 +113,12 @@ const ServiceList = ({ items, query }) => {
             ) : (
               <Category
                 element={item}
-                selectCategory={() => selectCategory(item._id, item.Code)}
+                selectCategory={(event) => selectCategory(event, item._id)}
                 query={query}
+                addForm={AddServiceForm}
+                editForm={EditServiceForm}
+                create={createService}
+                edit={editService}
               ></Category>
             )}
           </Item>
