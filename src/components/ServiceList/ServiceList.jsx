@@ -107,7 +107,7 @@ const ServiceList = ({ items, query }) => {
           editedService,
           controller.signal
         );
-        console.log("response: ", response);
+        // console.log("response: ", response);
         setCurrentItems(
           curentItems.map((item) => {
             if (item._id === id) {
@@ -143,7 +143,7 @@ const ServiceList = ({ items, query }) => {
   async function handleDelete(id) {
     try {
       const result = await removeService(id);
-      console.log("result: ", result);
+      // console.log("result: ", result);
       if (result) {
         toast.info("Послуга успішно видалена");
         setCurrentItems(

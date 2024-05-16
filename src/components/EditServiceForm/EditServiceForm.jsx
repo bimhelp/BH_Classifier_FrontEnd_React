@@ -84,6 +84,7 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
       }
       return acc;
     }, {});
+    // console.log("changedValues: ", changedValues);
 
     // Відправка даних у верхній компонент
     edit(id, changedValues);
