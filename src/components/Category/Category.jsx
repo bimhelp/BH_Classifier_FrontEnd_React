@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import AddForm from "../AddForm/AddForm";
 import { authContext as context } from "../../context/authContext";
 import { createLevel } from "../../services";
 import { toast } from "react-toastify";
@@ -10,7 +9,6 @@ import { FaSquarePlus } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 // import { IoCheckbox } from "react-icons/io5";
 import {
@@ -46,8 +44,10 @@ const Category = ({
   query,
   isSelected,
   handleDelete,
-  createMaterial,
-  editMaterial,
+  addForm: AddForm,
+  create,
+  editForm: EditForm,
+  edit,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
@@ -57,10 +57,6 @@ const Category = ({
   useEffect(() => {
     setLevel(createLevel(ElementNestingLevel));
   }, [ElementNestingLevel]);
-
-  function handleClick(event) {
-    selectCategory(event);
-  }
 
   // Відкриття-закриття форми додавання
   function toggleAddForm(id) {
@@ -90,7 +86,7 @@ const Category = ({
 
   return (
     <>
-      <Card onClick={handleClick}>
+      <Card onClick={selectCategory}>
         <CategoryWrapper level={level}>
           <CodeWrapper level={level}>
             <CopyToClipboard
@@ -105,7 +101,7 @@ const Category = ({
                 position="absolute"
                 variant="light"
                 tooltip="Копіювати"
-              ></IconButton>
+              />
             </CopyToClipboard>
             <CategoryCode>{Code}</CategoryCode>
           </CodeWrapper>
@@ -128,7 +124,7 @@ const Category = ({
                     position="absolute"
                     variant="dark"
                     tooltip="Копіювати"
-                  ></IconButton>
+                  />
                 </CopyToClipboard>
               </div>
             ) : (
@@ -161,6 +157,7 @@ const Category = ({
             </Extended>
           </DescriptionWrapper>
         </CategoryWrapper>
+
         {role === "admin" && (
           <ItemMenu>
             <IconButton
@@ -203,38 +200,36 @@ const Category = ({
                 Code={Code}
                 ParentElementId={ParentElementId}
                 onClose={() => closeAddForm()}
-                createMaterial={createMaterial}
+                createMaterial={create}
                 element={element}
               />
             </Animation>
           </CSSTransition>
         )}
-      </TransitionGroup>
-      <TransitionGroup>
+
         {editFormVisible && (
           <CSSTransition
-            in={addFormVisible}
+            in={editFormVisible}
             classNames="fade"
             timeout={300}
             unmountOnExit
           >
             <Animation>
-              <EditMaterialForm
+              <EditForm
                 id={_id}
                 Code={Code}
                 ParentElementId={ParentElementId}
                 onClose={() => closeEditForm()}
-                editMaterial={editMaterial}
+                editMaterial={edit}
                 element={element}
               />
             </Animation>
           </CSSTransition>
         )}
-      </TransitionGroup>
-      <TransitionGroup>
+
         {isSelected && (
           <CSSTransition
-            in={addFormVisible}
+            in={children}
             classNames="fade"
             timeout={300}
             unmountOnExit

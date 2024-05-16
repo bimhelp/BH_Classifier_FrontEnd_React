@@ -5,20 +5,10 @@ import { ToastContainer, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { PrivateRoute, PublicRoute } from "./services";
 
-// Компоненти
-// Public Pages
-// Завантаження всього додатку
-// import WelcomePage from "./pages/WelcomePage/WelcomePage";
-// import RegisterPage from "./pages/RegisterPage/RegisterPage";
-// import LogInPage from "./pages/LogInPage/LogInPage";
-// import ErrorPage from "./pages/ErrorPage/ErrorPage";
-// import TablePage from "./pages/TablePage/TablePage";
-// import ProjectsPage from "./pages/ProjectsPage/ProjectsPage";
-// import ProjectDetails from "./components/ProjectDetails/ProjectDetails";
 // Private Pages
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
-import AddItemPage from "./pages/AddItemPage/AddItemPage";
+// import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import Users from "./components/Users/Users";
 import Script from "./components/Script/Script";
 // Динамічне завантаження додатку
@@ -49,10 +39,10 @@ function App() {
             element={<PublicRoute component={<LogInPage />} />}
           />
           <Route path="cabinet" element={<CabinetPage />} />
-          <Route
+          {/* <Route
             path="materials"
             element={<PrivateRoute component={<AddItemPage />} />}
-          />
+          /> */}
           <Route
             path="projects"
             element={<PrivateRoute component={<ProjectsPage />} />}

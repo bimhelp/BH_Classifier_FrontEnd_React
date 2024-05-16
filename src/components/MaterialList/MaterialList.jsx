@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+
 // functions
 import {
   addMaterial,
@@ -14,6 +15,8 @@ import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
 import { Button } from "../Button/Button";
 import Confirm from "../Confirm/Confirm";
+import AddMaterialForm from "../AddMaterialForm/AddMaterialForm";
+import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
 
 const MaterialList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -168,8 +171,10 @@ const MaterialList = ({ items, query }) => {
                   query={query}
                   isSelected={selectedId === item._id}
                   handleDelete={confirmDelete}
-                  createMaterial={createMaterial}
-                  editMaterial={editMaterial}
+                  addForm={AddMaterialForm}
+                  editForm={EditMaterialForm}
+                  create={createMaterial}
+                  edit={editMaterial}
                 >
                   {isLoading ? (
                     <BarLoader color="#125b56" width="100%" />
@@ -183,8 +188,10 @@ const MaterialList = ({ items, query }) => {
                   selectCategory={(event) => selectCategory(event, item._id)}
                   query={query}
                   handleDelete={confirmDelete}
-                  createMaterial={createMaterial}
-                  editMaterial={editMaterial}
+                  addForm={AddMaterialForm}
+                  editForm={EditMaterialForm}
+                  create={createMaterial}
+                  edit={editMaterial}
                 ></Category>
               )}
             </Item>

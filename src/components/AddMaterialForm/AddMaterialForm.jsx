@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { validationColor } from "../../services/utility";
-import { Button, IconButton } from "../../components/Button/Button";
-import { CloseButton } from "../../components/Button/Button";
+import { Button, IconButton } from "../Button/Button";
+import { CloseButton } from "../Button/Button";
 import { CgClose } from "react-icons/cg";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
@@ -18,11 +18,9 @@ import {
   Select,
   ButtonWrapper,
   FormTitle,
-} from "./AddForm.styled";
+} from "./AddMaterialForm.styled";
 
-const AddForm = ({ onClose, id, createMaterial }) => {
-  // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
-
+const AddMaterialForm = ({ onClose, id, createMaterial }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
 
@@ -390,4 +388,4 @@ const AddForm = ({ onClose, id, createMaterial }) => {
   );
 };
 
-export default AddForm;
+export default AddMaterialForm;
