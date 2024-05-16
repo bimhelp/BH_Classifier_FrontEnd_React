@@ -83,7 +83,11 @@ const MaterialPage = () => {
       <Section>
         <MainTableWrapper>
           {searchResult.length > 0 ? (
-            <SearchResults results={searchResult} query={query} />
+            <SearchResults
+              results={searchResult}
+              query={query}
+              variant="material"
+            />
           ) : (
             <MaterialTable />
           )}
