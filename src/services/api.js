@@ -82,6 +82,20 @@ export async function addService(newElement, signal) {
   return response.data;
 }
 
+// Оновити сервіс
+export async function updateService(id, editedService, signal) {
+  const response = await axios.put(`/service/${id}`, editedService, {
+    signal,
+  });
+  return response.data;
+}
+
+// Видалити сервіс
+export async function removeService(id) {
+  const response = await axios.delete(`/service/${id}`);
+  return response.data;
+}
+
 // Отримати всі сервіси
 export async function getAllServices(signal) {
   const responce = await axios.get("/all-service", { signal });

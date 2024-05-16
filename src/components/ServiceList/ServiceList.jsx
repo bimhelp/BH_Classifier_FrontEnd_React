@@ -4,6 +4,8 @@ import React, { useState, useEffect, useMemo } from "react";
 import { getServiceByParentId } from "../../services";
 import { createLevel } from "../../services";
 import { addService } from "../../services";
+import { updateService } from "../../services";
+import { removeService } from "../../services";
 
 // components
 import Category from "../Category/Category";
@@ -12,16 +14,16 @@ import { BarLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import AddServiceForm from "../AddServiceForm/AddServiceForm";
 import EditServiceForm from "../EditServiceForm/EditServiceForm";
+import Confirm from "../Confirm/Confirm";
+import { Button } from "../Button/Button";
 
 const ServiceList = ({ items, query }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [newService, setNewService] = useState(null);
-
-  useEffect(() => {
-    // console.log("selectedId: ", selectedId);
-  }, [selectedId]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [curentItems, setCurrentItems] = useState(items);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   // Запит по під категорії
   useEffect(() => {
@@ -34,8 +36,6 @@ const ServiceList = ({ items, query }) => {
           selectedId,
           controller.signal
         );
-        // console.log("response: ", response.data);
-
         setSubCategories(response.data);
       } catch (error) {
         toast.error("Не вдалось завантажити підкагеторії");
@@ -45,7 +45,6 @@ const ServiceList = ({ items, query }) => {
     }
 
     if (!selectedId) {
-      // console.log("return");
       return;
     }
     subCategory(selectedId);
@@ -82,8 +81,6 @@ const ServiceList = ({ items, query }) => {
 
   // Створення сервісу
   function createService(service) {
-    console.log("create service");
-
     const controller = new AbortController();
     async function createService(newService) {
       try {
@@ -101,14 +98,71 @@ const ServiceList = ({ items, query }) => {
   }
 
   // Редагування сервісу
-  function editService() {
-    console.log("edit service");
+  function editService(id, editedService) {
+    const controller = new AbortController();
+    async function edit(id, editedService) {
+      try {
+        const response = await updateService(
+          id,
+          editedService,
+          controller.signal
+        );
+        console.log("response: ", response);
+        setCurrentItems(
+          curentItems.map((item) => {
+            if (item._id === id) {
+              return {
+                ...response.data,
+              };
+            }
+            return item;
+          })
+        );
+        // console.log("response.data: ", response.data);
+        toast.success("Послугу успішно оновлено");
+      } catch (error) {
+        toast.error("Не вдалось оновити послугу");
+      }
+    }
+    edit(id, editedService);
+    return () => {
+      controller.abort();
+    };
+  }
+  // Відкриття меню підтвердження
+  const confirmDelete = (id) => {
+    setConfirmOpen(id);
+  };
+
+  // Тогл меню підтвердження
+  const toggleConfirm = () => {
+    setConfirmOpen(!confirmOpen);
+  };
+
+  // Видалення сервісу
+  async function handleDelete(id) {
+    try {
+      const result = await removeService(id);
+      console.log("result: ", result);
+      if (result) {
+        toast.info("Послуга успішно видалена");
+        setCurrentItems(
+          curentItems.filter(
+            (category) => category._id !== result.data.service._id
+          )
+        );
+        setConfirmOpen(false);
+      }
+    } catch (error) {
+      toast.error("Не вдалось видалити  послугу");
+    } finally {
+    }
   }
 
   return (
     <>
       <List level={level}>
-        {items.map((item) => (
+        {curentItems.map((item) => (
           <Item key={item._id}>
             {/* якщо вибраний елемент */}
             {selectedId === item._id ? (
@@ -117,6 +171,7 @@ const ServiceList = ({ items, query }) => {
                 selectCategory={(event) => selectCategory(event, item._id)}
                 query={query}
                 isSelected={selectedId === item._id}
+                handleDelete={confirmDelete}
                 addForm={AddServiceForm}
                 editForm={EditServiceForm}
                 create={createService}
@@ -132,6 +187,7 @@ const ServiceList = ({ items, query }) => {
               <Category
                 element={item}
                 selectCategory={(event) => selectCategory(event, item._id)}
+                handleDelete={confirmDelete}
                 query={query}
                 addForm={AddServiceForm}
                 editForm={EditServiceForm}
@@ -142,6 +198,16 @@ const ServiceList = ({ items, query }) => {
           </Item>
         ))}
       </List>
+      {confirmOpen && (
+        <Confirm onClose={toggleConfirm} title="Ви точно хочете видалити?">
+          <>
+            <Button onClick={() => handleDelete(confirmOpen)} role="warning">
+              Delete
+            </Button>
+            <Button onClick={toggleConfirm}>Cancel</Button>
+          </>
+        </Confirm>
+      )}
     </>
   );
 };

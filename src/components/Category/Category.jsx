@@ -189,7 +189,7 @@ const Category = ({
       <TransitionGroup>
         {addFormVisible && (
           <CSSTransition
-            in={addFormVisible}
+            // in={addFormVisible}
             classNames="fade"
             timeout={300}
             unmountOnExit
@@ -229,7 +229,7 @@ const Category = ({
 
         {isSelected && (
           <CSSTransition
-            in={children}
+            // in={children}
             classNames="fade"
             timeout={300}
             unmountOnExit

@@ -21,8 +21,6 @@ import {
 } from "./EditMaterialForm.styled";
 
 const EditMaterialForm = ({ element, onClose, id, edit }) => {
-  // const textAreaRef = useRef(null); // отримуємо елемент textarea щоб зчитати позицію скролу в textarea
-
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
 
@@ -62,11 +60,6 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
   };
-
-  // Показує апо приховує додаткові параметри
-  function toggleAdditionalFields() {
-    setAdditionalFields(!additionalFields);
-  }
 
   // Масив для рендеру інпутів
   const inputs = [
@@ -214,8 +207,15 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .max(500, "Занадто довкий опис"),
   });
 
+  // Показує апо приховує додаткові параметри
+  function toggleAdditionalFields() {
+    setAdditionalFields(!additionalFields);
+  }
+
   const handleSubmit = (values, actions) => {
     const { resetForm } = actions;
+
+    // перебирає ключі отримані із форми і перевіряє чи є вони у об'єкта який редагується, якщо немає то додає
     const changedValues = Object.keys(values).reduce((acc, key) => {
       if (values[key] !== initialValues[key]) {
         acc[key] = values[key];
@@ -223,11 +223,10 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       return acc;
     }, {});
 
-    // console.log("values: ", values);
-    console.log("Змінені значення:", changedValues);
-
+    // Відправка даних у верхній компонент
     edit(id, changedValues);
     actions.setSubmitting(false); // Позначити, що обробка завершена
+
     // Очистка форми
     resetForm();
     onClose();

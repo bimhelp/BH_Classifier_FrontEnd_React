@@ -34,12 +34,10 @@ const MaterialList = ({ items, query }) => {
       setIsLoading(true);
       try {
         const response = await getByParentId(selectedId, controller.signal);
-        // console.log("response: ", response.data);
         setSubCategories(response.data);
       } catch (error) {
         toast.error("Не вдалось завантажити підкагеторії");
       } finally {
-        // console.log("finish loading");
         setIsLoading(false);
       }
     }
@@ -106,7 +104,7 @@ const MaterialList = ({ items, query }) => {
           editedMaterial,
           controller.signal
         );
-        console.log("response: ", response);
+        // console.log("response: ", response);
         setCurrentItems(
           curentItems.map((item) => {
             if (item._id === id) {
