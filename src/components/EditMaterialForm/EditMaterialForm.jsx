@@ -247,6 +247,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
             <DescriptionWrapper>
               <label htmlFor="DescriptionUA">Опис</label>
               <TextArea
+                autoFocus={true}
                 name="DescriptionUA"
                 id="DescriptionUA"
                 placeholder="Введіть опис українською мовою"

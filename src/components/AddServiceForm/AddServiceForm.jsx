@@ -93,6 +93,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
             <DescriptionWrapper>
               <label htmlFor="DescriptionUA">Опис</label>
               <TextArea
+                autoFocus={true}
                 name="DescriptionUA"
                 id="DescriptionUA"
                 placeholder="Введість опис українською мовою"

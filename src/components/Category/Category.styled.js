@@ -19,10 +19,24 @@ export const Card = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
-  background-color: var(--materialColorAlfa);
+  /* background-color: var(--materialColorAlfa); */
+  background-color: ${(props) =>
+    props.isDelete
+      ? props.theme.colors.atention
+      : props.theme.colors.backgroundGrey};
   /* outline: 1px solid tomato; */
   margin-bottom: ${(props) => props.theme.space[2]}px;
+
   &:hover,
+  &:focus {
+    box-shadow: var(--card-shadow);
+    background-color: white;
+
+    /* Зміна прозорості у ItemMenu при ховері на Card */
+    & ${ItemMenu} {
+      opacity: 1; /* Нове значення прозорості */
+    }
+  }
   &:focus {
     box-shadow: var(--card-shadow);
     background-color: white;

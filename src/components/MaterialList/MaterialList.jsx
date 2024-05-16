@@ -173,6 +173,7 @@ const MaterialList = ({ items, query }) => {
                   editForm={EditMaterialForm}
                   create={createMaterial}
                   edit={editMaterial}
+                  isDelete={item._id === confirmOpen}
                 >
                   {isLoading ? (
                     <BarLoader color="#125b56" width="100%" />
@@ -190,6 +191,7 @@ const MaterialList = ({ items, query }) => {
                   editForm={EditMaterialForm}
                   create={createMaterial}
                   edit={editMaterial}
+                  isDelete={item._id === confirmOpen}
                 ></Category>
               )}
             </Item>

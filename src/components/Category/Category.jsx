@@ -48,6 +48,7 @@ const Category = ({
   create,
   editForm: EditForm,
   edit,
+  isDelete,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
@@ -86,7 +87,7 @@ const Category = ({
 
   return (
     <>
-      <Card onClick={selectCategory}>
+      <Card onClick={selectCategory} isDelete={isDelete}>
         <CategoryWrapper level={level}>
           <CodeWrapper level={level}>
             <CopyToClipboard

@@ -173,6 +173,7 @@ const ServiceList = ({ items, query }) => {
                 editForm={EditServiceForm}
                 create={createService}
                 edit={editService}
+                isDelete={item._id === confirmOpen}
               >
                 {isLoading ? (
                   <BarLoader color="#125b56" width="100%" />
@@ -190,6 +191,7 @@ const ServiceList = ({ items, query }) => {
                 editForm={EditServiceForm}
                 create={createService}
                 edit={editService}
+                isDelete={item._id === confirmOpen}
               ></Category>
             )}
           </Item>
