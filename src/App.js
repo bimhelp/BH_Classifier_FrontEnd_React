@@ -8,7 +8,7 @@ import { PrivateRoute, PublicRoute } from "./services";
 // Private Pages
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
-// import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import Users from "./components/Users/Users";
 import Script from "./components/Script/Script";
 // Динамічне завантаження додатку
@@ -39,10 +39,10 @@ function App() {
             element={<PublicRoute component={<LogInPage />} />}
           />
           <Route path="cabinet" element={<CabinetPage />} />
-          {/* <Route
+          <Route
             path="materials"
             element={<PrivateRoute component={<AddItemPage />} />}
-          /> */}
+          />
           <Route
             path="projects"
             element={<PrivateRoute component={<ProjectsPage />} />}

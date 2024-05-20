@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { authContext as context } from "../../context/authContext";
+import React, { useState, useEffect } from "react";
 import { createLevel } from "../../services";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
 import { IoIosCopy } from "react-icons/io";
-import { MdModeEditOutline } from "react-icons/md";
-import { FaSquarePlus } from "react-icons/fa6";
-import { MdDelete } from "react-icons/md";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 // import { IoCheckbox } from "react-icons/io5";
+import ItemMenu from "../ItemMenu/ItemMenu";
 import {
   CategoryWrapper,
   CategoryCode,
@@ -23,7 +20,7 @@ import {
   Extended,
   SubList,
   Card,
-  ItemMenu,
+  MenuWrapper,
   Animation,
 } from "./Category.styled";
 
@@ -48,12 +45,11 @@ const Category = ({
   create,
   editForm: EditForm,
   edit,
-  isDelete,
+  isdelete,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [editFormVisible, setEditFormVisible] = useState(false);
-  const { role } = useContext(context);
 
   useEffect(() => {
     setLevel(createLevel(ElementNestingLevel));
@@ -87,7 +83,7 @@ const Category = ({
 
   return (
     <>
-      <Card onClick={selectCategory} isDelete={isDelete}>
+      <Card onClick={selectCategory} isdelete={isdelete}>
         <CategoryWrapper level={level}>
           <CodeWrapper level={level}>
             <CopyToClipboard
@@ -159,32 +155,14 @@ const Category = ({
           </DescriptionWrapper>
         </CategoryWrapper>
 
-        {role === "admin" && (
-          <ItemMenu>
-            <IconButton
-              id="add"
-              icon={FaSquarePlus}
-              visibility="visible"
-              variant="neutral"
-              tooltip="Додати"
-              onClick={() => toggleAddForm(_id)}
-            ></IconButton>
-            <IconButton
-              icon={MdModeEditOutline}
-              visibility="visible"
-              variant="neutral"
-              tooltip="Редагувати"
-              onClick={() => toggleEditeForm(_id)}
-            ></IconButton>
-            <IconButton
-              icon={MdDelete}
-              visibility="visible"
-              variant="neutral"
-              tooltip="Видалити"
-              onClick={() => handleDelete(_id)}
-            ></IconButton>
-          </ItemMenu>
-        )}
+        <MenuWrapper>
+          <ItemMenu
+            id={_id}
+            toggleAddForm={toggleAddForm}
+            toggleEditeForm={toggleEditeForm}
+            handleDelete={handleDelete}
+          />
+        </MenuWrapper>
       </Card>
 
       <TransitionGroup>

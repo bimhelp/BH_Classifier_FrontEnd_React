@@ -41,6 +41,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
   const initialValues = {
     DescriptionUA: getFieldValue(element, "DescriptionUA"),
     DescriptionEN: getFieldValue(element, "DescriptionEN"),
+    Code: getFieldValue(element, "Code"),
     PriceUAH: getFieldValue(element, "PriceUAH"),
     Unit: getFieldValue(element, "Unit"),
     Length: getFieldValue(element, "Length"),
@@ -136,6 +137,12 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
+    Code: yup
+      .string()
+      .matches(
+        /^\d{8}-\d$/,
+        "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
+      ),
     PriceUAH: yup.number().typeError("Введіть число").positive(),
     Unit: yup
       .string()
@@ -262,7 +269,23 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-
+            <InputWrapper>
+              <label htmlFor="Code">Код</label>
+              <Input
+                type="text"
+                placeholder="Код"
+                name="Code"
+                id="Code"
+                bordercolor={validationColor(
+                  props.errors.Code,
+                  props.values.Code
+                )}
+              />
+              <ErrorMessage
+                name="Code"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field

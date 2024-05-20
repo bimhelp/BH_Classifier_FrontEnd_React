@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { setBgColor } from "../../services";
 
-export const ItemMenu = styled.div`
+export const MenuWrapper = styled.div`
   /* outline: 1px solid tomato; */
   position: absolute;
   display: flex;
@@ -21,7 +21,7 @@ export const Card = styled.div`
   justify-content: space-between;
   /* background-color: var(--materialColorAlfa); */
   background-color: ${(props) =>
-    props.isDelete
+    props.isdelete
       ? props.theme.colors.atention
       : props.theme.colors.backgroundGrey};
   /* outline: 1px solid tomato; */
@@ -33,7 +33,7 @@ export const Card = styled.div`
     background-color: white;
 
     /* Зміна прозорості у ItemMenu при ховері на Card */
-    & ${ItemMenu} {
+    & ${MenuWrapper} {
       opacity: 1; /* Нове значення прозорості */
     }
   }
@@ -42,7 +42,7 @@ export const Card = styled.div`
     background-color: white;
 
     /* Зміна прозорості у ItemMenu при ховері на Card */
-    & ${ItemMenu} {
+    & ${MenuWrapper} {
       opacity: 1; /* Нове значення прозорості */
     }
   }

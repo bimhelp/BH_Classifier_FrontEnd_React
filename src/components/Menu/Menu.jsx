@@ -50,7 +50,11 @@ const Menu = () => {
             <LinkTitle>Admin panel</LinkTitle>
           </StyledNavLink>
         )}
-
+        {role === "designer" && (
+          <StyledNavLink to="materials">
+            <LinkTitle>Мої матеріали</LinkTitle>
+          </StyledNavLink>
+        )}
         {/* {isLoggedIn && (
           <>
             <StyledNavLink to="projects">

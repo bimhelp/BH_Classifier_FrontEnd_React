@@ -173,7 +173,7 @@ const ServiceList = ({ items, query }) => {
                 editForm={EditServiceForm}
                 create={createService}
                 edit={editService}
-                isDelete={item._id === confirmOpen}
+                isdelete={item._id === confirmOpen ? item._id : undefined}
               >
                 {isLoading ? (
                   <BarLoader color="#125b56" width="100%" />
@@ -191,7 +191,7 @@ const ServiceList = ({ items, query }) => {
                 editForm={EditServiceForm}
                 create={createService}
                 edit={editService}
-                isDelete={item._id === confirmOpen}
+                isdelete={item._id === confirmOpen ? item._id : undefined}
               ></Category>
             )}
           </Item>
