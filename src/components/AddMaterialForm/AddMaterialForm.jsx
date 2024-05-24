@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { authContext as context } from "../../context/authContext";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { validationColor } from "../../services/utility";
@@ -7,6 +8,8 @@ import { CloseButton } from "../Button/Button";
 import { CgClose } from "react-icons/cg";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
+import { Modal } from "../Modal/Modal";
+import MaterialTable from "../MaterialTable/MaterialTable";
 import {
   InputWrapper,
   StyledForm,
@@ -23,7 +26,8 @@ import {
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { role } = useContext(context);
   // Початкові значення
   const initialValues = {
     DescriptionUA: "",
@@ -47,6 +51,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     ConsumptionPer1t: "",
     OwnerBarcode: "",
     Comment: "",
+    origin: false,
   };
 
   // Масив для рендеру інпутів
@@ -207,6 +212,11 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     setAdditionalFields(!additionalFields);
   }
 
+  // відкриття модалки
+  function toggleModal() {
+    setModalIsOpen(!modalIsOpen);
+  }
+
   const handleSubmit = (values, actions) => {
     // formik метод очистки форми
     const { resetForm } = actions;
@@ -229,6 +239,11 @@ const AddMaterialForm = ({ onClose, id, create }) => {
 
   return (
     <>
+      {modalIsOpen && (
+        <Modal onClose={toggleModal}>
+          <MaterialTable></MaterialTable>
+        </Modal>
+      )}
       <FormTitle>Додати матеріал</FormTitle>
       <Formik
         initialValues={initialValues}
@@ -257,23 +272,31 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-            <InputWrapper>
-              <label htmlFor="Code">Код</label>
-              <Input
-                type="text"
-                placeholder="Код"
-                name="Code"
-                id="Code"
-                bordercolor={validationColor(
-                  props.errors.Code,
-                  props.values.Code
-                )}
-              />
-              <ErrorMessage
-                name="Code"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
+            {role === "admin" ? (
+              <InputWrapper>
+                <label htmlFor="Code">Код</label>
+                <Input
+                  type="text"
+                  placeholder="Код"
+                  name="Code"
+                  id="Code"
+                  bordercolor={validationColor(
+                    props.errors.Code,
+                    props.values.Code
+                  )}
+                />
+                <ErrorMessage
+                  name="Code"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </InputWrapper>
+            ) : (
+              <Button type="button" onClick={toggleModal}>
+                Вибтари категорію
+              </Button>
+            )}
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field
@@ -319,7 +342,12 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
-
+            {role === "admin" && (
+              <div>
+                <label htmlFor="origin">cpv</label>
+                <Input type="checkbox" name="origin" id="origin"></Input>
+              </div>
+            )}
             <IconButton
               type="button"
               visibility="visible"

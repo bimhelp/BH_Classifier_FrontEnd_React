@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { authContext as context } from "../../context/authContext";
 import { Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { validationColor } from "../../services/utility";
@@ -23,6 +24,7 @@ import {
 const EditMaterialForm = ({ element, onClose, id, edit }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const { role } = useContext(context);
 
   // Функція, що перевіряє значення на undefined і встановлює пустий рядок в разі потреби
   const getFieldValue = (obj, fieldName) => {
@@ -60,6 +62,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     ConsumptionPer1t: getFieldValue(element, "ConsumptionPer1t"),
     OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
+    origin: getFieldValue(element, "origin"),
   };
 
   // Масив для рендеру інпутів
@@ -330,7 +333,12 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
-
+            {role === "admin" && (
+              <div>
+                <label htmlFor="origin">cpv</label>
+                <Input type="checkbox" name="origin" id="origin"></Input>
+              </div>
+            )}
             <IconButton
               type="button"
               visibility="visible"
