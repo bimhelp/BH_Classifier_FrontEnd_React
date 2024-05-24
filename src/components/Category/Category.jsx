@@ -35,6 +35,7 @@ const Category = ({
     PriceUAH,
     Unit,
     ElementNestingLevel,
+    Origin,
   },
   selectCategory,
   children,
@@ -98,9 +99,10 @@ const Category = ({
                 position="absolute"
                 variant="light"
                 tooltip="Копіювати"
+                left={0}
               />
             </CopyToClipboard>
-            <CategoryCode>{Code}</CategoryCode>
+            <CategoryCode origin={Origin}>{Code}</CategoryCode>
           </CodeWrapper>
 
           <DescriptionWrapper>
@@ -121,6 +123,7 @@ const Category = ({
                     position="absolute"
                     variant="dark"
                     tooltip="Копіювати"
+                    left={0}
                   />
                 </CopyToClipboard>
               </div>

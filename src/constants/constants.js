@@ -48,6 +48,7 @@ export const theme = Object.freeze({
     orange: "#cc5506",
     invalid: "#E74A3B",
     valid: "#3CBC81",
+    cpv: "#81acf0",
 
     textBlackColor: "#000000",
     textWhiteColor: "#ffffff",

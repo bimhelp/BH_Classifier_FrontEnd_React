@@ -34,7 +34,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
     Unit: "",
     OwnerBarcode: "",
     Comment: "",
-    origin: false,
+    Origin: false,
   };
   // Схема валідації
   const addServiceSchema = yup.object().shape({
@@ -157,8 +157,8 @@ const AddServiceForm = ({ onClose, id, create }) => {
             </InputWrapper>
             {role === "admin" && (
               <div>
-                <label htmlFor="origin">cpv</label>
-                <Input type="checkbox" name="origin" id="origin"></Input>
+                <label htmlFor="Origin">cpv</label>
+                <Input type="checkbox" name="Origin" id="Origin"></Input>
               </div>
             )}
             <IconButton

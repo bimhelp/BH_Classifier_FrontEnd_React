@@ -62,7 +62,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     ConsumptionPer1t: getFieldValue(element, "ConsumptionPer1t"),
     OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
-    origin: getFieldValue(element, "origin"),
+    Origin: getFieldValue(element, "Origin"),
   };
 
   // Масив для рендеру інпутів
@@ -335,8 +335,8 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
             </InputWrapper>
             {role === "admin" && (
               <div>
-                <label htmlFor="origin">cpv</label>
-                <Input type="checkbox" name="origin" id="origin"></Input>
+                <label htmlFor="Origin">cpv</label>
+                <Input type="checkbox" name="Origin" id="Origin"></Input>
               </div>
             )}
             <IconButton

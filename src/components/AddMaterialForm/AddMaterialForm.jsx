@@ -51,7 +51,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     ConsumptionPer1t: "",
     OwnerBarcode: "",
     Comment: "",
-    origin: false,
+    Origin: false,
   };
 
   // Масив для рендеру інпутів
@@ -344,8 +344,8 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             </InputWrapper>
             {role === "admin" && (
               <div>
-                <label htmlFor="origin">cpv</label>
-                <Input type="checkbox" name="origin" id="origin"></Input>
+                <label htmlFor="Origin">cpv</label>
+                <Input type="checkbox" name="Origin" id="Origin"></Input>
               </div>
             )}
             <IconButton

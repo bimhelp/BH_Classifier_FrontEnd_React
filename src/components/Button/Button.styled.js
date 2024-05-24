@@ -117,6 +117,7 @@ export const StyledCloseButton = styled(StyledButton)`
   margin-bottom: ${(props) => props.theme.space[2]}px;
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   color: black;
+  margin-left: 0px;
   min-width: fit-content;
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
@@ -139,6 +140,8 @@ export const StyledIconButton = styled(StyledButton)`
   width: fit-content;
   font-size: ${(props) => props.theme.fontSizes.m};
   padding: ${(props) => props.theme.space[2]}px;
+  padding-left: 0px;
+
   color: white;
   color: ${(props) => props.variant === "dark" && props.theme.colors.black};
   color: ${(props) => props.variant === "neutral" && props.theme.colors.grey};
@@ -160,7 +163,10 @@ export const StyledIconButton = styled(StyledButton)`
   &:focus:not(:disabled) {
     /* cursor: cell; */
     box-shadow: none;
-    color: ${(props) => props.variant === "dark" && props.theme.colors.black};
+    color: ${(props) =>
+      props.variant === "dark"
+        ? props.theme.colors.black
+        : props.theme.colors.white};
     background-color: transparent;
     opacity: 1;
   }

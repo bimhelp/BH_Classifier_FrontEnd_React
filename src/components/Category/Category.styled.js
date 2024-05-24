@@ -93,6 +93,17 @@ export const CategoryCode = styled.p`
   @media screen and (min-width: 680px) {
     padding-left: ${(props) => props.theme.space[3]}px;
   }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 5px;
+    height: 5px;
+    display: inline-block;
+    border-radius: 50%; // Зробити коло
+    background-color: ${(props) => !props.origin && props.theme.colors.white};
+  }
 `;
 
 export const DescriptionWrapper = styled.div`
@@ -107,7 +118,7 @@ export const CopyParent = styled.div`
 `;
 
 export const CategoryDescription = styled.p`
-  padding-left: 30px;
+  padding-left: 20px;
   line-height: 1;
   font-size: ${(props) => props.theme.fontSizes.m};
 `;
