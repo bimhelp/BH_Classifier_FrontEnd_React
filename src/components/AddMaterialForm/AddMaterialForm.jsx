@@ -207,7 +207,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       .max(500, "Занадто довкий опис"),
   });
 
-  // Показує апо приховує додаткові параметри
+  // Показує або приховує додаткові параметри
   function toggleAdditionalFields() {
     setAdditionalFields(!additionalFields);
   }
@@ -272,31 +272,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-            {role === "admin" ? (
-              <InputWrapper>
-                <label htmlFor="Code">Код</label>
-                <Input
-                  type="text"
-                  placeholder="Код"
-                  name="Code"
-                  id="Code"
-                  bordercolor={validationColor(
-                    props.errors.Code,
-                    props.values.Code
-                  )}
-                />
-                <ErrorMessage
-                  name="Code"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
-              </InputWrapper>
-            ) : (
-              <Button type="button" onClick={toggleModal}>
-                Вибтари категорію
-              </Button>
-            )}
+
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field
@@ -362,6 +338,31 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             ></IconButton>
             {additionalFields && (
               <>
+                {role === "admin" ? (
+                  <InputWrapper>
+                    <label htmlFor="Code">Код</label>
+                    <Input
+                      type="text"
+                      placeholder="Код"
+                      name="Code"
+                      id="Code"
+                      bordercolor={validationColor(
+                        props.errors.Code,
+                        props.values.Code
+                      )}
+                    />
+                    <ErrorMessage
+                      name="Code"
+                      render={(msg) => (
+                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                      )}
+                    />
+                  </InputWrapper>
+                ) : (
+                  <Button type="button" onClick={toggleModal}>
+                    Вибтари категорію
+                  </Button>
+                )}
                 <DescriptionWrapper>
                   <label htmlFor="DescriptionEN">Опис</label>
                   <TextArea

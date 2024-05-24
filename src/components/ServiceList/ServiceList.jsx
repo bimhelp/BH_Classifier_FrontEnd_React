@@ -107,16 +107,24 @@ const ServiceList = ({ items, query }) => {
           editedService,
           controller.signal
         );
-        setCurrentItems(
-          curentItems.map((item) => {
-            if (item._id === id) {
-              return {
-                ...response.data,
-              };
-            }
-            return item;
-          })
-        );
+        // Видаляємо оновлений сервіс із списку, якщо в оновленого сервісу ParentElementId відрізняється від елементів у поточному списку
+        if (response.data.ParentElementId !== curentItems[0].ParentElementId) {
+          setCurrentItems(
+            curentItems.filter((item) => item._id !== response.data._id)
+          );
+        } else {
+          // Замінюємо сервіс на оновлений
+          setCurrentItems(
+            curentItems.map((item) => {
+              if (item._id === id) {
+                return {
+                  ...response.data,
+                };
+              }
+              return item;
+            })
+          );
+        }
         toast.success("Послугу успішно оновлено");
       } catch (error) {
         toast.error("Не вдалось оновити послугу");

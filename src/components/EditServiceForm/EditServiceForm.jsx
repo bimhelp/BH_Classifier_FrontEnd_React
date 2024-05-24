@@ -48,6 +48,8 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
     OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
     Origin: getFieldValue(element, "Origin"),
+    Code: getFieldValue(element, "Code"),
+    ParentElementId: getFieldValue(element, "ParentElementId"),
   };
   // Схема валідації
   const addServiceSchema = yup.object().shape({
@@ -191,6 +193,47 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
             ></IconButton>
             {additionalFields && (
               <>
+                {role === "admin" && (
+                  <InputWrapper>
+                    <label htmlFor="Code">Код</label>
+                    <Input
+                      type="text"
+                      placeholder="Код"
+                      name="Code"
+                      id="Code"
+                      bordercolor={validationColor(
+                        props.errors.Code,
+                        props.values.Code
+                      )}
+                    />
+                    <InputWrapper>
+                      <label htmlFor="ParentElementId">Код Категорії</label>
+                      <Input
+                        type="text"
+                        placeholder="Код Категорії"
+                        name="ParentElementId"
+                        id="ParentElementId"
+                        bordercolor={validationColor(
+                          props.errors.Code,
+                          props.values.Code
+                        )}
+                      />
+                      <ErrorMessage
+                        name="Code"
+                        render={(msg) => (
+                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                        )}
+                      />
+                    </InputWrapper>
+                    <ErrorMessage
+                      name="Code"
+                      render={(msg) => (
+                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                      )}
+                    />
+                  </InputWrapper>
+                )}
+
                 <DescriptionWrapper>
                   <label htmlFor="DescriptionEN">Опис</label>
                   <TextArea

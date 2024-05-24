@@ -63,6 +63,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
     Origin: getFieldValue(element, "Origin"),
+    ParentElementId: getFieldValue(element, "ParentElementId"),
   };
 
   // Масив для рендеру інпутів
@@ -272,23 +273,46 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-            <InputWrapper>
-              <label htmlFor="Code">Код</label>
-              <Input
-                type="text"
-                placeholder="Код"
-                name="Code"
-                id="Code"
-                bordercolor={validationColor(
-                  props.errors.Code,
-                  props.values.Code
-                )}
-              />
-              <ErrorMessage
-                name="Code"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
+            {role === "admin" && (
+              <InputWrapper>
+                <label htmlFor="Code">Код</label>
+                <Input
+                  type="text"
+                  placeholder="Код"
+                  name="Code"
+                  id="Code"
+                  bordercolor={validationColor(
+                    props.errors.Code,
+                    props.values.Code
+                  )}
+                />
+                <InputWrapper>
+                  <label htmlFor="ParentElementId">Код Категорії</label>
+                  <Input
+                    type="text"
+                    placeholder="Код Категорії"
+                    name="ParentElementId"
+                    id="ParentElementId"
+                    bordercolor={validationColor(
+                      props.errors.Code,
+                      props.values.Code
+                    )}
+                  />
+                  <ErrorMessage
+                    name="Code"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </InputWrapper>
+                <ErrorMessage
+                  name="Code"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </InputWrapper>
+            )}
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field

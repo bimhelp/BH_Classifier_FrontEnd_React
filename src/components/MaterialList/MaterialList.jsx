@@ -104,17 +104,25 @@ const MaterialList = ({ items, query }) => {
           editedMaterial,
           controller.signal
         );
-        // console.log("response: ", response);
-        setCurrentItems(
-          curentItems.map((item) => {
-            if (item._id === id) {
-              return {
-                ...response.data,
-              };
-            }
-            return item;
-          })
-        );
+        // Видаляємо оновлений матеріал із списку, якщо в оновленого матеріалу ParentElementId відрізняється від елементів у поточному списку
+        if (response.data.ParentElementId !== curentItems[0].ParentElementId) {
+          setCurrentItems(
+            curentItems.filter((item) => item._id !== response.data._id)
+          );
+        } else {
+          // Замінюємо матеріал на оновлений
+          setCurrentItems(
+            curentItems.map((item) => {
+              if (item._id === id) {
+                return {
+                  ...response.data,
+                };
+              }
+              return item;
+            })
+          );
+        }
+
         // console.log("response.data: ", response.data);
         toast.success("Матеріал успішно оновлено");
       } catch (error) {

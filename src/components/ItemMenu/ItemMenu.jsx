@@ -4,12 +4,28 @@ import { IconButton } from "../Button/Button";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaSquarePlus } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
+import { IoIosCopy } from "react-icons/io";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
 
 const ItemMenu = ({ id, toggleAddForm, toggleEditeForm, handleDelete }) => {
   const { role } = useContext(context);
   if (role === "admin") {
     return (
       <>
+        <CopyToClipboard
+          text={id}
+          onCopy={() => toast.info(`Код ${id} скопійовано в буфер омбіну`)}
+        >
+          <IconButton
+            id="copyId"
+            icon={IoIosCopy}
+            visibility="visible"
+            variant="neutral"
+            tooltip="Копіювати id"
+          ></IconButton>
+        </CopyToClipboard>
+
         <IconButton
           id="add"
           icon={FaSquarePlus}

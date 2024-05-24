@@ -161,16 +161,13 @@ export const StyledIconButton = styled(StyledButton)`
 
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
-    /* cursor: cell; */
     box-shadow: none;
     color: ${(props) =>
       props.variant === "dark"
         ? props.theme.colors.black
         : props.theme.colors.white};
     color: ${(props) =>
-      props.variant === "neutral"
-        ? props.theme.colors.black
-        : props.theme.colors.white};
+      props.variant === "neutral" && props.theme.colors.black};
     background-color: transparent;
     opacity: 1;
   }

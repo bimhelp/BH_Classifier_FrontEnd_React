@@ -24,6 +24,8 @@ import {
 const AddServiceForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const { role } = useContext(context);
 
   // Початкові значення
@@ -35,6 +37,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
     OwnerBarcode: "",
     Comment: "",
     Origin: false,
+    Code: "",
   };
   // Схема валідації
   const addServiceSchema = yup.object().shape({
@@ -47,6 +50,12 @@ const AddServiceForm = ({ onClose, id, create }) => {
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
+    Code: yup
+      .string()
+      .matches(
+        /^\d{8}-\d$/,
+        "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
+      ),
     PriceUAH: yup.number().typeError("Введіть число").positive(),
     Unit: yup
       .string()
@@ -77,9 +86,14 @@ const AddServiceForm = ({ onClose, id, create }) => {
     onClose();
   };
 
-  // Показує апо приховує додаткові параметри
+  // Показує або приховує додаткові параметри
   function toggleAdditionalFields() {
     setAdditionalFields(!additionalFields);
+  }
+
+  // відкриття модалки
+  function toggleModal() {
+    setModalIsOpen(!modalIsOpen);
   }
 
   return (
@@ -175,6 +189,31 @@ const AddServiceForm = ({ onClose, id, create }) => {
             ></IconButton>
             {additionalFields && (
               <>
+                {role === "admin" ? (
+                  <InputWrapper>
+                    <label htmlFor="Code">Код</label>
+                    <Input
+                      type="text"
+                      placeholder="Код"
+                      name="Code"
+                      id="Code"
+                      bordercolor={validationColor(
+                        props.errors.Code,
+                        props.values.Code
+                      )}
+                    />
+                    <ErrorMessage
+                      name="Code"
+                      render={(msg) => (
+                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                      )}
+                    />
+                  </InputWrapper>
+                ) : (
+                  <Button type="button" onClick={toggleModal}>
+                    Вибтари категорію
+                  </Button>
+                )}
                 <DescriptionWrapper>
                   <label htmlFor="DescriptionEN">Опис</label>
                   <TextArea
