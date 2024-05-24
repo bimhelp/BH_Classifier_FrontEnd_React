@@ -167,6 +167,10 @@ export const StyledIconButton = styled(StyledButton)`
       props.variant === "dark"
         ? props.theme.colors.black
         : props.theme.colors.white};
+    color: ${(props) =>
+      props.variant === "neutral"
+        ? props.theme.colors.black
+        : props.theme.colors.white};
     background-color: transparent;
     opacity: 1;
   }
