@@ -98,7 +98,8 @@ export function createLevel(code) {
 }
 // Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
 export const setBgColor = ({ level, theme }) => {
-  // console.log(theme);
+  // console.log("theme: ", theme);
+  console.log("level: ", level);
   switch (level) {
     case "main" || 1 || 2:
       return theme.colors.mainLevelColor;
@@ -198,7 +199,7 @@ export function makeOptions(array) {
     return;
   }
   return array.map((category) => ({
-    value: category.Code,
+    value: category,
     label: category.DescriptionUA,
   }));
 }

@@ -10,6 +10,7 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import { Modal } from "../Modal/Modal";
 import MaterialTable from "../MaterialTable/MaterialTable";
+import CategorySelect from "../CategorySelect/CategorySelect";
 import {
   InputWrapper,
   StyledForm,
@@ -18,7 +19,7 @@ import {
   Input,
   DescriptionWrapper,
   ErrorMessageStyled,
-  Select,
+  StyledSelect,
   ButtonWrapper,
   FormTitle,
 } from "./AddMaterialForm.styled";
@@ -276,7 +277,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field
-                as={Select}
+                as={StyledSelect}
                 name="Unit"
                 bordercolor={validationColor(
                   props.errors.Unit,
@@ -359,9 +360,11 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                     />
                   </InputWrapper>
                 ) : (
-                  <Button type="button" onClick={toggleModal}>
-                    Вибтари категорію
-                  </Button>
+                  <CategorySelect
+                    onSelect={(value) => {
+                      console.log(value);
+                    }}
+                  />
                 )}
                 <DescriptionWrapper>
                   <label htmlFor="DescriptionEN">Опис</label>

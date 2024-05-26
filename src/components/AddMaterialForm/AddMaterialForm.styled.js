@@ -93,7 +93,7 @@ export const Input = styled(Field)`
     outline: 0px solid white;
   }
 `;
-export const Select = styled.select`
+export const StyledSelect = styled.select`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
   border-color: ${({ bordercolor }) => bordercolor};
