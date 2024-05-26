@@ -255,6 +255,20 @@ const AddMaterialForm = ({ onClose, id, create }) => {
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
 
+            <InputWrapper>
+              {role === "designer" && (
+                <>
+                  <label htmlFor="Code">Категорія</label>
+                  <CategorySelect
+                    name="Code"
+                    onSelect={(value) => {
+                      console.log(value);
+                    }}
+                  />
+                </>
+              )}
+            </InputWrapper>
+
             <DescriptionWrapper>
               <label htmlFor="DescriptionUA">Опис</label>
               <TextArea
@@ -339,7 +353,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             ></IconButton>
             {additionalFields && (
               <>
-                {role === "admin" ? (
+                {role === "admin" && (
                   <InputWrapper>
                     <label htmlFor="Code">Код</label>
                     <Input
@@ -359,12 +373,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                       )}
                     />
                   </InputWrapper>
-                ) : (
-                  <CategorySelect
-                    onSelect={(value) => {
-                      console.log(value);
-                    }}
-                  />
                 )}
                 <DescriptionWrapper>
                   <label htmlFor="DescriptionEN">Опис</label>

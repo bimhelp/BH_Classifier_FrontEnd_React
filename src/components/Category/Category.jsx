@@ -5,7 +5,6 @@ import { IoIosCopy } from "react-icons/io";
 import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-// import { IoCheckbox } from "react-icons/io5";
 import ItemMenu from "../ItemMenu/ItemMenu";
 import {
   CategoryWrapper,
@@ -101,7 +100,7 @@ const Category = ({
                 left={0}
               />
             </CopyToClipboard>
-            <CategoryCode origin={Origin}>{Code}</CategoryCode>
+            <CategoryCode origin={Origin.toString()}>{Code}</CategoryCode>
           </CodeWrapper>
 
           <DescriptionWrapper>
@@ -149,7 +148,6 @@ const Category = ({
               {Unit && Unit !== "category" && (
                 <MaterialUnit>Одиниця виміру: {Unit}</MaterialUnit>
               )}
-              {/* {Unit && Unit === "category" && <IoCheckbox />} */}
               {PriceUAH && (
                 <MaterialPrice>Ціна: {PriceUAH} &#8372;</MaterialPrice>
               )}
@@ -169,12 +167,7 @@ const Category = ({
 
       <TransitionGroup>
         {addFormVisible && (
-          <CSSTransition
-            // in={addFormVisible}
-            classNames="fade"
-            timeout={300}
-            unmountOnExit
-          >
+          <CSSTransition classNames="fade" timeout={300} unmountOnExit>
             <Animation>
               <AddForm
                 id={_id}
@@ -209,12 +202,7 @@ const Category = ({
         )}
 
         {isSelected && (
-          <CSSTransition
-            // in={children}
-            classNames="fade"
-            timeout={300}
-            unmountOnExit
-          >
+          <CSSTransition classNames="fade" timeout={300} unmountOnExit>
             <Animation>
               <SubList>{children}</SubList>
             </Animation>

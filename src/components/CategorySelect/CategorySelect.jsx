@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
 // import { StyledSelect } from "./CategorySelect.styled";
 import { makeOptions } from "../../services";
@@ -24,8 +24,13 @@ const CategorySelect = ({ onSelect }) => {
       // відфільтрувати тільки категорії
       const category = response.data.filter((item) => item.Unit === "category");
       console.log("category: ", category);
+      const sortedCategory = category.sort(
+        (first, second) =>
+          first.ElementNestingLevel - second.ElementNestingLevel
+      );
+      console.log("sortedCategory: ", sortedCategory);
 
-      return makeOptions(category);
+      return makeOptions(sortedCategory);
     } catch (error) {
       toast.error(`Не вдалось знайти ${normalizedQuery}`);
       return [];
