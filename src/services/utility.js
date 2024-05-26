@@ -99,23 +99,22 @@ export function createLevel(code) {
 // Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
 export const setBgColor = ({ level, theme }) => {
   // console.log("theme: ", theme);
-  console.log("level: ", level);
   switch (level) {
-    case "main" || 1 || 2:
+    case 1 || 2 || "main":
       return theme.colors.mainLevelColor;
-    case "first" || 3:
+    case 3 || "first":
       return theme.colors.firstLevelColor;
-    case "second" || 4:
+    case 4 || "second":
       return theme.colors.secondLevelColor;
-    case "third" || 5:
+    case 5 || "third":
       return theme.colors.thirdLevelColor;
-    case "four" || 6:
+    case 6 || "four":
       return theme.colors.fourLevelColor;
-    case "five" || 7:
+    case 7 || "five":
       return theme.colors.fiveLevelColor;
-    case "six" || 8:
+    case 8 || "six":
       return theme.colors.materialColor;
-    case "seven" || 9:
+    case 9 || "seven":
       return theme.colors.materialColor;
     default:
       return theme.colors.mainLevelColor;
