@@ -7,7 +7,6 @@ import {
   getByParentId,
   removeMaterial,
 } from "../../services";
-import { createLevel } from "../../services";
 // components
 import Category from "../Category/Category";
 import { List, Item } from "./MaterialList.styled";
@@ -55,7 +54,7 @@ const MaterialList = ({ items, query }) => {
   // Створення класів для кольорів
   const level = useMemo(() => {
     if (items.length > 0) {
-      return createLevel(items[0].ElementNestingLevel);
+      return items[0].ElementNestingLevel;
     }
     return null;
   }, [items]);

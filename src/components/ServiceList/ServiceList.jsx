@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 
 // functions
 import { getServiceByParentId } from "../../services";
-import { createLevel } from "../../services";
 import { addService } from "../../services";
 import { updateService } from "../../services";
 import { removeService } from "../../services";
@@ -56,7 +55,7 @@ const ServiceList = ({ items, query }) => {
 
   const level = useMemo(() => {
     if (items.length > 0) {
-      return createLevel(items[0].ElementNestingLevel);
+      return items[0].ElementNestingLevel;
     }
     return null;
   }, [items]);

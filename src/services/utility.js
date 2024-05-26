@@ -57,64 +57,25 @@ export function filterNextLevelItems(subCategories, selectedCode) {
 }
 
 // Колір _____________________________________________________________________________________
-// Функція створює css клас в залежності від властивості ElementNestingLevel
-export function createLevel(code) {
-  // console.log("code: ", code);
-
-  var level = "";
-  switch (code) {
-    case 1:
-      level = "main";
-      break;
-    case 2:
-      level = "main";
-      break;
-    case 3:
-      level = "first";
-      break;
-    case 4:
-      level = "second";
-      break;
-    case 5:
-      level = "third";
-      break;
-    case 6:
-      level = "four";
-      break;
-    case 7:
-      level = "five";
-      break;
-    case 8:
-      level = "six";
-      break;
-    case 9:
-      level = "seven";
-      break;
-    default:
-      level = "default";
-      break;
-  }
-  return level;
-}
 // Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
 export const setBgColor = ({ level, theme }) => {
   // console.log("theme: ", theme);
   switch (level) {
-    case 1 || 2 || "main":
+    case 1 || 2:
       return theme.colors.mainLevelColor;
-    case 3 || "first":
+    case 3:
       return theme.colors.firstLevelColor;
-    case 4 || "second":
+    case 4:
       return theme.colors.secondLevelColor;
-    case 5 || "third":
+    case 5:
       return theme.colors.thirdLevelColor;
-    case 6 || "four":
+    case 6:
       return theme.colors.fourLevelColor;
-    case 7 || "five":
+    case 7:
       return theme.colors.fiveLevelColor;
-    case 8 || "six":
+    case 8:
       return theme.colors.materialColor;
-    case 9 || "seven":
+    case 9:
       return theme.colors.materialColor;
     default:
       return theme.colors.mainLevelColor;
