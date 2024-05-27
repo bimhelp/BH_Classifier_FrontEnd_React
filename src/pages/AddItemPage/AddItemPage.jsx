@@ -6,6 +6,8 @@ import { IconButton } from "../../components/Button/Button";
 import { Layout, Content } from "./AddItemPage.styled";
 import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
 import { TbLayoutSidebarRightExpandFilled } from "react-icons/tb";
+import { toast } from "react-toastify";
+import { addMaterial } from "../../services";
 const AddItemPage = () => {
   const [isVisibleMaterials, setIsVisibleMaterials] = useState(false);
 
@@ -20,6 +22,25 @@ const AddItemPage = () => {
     return TbLayoutSidebarLeftExpandFilled;
   }
 
+  // Створення матеріалу
+  function createMaterial(material) {
+    const controller = new AbortController();
+    async function createMaterial(newMaterial) {
+      try {
+        const response = await addMaterial(newMaterial, controller.signal);
+        console.log("response: ", response.data);
+        toast.success("Матеріал успішно створено");
+        // setNewMaterial(response.data);
+      } catch (error) {
+        toast.error("Не вдалось створити матеріал");
+      }
+    }
+    createMaterial(material);
+    return () => {
+      controller.abort();
+    };
+  }
+
   return (
     <>
       <Section>
@@ -32,7 +53,7 @@ const AddItemPage = () => {
         <Layout>
           {isVisibleMaterials && <MaterialTable></MaterialTable>}
           <Content>
-            <AddMaterialForm></AddMaterialForm>
+            <AddMaterialForm create={createMaterial}></AddMaterialForm>
           </Content>
         </Layout>
         <p>Список доданих матеріалів</p>

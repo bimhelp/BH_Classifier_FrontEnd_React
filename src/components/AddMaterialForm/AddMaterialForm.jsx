@@ -23,6 +23,7 @@ import {
 
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
+  const [selectedId, setSelectedId] = useState(id);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
   const { role } = useContext(context);
   // Початкові значення
@@ -219,7 +220,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     );
 
     const additionalElement = {
-      ParentElementId: id,
+      ParentElementId: selectedId,
       ...filteredValues,
     };
 
@@ -227,6 +228,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     // Очистка форми
     resetForm();
     onClose();
+  };
+
+  const reactHandleSelect = (data) => {
+    setSelectedId(data.value._id);
   };
 
   return (
@@ -262,12 +267,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             {role === "designer" && (
               <InputWrapper>
                 <label htmlFor="Code">Категорія</label>
-                <CategorySelect
-                  name="Code"
-                  onSelect={(value) => {
-                    console.log(value);
-                  }}
-                />
+                <CategorySelect name="Code" onSelect={reactHandleSelect} />
               </InputWrapper>
             )}
 
