@@ -1,6 +1,7 @@
 import React from "react";
 import { components } from "react-select"; // Імпортування компонентів react-select
-import { Code } from "./CustomOption.styled";
+import { Code, HilightDescription } from "./CustomOption.styled";
+import { hiLight } from "../../services";
 
 // Ваш кастомний компонент для опції
 const CustomOption = (props) => {
@@ -11,7 +12,13 @@ const CustomOption = (props) => {
         <Code level={props.data.value.ElementNestingLevel}>
           {props.data.value.Code}
         </Code>
-        <span>{props.data.label}</span>
+        {props.querry ? (
+          <HilightDescription>{hiLight(props.query)}</HilightDescription>
+        ) : (
+          <span>{props.data.label}</span>
+        )}
+
+        {/* <span>{props.data.label}</span> */}
       </div>
     </components.Option>
   );

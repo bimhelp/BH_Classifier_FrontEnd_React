@@ -185,7 +185,7 @@ export const StyledIconButton = styled(StyledButton)`
   }
 
   &:hover .tooltip {
-    z-index: 100;
+    z-index: 301;
     color: black;
     display: unset;
     position: absolute;

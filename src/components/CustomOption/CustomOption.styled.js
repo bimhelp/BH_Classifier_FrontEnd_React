@@ -11,3 +11,8 @@ export const Code = styled.span`
   color: ${(props) => props.theme.colors.white};
   background-color: ${setBgColor};
 `;
+export const HilightDescription = styled.div`
+  padding-left: 30px;
+  font-size: ${(props) => props.theme.fontSizes.s};
+  background-color: ${(props) => props.type === "mark" && "yellow"};
+`;

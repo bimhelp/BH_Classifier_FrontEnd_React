@@ -8,8 +8,6 @@ import { CloseButton } from "../Button/Button";
 import { CgClose } from "react-icons/cg";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
-import { Modal } from "../Modal/Modal";
-import MaterialTable from "../MaterialTable/MaterialTable";
 import CategorySelect from "../CategorySelect/CategorySelect";
 import {
   InputWrapper,
@@ -21,13 +19,11 @@ import {
   ErrorMessageStyled,
   StyledSelect,
   ButtonWrapper,
-  FormTitle,
 } from "./AddMaterialForm.styled";
 
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { role } = useContext(context);
   // Початкові значення
   const initialValues = {
@@ -213,11 +209,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     setAdditionalFields(!additionalFields);
   }
 
-  // відкриття модалки
-  function toggleModal() {
-    setModalIsOpen(!modalIsOpen);
-  }
-
   const handleSubmit = (values, actions) => {
     // formik метод очистки форми
     const { resetForm } = actions;
@@ -240,12 +231,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
 
   return (
     <>
-      {modalIsOpen && (
-        <Modal onClose={toggleModal}>
-          <MaterialTable></MaterialTable>
-        </Modal>
-      )}
-      <FormTitle>Додати матеріал</FormTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={addMaterialSchema}
@@ -254,20 +239,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
         {(props) => (
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
-
-            <InputWrapper>
-              {role === "designer" && (
-                <>
-                  <label htmlFor="Code">Категорія</label>
-                  <CategorySelect
-                    name="Code"
-                    onSelect={(value) => {
-                      console.log(value);
-                    }}
-                  />
-                </>
-              )}
-            </InputWrapper>
 
             <DescriptionWrapper>
               <label htmlFor="DescriptionUA">Опис</label>
@@ -287,6 +258,18 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
+
+            {role === "designer" && (
+              <InputWrapper>
+                <label htmlFor="Code">Категорія</label>
+                <CategorySelect
+                  name="Code"
+                  onSelect={(value) => {
+                    console.log(value);
+                  }}
+                />
+              </InputWrapper>
+            )}
 
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>

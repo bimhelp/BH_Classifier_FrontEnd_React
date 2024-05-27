@@ -274,25 +274,14 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
               />
             </DescriptionWrapper>
             {role === "admin" && (
-              <InputWrapper>
-                <label htmlFor="Code">Код</label>
-                <Input
-                  type="text"
-                  placeholder="Код"
-                  name="Code"
-                  id="Code"
-                  bordercolor={validationColor(
-                    props.errors.Code,
-                    props.values.Code
-                  )}
-                />
+              <>
                 <InputWrapper>
-                  <label htmlFor="ParentElementId">Код Категорії</label>
+                  <label htmlFor="Code">Код</label>
                   <Input
                     type="text"
-                    placeholder="Код Категорії"
-                    name="ParentElementId"
-                    id="ParentElementId"
+                    placeholder="Код"
+                    name="Code"
+                    id="Code"
                     bordercolor={validationColor(
                       props.errors.Code,
                       props.values.Code
@@ -305,13 +294,27 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                     )}
                   />
                 </InputWrapper>
-                <ErrorMessage
-                  name="Code"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
-              </InputWrapper>
+                <InputWrapper>
+                  <label htmlFor="ParentElementId">Код Категорії</label>
+                  <Input
+                    type="text"
+                    placeholder="Код Категорії"
+                    name="ParentElementId"
+                    id="ParentElementId"
+                    disabled={element.CodeParentElement === "materials"}
+                    bordercolor={validationColor(
+                      props.errors.Code,
+                      props.values.Code
+                    )}
+                  />
+                  <ErrorMessage
+                    name="ParentElementId"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </InputWrapper>
+              </>
             )}
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>

@@ -19,16 +19,13 @@ const CategorySelect = ({ onSelect }) => {
     try {
       // Виконати запит до сервера для отримання даних на основі введеного тексту
       const response = await searchMaterialByDescription(normalizedQuery);
-      console.log("response: ", response.data);
 
       // відфільтрувати тільки категорії
       const category = response.data.filter((item) => item.Unit === "category");
-      console.log("category: ", category);
       const sortedCategory = category.sort(
         (first, second) =>
           first.ElementNestingLevel - second.ElementNestingLevel
       );
-      console.log("sortedCategory: ", sortedCategory);
 
       return makeOptions(sortedCategory);
     } catch (error) {
@@ -41,7 +38,6 @@ const CategorySelect = ({ onSelect }) => {
     setSelectedOption(selectedOption);
 
     // Викликати функцію з пропсів для передачі вибраного значення
-    console.log("selectedOption: ", selectedOption);
     onSelect(selectedOption);
   };
 
