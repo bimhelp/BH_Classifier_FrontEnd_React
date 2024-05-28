@@ -20,6 +20,7 @@ import {
   DescriptionWrapper,
   ErrorMessageStyled,
   ButtonWrapper,
+  CheckBox,
 } from "./AddMaterialForm.styled";
 
 const AddMaterialForm = ({ onClose, id, create }) => {
@@ -329,7 +330,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             {role === "admin" && (
               <div>
                 <label htmlFor="Origin">cpv</label>
-                <Input type="checkbox" name="Origin" id="Origin"></Input>
+                <CheckBox type="checkbox" name="Origin" id="Origin"></CheckBox>
               </div>
             )}
             <IconButton

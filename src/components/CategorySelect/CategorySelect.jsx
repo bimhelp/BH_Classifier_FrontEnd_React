@@ -56,7 +56,7 @@ const CategorySelect = ({ onSelect }) => {
       borderColor: selectedOption ? "#3CBC81" : "black", // колір рамки в залежності від вибраної опції
       borderWidth: "2px",
       "&:hover": {
-        borderColor: state.isFocused ? "#3CBC81" : "#3CBC81", // колір рамки при наведенні
+        borderColor: state.isFocused && "black", // колір рамки при наведенні
         boxShadow:
           "0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16)",
       },

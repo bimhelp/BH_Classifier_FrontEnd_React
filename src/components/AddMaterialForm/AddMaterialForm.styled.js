@@ -93,6 +93,10 @@ export const Input = styled(Field)`
     outline: 0px solid white;
   }
 `;
+
+export const CheckBox = styled(Field)`
+  margin-left: 10px;
+`;
 export const StyledSelect = styled.select`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
