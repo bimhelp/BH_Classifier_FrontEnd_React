@@ -329,7 +329,9 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 <option value="" disabled hidden>
                   Оберіть одиницю виміру
                 </option>
-                <option value="category">Категорія</option>
+                {role === "admin" && (
+                  <option value="category">Категорія</option>
+                )}
                 <option value="pcs.">Штука</option>
                 <option value="m">Метр погонний</option>
                 <option value="m2">Метр квадратний</option>
