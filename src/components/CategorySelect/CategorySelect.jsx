@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import AsyncSelect from "react-select/async";
-// import { StyledSelect } from "./CategorySelect.styled";
 import { makeOptions } from "../../services";
 import { searchMaterialByDescription } from "../../services";
 import { toast } from "react-toastify";
 import CustomOption from "../CustomOption/CustomOption";
+
 const CategorySelect = ({ onSelect }) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -47,6 +47,26 @@ const CategorySelect = ({ onSelect }) => {
     }
   };
 
+  // Налаштування стилів для react-select
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+
+      // borderColor: state.isFocused ? "black" : "#E74A3B", // колір рамки для фокусу та звичайного стану
+      borderColor: selectedOption ? "#3CBC81" : "black", // колір рамки в залежності від вибраної опції
+      borderWidth: "2px",
+      "&:hover": {
+        borderColor: state.isFocused ? "#3CBC81" : "#3CBC81", // колір рамки при наведенні
+        boxShadow:
+          "0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16)",
+      },
+    }),
+    menu: (provided) => ({
+      ...provided,
+      zIndex: 9999, // щоб випадаючий список був над іншими елементами
+    }),
+  };
+
   return (
     <AsyncSelect
       cacheOptions
@@ -56,6 +76,9 @@ const CategorySelect = ({ onSelect }) => {
       value={selectedOption}
       onInputChange={handleInputChange}
       components={{ Option: CustomOption }} // Передача кастомного компонента для опцій
+      styles={customStyles}
+      isClearable // додає кнопку очищення
+      placeholder="Введіть назву категорії"
     />
   );
 };

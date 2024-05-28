@@ -119,6 +119,25 @@ export const StyledSelect = styled.select`
   }
 `;
 
+export const StyledOption = styled.option`
+  background-color: ${(props) => props.theme.colors.backgroundWhite};
+  color: ${(props) => props.theme.colors.black};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.primaryLight};
+    color: ${(props) => props.theme.colors.white};
+  }
+
+  &:checked {
+    background-color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.white};
+  }
+`;
+
 export const InputGroup = styled.div`
   width: 100%;
   display: flex;

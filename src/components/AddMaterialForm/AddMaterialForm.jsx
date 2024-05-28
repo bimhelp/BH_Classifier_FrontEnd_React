@@ -9,6 +9,8 @@ import { CgClose } from "react-icons/cg";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import CategorySelect from "../CategorySelect/CategorySelect";
+import UnitSelect from "../UnitSelect/UnitSelect";
+
 import {
   InputWrapper,
   StyledForm,
@@ -17,14 +19,15 @@ import {
   Input,
   DescriptionWrapper,
   ErrorMessageStyled,
-  StyledSelect,
   ButtonWrapper,
 } from "./AddMaterialForm.styled";
 
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const [selectedId, setSelectedId] = useState(id);
-  const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  // const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const [selectedUnit, setSelectedUnit] = useState("");
+  const [reset, setReset] = useState(false);
   const { role } = useContext(context);
   // Початкові значення
   const initialValues = {
@@ -134,10 +137,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
       ),
     PriceUAH: yup.number().typeError("Введіть число").positive(),
-    Unit: yup
-      .string()
-      .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
-      .required("Оберіть одиниці виміру"),
+    // Unit: yup
+    //   .string()
+    //   .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
+    //   .required("Оберіть одиниці виміру"),
     Length: yup
       .number()
       .typeError("Введіть число")
@@ -210,6 +213,9 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     setAdditionalFields(!additionalFields);
   }
 
+  // Очистка react input
+  // const clearSelect = () => {};
+
   const handleSubmit = (values, actions) => {
     // formik метод очистки форми
     const { resetForm } = actions;
@@ -221,17 +227,30 @@ const AddMaterialForm = ({ onClose, id, create }) => {
 
     const additionalElement = {
       ParentElementId: selectedId,
+      Unit: selectedUnit,
       ...filteredValues,
     };
+    console.log("additionalElement: ", additionalElement);
 
     create(additionalElement);
     // Очистка форми
     resetForm();
+    setReset(true);
     onClose();
   };
 
   const reactHandleSelect = (data) => {
-    setSelectedId(data.value._id);
+    if (data) {
+      setSelectedId(data.value._id);
+    }
+    return;
+  };
+
+  const onUnitSelect = (data) => {
+    if (data) {
+      setSelectedUnit(data.value);
+    }
+    return;
   };
 
   return (
@@ -248,7 +267,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             <DescriptionWrapper>
               <label htmlFor="DescriptionUA">Опис</label>
               <TextArea
-                autoFocus={true}
+                // autoFocus={true}
                 name="DescriptionUA"
                 id="DescriptionUA"
                 placeholder="Введіть опис українською мовою"
@@ -267,38 +286,27 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             {role === "designer" && (
               <InputWrapper>
                 <label htmlFor="Code">Категорія</label>
-                <CategorySelect name="Code" onSelect={reactHandleSelect} />
+                <CategorySelect
+                  name="Code"
+                  onSelect={reactHandleSelect}
+                  reset={reset}
+                />
+                <ErrorMessage
+                  name="Code"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
               </InputWrapper>
             )}
-
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field
-                as={StyledSelect}
+                as={UnitSelect}
                 name="Unit"
-                bordercolor={validationColor(
-                  props.errors.Unit,
-                  props.values.Unit
-                )}
-              >
-                <option value="" disabled hidden>
-                  Оберіть одиницю виміру
-                </option>
-                {role === "admin" && (
-                  <option value="category">Категорія</option>
-                )}
-                <option value="pcs.">Штука</option>
-                <option value="m">Метр погонний</option>
-                <option value="m2">Метр квадратний</option>
-                <option value="m3">Метр кубічний</option>
-                <option value="t">Тона</option>
-                <option value="kg">Кілограм</option>
-              </Field>
-
-              <ErrorMessage
-                name="Unit"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
+                onSelect={onUnitSelect}
+                reset={reset}
+              ></Field>
             </InputWrapper>
 
             <InputWrapper>
