@@ -100,7 +100,7 @@ const Category = ({
                 left={0}
               />
             </CopyToClipboard>
-            <CategoryCode origin={Origin.toString()}>{Code}</CategoryCode>
+            <CategoryCode origin={Origin?.toString()}>{Code}</CategoryCode>
           </CodeWrapper>
 
           <DescriptionWrapper>
@@ -183,7 +183,7 @@ const Category = ({
 
         {editFormVisible && (
           <CSSTransition
-            in={editFormVisible}
+            // in={editFormVisible}
             classNames="fade"
             timeout={300}
             unmountOnExit
