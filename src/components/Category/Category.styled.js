@@ -93,7 +93,9 @@ export const CategoryCode = styled.p`
   @media screen and (min-width: 680px) {
     padding-left: ${(props) => props.theme.space[3]}px;
   }
+
   &::before {
+    ${(props) => console.log(props)}
     content: "";
     position: absolute;
     top: 2px;
@@ -102,7 +104,8 @@ export const CategoryCode = styled.p`
     height: 5px;
     display: inline-block;
     border-radius: 50%; // Зробити коло
-    background-color: ${(props) => !props.origin && props.theme.colors.white};
+    background-color: ${(props) =>
+      props.origin === "false" && props.theme.colors.white};
   }
 `;
 

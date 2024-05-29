@@ -58,10 +58,13 @@ const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
 
   return (
     <Select
+      cacheOptions
+      defaultOptions
       options={makeOptions(options)}
       styles={customStyles}
       placeholder="Виберіть одиницю виміру"
       onChange={handleChange}
+      // isClearable
     ></Select>
   );
 };
