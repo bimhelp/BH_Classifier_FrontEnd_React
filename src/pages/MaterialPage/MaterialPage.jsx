@@ -7,9 +7,10 @@ import {
   searchMaterialByCode,
 } from "../../services/api";
 import { checkIsString, parseNumber } from "../../services";
-import { MainTableWrapper } from "./MaterialPage.styled";
+import { MainTableWrapper, SearchWrapper } from "./MaterialPage.styled";
 import { toast } from "react-toastify";
 import SearchResults from "../../components/SearchResults/SearchResults";
+import UnitSelect from "../../components/UnitSelect/UnitSelect";
 
 const MaterialPage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -73,12 +74,15 @@ const MaterialPage = () => {
   return (
     <>
       <Section>
-        <Search
-          submit={submit}
-          isLoading={isLoading}
-          back={backToTable}
-          isSubmiting={isLoading}
-        />
+        <SearchWrapper>
+          <Search
+            submit={submit}
+            isLoading={isLoading}
+            back={backToTable}
+            isSubmiting={isLoading}
+          />
+          {searchResult.length > 0 && <UnitSelect />}
+        </SearchWrapper>
       </Section>
       <Section>
         <MainTableWrapper>

@@ -46,6 +46,7 @@ export const StyledBack = styled(StyledButton)`
   margin: ${(props) => props.theme.space[0]}px;
 
   min-width: 40px;
+  height: 100%;
   padding-top: ${(props) => props.theme.space[3]}px;
   padding-bottom: ${(props) => props.theme.space[3]}px;
   padding-left: ${(props) => props.theme.space[3]}px;
@@ -79,6 +80,7 @@ export const StyledSearch = styled(StyledButton)`
   margin: ${(props) => props.theme.space[0]}px;
   /* display: inline-blockblock; */
   min-width: 40px;
+  height: 100%;
   padding-top: ${(props) => props.theme.space[3]}px;
   padding-bottom: ${(props) => props.theme.space[3]}px;
   padding-left: ${(props) => props.theme.space[3]}px;

@@ -6,6 +6,7 @@ export const FormStyled = styled.form`
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: 40px;
   margin-bottom: ${(props) => props.theme.space[2]}px;
   @media screen and (min-width: 680px) {
     width: 40%;
@@ -18,7 +19,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   font-size: ${(props) => props.theme.fontSizes.m};
   width: 100%;
-  padding: 6px;
+  padding: 9px;
   box-sizing: border-box;
   border-top: ${(props) => props.theme.borders.bold};
   border-bottom: ${(props) => props.theme.borders.bold};
