@@ -99,7 +99,7 @@ export const setRoleColor = ({ role, theme }) => {
     case "rental":
       return theme.colors.fiveLevelColor;
     default:
-      return theme.colors.mainLevelColor;
+      return theme.colors.muted;
   }
 };
 

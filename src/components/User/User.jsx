@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { authContext as context } from "../../context/authContext";
-import { FiUser } from "react-icons/fi";
+import { FaUser } from "react-icons/fa";
 import { Button } from "../Button/Button";
 import { PLUGIN_URL } from "../../services";
 import {
@@ -9,12 +9,14 @@ import {
   FlexWrapper,
   Menu,
   Plugin,
+  IconWrapper,
 } from "./User.styled";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import Confirm from "../Confirm/Confirm";
 import { FaArrowRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { SiAutodeskrevit } from "react-icons/si";
+
 const User = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -38,17 +40,23 @@ const User = () => {
     toggleConfirm();
     toggleMenu();
   };
-  const { user, isLoggedIn, onLogOut } = useContext(context);
+  const { user, isLoggedIn, onLogOut, role } = useContext(context);
+
   return (
     <>
       <UserWrapper>
         {isLoggedIn ? (
-          <LogInButton onClick={toggleMenu} type="button">
-            {user.name} <FiUser />
-          </LogInButton>
+          <>
+            <LogInButton onClick={toggleMenu} type="button">
+              {user.name}
+              <IconWrapper role={role}>
+                <FaUser />
+              </IconWrapper>
+            </LogInButton>
+          </>
         ) : (
           <LogInButton to="login">
-            LogIn <FiUser />
+            LogIn <FaUser />
           </LogInButton>
         )}
       </UserWrapper>
@@ -56,6 +64,11 @@ const User = () => {
         <ContextMenu onClose={toggleMenu}>
           {isLoggedIn && (
             <Menu>
+              <IconWrapper role={role} style={{ paddingLeft: "10px" }}>
+                <FaUser />
+                <span style={{ marginLeft: "6px" }}>{role}</span>
+              </IconWrapper>
+
               <Plugin>
                 <SiAutodeskrevit />
                 <a href={PLUGIN_URL} target="_blank" rel="noreferrer noopener">

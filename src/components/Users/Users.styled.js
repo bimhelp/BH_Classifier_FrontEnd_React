@@ -21,11 +21,7 @@ export const Table = styled.table`
 
 export const Row = styled.tr``;
 
-export const Name = styled.td`
-  /* color: ${(props) => props.theme.colors.white}; */
-  /* background-color: ${setRoleColor}; */
-`;
+export const Name = styled.td``;
 export const Role = styled.td`
-  /* color: ${(props) => props.theme.colors.white}; */
   background-color: ${setRoleColor};
 `;
