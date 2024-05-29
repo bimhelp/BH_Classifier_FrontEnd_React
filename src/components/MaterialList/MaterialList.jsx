@@ -25,6 +25,10 @@ const MaterialList = ({ items, query }) => {
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
+  useEffect(() => {
+    setCurrentItems(items);
+  }, [items]);
+
   // Запит по під категорії
   useEffect(() => {
     const controller = new AbortController();

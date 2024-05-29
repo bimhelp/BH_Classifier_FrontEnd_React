@@ -306,6 +306,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 as={UnitSelect}
                 name="Unit"
                 onSelect={onUnitSelect}
+                variant="add"
                 reset={reset}
               ></Field>
             </InputWrapper>

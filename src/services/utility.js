@@ -163,3 +163,37 @@ export function makeOptions(array) {
     label: category.DescriptionUA,
   }));
 }
+
+// Функція для створення списку options
+export const createOptionsFromUnits = (materials) => {
+  // Об'єкт для зіставлення значень Unit з мітками
+  const unitLabels = {
+    category: "Категорія",
+    "pcs.": "Штука",
+    m: "Метр погонний",
+    m2: "Метр квадратний",
+    m3: "Метр кубічний",
+    t: "Тона",
+    kg: "Кілограм",
+  };
+  // Створюємо об'єкт для зберігання унікальних значень поля Unit
+  const uniqueUnits = {};
+
+  // Проходимо через всі матеріали
+  materials.forEach((material) => {
+    const unit = material.Unit;
+    if (unit && !uniqueUnits[unit]) {
+      // Додаємо унікальні значення в об'єкт
+      uniqueUnits[unit] = true;
+    }
+  });
+
+  // Перетворюємо унікальні значення в масив об'єктів формату { value: "unit", label: "label" }
+  const options = Object.keys(uniqueUnits).map((unit) => {
+    // Отримуємо мітку для поточного unit з об'єкта unitLabels, або використовуємо сам unit як мітку за замовчуванням
+    const label = unitLabels[unit] || unit;
+    return { value: unit, label: label };
+  });
+
+  return options;
+};

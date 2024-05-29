@@ -3,7 +3,16 @@ import { authContext as context } from "../../context/authContext";
 
 import Select from "react-select";
 
-const UnitSelect = ({ onSelect, reset }) => {
+const defaultOptions = [
+  { value: "category", label: "Категорія" },
+  { value: "pcs.", label: "Штука" },
+  { value: "m", label: "Метр погонний" },
+  { value: "m2", label: "Метр квадратний" },
+  { value: "m3", label: "Метр кубічний" },
+  { value: "t", label: "Тона" },
+  { value: "kg", label: "Кілограм" },
+];
+const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const { role } = useContext(context);
 
@@ -14,18 +23,8 @@ const UnitSelect = ({ onSelect, reset }) => {
     }
   }, [reset]);
 
-  const options = [
-    { value: "category", label: "Категорія" },
-    { value: "pcs.", label: "Штука" },
-    { value: "m", label: "Метр погонний" },
-    { value: "m2", label: "Метр квадратний" },
-    { value: "m3", label: "Метр кубічний" },
-    { value: "t", label: "Тона" },
-    { value: "kg", label: "Кілограм" },
-  ];
-
   const makeOptions = (options) => {
-    if (role !== "admin") {
+    if (role !== "admin" && variant === "add") {
       return options.filter((option) => option.value !== "category");
     } else return options;
   };
