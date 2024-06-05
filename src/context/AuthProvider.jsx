@@ -12,20 +12,46 @@ const AuthProvider = ({ children }) => {
     name: null,
     email: null,
   });
+  const [userId, setUserId] = useState(null);
 
   const [role, setRole] = useLocalStorage("role", "");
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
+  function storeUserId() {
+    if (token) {
+      // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
+      const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+      console.log("tokenPayload: ", tokenPayload);
 
+      // Отримуємо ідентифікатор користувача з токена
+      console.log("tokenPayload.userId: ", tokenPayload.userId);
+      setUserId(tokenPayload.userId);
+    }
+  }
   useEffect(() => {
+    function storeUserId() {
+      if (token) {
+        // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
+        const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+        console.log("tokenPayload: ", tokenPayload);
+
+        // Отримуємо ідентифікатор користувача з токена
+        console.log("tokenPayload.userId: ", tokenPayload.userId);
+        setUserId(tokenPayload.id);
+      }
+    }
+
     if (!mounted) {
       // Код, який потрібно виконати тільки при першому монтуванні
       async function getCurrent(token) {
         // console.log("token: ", token);
+
         try {
           const response = await currentUser(token);
           // console.log("response: ", response);
+
           setUser(response.user);
+          storeUserId();
           setRole(response.user.role);
           setIsLoggedIn(true);
         } catch (error) {
@@ -56,6 +82,7 @@ const AuthProvider = ({ children }) => {
 
         // записуємо токен в lacalstorage
         setToken(response.token);
+        storeUserId();
         setIsLoggedIn(true);
         // Перенаправляємо на головну сторінку
         navigate("/", { replace: true });
@@ -85,6 +112,7 @@ const AuthProvider = ({ children }) => {
           setToken(response.token);
           setRole(response.user.role);
           setUser(response.user);
+          storeUserId();
           setIsLoggedIn(true);
           // при успішному логіні видалить всі тости
           toast.dismiss();
@@ -135,6 +163,7 @@ const AuthProvider = ({ children }) => {
     onLogIn,
     onLogOut,
     role,
+    userId,
   };
   return (
     <authContext.Provider value={providerValue}>

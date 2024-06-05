@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 const ItemMenu = ({ id, toggleAddForm, toggleEditeForm, handleDelete }) => {
   const { role } = useContext(context);
+
   if (role === "admin") {
     return (
       <>

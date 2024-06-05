@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { authContext as context } from "../../context/authContext";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
 import { IoIosCopy } from "react-icons/io";
@@ -34,6 +35,7 @@ const Category = ({
     Unit,
     ElementNestingLevel,
     Origin,
+    owner,
   },
   selectCategory,
   children,
@@ -49,6 +51,8 @@ const Category = ({
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [editFormVisible, setEditFormVisible] = useState(false);
+  const { userId } = useContext(context);
+  console.log("userId: ", userId);
 
   useEffect(() => {
     setLevel(ElementNestingLevel);
@@ -156,12 +160,14 @@ const Category = ({
         </CategoryWrapper>
 
         <MenuWrapper>
-          <ItemMenu
-            id={_id}
-            toggleAddForm={toggleAddForm}
-            toggleEditeForm={toggleEditeForm}
-            handleDelete={handleDelete}
-          />
+          {userId === owner && (
+            <ItemMenu
+              id={_id}
+              toggleAddForm={toggleAddForm}
+              toggleEditeForm={toggleEditeForm}
+              handleDelete={handleDelete}
+            />
+          )}
         </MenuWrapper>
       </Card>
 

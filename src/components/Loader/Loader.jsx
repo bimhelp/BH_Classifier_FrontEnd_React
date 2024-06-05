@@ -62,29 +62,3 @@ const Loader = () => {
 };
 
 export default Loader;
-
-// import React from "react";
-// import { CustomLoader } from "./Loader.styled";
-// const Loader = () => {
-//   return (
-//     <CustomLoader
-//       speed={2}
-//       width={1200}
-//       height={40}
-//       // viewBox="0 0 1415 78"
-//       viewBox="0 0 1200 37"
-//       backgroundColor="#e3e3e3"
-//       foregroundColor="#c7c7c7"
-//       // style={{ width: "100%" }}
-//     >
-//       <rect x="15" y="0" rx="5" ry="5" width="110" height="32" />
-//       <rect x="130" y="0" rx="5" ry="5" width="1000" height="32" />
-//       {/* <rect x="15" y="27" rx="5" ry="5" width="110" height="24" />
-//       <rect x="130" y="27" rx="5" ry="5" width="1285" height="24" />
-//       <rect x="15" y="54" rx="5" ry="5" width="110" height="24" />
-//       <rect x="130" y="54" rx="5" ry="5" width="1285" height="24" /> */}
-//     </CustomLoader>
-//   );
-// };
-
-// export default Loader;
