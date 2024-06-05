@@ -3,19 +3,21 @@ import Section from "../../components/Section/Section";
 import AddMaterialForm from "../../components/AddMaterialForm/AddMaterialForm";
 import MaterialTable from "../../components/MaterialTable/MaterialTable";
 import { IconButton } from "../../components/Button/Button";
-import { Layout, Content } from "./AddItemPage.styled";
+import { Layout, Content, Menu } from "./AddItemPage.styled";
 import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
 import { TbLayoutSidebarRightExpandFilled } from "react-icons/tb";
 import { toast } from "react-toastify";
 import { addMaterial } from "../../services";
 import MaterialList from "../../components/MaterialList/MaterialList";
 import { getByUser } from "../../services";
+import { MdAddBox } from "react-icons/md";
 
 const AddItemPage = () => {
   const [isVisibleMaterials, setIsVisibleMaterials] = useState(false);
   const [userMaterials, setUserMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [newMaterial, setNewMaterial] = useState("");
+  const [formVisible, setFormVisible] = useState(false);
 
   // Запит по матеріали користувача
   useEffect(() => {
@@ -42,6 +44,9 @@ const AddItemPage = () => {
 
   function toggleStructure() {
     setIsVisibleMaterials(!isVisibleMaterials);
+  }
+  function toggleForm() {
+    setFormVisible(!formVisible);
   }
 
   function icon() {
@@ -72,20 +77,37 @@ const AddItemPage = () => {
   return (
     <>
       <Section>
-        <IconButton
-          onClick={toggleStructure}
-          variant="dark"
-          tooltip="Матеріали"
-          icon={icon()}
-        ></IconButton>
+        <Menu>
+          <IconButton
+            onClick={toggleStructure}
+            variant="dark"
+            tooltip="Матеріали"
+            icon={icon()}
+            size={40}
+          ></IconButton>
+          <IconButton
+            onClick={toggleForm}
+            variant="dark"
+            tooltip="Створити"
+            icon={MdAddBox}
+            size={40}
+          ></IconButton>
+        </Menu>
         <Layout>
           {isVisibleMaterials && <MaterialTable></MaterialTable>}
           <Content>
-            <AddMaterialForm create={createMaterial}></AddMaterialForm>
+            {formVisible && (
+              <AddMaterialForm
+                create={createMaterial}
+                onClose={toggleForm}
+              ></AddMaterialForm>
+            )}
             {!isLoading && (
               <Section>
-                {userMaterials.length > 0 && (
+                {userMaterials.length > 0 ? (
                   <MaterialList items={userMaterials} />
+                ) : (
+                  <p>Ви ще не створили жодного матеріалу</p>
                 )}
               </Section>
             )}
