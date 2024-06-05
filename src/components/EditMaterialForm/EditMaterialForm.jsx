@@ -234,6 +234,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       return acc;
     }, {});
 
+    console.log("changedValues: ", changedValues);
     // Відправка даних у верхній компонент
     edit(id, changedValues);
     actions.setSubmitting(false); // Позначити, що обробка завершена

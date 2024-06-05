@@ -95,7 +95,6 @@ export const CategoryCode = styled.p`
   }
 
   &::before {
-    ${(props) => console.log(props)}
     content: "";
     position: absolute;
     top: 2px;

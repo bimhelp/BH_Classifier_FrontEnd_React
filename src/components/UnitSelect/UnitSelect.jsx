@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { authContext as context } from "../../context/authContext";
+import { toast } from "react-toastify";
 
 import Select from "react-select";
 
@@ -36,6 +37,12 @@ const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
     onSelect(selectedOption);
   };
 
+  const handleBlur = () => {
+    if (!selectedOption) {
+      toast.error("Оберіть одиницю виміру");
+    }
+  };
+
   // Налаштування стилів для react-select
   const customStyles = {
     control: (provided, state) => ({
@@ -59,12 +66,16 @@ const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
   return (
     <Select
       cacheOptions
-      defaultOptions
+      defaultOptions={defaultOptions}
+      value={selectedOption}
       options={makeOptions(options)}
       styles={customStyles}
       placeholder="Виберіть одиницю виміру"
       onChange={handleChange}
-      // isClearable
+      onBlur={handleBlur}
+      isClearable={variant === "add"}
+      required={variant === "add"}
+      onSubmit={() => console.log("submit")}
     ></Select>
   );
 };

@@ -17,6 +17,11 @@ export async function getByLevel(level, signal) {
   return response.data;
 }
 
+export async function getByUser(signal) {
+  const response = await axios.get("/material", { signal });
+  return response.data;
+}
+
 export async function getByParentId(parentCode, signal) {
   const response = await axios.get(`/material-by-parent/${parentCode}`, {
     signal,

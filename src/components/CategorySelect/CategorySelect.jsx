@@ -7,12 +7,12 @@ import CustomOption from "../CustomOption/CustomOption";
 
 const CategorySelect = ({ onSelect }) => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [inputValue, setInputValue] = useState("");
 
   const loadOptions = async (inputValue) => {
     const normalizedQuery = inputValue.toLowerCase().trim();
-
     if (normalizedQuery.length < 1) {
-      toast.error("Введіть запит в поле пошуку");
+      // toast.error("Введіть запит в поле пошуку");
       return [];
     }
 
@@ -36,17 +36,23 @@ const CategorySelect = ({ onSelect }) => {
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
-
     // Викликати функцію з пропсів для передачі вибраного значення
     onSelect(selectedOption);
   };
 
   const handleInputChange = (inputValue, { action }) => {
     if (action === "input-change") {
+      setInputValue(inputValue);
       setSelectedOption(null);
     }
   };
 
+  const handleBlur = () => {
+    const normalizedQuery = inputValue.toLowerCase().trim();
+    if (normalizedQuery.length < 1) {
+      toast.error("Введіть запит в поле пошуку категорії");
+    }
+  };
   // Налаштування стилів для react-select
   const customStyles = {
     control: (provided, state) => ({
@@ -79,6 +85,9 @@ const CategorySelect = ({ onSelect }) => {
       styles={customStyles}
       isClearable // додає кнопку очищення
       placeholder="Введіть назву категорії"
+      onBlur={handleBlur}
+      noOptionsMessage={() => "Категорій не знайдено"}
+      required={true}
     />
   );
 };
