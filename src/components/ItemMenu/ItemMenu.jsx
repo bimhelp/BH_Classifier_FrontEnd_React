@@ -51,6 +51,26 @@ const ItemMenu = ({ id, toggleAddForm, toggleEditeForm, handleDelete }) => {
       </>
     );
   }
+  if (role === "designer") {
+    return (
+      <>
+        <IconButton
+          icon={MdModeEditOutline}
+          visibility="visible"
+          variant="neutral"
+          tooltip="Редагувати"
+          onClick={() => toggleEditeForm(id)}
+        ></IconButton>
+        <IconButton
+          icon={MdDelete}
+          visibility="visible"
+          variant="neutral"
+          tooltip="Видалити"
+          onClick={() => handleDelete(id)}
+        ></IconButton>
+      </>
+    );
+  }
 };
 
 export default ItemMenu;
