@@ -51,7 +51,7 @@ const Category = ({
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [editFormVisible, setEditFormVisible] = useState(false);
-  const { userId } = useContext(context);
+  const { role, userId } = useContext(context);
   console.log("userId: ", userId);
 
   useEffect(() => {
@@ -160,14 +160,14 @@ const Category = ({
         </CategoryWrapper>
 
         <MenuWrapper>
-          {userId === owner && (
+          {role === "admin" || userId === owner ? (
             <ItemMenu
               id={_id}
               toggleAddForm={toggleAddForm}
               toggleEditeForm={toggleEditeForm}
               handleDelete={handleDelete}
             />
-          )}
+          ) : null}
         </MenuWrapper>
       </Card>
 
