@@ -51,6 +51,7 @@ const Category = ({
   editForm: EditForm,
   edit,
   isdelete,
+  submit,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
@@ -111,12 +112,14 @@ const Category = ({
         {tree.length > 0 && (
           <Chain>
             {tree.map((item) => (
-              <li key={item._id}>
-                <div level={item.ElementNestingLevel}>
-                  <CopyToClipboard
-                    text={item.Code}
+              <li key={item._id} onClick={() => submit(item.DescriptionUA)}>
+                <ChainLink level={item.ElementNestingLevel}>
+                  {/* <CopyToClipboard
+                    text={item.DescriptionUA}
                     onCopy={() =>
-                      toast.info(`Код ${item.Code} скопійовано в буфер омбіну`)
+                      toast.info(
+                        `${item.DescriptionUA} скопійовано в буфер омбіну`
+                      )
                     }
                   >
                     <IconButton
@@ -127,11 +130,9 @@ const Category = ({
                       tooltip="Копіювати"
                       left={0}
                     />
-                  </CopyToClipboard>
-                  <ChainLink level={item.ElementNestingLevel}>
-                    {item.DescriptionUA}
-                  </ChainLink>
-                </div>
+                  </CopyToClipboard> */}
+                  <p level={item.ElementNestingLevel}>{item.DescriptionUA}</p>
+                </ChainLink>
               </li>
             ))}
           </Chain>

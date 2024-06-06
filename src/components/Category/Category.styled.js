@@ -83,28 +83,35 @@ export const Chain = styled.ul`
   display: flex;
   justify-content: start;
   align-items: center;
+  gap: 2px;
 
   width: 100%;
   border-radius: 0 5px 5px 0px;
   font-size: 10px;
 `;
 
-export const ChainLink = styled.p`
-  white-space: nowrap; /* Важливо для обрізання тексту */
-  overflow: hidden; /* Важливо для обрізання тексту */
-  text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
-  margin: 0; /* Додаємо margin, щоб текст правильно обрізався */
+export const ChainLink = styled.div`
+  position: relative;
+  padding-left: ${(props) => props.theme.space[3]}px;
+  /* padding-right: ${(props) => props.theme.space[3]}px; */
 
-  display: inline-block;
-  padding: ${(props) => props.theme.space[1]}px;
   background-color: ${setBgColor};
   width: 150px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 
-  text-overflow: ellipsis;
   border-radius: 0 5px 5px 0px;
   text-align: left;
   color: ${(props) => props.theme.colors.textWhiteColor};
   font-size: ${(props) => props.theme.fontSizes.s};
+
+  & p {
+    white-space: nowrap; /* Важливо для обрізання тексту */
+    overflow: hidden; /* Важливо для обрізання тексту */
+    text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
+    margin: 0; /* Додаємо margin, щоб текст правильно обрізався */
+  }
 `;
 
 export const CategoryCode = styled.p`

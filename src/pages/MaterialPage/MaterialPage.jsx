@@ -106,7 +106,7 @@ const MaterialPage = () => {
             isSubmiting={isLoading}
           />
           <div style={{ minWidth: "20%" }}>
-            {searchResult.length > 0 && (
+            {searchResult?.length > 0 && (
               <UnitSelect onSelect={selectUnit} options={options} />
             )}
           </div>
@@ -119,9 +119,10 @@ const MaterialPage = () => {
               results={filteredResults}
               query={query}
               variant="material"
+              submit={submit}
             />
           ) : (
-            <MaterialTable />
+            <MaterialTable submit={submit} />
           )}
         </MainTableWrapper>
       </Section>

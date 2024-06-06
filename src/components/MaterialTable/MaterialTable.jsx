@@ -6,7 +6,7 @@ import { BarLoader } from "react-spinners";
 import { ListWrapper } from "./MaterialTable.styled";
 import ScrollToTopBtn from "../ScrollToTopBtn/ScrollToTopBtn";
 
-const MaterialTable = () => {
+const MaterialTable = ({ submit }) => {
   const [mainCategory, setMainCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -37,7 +37,11 @@ const MaterialTable = () => {
         <BarLoader color="#125b56" width="100%" />
       ) : (
         <ListWrapper>
-          <MaterialList items={mainCategory} style={{ padding: 0 }} />
+          <MaterialList
+            items={mainCategory}
+            style={{ padding: 0 }}
+            submit={submit}
+          />
           <ScrollToTopBtn />
         </ListWrapper>
       )}
