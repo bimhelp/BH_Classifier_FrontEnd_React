@@ -23,6 +23,7 @@ const ServiceList = ({ items, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [tree, setTree] = useState([]);
 
   // Запит по під категорії
   useEffect(() => {
@@ -163,6 +164,24 @@ const ServiceList = ({ items, query }) => {
     }
   }
 
+  // Показати Дерево
+  function showTree(id) {
+    toast.info("Ця фукнція в розробці");
+    // const controller = new AbortController();
+    // async function tree(id) {
+    //   try {
+    //     const response = await getMaterialTree(id, controller.signal);
+    //     setTree(response.data);
+    //   } catch (error) {
+    //     toast.error("Не вдалось отримати дерево вкладеності");
+    //   }
+    // }
+    // tree(id);
+    // return () => {
+    //   controller.abort();
+    // };
+  }
+
   return (
     <>
       <List level={level}>
@@ -181,6 +200,9 @@ const ServiceList = ({ items, query }) => {
                 create={createService}
                 edit={editService}
                 isdelete={item._id === confirmOpen ? item._id : undefined}
+                // submit={submit}
+                showTree={showTree}
+                tree={tree}
               >
                 {isLoading ? (
                   <BarLoader color="#125b56" width="100%" />
@@ -199,6 +221,9 @@ const ServiceList = ({ items, query }) => {
                 create={createService}
                 edit={editService}
                 isdelete={item._id === confirmOpen ? item._id : undefined}
+                // submit={submit}
+                showTree={showTree}
+                tree={tree}
               ></Category>
             )}
           </Item>

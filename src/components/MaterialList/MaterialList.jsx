@@ -16,6 +16,7 @@ import { Button } from "../Button/Button";
 import Confirm from "../Confirm/Confirm";
 import AddMaterialForm from "../AddMaterialForm/AddMaterialForm";
 import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
+import { getMaterialTree } from "../../services";
 
 const MaterialList = ({ items, query, submit }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -24,6 +25,7 @@ const MaterialList = ({ items, query, submit }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [tree, setTree] = useState([]);
 
   useEffect(() => {
     setCurrentItems(items);
@@ -166,6 +168,23 @@ const MaterialList = ({ items, query, submit }) => {
     }
   }
 
+  // Показати Дерево
+  function showTree(id) {
+    const controller = new AbortController();
+    async function tree(id) {
+      try {
+        const response = await getMaterialTree(id, controller.signal);
+        setTree(response.data);
+      } catch (error) {
+        toast.error("Не вдалось отримати дерево вкладеності");
+      }
+    }
+    tree(id);
+    return () => {
+      controller.abort();
+    };
+  }
+
   return (
     <>
       <div>
@@ -186,6 +205,8 @@ const MaterialList = ({ items, query, submit }) => {
                   edit={editMaterial}
                   isdelete={item._id === confirmOpen ? item._id : undefined}
                   submit={submit}
+                  showTree={showTree}
+                  tree={tree}
                 >
                   {isLoading ? (
                     <BarLoader color="#125b56" width="100%" />
@@ -209,6 +230,8 @@ const MaterialList = ({ items, query, submit }) => {
                   edit={editMaterial}
                   isdelete={item._id === confirmOpen ? item._id : undefined}
                   submit={submit}
+                  showTree={showTree}
+                  tree={tree}
                 ></Category>
               )}
             </Item>

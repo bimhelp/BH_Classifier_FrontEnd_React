@@ -14,7 +14,7 @@ const ItemMenu = ({
   toggleAddForm,
   toggleEditeForm,
   handleDelete,
-  showTree,
+  toggleTree,
 }) => {
   const { role } = useContext(context);
 
@@ -41,7 +41,7 @@ const ItemMenu = ({
             visibility="visible"
             variant="neutral"
             tooltip="Дерево"
-            onClick={() => showTree(id)}
+            onClick={() => toggleTree(id)}
           ></IconButton>
         )}
         <IconButton

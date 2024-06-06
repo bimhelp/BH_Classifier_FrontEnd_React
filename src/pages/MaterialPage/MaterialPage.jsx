@@ -114,7 +114,7 @@ const MaterialPage = () => {
       </Section>
       <Section>
         <MainTableWrapper>
-          {searchResult.length > 0 ? (
+          {searchResult?.length > 0 ? (
             <SearchResults
               results={filteredResults}
               query={query}

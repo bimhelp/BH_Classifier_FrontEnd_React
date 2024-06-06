@@ -7,7 +7,6 @@ import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ItemMenu from "../ItemMenu/ItemMenu";
-import { getMaterialTree } from "../../services";
 
 import {
   CategoryWrapper,
@@ -50,14 +49,16 @@ const Category = ({
   create,
   editForm: EditForm,
   edit,
+  showTree,
+  tree = [],
   isdelete,
   submit,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [editFormVisible, setEditFormVisible] = useState(false);
+  const [treeVisible, setTreeVisible] = useState(null);
   const { role, userId } = useContext(context);
-  const [tree, setTree] = useState([]);
 
   useEffect(() => {
     setLevel(ElementNestingLevel);
@@ -69,6 +70,15 @@ const Category = ({
       setAddFormVisible(null);
     } else {
       setAddFormVisible(id);
+    }
+  }
+  // Відкриття-закриття дерева
+  function toggleTree(id) {
+    if (treeVisible === id) {
+      setTreeVisible(null);
+    } else {
+      showTree(id);
+      setTreeVisible(id);
     }
   }
   // Відкриття-закриття форми редагування
@@ -89,48 +99,14 @@ const Category = ({
     setEditFormVisible(null);
   }
 
-  // Показати Дерево
-  function showTree(id) {
-    const controller = new AbortController();
-    async function tree(id) {
-      try {
-        const response = await getMaterialTree(id, controller.signal);
-        setTree(response.data);
-      } catch (error) {
-        toast.error("Не вдалось отримати дерево вкладеності");
-      }
-    }
-    tree(id);
-    return () => {
-      controller.abort();
-    };
-  }
-
   return (
     <>
       <div>
-        {tree.length > 0 && (
+        {treeVisible && (
           <Chain>
             {tree.map((item) => (
               <li key={item._id} onClick={() => submit(item.DescriptionUA)}>
                 <ChainLink level={item.ElementNestingLevel}>
-                  {/* <CopyToClipboard
-                    text={item.DescriptionUA}
-                    onCopy={() =>
-                      toast.info(
-                        `${item.DescriptionUA} скопійовано в буфер омбіну`
-                      )
-                    }
-                  >
-                    <IconButton
-                      icon={IoIosCopy}
-                      visibility="hide"
-                      position="absolute"
-                      variant="dark"
-                      tooltip="Копіювати"
-                      left={0}
-                    />
-                  </CopyToClipboard> */}
                   <p level={item.ElementNestingLevel}>{item.DescriptionUA}</p>
                 </ChainLink>
               </li>
@@ -219,7 +195,7 @@ const Category = ({
               toggleAddForm={toggleAddForm}
               toggleEditeForm={toggleEditeForm}
               handleDelete={handleDelete}
-              showTree={showTree}
+              toggleTree={toggleTree}
             />
           ) : null}
         </MenuWrapper>
