@@ -29,6 +29,16 @@ export async function getByParentId(parentCode, signal) {
   return response.data;
 }
 
+export async function getMaterialTree(id, signal) {
+  const response = await axios.get(`/material-tree/${id}`, { signal });
+  return response.data;
+}
+
+export async function getMaterialById(id, signal) {
+  const response = await axios.get(`/material/${id}`, { signal });
+  return response.data;
+}
+
 // Пошук матеріалу по коду
 export async function searchMaterialByCode(number) {
   const response = await axios.get("/material/search/by-code", {

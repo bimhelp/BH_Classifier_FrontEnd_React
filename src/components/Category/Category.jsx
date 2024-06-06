@@ -7,6 +7,8 @@ import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ItemMenu from "../ItemMenu/ItemMenu";
+import { getMaterialTree } from "../../services";
+
 import {
   CategoryWrapper,
   CategoryCode,
@@ -21,6 +23,8 @@ import {
   Card,
   MenuWrapper,
   Animation,
+  Chain,
+  ChainLink,
 } from "./Category.styled";
 
 // Компонент рендерить розмітку категорії і вкладені списки
@@ -52,7 +56,7 @@ const Category = ({
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [editFormVisible, setEditFormVisible] = useState(false);
   const { role, userId } = useContext(context);
-  console.log("userId: ", userId);
+  const [tree, setTree] = useState([]);
 
   useEffect(() => {
     setLevel(ElementNestingLevel);
@@ -84,8 +88,55 @@ const Category = ({
     setEditFormVisible(null);
   }
 
+  // Показати Дерево
+  function showTree(id) {
+    const controller = new AbortController();
+    async function tree(id) {
+      try {
+        const response = await getMaterialTree(id, controller.signal);
+        setTree(response.data);
+      } catch (error) {
+        toast.error("Не вдалось отримати дерево вкладеності");
+      }
+    }
+    tree(id);
+    return () => {
+      controller.abort();
+    };
+  }
+
   return (
     <>
+      <div>
+        {tree.length > 0 && (
+          <Chain>
+            {tree.map((item) => (
+              <li key={item._id}>
+                <div level={item.ElementNestingLevel}>
+                  <CopyToClipboard
+                    text={item.Code}
+                    onCopy={() =>
+                      toast.info(`Код ${item.Code} скопійовано в буфер омбіну`)
+                    }
+                  >
+                    <IconButton
+                      icon={IoIosCopy}
+                      visibility="hide"
+                      position="absolute"
+                      variant="dark"
+                      tooltip="Копіювати"
+                      left={0}
+                    />
+                  </CopyToClipboard>
+                  <ChainLink level={item.ElementNestingLevel}>
+                    {item.DescriptionUA}
+                  </ChainLink>
+                </div>
+              </li>
+            ))}
+          </Chain>
+        )}
+      </div>
       <Card onClick={selectCategory} isdelete={isdelete}>
         <CategoryWrapper level={level}>
           <CodeWrapper level={level}>
@@ -163,9 +214,11 @@ const Category = ({
           {role === "admin" || userId === owner ? (
             <ItemMenu
               id={_id}
+              ParentElementId={ParentElementId}
               toggleAddForm={toggleAddForm}
               toggleEditeForm={toggleEditeForm}
               handleDelete={handleDelete}
+              showTree={showTree}
             />
           ) : null}
         </MenuWrapper>

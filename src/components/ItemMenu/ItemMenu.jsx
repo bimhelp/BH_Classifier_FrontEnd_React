@@ -6,9 +6,16 @@ import { FaSquarePlus } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import { IoIosCopy } from "react-icons/io";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { GrTree } from "react-icons/gr";
 import { toast } from "react-toastify";
-
-const ItemMenu = ({ id, toggleAddForm, toggleEditeForm, handleDelete }) => {
+const ItemMenu = ({
+  id,
+  ParentElementId,
+  toggleAddForm,
+  toggleEditeForm,
+  handleDelete,
+  showTree,
+}) => {
   const { role } = useContext(context);
 
   if (role === "admin") {
@@ -27,6 +34,16 @@ const ItemMenu = ({ id, toggleAddForm, toggleEditeForm, handleDelete }) => {
           ></IconButton>
         </CopyToClipboard>
 
+        {ParentElementId && (
+          <IconButton
+            id="tree"
+            icon={GrTree}
+            visibility="visible"
+            variant="neutral"
+            tooltip="Дерево"
+            onClick={() => showTree(id)}
+          ></IconButton>
+        )}
         <IconButton
           id="add"
           icon={FaSquarePlus}

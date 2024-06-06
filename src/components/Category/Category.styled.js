@@ -79,6 +79,33 @@ export const CodeWrapper = styled.div`
     text-align: start;
   }
 `;
+export const Chain = styled.ul`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  width: 100%;
+  border-radius: 0 5px 5px 0px;
+  font-size: 10px;
+`;
+
+export const ChainLink = styled.p`
+  white-space: nowrap; /* Важливо для обрізання тексту */
+  overflow: hidden; /* Важливо для обрізання тексту */
+  text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
+  margin: 0; /* Додаємо margin, щоб текст правильно обрізався */
+
+  display: inline-block;
+  padding: ${(props) => props.theme.space[1]}px;
+  background-color: ${setBgColor};
+  width: 150px;
+
+  text-overflow: ellipsis;
+  border-radius: 0 5px 5px 0px;
+  text-align: left;
+  color: ${(props) => props.theme.colors.textWhiteColor};
+  font-size: ${(props) => props.theme.fontSizes.s};
+`;
 
 export const CategoryCode = styled.p`
   padding: ${(props) => props.theme.space[2]}px;
