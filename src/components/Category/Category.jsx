@@ -52,7 +52,7 @@ const Category = ({
   showTree,
   tree = [],
   isdelete,
-  submit,
+  byId,
 }) => {
   const [level, setLevel] = useState(null);
   const [addFormVisible, setAddFormVisible] = useState(false);
@@ -105,7 +105,7 @@ const Category = ({
         {treeVisible && (
           <Chain>
             {tree.map((item) => (
-              <li key={item._id} onClick={() => submit(item.DescriptionUA)}>
+              <li key={item._id} onClick={() => byId(item._id)}>
                 <ChainLink level={item.ElementNestingLevel}>
                   <p level={item.ElementNestingLevel}>{item.DescriptionUA}</p>
                 </ChainLink>

@@ -11,7 +11,9 @@ import { toast } from "react-toastify";
 import {
   searchMaterialByDescription,
   searchMaterialByCode,
+  getMaterialById,
 } from "../../services/api";
+import MaterialList from "../../components/MaterialList/MaterialList";
 
 const MaterialPage = () => {
   const [searchResult, setSearchResult] = useState([]);
@@ -20,6 +22,8 @@ const MaterialPage = () => {
   const [options, setOptions] = useState(null);
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [material, setMaterial] = useState([]);
+  const [status, setStatus] = useState("materials");
 
   useEffect(() => {
     const getVisibleMaterials = () => {
@@ -36,6 +40,7 @@ const MaterialPage = () => {
     setSearchResult([]);
     setFilteredResults([]);
     setUnit(null);
+    setStatus("materials");
   };
 
   // вибір одиниці виміру
@@ -45,8 +50,7 @@ const MaterialPage = () => {
 
   // Пошук елементів
   const submit = (searchValue) => {
-    // console.log("searchValue: ", searchValue);
-
+    setStatus("search");
     const isString = checkIsString(searchValue);
     const codeNumber = parseNumber(searchValue);
 
@@ -95,6 +99,28 @@ const MaterialPage = () => {
     }
   };
 
+  // Отримати по id
+  const materialById = (id) => {
+    setStatus("material");
+    const controller = new AbortController();
+    async function getMaterial(id) {
+      try {
+        //  setIsLoading(true);
+        const response = await getMaterialById(id, controller.signal);
+
+        setMaterial([response.data]);
+      } catch {
+        toast.error("Не вдалось отримати матеріал");
+      } finally {
+        //  setIsLoading(false);
+      }
+    }
+    getMaterial(id);
+    return () => {
+      controller.abort();
+    };
+  };
+
   return (
     <>
       <Section>
@@ -114,15 +140,19 @@ const MaterialPage = () => {
       </Section>
       <Section>
         <MainTableWrapper>
-          {searchResult?.length > 0 ? (
+          {status === "materials" && <MaterialTable byId={materialById} />}
+
+          {status === "material" && (
+            <MaterialList items={material} byId={materialById} />
+          )}
+
+          {status === "search" && (
             <SearchResults
               results={filteredResults}
               query={query}
               variant="material"
-              submit={submit}
+              byId={materialById}
             />
-          ) : (
-            <MaterialTable submit={submit} />
           )}
         </MainTableWrapper>
       </Section>

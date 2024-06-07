@@ -18,7 +18,7 @@ import AddMaterialForm from "../AddMaterialForm/AddMaterialForm";
 import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
 import { getMaterialTree } from "../../services";
 
-const MaterialList = ({ items, query, submit }) => {
+const MaterialList = ({ items, query, byId }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [newMaterial, setNewMaterial] = useState(null);
@@ -204,9 +204,9 @@ const MaterialList = ({ items, query, submit }) => {
                   create={createMaterial}
                   edit={editMaterial}
                   isdelete={item._id === confirmOpen ? item._id : undefined}
-                  submit={submit}
                   showTree={showTree}
                   tree={tree}
+                  byId={byId}
                 >
                   {isLoading ? (
                     <BarLoader color="#125b56" width="100%" />
@@ -214,7 +214,7 @@ const MaterialList = ({ items, query, submit }) => {
                     <MaterialList
                       items={subCategories}
                       query={query}
-                      submit={submit}
+                      byId={byId}
                     />
                   )}
                 </Category>
@@ -229,9 +229,9 @@ const MaterialList = ({ items, query, submit }) => {
                   create={createMaterial}
                   edit={editMaterial}
                   isdelete={item._id === confirmOpen ? item._id : undefined}
-                  submit={submit}
                   showTree={showTree}
                   tree={tree}
+                  byId={byId}
                 ></Category>
               )}
             </Item>
