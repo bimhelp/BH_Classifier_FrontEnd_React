@@ -15,6 +15,7 @@ const ItemMenu = ({
   toggleEditeForm,
   handleDelete,
   toggleTree,
+  extended,
 }) => {
   const { role } = useContext(context);
 
@@ -73,19 +74,41 @@ const ItemMenu = ({
     return (
       <>
         <IconButton
-          icon={MdModeEditOutline}
+          id="add"
+          icon={FaSquarePlus}
           visibility="visible"
           variant="neutral"
-          tooltip="Редагувати"
-          onClick={() => toggleEditeForm(id)}
+          tooltip="Додати"
+          onClick={() => toggleAddForm(id)}
         ></IconButton>
-        <IconButton
-          icon={MdDelete}
-          visibility="visible"
-          variant="neutral"
-          tooltip="Видалити"
-          onClick={() => handleDelete(id)}
-        ></IconButton>
+        {ParentElementId && (
+          <IconButton
+            id="tree"
+            icon={GrTree}
+            visibility="visible"
+            variant="neutral"
+            tooltip="Дерево"
+            onClick={() => toggleTree(id)}
+          ></IconButton>
+        )}
+        {extended && (
+          <>
+            <IconButton
+              icon={MdModeEditOutline}
+              visibility="visible"
+              variant="neutral"
+              tooltip="Редагувати"
+              onClick={() => toggleEditeForm(id)}
+            ></IconButton>
+            <IconButton
+              icon={MdDelete}
+              visibility="visible"
+              variant="neutral"
+              tooltip="Видалити"
+              onClick={() => handleDelete(id)}
+            ></IconButton>
+          </>
+        )}
       </>
     );
   }

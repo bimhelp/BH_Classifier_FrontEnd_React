@@ -196,8 +196,19 @@ const Category = ({
               toggleEditeForm={toggleEditeForm}
               handleDelete={handleDelete}
               toggleTree={toggleTree}
+              extended={true}
             />
-          ) : null}
+          ) : (
+            <ItemMenu
+              id={_id}
+              ParentElementId={ParentElementId}
+              toggleAddForm={toggleAddForm}
+              toggleEditeForm={toggleEditeForm}
+              handleDelete={handleDelete}
+              toggleTree={toggleTree}
+              extended={false}
+            />
+          )}
         </MenuWrapper>
       </Card>
 

@@ -8,7 +8,7 @@ import { CloseButton } from "../Button/Button";
 import { CgClose } from "react-icons/cg";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
-import CategorySelect from "../CategorySelect/CategorySelect";
+// import CategorySelect from "../CategorySelect/CategorySelect";
 import UnitSelect from "../UnitSelect/UnitSelect";
 import {
   InputWrapper,
@@ -24,7 +24,7 @@ import {
 
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
-  const [selectedId, setSelectedId] = useState(id);
+  // const [selectedId, setSelectedId] = useState(id);
   const [selectedUnit, setSelectedUnit] = useState("");
   const [reset, setReset] = useState(false);
   const { role } = useContext(context);
@@ -225,7 +225,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     );
 
     const additionalElement = {
-      ParentElementId: selectedId,
+      ParentElementId: id,
       Unit: selectedUnit,
       ...filteredValues,
     };
@@ -237,12 +237,12 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     onClose();
   };
 
-  const categorySelect = (data) => {
-    if (data) {
-      setSelectedId(data.value._id);
-    }
-    return;
-  };
+  // const categorySelect = (data) => {
+  //   if (data) {
+  //     setSelectedId(data.value._id);
+  //   }
+  //   return;
+  // };
 
   const onUnitSelect = (data) => {
     if (data) {
@@ -281,7 +281,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
               />
             </DescriptionWrapper>
 
-            {role === "designer" && (
+            {/* {role === "designer" && (
               <InputWrapper>
                 <label htmlFor="Code">Категорія</label>
                 <CategorySelect
@@ -296,7 +296,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   )}
                 />
               </InputWrapper>
-            )}
+            )} */}
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field

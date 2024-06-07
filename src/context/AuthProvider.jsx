@@ -21,10 +21,10 @@ const AuthProvider = ({ children }) => {
     if (token) {
       // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
       const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-      console.log("tokenPayload: ", tokenPayload);
+      // console.log("tokenPayload: ", tokenPayload);
 
       // Отримуємо ідентифікатор користувача з токена
-      console.log("tokenPayload.userId: ", tokenPayload.userId);
+      // console.log("tokenPayload.userId: ", tokenPayload.userId);
       setUserId(tokenPayload.userId);
     }
   }
@@ -33,10 +33,10 @@ const AuthProvider = ({ children }) => {
       if (token) {
         // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
         const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-        console.log("tokenPayload: ", tokenPayload);
+        // console.log("tokenPayload: ", tokenPayload);
 
         // Отримуємо ідентифікатор користувача з токена
-        console.log("tokenPayload.userId: ", tokenPayload.userId);
+        // console.log("tokenPayload.userId: ", tokenPayload.userId);
         setUserId(tokenPayload.id);
       }
     }
