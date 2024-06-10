@@ -10,12 +10,15 @@ import {
   Menu,
   Plugin,
   IconWrapper,
+  StyledNavLink,
+  LinkTitle,
 } from "./User.styled";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import Confirm from "../Confirm/Confirm";
 import { FaArrowRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { SiAutodeskrevit } from "react-icons/si";
+import { FaListAlt } from "react-icons/fa";
 
 const User = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,11 +67,17 @@ const User = () => {
         <ContextMenu onClose={toggleMenu}>
           {isLoggedIn && (
             <Menu>
-              <IconWrapper role={role} style={{ paddingLeft: "10px" }}>
+              <IconWrapper role={role}>
                 <FaUser />
-                <span style={{ marginLeft: "6px" }}>{role}</span>
+                <span>{user.name}</span>
+                <span style={{ marginLeft: "auto" }}>{role}</span>
               </IconWrapper>
-
+              {role === "designer" && (
+                <StyledNavLink to="materials">
+                  <FaListAlt />
+                  <LinkTitle>Мої матеріали</LinkTitle>
+                </StyledNavLink>
+              )}
               <Plugin>
                 <SiAutodeskrevit />
                 <a href={PLUGIN_URL} target="_blank" rel="noreferrer noopener">

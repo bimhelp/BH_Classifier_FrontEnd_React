@@ -41,17 +41,6 @@ const AddItemPage = () => {
     };
   }, []);
 
-  // function toggleStructure() {
-  //   setIsVisibleMaterials(!isVisibleMaterials);
-  // }
-
-  // function icon() {
-  //   if (isVisibleMaterials) {
-  //     return TbLayoutSidebarRightExpandFilled;
-  //   }
-  //   return TbLayoutSidebarLeftExpandFilled;
-  // }
-
   // Отримати по id
   const materialById = (id) => {
     setStatus("material");
@@ -81,13 +70,6 @@ const AddItemPage = () => {
     <>
       <Section>
         <Menu>
-          {/* <IconButton
-            onClick={toggleStructure}
-            variant="dark"
-            tooltip="Матеріали"
-            icon={icon()}
-            size={40}
-          ></IconButton> */}
           {status === "material" && (
             <IconButton
               onClick={backToUserMaterials}
@@ -99,12 +81,14 @@ const AddItemPage = () => {
           )}
         </Menu>
         <Layout>
-          {/* {isVisibleMaterials && <MaterialTable></MaterialTable>} */}
           <Content>
             {!isLoading && (
               <Section>
-                {userMaterials.length < 0 && (
-                  <p>Ви ще не створили жодного матеріалу</p>
+                {userMaterials.length < 1 && (
+                  <p>
+                    Тут будуть відображатись ваші матеріали, створіть перший
+                    матеріал
+                  </p>
                 )}
 
                 {status === "userMaterials" && (
