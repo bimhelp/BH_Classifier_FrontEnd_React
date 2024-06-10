@@ -16,16 +16,15 @@ const AuthProvider = ({ children }) => {
   const [role, setRole] = useLocalStorage("role", "");
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
-  function storeUserId() {
-    if (token) {
-      // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
-      const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-      // console.log("tokenPayload: ", tokenPayload);
 
-      // Отримуємо ідентифікатор користувача з токена
-      // console.log("tokenPayload.userId: ", tokenPayload.userId);
-      setUserId(tokenPayload.userId);
-    }
+  function storeUserId(token) {
+    // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
+    const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+    // console.log("tokenPayload: ", tokenPayload);
+
+    // Отримуємо ідентифікатор користувача з токена
+    // console.log("tokenPayload.userId: ", tokenPayload.id);
+    setUserId(tokenPayload.id);
   }
   useEffect(() => {
     function storeUserId() {
@@ -81,8 +80,8 @@ const AuthProvider = ({ children }) => {
 
         // записуємо токен в lacalstorage
         setToken(response.token);
-        storeUserId();
         setIsLoggedIn(true);
+        storeUserId(response.token);
         // Перенаправляємо на головну сторінку
         navigate("/", { replace: true });
       } catch (error) {
@@ -107,12 +106,11 @@ const AuthProvider = ({ children }) => {
         if (response) {
           // console.log("token", response.token);
           // console.log("username", response.user.name);
-          // console.log(response.token);
           setToken(response.token);
           setRole(response.user.role);
           setUser(response.user);
-          storeUserId();
           setIsLoggedIn(true);
+          storeUserId(response.token);
           // при успішному логіні видалить всі тости
           toast.dismiss();
           // Перенаправляємо на головну сторінку

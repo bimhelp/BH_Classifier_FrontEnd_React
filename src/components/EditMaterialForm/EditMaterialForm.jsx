@@ -234,6 +234,11 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       return acc;
     }, {});
 
+    // Перевірка та додавання ParentElementId, якщо його немає в changedValues
+    if (!changedValues.hasOwnProperty("ParentElementId")) {
+      changedValues.ParentElementId = initialValues.ParentElementId;
+    }
+
     console.log("changedValues: ", changedValues);
     // Відправка даних у верхній компонент
     edit(id, changedValues);
