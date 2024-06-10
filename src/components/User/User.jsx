@@ -19,10 +19,13 @@ import { FaArrowRight } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import { SiAutodeskrevit } from "react-icons/si";
 import { FaListAlt } from "react-icons/fa";
+import { GrProjects } from "react-icons/gr";
+import { FaGear } from "react-icons/fa6";
 
 const User = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+
   // Показує або приховує меню
   const toggleMenu = () => {
     // console.log("toggle menu");
@@ -43,6 +46,7 @@ const User = () => {
     toggleConfirm();
     toggleMenu();
   };
+
   const { user, isLoggedIn, onLogOut, role } = useContext(context);
 
   return (
@@ -78,6 +82,20 @@ const User = () => {
                   <LinkTitle>Мої матеріали</LinkTitle>
                 </StyledNavLink>
               )}
+
+              {role === "admin" && (
+                <StyledNavLink to="projects">
+                  <GrProjects />
+                  <LinkTitle>Projects</LinkTitle>
+                </StyledNavLink>
+              )}
+              {role === "admin" && (
+                <StyledNavLink to="admin-panel">
+                  <FaGear />
+                  <LinkTitle>Admin panel</LinkTitle>
+                </StyledNavLink>
+              )}
+
               <Plugin>
                 <SiAutodeskrevit />
                 <a href={PLUGIN_URL} target="_blank" rel="noreferrer noopener">
