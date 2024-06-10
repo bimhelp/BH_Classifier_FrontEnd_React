@@ -263,7 +263,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
 
             <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис</label>
+              <label htmlFor="DescriptionUA">Опис UA</label>
               <TextArea
                 // autoFocus={true}
                 name="DescriptionUA"
@@ -280,7 +280,23 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-
+            <DescriptionWrapper>
+              <label htmlFor="DescriptionEN">Опис EN</label>
+              <TextArea
+                name="DescriptionEN"
+                id="DescriptionEN"
+                placeholder="Введіть опис англійською мовою"
+                type="text"
+                bordercolor={validationColor(
+                  props.errors.DescriptionEN,
+                  props.values.DescriptionEN
+                )}
+              />
+              <ErrorMessage
+                name="DescriptionEN"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </DescriptionWrapper>
             {/* {role === "designer" && (
               <InputWrapper>
                 <label htmlFor="Code">Категорія</label>
@@ -366,25 +382,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                     />
                   </InputWrapper>
                 )}
-                <DescriptionWrapper>
-                  <label htmlFor="DescriptionEN">Опис</label>
-                  <TextArea
-                    name="DescriptionEN"
-                    id="DescriptionEN"
-                    placeholder="Введіть опис англійською мовою"
-                    type="text"
-                    bordercolor={validationColor(
-                      props.errors.DescriptionEN,
-                      props.values.DescriptionEN
-                    )}
-                  />
-                  <ErrorMessage
-                    name="DescriptionEN"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                    )}
-                  />
-                </DescriptionWrapper>
+
                 <InputGroup>
                   {inputs.map(({ id, label }) => (
                     <InputWrapper key={id}>

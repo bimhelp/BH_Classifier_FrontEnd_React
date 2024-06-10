@@ -108,7 +108,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
             <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис</label>
+              <label htmlFor="DescriptionUA">Опис UA</label>
               <TextArea
                 autoFocus={true}
                 name="DescriptionUA"
@@ -122,6 +122,23 @@ const AddServiceForm = ({ onClose, id, create }) => {
               />
               <ErrorMessage
                 name="DescriptionUA"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </DescriptionWrapper>
+            <DescriptionWrapper>
+              <label htmlFor="DescriptionEN">Опис EN</label>
+              <TextArea
+                name="DescriptionEN"
+                id="DescriptionEN"
+                placeholder="Введіть опис англійською мовою"
+                type="text"
+                bordercolor={validationColor(
+                  props.errors.DescriptionEN,
+                  props.values.DescriptionEN
+                )}
+              />
+              <ErrorMessage
+                name="DescriptionEN"
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
@@ -214,25 +231,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
                     Вибтари категорію
                   </Button>
                 )}
-                <DescriptionWrapper>
-                  <label htmlFor="DescriptionEN">Опис</label>
-                  <TextArea
-                    name="DescriptionEN"
-                    id="DescriptionEN"
-                    placeholder="Введіть опис англійською мовою"
-                    type="text"
-                    bordercolor={validationColor(
-                      props.errors.DescriptionEN,
-                      props.values.DescriptionEN
-                    )}
-                  />
-                  <ErrorMessage
-                    name="DescriptionEN"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                    )}
-                  />
-                </DescriptionWrapper>
+
                 <InputWrapper>
                   <label htmlFor="OwnerBarcode">Власний код</label>
                   <Input

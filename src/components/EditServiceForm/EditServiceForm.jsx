@@ -62,6 +62,13 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
+    Code: yup
+      .string()
+      .matches(
+        /^\d{8}-\d$/,
+        "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
+      )
+      .required("Код обов'язкове поле"),
     PriceUAH: yup.number().typeError("Введіть число").positive(),
     Unit: yup
       .string()
@@ -112,7 +119,7 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
             <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис</label>
+              <label htmlFor="DescriptionUA">Опис UA</label>
               <TextArea
                 autoFocus={true}
                 name="DescriptionUA"
@@ -126,6 +133,24 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
               />
               <ErrorMessage
                 name="DescriptionUA"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </DescriptionWrapper>
+
+            <DescriptionWrapper>
+              <label htmlFor="DescriptionEN">Опис EN</label>
+              <TextArea
+                name="DescriptionEN"
+                id="DescriptionEN"
+                placeholder="Введіть опис англійською мовою"
+                type="text"
+                bordercolor={validationColor(
+                  props.errors.DescriptionEN,
+                  props.values.DescriptionEN
+                )}
+              />
+              <ErrorMessage
+                name="DescriptionEN"
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
@@ -194,18 +219,26 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
             {additionalFields && (
               <>
                 {role === "admin" && (
-                  <InputWrapper>
-                    <label htmlFor="Code">Код</label>
-                    <Input
-                      type="text"
-                      placeholder="Код"
-                      name="Code"
-                      id="Code"
-                      bordercolor={validationColor(
-                        props.errors.Code,
-                        props.values.Code
-                      )}
-                    />
+                  <>
+                    <InputWrapper>
+                      <label htmlFor="Code">Код</label>
+                      <Input
+                        type="text"
+                        placeholder="Код"
+                        name="Code"
+                        id="Code"
+                        bordercolor={validationColor(
+                          props.errors.Code,
+                          props.values.Code
+                        )}
+                      />
+                      <ErrorMessage
+                        name="Code"
+                        render={(msg) => (
+                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                        )}
+                      />
+                    </InputWrapper>
                     <InputWrapper>
                       <label htmlFor="ParentElementId">Код Категорії</label>
                       <Input
@@ -219,40 +252,15 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                         )}
                       />
                       <ErrorMessage
-                        name="Code"
+                        name="ParentElementId"
                         render={(msg) => (
                           <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                         )}
                       />
                     </InputWrapper>
-                    <ErrorMessage
-                      name="Code"
-                      render={(msg) => (
-                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                      )}
-                    />
-                  </InputWrapper>
+                  </>
                 )}
 
-                <DescriptionWrapper>
-                  <label htmlFor="DescriptionEN">Опис</label>
-                  <TextArea
-                    name="DescriptionEN"
-                    id="DescriptionEN"
-                    placeholder="Введіть опис англійською мовою"
-                    type="text"
-                    bordercolor={validationColor(
-                      props.errors.DescriptionEN,
-                      props.values.DescriptionEN
-                    )}
-                  />
-                  <ErrorMessage
-                    name="DescriptionEN"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                    )}
-                  />
-                </DescriptionWrapper>
                 <InputWrapper>
                   <label htmlFor="OwnerBarcode">Власний код</label>
                   <Input

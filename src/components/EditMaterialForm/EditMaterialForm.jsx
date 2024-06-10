@@ -146,7 +146,8 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .matches(
         /^\d{8}-\d$/,
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
-      ),
+      )
+      .required("Код обов'язкове поле"),
     PriceUAH: yup.number().typeError("Введіть число").positive(),
     Unit: yup
       .string()
@@ -279,6 +280,23 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
+            <DescriptionWrapper>
+              <label htmlFor="DescriptionEN">Опис</label>
+              <TextArea
+                name="DescriptionEN"
+                id="DescriptionEN"
+                placeholder="Введіть опис англійською мовою"
+                type="text"
+                bordercolor={validationColor(
+                  props.errors.DescriptionEN,
+                  props.values.DescriptionEN
+                )}
+              />
+              <ErrorMessage
+                name="DescriptionEN"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </DescriptionWrapper>
             {role === "admin" && (
               <>
                 <InputWrapper>
@@ -388,25 +406,6 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
             ></IconButton>
             {additionalFields && (
               <>
-                <DescriptionWrapper>
-                  <label htmlFor="DescriptionEN">Опис</label>
-                  <TextArea
-                    name="DescriptionEN"
-                    id="DescriptionEN"
-                    placeholder="Введіть опис англійською мовою"
-                    type="text"
-                    bordercolor={validationColor(
-                      props.errors.DescriptionEN,
-                      props.values.DescriptionEN
-                    )}
-                  />
-                  <ErrorMessage
-                    name="DescriptionEN"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                    )}
-                  />
-                </DescriptionWrapper>
                 <InputGroup>
                   {inputs.map(({ id, label }) => (
                     <InputWrapper key={id}>
