@@ -80,23 +80,30 @@ export const CodeWrapper = styled.div`
   }
 `;
 export const Chain = styled.ul`
+  width: 100%;
   display: flex;
   justify-content: start;
-  align-items: center;
+  align-items: stretch;
   gap: 2px;
-
-  width: 100%;
+  margin-bottom: 5px;
+  /* flex-wrap: wrap; */
   border-radius: 0 5px 5px 0px;
   font-size: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  @media screen and (min-width: 680px) {
+    flex-direction: row;
+  }
 `;
 
 export const ChainLink = styled.div`
   position: relative;
+
   padding-left: ${(props) => props.theme.space[3]}px;
   /* padding-right: ${(props) => props.theme.space[3]}px; */
 
   background-color: ${setBgColor};
-  width: 150px;
+
   display: flex;
   gap: 5px;
   align-items: center;
@@ -112,6 +119,13 @@ export const ChainLink = styled.div`
     text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
     margin: 0; /* Додаємо margin, щоб текст правильно обрізався */
   }
+
+  /* @media screen and (min-width: 480px) {
+    width: 200px;
+  }
+  @media screen and (min-width: 680px) {
+    width: 150px;
+  } */
 `;
 
 export const CategoryCode = styled.p`
