@@ -82,18 +82,23 @@ const User = () => {
                   <LinkTitle>Мої матеріали</LinkTitle>
                 </StyledNavLink>
               )}
+              {role === "admin" && (
+                <>
+                  <StyledNavLink to="materials">
+                    <FaListAlt />
+                    <LinkTitle>Мої матеріали</LinkTitle>
+                  </StyledNavLink>
 
-              {role === "admin" && (
-                <StyledNavLink to="projects">
-                  <GrProjects />
-                  <LinkTitle>Projects</LinkTitle>
-                </StyledNavLink>
-              )}
-              {role === "admin" && (
-                <StyledNavLink to="admin-panel">
-                  <FaGear />
-                  <LinkTitle>Admin panel</LinkTitle>
-                </StyledNavLink>
+                  <StyledNavLink to="projects">
+                    <GrProjects />
+                    <LinkTitle>Projects</LinkTitle>
+                  </StyledNavLink>
+
+                  <StyledNavLink to="admin-panel">
+                    <FaGear />
+                    <LinkTitle>Admin panel</LinkTitle>
+                  </StyledNavLink>
+                </>
               )}
 
               <Plugin>
