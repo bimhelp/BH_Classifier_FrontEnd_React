@@ -13,6 +13,7 @@ const AuthProvider = ({ children }) => {
     email: null,
   });
   const [userId, setUserId] = useState(null);
+  console.log("userId: ", userId);
 
   const [role, setRole] = useLocalStorage("role", "");
   const [mounted, setMounted] = useState(false);
@@ -141,6 +142,7 @@ const AuthProvider = ({ children }) => {
             email: null,
           });
           setRole("");
+          setUserId(null);
           setIsLoggedIn(false);
           // Перенаправляємо на головну сторінку
           navigate("/", { replace: true });

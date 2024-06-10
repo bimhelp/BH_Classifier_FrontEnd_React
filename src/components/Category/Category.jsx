@@ -59,6 +59,8 @@ const Category = ({
   const [editFormVisible, setEditFormVisible] = useState(false);
   const [treeVisible, setTreeVisible] = useState(null);
   const { role, userId } = useContext(context);
+  // console.log("role: ", role);
+  console.log("Category userId: ", userId);
 
   useEffect(() => {
     setLevel(ElementNestingLevel);
