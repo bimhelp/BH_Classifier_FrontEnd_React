@@ -103,6 +103,7 @@ const MaterialList = ({ items, query, byId }) => {
   function editMaterial(id, editedMaterial) {
     const controller = new AbortController();
     async function edit(id, editedMaterial) {
+      console.log("editedMaterial: ", editedMaterial);
       try {
         const response = await updateMaterial(
           id,
@@ -110,12 +111,13 @@ const MaterialList = ({ items, query, byId }) => {
           controller.signal
         );
         // Видаляємо оновлений матеріал із списку, якщо в оновленого матеріалу ParentElementId відрізняється від елементів у поточному списку
-        if (response.data.ParentElementId !== curentItems[0].ParentElementId) {
+        if (response.data.ParentElementId !== editedMaterial.ParentElementId) {
           setCurrentItems(
             curentItems.filter((item) => item._id !== response.data._id)
           );
         } else {
           // Замінюємо матеріал на оновлений
+          console.log("setCurrentItems: ");
           setCurrentItems(
             curentItems.map((item) => {
               if (item._id === id) {
