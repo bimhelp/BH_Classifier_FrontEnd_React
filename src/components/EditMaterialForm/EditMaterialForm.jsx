@@ -6,8 +6,8 @@ import { validationColor } from "../../services/utility";
 import { Button, IconButton } from "../../components/Button/Button";
 import { CloseButton } from "../../components/Button/Button";
 import { CgClose } from "react-icons/cg";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
-import { IoMdArrowDropupCircle } from "react-icons/io";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import {
   InputWrapper,
   StyledForm,
@@ -45,6 +45,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     DescriptionEN: getFieldValue(element, "DescriptionEN"),
     Code: getFieldValue(element, "Code"),
     PriceUAH: getFieldValue(element, "PriceUAH"),
+    Url: getFieldValue(element, "Url"),
     Unit: getFieldValue(element, "Unit"),
     Length: getFieldValue(element, "Length"),
     Width: getFieldValue(element, "Width"),
@@ -263,7 +264,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
 
             <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис</label>
+              <label htmlFor="DescriptionUA">Опис UA</label>
               <TextArea
                 autoFocus={true}
                 name="DescriptionUA"
@@ -281,7 +282,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
               />
             </DescriptionWrapper>
             <DescriptionWrapper>
-              <label htmlFor="DescriptionEN">Опис</label>
+              <label htmlFor="DescriptionEN">Опис EN</label>
               <TextArea
                 name="DescriptionEN"
                 id="DescriptionEN"
@@ -386,24 +387,36 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
-            {role === "admin" && (
-              <div>
-                <label htmlFor="Origin">cpv</label>
-                <Input type="checkbox" name="Origin" id="Origin"></Input>
-              </div>
-            )}
-            <IconButton
-              type="button"
-              visibility="visible"
-              variant="neutral"
-              tooltip={"Додаткові властивості"}
-              icon={
-                additionalFields
-                  ? IoMdArrowDropupCircle
-                  : IoMdArrowDropdownCircle
-              }
-              onClick={() => toggleAdditionalFields()}
-            ></IconButton>
+            <InputWrapper>
+              <label htmlFor="Url">Посилання</label>
+              <Input
+                type="text"
+                placeholder="Посилання на сайт виробника"
+                name="Url"
+                id="Url"
+                bordercolor={validationColor(
+                  props.errors.Url,
+                  props.values.Url
+                )}
+              />
+              <ErrorMessage
+                name="Url"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
+            <ButtonWrapper>
+              <IconButton
+                type="button"
+                visibility="visible"
+                variant="neutral"
+                tooltip={"Додаткові властивості"}
+                iconSize="40px"
+                icon={
+                  additionalFields ? MdKeyboardArrowUp : MdKeyboardArrowDown
+                }
+                onClick={() => toggleAdditionalFields()}
+              ></IconButton>
+            </ButtonWrapper>
             {additionalFields && (
               <>
                 <InputGroup>
@@ -448,6 +461,12 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                     )}
                   />
                 </DescriptionWrapper>
+                {role === "admin" && (
+                  <div>
+                    <label htmlFor="Origin">cpv</label>
+                    <Input type="checkbox" name="Origin" id="Origin"></Input>
+                  </div>
+                )}
               </>
             )}
 

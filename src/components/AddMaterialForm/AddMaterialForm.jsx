@@ -6,8 +6,9 @@ import { validationColor } from "../../services/utility";
 import { Button, IconButton } from "../Button/Button";
 import { CloseButton } from "../Button/Button";
 import { CgClose } from "react-icons/cg";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
-import { IoMdArrowDropupCircle } from "react-icons/io";
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
+
 // import CategorySelect from "../CategorySelect/CategorySelect";
 import UnitSelect from "../UnitSelect/UnitSelect";
 import {
@@ -297,22 +298,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
-            {/* {role === "designer" && (
-              <InputWrapper>
-                <label htmlFor="Code">Категорія</label>
-                <CategorySelect
-                  name="Code"
-                  onSelect={categorySelect}
-                  reset={reset}
-                />
-                <ErrorMessage
-                  name="Code"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
-              </InputWrapper>
-            )} */}
+
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field
@@ -341,24 +327,36 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
-            {role === "admin" && (
-              <div>
-                <label htmlFor="Origin">cpv</label>
-                <CheckBox type="checkbox" name="Origin" id="Origin"></CheckBox>
-              </div>
-            )}
-            <IconButton
-              type="button"
-              visibility="visible"
-              variant="neutral"
-              tooltip={"Додаткові властивості"}
-              icon={
-                additionalFields
-                  ? IoMdArrowDropupCircle
-                  : IoMdArrowDropdownCircle
-              }
-              onClick={() => toggleAdditionalFields()}
-            ></IconButton>
+            <InputWrapper>
+              <label htmlFor="Url">Посилання</label>
+              <Input
+                type="text"
+                placeholder="Посилання на сайт виробника"
+                name="Url"
+                id="Url"
+                bordercolor={validationColor(
+                  props.errors.Url,
+                  props.values.Url
+                )}
+              />
+              <ErrorMessage
+                name="Url"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
+            <ButtonWrapper>
+              <IconButton
+                type="button"
+                visibility="visible"
+                variant="dark"
+                tooltip={"Додаткові властивості"}
+                iconSize="40px"
+                icon={
+                  additionalFields ? MdKeyboardArrowUp : MdKeyboardArrowDown
+                }
+                onClick={() => toggleAdditionalFields()}
+              ></IconButton>
+            </ButtonWrapper>
             {additionalFields && (
               <>
                 {role === "admin" && (
@@ -425,6 +423,16 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                     )}
                   />
                 </DescriptionWrapper>
+                {role === "admin" && (
+                  <div>
+                    <label htmlFor="Origin">cpv</label>
+                    <CheckBox
+                      type="checkbox"
+                      name="Origin"
+                      id="Origin"
+                    ></CheckBox>
+                  </div>
+                )}
               </>
             )}
 

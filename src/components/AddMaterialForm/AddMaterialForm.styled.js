@@ -25,6 +25,7 @@ export const DescriptionWrapper = styled.div`
   flex-direction: column;
   margin-bottom: 15px;
   position: relative;
+  width: 100%;
 `;
 
 export const TextArea = styled(Field)`
@@ -160,5 +161,5 @@ export const ErrorMessageStyled = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
 `;

@@ -136,5 +136,5 @@ export const ErrorMessageStyled = styled.div`
 
 export const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: end;
+  justify-content: center;
 `;

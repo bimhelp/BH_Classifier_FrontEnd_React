@@ -77,7 +77,7 @@ export const IconButton = ({
   variant,
   tooltip,
   left,
-  size = 24,
+  iconSize = "24px",
 }) => {
   return (
     <StyledIconButton
@@ -92,7 +92,7 @@ export const IconButton = ({
       tooltip={tooltip}
     >
       <div>
-        {children} {Icon && <Icon size={size} />}
+        {children} {Icon && <Icon size={iconSize} />}
         {tooltip && <span className="tooltip">{tooltip}</span>}
       </div>
     </StyledIconButton>

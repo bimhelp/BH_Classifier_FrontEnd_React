@@ -33,6 +33,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
     DescriptionUA: "",
     DescriptionEN: "",
     PriceUAH: "",
+    Url: "",
     Unit: "",
     OwnerBarcode: "",
     Comment: "",
@@ -50,6 +51,10 @@ const AddServiceForm = ({ onClose, id, create }) => {
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
+    Url: yup
+      .string()
+      .min(3, "Занадто короткий url")
+      .max(500, "Занадто довкий url"),
     Code: yup
       .string()
       .matches(
@@ -197,6 +202,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
               visibility="visible"
               variant="neutral"
               tooltip={"Додаткові властивості"}
+              iconSize="34px"
               icon={
                 additionalFields
                   ? IoMdArrowDropupCircle

@@ -141,8 +141,9 @@ export const StyledIconButton = styled(StyledButton)`
   min-width: fit-content;
   width: fit-content;
   font-size: ${(props) => props.theme.fontSizes.m};
-  padding: ${(props) => props.theme.space[2]}px;
-  padding-left: 0px;
+  /* padding: ${(props) => props.theme.space[2]}px; */
+  /* padding-left: 0px; */
+  padding: 0;
 
   color: white;
   color: ${(props) => props.variant === "dark" && props.theme.colors.black};
