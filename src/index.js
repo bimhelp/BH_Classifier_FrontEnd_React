@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import AuthProvider from "./context/AuthProvider";
+import MaterialProvider from "./context/MaterialProvider";
+
 // навігація по сторінках
 import { BrowserRouter } from "react-router-dom";
 // стилі
@@ -17,7 +19,9 @@ root.render(
   <BrowserRouter basename="/classifier">
     <ThemeProvider theme={theme}>
       <AuthProvider>
-        <App />
+        <MaterialProvider>
+          <App />
+        </MaterialProvider>
       </AuthProvider>
     </ThemeProvider>
   </BrowserRouter>

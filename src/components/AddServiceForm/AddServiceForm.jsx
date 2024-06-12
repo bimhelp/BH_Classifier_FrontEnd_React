@@ -5,10 +5,9 @@ import * as yup from "yup";
 import { validationColor } from "../../services/utility";
 import { Button, IconButton } from "../Button/Button";
 import { CloseButton } from "../Button/Button";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
-import { IoMdArrowDropupCircle } from "react-icons/io";
 import { CgClose } from "react-icons/cg";
-
+import { MdKeyboardArrowUp } from "react-icons/md";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import {
   InputWrapper,
   StyledForm,
@@ -197,19 +196,20 @@ const AddServiceForm = ({ onClose, id, create }) => {
                 <Input type="checkbox" name="Origin" id="Origin"></Input>
               </div>
             )}
-            <IconButton
-              type="button"
-              visibility="visible"
-              variant="neutral"
-              tooltip={"Додаткові властивості"}
-              iconSize="34px"
-              icon={
-                additionalFields
-                  ? IoMdArrowDropupCircle
-                  : IoMdArrowDropdownCircle
-              }
-              onClick={() => toggleAdditionalFields()}
-            ></IconButton>
+            <ButtonWrapper>
+              {" "}
+              <IconButton
+                type="button"
+                visibility="visible"
+                variant="dark"
+                tooltip={"Додаткові властивості"}
+                iconSize="40px"
+                icon={
+                  additionalFields ? MdKeyboardArrowUp : MdKeyboardArrowDown
+                }
+                onClick={() => toggleAdditionalFields()}
+              ></IconButton>
+            </ButtonWrapper>
             {additionalFields && (
               <>
                 {role === "admin" ? (

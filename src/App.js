@@ -21,6 +21,9 @@ const ServicePage = lazy(() => import("./pages/ServicePage/ServicePage"));
 const ProjectDetails = lazy(() =>
   import("./components/ProjectDetails/ProjectDetails")
 );
+const MaterialInfoPage = lazy(() =>
+  import("./pages/MaterialInfoPage/MaterialInfoPage")
+);
 const AdminPage = lazy(() => import("./pages/AdminPage/AdminPage"));
 
 function App() {
@@ -42,6 +45,10 @@ function App() {
           <Route
             path="materials"
             element={<PrivateRoute component={<AddItemPage />} />}
+          />
+          <Route
+            path="materials/:id"
+            element={<PrivateRoute component={<MaterialInfoPage />} />}
           />
           <Route
             path="projects"

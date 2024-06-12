@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-
 // functions
 import {
   addMaterial,
@@ -141,6 +140,7 @@ const MaterialList = ({ items, query, byId }) => {
       controller.abort();
     };
   }
+
   // Відкриття меню підтвердження
   const confirmDelete = (id) => {
     setConfirmOpen(id);

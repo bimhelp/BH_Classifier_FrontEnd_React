@@ -19,7 +19,7 @@ const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
 
   useEffect(() => {
     if (reset) {
-      console.log("reset: ", reset);
+      // console.log("reset: ", reset);
       setSelectedOption(null);
     }
   }, [reset]);

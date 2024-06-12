@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Section from "../../components/Section/Section";
-// import AddMaterialForm from "../../components/AddMaterialForm/AddMaterialForm";
-// import MaterialTable from "../../components/MaterialTable/MaterialTable";
+import MaterialList from "../../components/MaterialList/MaterialList";
 import { IconButton } from "../../components/Button/Button";
 import { Layout, Content, Menu } from "./AddItemPage.styled";
-// import { TbLayoutSidebarLeftExpandFilled } from "react-icons/tb";
-// import { TbLayoutSidebarRightExpandFilled } from "react-icons/tb";
 import { toast } from "react-toastify";
-import MaterialList from "../../components/MaterialList/MaterialList";
 import { getByUser, getMaterialById } from "../../services";
 import { IoMdBackspace } from "react-icons/io";
 
 const AddItemPage = () => {
-  // const [isVisibleMaterials, setIsVisibleMaterials] = useState(false);
   const [userMaterials, setUserMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("userMaterials");
@@ -76,7 +71,7 @@ const AddItemPage = () => {
               variant="dark"
               tooltip="Повернутись"
               icon={IoMdBackspace}
-              size={40}
+              iconSize="40px"
             ></IconButton>
           )}
         </Menu>

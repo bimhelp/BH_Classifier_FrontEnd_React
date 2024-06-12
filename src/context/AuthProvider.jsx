@@ -8,14 +8,14 @@ import { useNavigate } from "react-router-dom";
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useLocalStorage("token", "");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({
-    name: null,
-    email: null,
-  });
   const [userId, setUserId] = useState(null);
   const [role, setRole] = useLocalStorage("role", "");
   const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: null,
+    email: null,
+  });
 
   function storeUserId(token) {
     // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
