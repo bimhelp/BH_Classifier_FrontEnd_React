@@ -7,8 +7,6 @@
 export const CLIENT_ID =
   "49885303582-8200cjntpi6kn24g7lcj38ggl4nd3bi4.apps.googleusercontent.com";
 
-// export const CLIENT_SECRET = "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";
-
 export const theme = Object.freeze({
   colors: {
     mainLevelColor: "#125b56",
