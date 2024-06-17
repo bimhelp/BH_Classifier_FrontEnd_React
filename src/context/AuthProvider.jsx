@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { authContext } from "./authContext";
-import { logIn, logOut, registerUser, currentUser } from "../services";
+import {
+  logIn,
+  logOut,
+  registerUser,
+  currentUser,
+  completeRegistration,
+  googleAuthenticate,
+} from "../services";
 import { toast } from "react-toastify";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useNavigate } from "react-router-dom";
@@ -99,6 +106,40 @@ const AuthProvider = ({ children }) => {
     register(credentials);
   };
 
+  const onCompleteRegistration = (credentials) => {
+    async function complete(credentials) {
+      console.log("credentials: ", credentials);
+      try {
+        const response = await completeRegistration(credentials);
+        console.log("response: ", response);
+        setUser(response);
+        // записуємо токен в lacalstorage
+        setToken(response.token);
+        setIsLoggedIn(true);
+        storeUserId(response.token);
+        // Перенаправляємо на головну сторінку
+        navigate("/", { replace: true });
+      } catch (error) {
+        toast.error(
+          "Не вдалось зареєструвати користувача, перевірте чи коректно заповнена форма реєстрації"
+        );
+      }
+    }
+    complete(credentials);
+  };
+
+  const onGoogleLogin = () => {
+    async function authenticate() {
+      try {
+        const response = await googleAuthenticate();
+        console.log("response: ", response);
+      } catch (error) {
+        toast.error("Не вдалось увійти в акаунт google", { autoClose: false });
+      }
+    }
+    authenticate();
+  };
+
   const onLogIn = (credentials) => {
     async function login(credentials) {
       try {
@@ -162,6 +203,9 @@ const AuthProvider = ({ children }) => {
     onLogOut,
     role,
     userId,
+    setToken,
+    onGoogleLogin,
+    onCompleteRegistration,
   };
   return (
     <authContext.Provider value={providerValue}>

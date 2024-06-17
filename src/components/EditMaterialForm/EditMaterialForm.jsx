@@ -220,7 +220,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .max(500, "Занадто довкий опис"),
   });
 
-  // Показує апо приховує додаткові параметри
+  // Показує або приховує додаткові параметри
   function toggleAdditionalFields() {
     setAdditionalFields(!additionalFields);
   }
@@ -236,10 +236,22 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       return acc;
     }, {});
 
+    // Передаємо обов'язкові поля
     // Перевірка та додавання ParentElementId, якщо його немає в changedValues
     if (!changedValues.hasOwnProperty("ParentElementId")) {
       changedValues.ParentElementId = initialValues.ParentElementId;
     }
+
+    // Перевірка та додавання Code, якщо його немає в changedValues
+    if (!changedValues.hasOwnProperty("Code")) {
+      changedValues.Code = initialValues.Code;
+    }
+
+    if (!changedValues.hasOwnProperty("Unit")) {
+      changedValues.Unit = initialValues.Unit;
+    }
+
+    console.log("changedValues: ", changedValues);
 
     // Відправка даних у верхній компонент
     edit(id, changedValues);

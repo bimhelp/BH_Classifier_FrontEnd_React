@@ -190,6 +190,17 @@ export async function registerUser(credentials) {
   return response.data;
 }
 
+export async function googleAuthenticate() {
+  window.location.href =
+    "https://classifier-backend.fly.dev/api/v1/auth/google";
+}
+export async function completeRegistration(credentials) {
+  const response = await axios.post("/auth/complete", credentials);
+  // записує токен в об'єкт token
+  token.set(response.data.token);
+  return response.data;
+}
+
 export async function logIn(credentials) {
   const response = await axios.post("/auth/login", credentials);
   // записує токен в об'єкт token

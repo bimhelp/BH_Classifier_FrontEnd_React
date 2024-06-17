@@ -13,6 +13,9 @@ import Users from "./components/Users/Users";
 import Script from "./components/Script/Script";
 // Динамічне завантаження додатку
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
+const CompleteRegistrationPage = lazy(() =>
+  import("./pages/CompleteRegistrationPage/CompleteRegistrationPage")
+);
 const LogInPage = lazy(() => import("./pages/LogInPage/LogInPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
 const MaterialPage = lazy(() => import("./pages/MaterialPage/MaterialPage"));
@@ -36,6 +39,10 @@ function App() {
           <Route
             path="registration"
             element={<PublicRoute component={<RegisterPage />} />}
+          />
+          <Route
+            path="complete-profile/:userId"
+            element={<PublicRoute component={<CompleteRegistrationPage />} />}
           />
           <Route
             path="login"

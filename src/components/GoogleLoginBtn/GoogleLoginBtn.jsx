@@ -1,27 +1,18 @@
-import GoogleLogin from "react-google-login";
-import { CLIENT_ID } from "../../constants/constants";
+// import React from "react";
+import React, { useContext } from "react";
+import { authContext as context } from "../../context/authContext";
 
-import React from "react";
-
-const onSuccess = (res) => {
-  console.log("login success, current user: ", res.profileObj);
-};
-
-const onFailure = (res) => {
-  console.log("login failed, res: ", res);
-};
+import { GoogleLink } from "./GoogleLoginBtn.styled";
 const GoogleLoginBtn = () => {
+  const { onGoogleLogin } = useContext(context);
   return (
-    <div>
-      <GoogleLogin
-        clientId={CLIENT_ID}
-        buttonText="Login with Google"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={"single_host_origin"}
-        isSignedIn={true}
-      />
-    </div>
+    <GoogleLink
+      type="button"
+      // href="https://classifier-backend.fly.dev/api/v1/auth/google/callback"
+      onClick={onGoogleLogin}
+    >
+      Google
+    </GoogleLink>
   );
 };
 
