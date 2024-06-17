@@ -102,21 +102,32 @@ const MaterialList = ({ items, query, byId }) => {
   function editMaterial(id, editedMaterial) {
     const controller = new AbortController();
     async function edit(id, editedMaterial) {
-      console.log("editedMaterial: ", editedMaterial);
+      const materialBeforeEdit = curentItems.filter((item) => item._id === id);
+      // console.log(
+      //   "materialBeforeEdit: ",
+      //   materialBeforeEdit[0].ParentElementId
+      // );
+
       try {
         const response = await updateMaterial(
           id,
           editedMaterial,
           controller.signal
         );
-        // Видаляємо оновлений матеріал із списку, якщо в оновленого матеріалу ParentElementId відрізняється від елементів у поточному списку
-        if (response.data.ParentElementId !== editedMaterial.ParentElementId) {
+        // Видаляємо оновлений матеріал із списку, якщо в оновленого матеріалу ParentElementId відрізняється від ParentElementId до редагування
+        // console.log(
+        //   "response.data.ParentElementId: ",
+        //   response.data.ParentElementId
+        // );
+        if (
+          response.data.ParentElementId !==
+          materialBeforeEdit[0].ParentElementId
+        ) {
           setCurrentItems(
             curentItems.filter((item) => item._id !== response.data._id)
           );
         } else {
           // Замінюємо матеріал на оновлений
-          console.log("setCurrentItems: ");
           setCurrentItems(
             curentItems.map((item) => {
               if (item._id === id) {

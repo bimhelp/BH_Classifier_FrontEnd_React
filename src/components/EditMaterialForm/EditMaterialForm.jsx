@@ -147,8 +147,8 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .matches(
         /^\d{8}-\d$/,
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
-      )
-      .required("Код обов'язкове поле"),
+      ),
+    // .required("Код обов'язкове поле"),
     PriceUAH: yup.number().typeError("Введіть число").positive(),
     Unit: yup
       .string()
@@ -240,15 +240,6 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     // Перевірка та додавання ParentElementId, якщо його немає в changedValues
     if (!changedValues.hasOwnProperty("ParentElementId")) {
       changedValues.ParentElementId = initialValues.ParentElementId;
-    }
-
-    // Перевірка та додавання Code, якщо його немає в changedValues
-    if (!changedValues.hasOwnProperty("Code")) {
-      changedValues.Code = initialValues.Code;
-    }
-
-    if (!changedValues.hasOwnProperty("Unit")) {
-      changedValues.Unit = initialValues.Unit;
     }
 
     console.log("changedValues: ", changedValues);
