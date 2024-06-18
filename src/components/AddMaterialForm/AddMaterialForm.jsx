@@ -8,6 +8,7 @@ import { CloseButton } from "../Button/Button";
 import { CgClose } from "react-icons/cg";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { PulseLoader } from "react-spinners";
 
 // import CategorySelect from "../CategorySelect/CategorySelect";
 import UnitSelect from "../UnitSelect/UnitSelect";
@@ -29,6 +30,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
   const [selectedUnit, setSelectedUnit] = useState("");
   const [reset, setReset] = useState(false);
   const { role } = useContext(context);
+  const [isLoading, setIsLoading] = useState(false);
   // Початкові значення
   const initialValues = {
     DescriptionUA: "",
@@ -216,10 +218,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
   // Очистка react input
   // const clearSelect = () => {};
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     // formik метод очистки форми
     const { resetForm } = actions;
-
+    setIsLoading(true);
     // фільтрація заповнених полів
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(([key, value]) => value !== "")
@@ -230,12 +232,23 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       Unit: selectedUnit,
       ...filteredValues,
     };
-
-    create(additionalElement);
-    // Очистка форми
-    resetForm();
-    setReset(true);
-    onClose();
+    try {
+      setIsLoading(true);
+      await create(additionalElement);
+      resetForm();
+      setReset(true);
+      onClose();
+    } catch (error) {
+      console.error("Error creating material:", error);
+    } finally {
+      setIsLoading(false);
+    }
+    // await create(additionalElement);
+    // setIsLoading(false);
+    // // Очистка форми
+    // resetForm();
+    // setReset(true);
+    // onClose();
   };
 
   // const categorySelect = (data) => {
@@ -440,8 +453,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
               <Button
                 type="submit"
                 disabled={Object.keys(props.errors).length > 0}
+                isLoading={true}
               >
                 Створити
+                {isLoading && <PulseLoader color="#ffffff" size={5} />}
               </Button>
             </ButtonWrapper>
           </StyledForm>

@@ -11,11 +11,13 @@ import Category from "../Category/Category";
 import { List, Item } from "./MaterialList.styled";
 import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { Button } from "../Button/Button";
 import Confirm from "../Confirm/Confirm";
 import AddMaterialForm from "../AddMaterialForm/AddMaterialForm";
 import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
 import { getMaterialTree } from "../../services";
+import { ConfirmButtons } from "./MaterialList.styled";
 
 const MaterialList = ({ items, query, byId }) => {
   const [subCategories, setSubCategories] = useState([]);
@@ -25,6 +27,8 @@ const MaterialList = ({ items, query, byId }) => {
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [tree, setTree] = useState([]);
+  const [delitingCandidate, setDelitingCandidate] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   useEffect(() => {
     setCurrentItems(items);
@@ -154,6 +158,8 @@ const MaterialList = ({ items, query, byId }) => {
 
   // Відкриття меню підтвердження
   const confirmDelete = (id) => {
+    setDelitingCandidate(curentItems.filter((item) => item._id === id)[0]);
+
     setConfirmOpen(id);
   };
 
@@ -165,6 +171,7 @@ const MaterialList = ({ items, query, byId }) => {
   // Видалення матеріалу
   async function handleDelete(id) {
     try {
+      setDeleteLoading(true);
       const result = await removeMaterial(id);
       if (result) {
         toast.info("Матеріал успішно видалений");
@@ -178,6 +185,7 @@ const MaterialList = ({ items, query, byId }) => {
     } catch (error) {
       toast.error("Не вдалось видалити  матеріал");
     } finally {
+      setDeleteLoading(false);
     }
   }
 
@@ -252,13 +260,18 @@ const MaterialList = ({ items, query, byId }) => {
         </List>
       </div>
       {confirmOpen && (
-        <Confirm onClose={toggleConfirm} title="Ви точно хочете видалити?">
-          <>
+        <Confirm
+          onClose={toggleConfirm}
+          title="Ви точно хочете видалити? "
+          element={delitingCandidate.DescriptionUA}
+        >
+          <ConfirmButtons>
             <Button onClick={() => handleDelete(confirmOpen)} role="warning">
-              Delete
+              Видалити
+              {deleteLoading && <PulseLoader color="#000000" size={5} />}
             </Button>
-            <Button onClick={toggleConfirm}>Cancel</Button>
-          </>
+            <Button onClick={toggleConfirm}>Залишити</Button>
+          </ConfirmButtons>
         </Confirm>
       )}
     </>

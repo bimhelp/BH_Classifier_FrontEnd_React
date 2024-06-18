@@ -18,3 +18,9 @@ export const Item = styled.li`
     margin-bottom: ${(props) => props.theme.space[1]}px;
   }
 `;
+
+export const ConfirmButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+`;

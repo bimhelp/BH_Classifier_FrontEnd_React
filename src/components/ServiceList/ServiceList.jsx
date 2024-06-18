@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from "react";
-
 // functions
 import { getServiceByParentId } from "../../services";
 import { addService } from "../../services";
@@ -10,6 +9,7 @@ import { removeService } from "../../services";
 import Category from "../Category/Category";
 import { List, Item } from "./ServiceList.styled";
 import { BarLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import AddServiceForm from "../AddServiceForm/AddServiceForm";
 import EditServiceForm from "../EditServiceForm/EditServiceForm";
@@ -23,6 +23,7 @@ const ServiceList = ({ items, query }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   // const [tree, setTree] = useState([]);
 
   // Запит по під категорії
@@ -148,6 +149,7 @@ const ServiceList = ({ items, query }) => {
   // Видалення сервісу
   async function handleDelete(id) {
     try {
+      setDeleteLoading(true);
       const result = await removeService(id);
       if (result) {
         toast.info("Послуга успішно видалена");
@@ -161,6 +163,7 @@ const ServiceList = ({ items, query }) => {
     } catch (error) {
       toast.error("Не вдалось видалити  послугу");
     } finally {
+      setDeleteLoading(false);
     }
   }
 
@@ -234,6 +237,7 @@ const ServiceList = ({ items, query }) => {
           <>
             <Button onClick={() => handleDelete(confirmOpen)} role="warning">
               Delete
+              {deleteLoading && <PulseLoader color="#000000" size={5} />}
             </Button>
             <Button onClick={toggleConfirm}>Cancel</Button>
           </>
