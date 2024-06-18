@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/classifier/static/css/main.f1f4b4b1.css",
-    "main.js": "/classifier/static/js/main.803f17d6.js",
+    "main.js": "/classifier/static/js/main.5fda4b61.js",
     "static/css/243.680df2df.chunk.css": "/classifier/static/css/243.680df2df.chunk.css",
     "static/js/243.a95a5d7b.chunk.js": "/classifier/static/js/243.a95a5d7b.chunk.js",
     "static/css/609.680df2df.chunk.css": "/classifier/static/css/609.680df2df.chunk.css",
@@ -9,17 +9,17 @@
     "static/css/745.4a78f8ce.chunk.css": "/classifier/static/css/745.4a78f8ce.chunk.css",
     "static/js/745.c4f275af.chunk.js": "/classifier/static/js/745.c4f275af.chunk.js",
     "static/js/247.f38517ed.chunk.js": "/classifier/static/js/247.f38517ed.chunk.js",
-    "static/js/592.abc033da.chunk.js": "/classifier/static/js/592.abc033da.chunk.js",
-    "static/js/675.ba977ff3.chunk.js": "/classifier/static/js/675.ba977ff3.chunk.js",
-    "static/js/377.676e2fad.chunk.js": "/classifier/static/js/377.676e2fad.chunk.js",
-    "static/js/297.76648b79.chunk.js": "/classifier/static/js/297.76648b79.chunk.js",
-    "static/js/22.0a8bd87c.chunk.js": "/classifier/static/js/22.0a8bd87c.chunk.js",
+    "static/js/592.f8edcb20.chunk.js": "/classifier/static/js/592.f8edcb20.chunk.js",
+    "static/js/675.c7d935b6.chunk.js": "/classifier/static/js/675.c7d935b6.chunk.js",
+    "static/js/377.db155d8d.chunk.js": "/classifier/static/js/377.db155d8d.chunk.js",
+    "static/js/297.b2ee49e4.chunk.js": "/classifier/static/js/297.b2ee49e4.chunk.js",
+    "static/js/22.0fdef686.chunk.js": "/classifier/static/js/22.0fdef686.chunk.js",
     "static/js/367.98e4cb58.chunk.js": "/classifier/static/js/367.98e4cb58.chunk.js",
     "static/js/657.6f13ba59.chunk.js": "/classifier/static/js/657.6f13ba59.chunk.js",
-    "static/js/683.ea4ead73.chunk.js": "/classifier/static/js/683.ea4ead73.chunk.js",
+    "static/js/683.1f434194.chunk.js": "/classifier/static/js/683.1f434194.chunk.js",
     "index.html": "/classifier/index.html",
     "main.f1f4b4b1.css.map": "/classifier/static/css/main.f1f4b4b1.css.map",
-    "main.803f17d6.js.map": "/classifier/static/js/main.803f17d6.js.map",
+    "main.5fda4b61.js.map": "/classifier/static/js/main.5fda4b61.js.map",
     "243.680df2df.chunk.css.map": "/classifier/static/css/243.680df2df.chunk.css.map",
     "243.a95a5d7b.chunk.js.map": "/classifier/static/js/243.a95a5d7b.chunk.js.map",
     "609.680df2df.chunk.css.map": "/classifier/static/css/609.680df2df.chunk.css.map",
@@ -27,17 +27,17 @@
     "745.4a78f8ce.chunk.css.map": "/classifier/static/css/745.4a78f8ce.chunk.css.map",
     "745.c4f275af.chunk.js.map": "/classifier/static/js/745.c4f275af.chunk.js.map",
     "247.f38517ed.chunk.js.map": "/classifier/static/js/247.f38517ed.chunk.js.map",
-    "592.abc033da.chunk.js.map": "/classifier/static/js/592.abc033da.chunk.js.map",
-    "675.ba977ff3.chunk.js.map": "/classifier/static/js/675.ba977ff3.chunk.js.map",
-    "377.676e2fad.chunk.js.map": "/classifier/static/js/377.676e2fad.chunk.js.map",
-    "297.76648b79.chunk.js.map": "/classifier/static/js/297.76648b79.chunk.js.map",
-    "22.0a8bd87c.chunk.js.map": "/classifier/static/js/22.0a8bd87c.chunk.js.map",
+    "592.f8edcb20.chunk.js.map": "/classifier/static/js/592.f8edcb20.chunk.js.map",
+    "675.c7d935b6.chunk.js.map": "/classifier/static/js/675.c7d935b6.chunk.js.map",
+    "377.db155d8d.chunk.js.map": "/classifier/static/js/377.db155d8d.chunk.js.map",
+    "297.b2ee49e4.chunk.js.map": "/classifier/static/js/297.b2ee49e4.chunk.js.map",
+    "22.0fdef686.chunk.js.map": "/classifier/static/js/22.0fdef686.chunk.js.map",
     "367.98e4cb58.chunk.js.map": "/classifier/static/js/367.98e4cb58.chunk.js.map",
     "657.6f13ba59.chunk.js.map": "/classifier/static/js/657.6f13ba59.chunk.js.map",
-    "683.ea4ead73.chunk.js.map": "/classifier/static/js/683.ea4ead73.chunk.js.map"
+    "683.1f434194.chunk.js.map": "/classifier/static/js/683.1f434194.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f1f4b4b1.css",
-    "static/js/main.803f17d6.js"
+    "static/js/main.5fda4b61.js"
   ]
 }
