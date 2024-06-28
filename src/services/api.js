@@ -1,5 +1,6 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
+// axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
+axios.defaults.baseURL = "http://localhost:5000/api/v1";
 
 export const PLUGIN_URL =
   "https://bimhelp.com.ua/bimstore/construction-cost-management/";
@@ -170,7 +171,7 @@ export async function searchServiceByDescription(description) {
 // Auth________________________________________________________
 
 // Об'єкт token, має два методи
-const token = {
+export const token = {
   // Передає токен в заголовок для будь-якого (common) запиту
   set(token) {
     // console.log("token: ", token);
@@ -191,11 +192,15 @@ export async function registerUser(credentials) {
 }
 
 export async function googleAuthenticate() {
-  window.location.href =
-    "https://classifier-backend.fly.dev/api/v1/auth/google";
+  // window.location.href =
+  //   "https://classifier-backend.fly.dev/api/v1/auth/google";
+  // }
+  window.location.href = "http://localhost:5000/api/v1/auth/google";
 }
+
 export async function completeRegistration(credentials) {
   const response = await axios.post("/auth/complete", credentials);
+  console.log("response: ", response);
   // записує токен в об'єкт token
   token.set(response.data.token);
   return response.data;

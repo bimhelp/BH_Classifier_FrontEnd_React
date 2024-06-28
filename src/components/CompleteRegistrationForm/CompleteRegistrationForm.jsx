@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { authContext as context } from "../../context/authContext";
+import { token } from "../../services/api";
 
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -59,6 +60,7 @@ const CompleteRegistrationForm = () => {
 
     if (tokenParam) {
       setToken(tokenParam);
+      token.set(tokenParam);
       // setTokenState(tokenParam);
     }
   }, [location, setToken]);

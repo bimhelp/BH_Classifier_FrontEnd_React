@@ -21,6 +21,7 @@ const ErrorPage = lazy(() => import("./pages/ErrorPage/ErrorPage"));
 const MaterialPage = lazy(() => import("./pages/MaterialPage/MaterialPage"));
 const ProjectsPage = lazy(() => import("./pages/ProjectsPage/ProjectsPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage/ServicePage"));
+const LoginGoogle = lazy(() => import("./components/LoginGoogle/LoginGoogle"));
 const ProjectDetails = lazy(() =>
   import("./components/ProjectDetails/ProjectDetails")
 );
@@ -47,6 +48,10 @@ function App() {
           <Route
             path="login"
             element={<PublicRoute component={<LogInPage />} />}
+          />
+          <Route
+            path="welcome"
+            element={<PublicRoute component={<LoginGoogle />} />}
           />
           <Route path="cabinet" element={<CabinetPage />} />
           <Route
