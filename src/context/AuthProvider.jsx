@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { authContext } from "./authContext";
 import {
   logIn,
@@ -89,7 +89,7 @@ const AuthProvider = ({ children }) => {
         // записуємо токен в lacalstorage
         setToken(response.token);
         setIsLoggedIn(true);
-        storeUserId(response.token);
+        // storeUserId(response.token);
         // Перенаправляємо на головну сторінку
         navigate("/", { replace: true });
       } catch (error) {
@@ -117,7 +117,7 @@ const AuthProvider = ({ children }) => {
         // записуємо токен в lacalstorage
         setToken(response.token);
         setIsLoggedIn(true);
-        storeUserId(response.token);
+        // storeUserId(response.token);
         // Перенаправляємо на головну сторінку
         navigate("/", { replace: true });
       } catch (error) {
@@ -146,7 +146,7 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await currentUser(token);
 
-        setToken(response.token);
+        // setToken(response.token);
         setRole(response.user.role);
         setUser(response.user);
         setIsLoggedIn(true);
@@ -173,7 +173,7 @@ const AuthProvider = ({ children }) => {
           setRole(response.user.role);
           setUser(response.user);
           setIsLoggedIn(true);
-          storeUserId(response.token);
+          // storeUserId(response.token);
           // при успішному логіні видалить всі тости
           toast.dismiss();
           // Перенаправляємо на головну сторінку
@@ -218,6 +218,7 @@ const AuthProvider = ({ children }) => {
   // }, [isLoggedIn, onLogIn, onLogOut, onRegister, user]);
 
   const providerValue = {
+    token,
     user,
     isLoggedIn,
     onRegister,
