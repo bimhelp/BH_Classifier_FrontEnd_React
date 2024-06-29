@@ -6,7 +6,7 @@ const LoginGoogle = () => {
   const { onGoogleLogin } = useContext(context);
   // const location = useLocation();
   const [searchParams] = useSearchParams();
-
+  // console.log("loginGoogle")
   useEffect(() => {
     // const searchParams = new URLSearchParams(location.search);
     const tokenParam = searchParams.get("token");
