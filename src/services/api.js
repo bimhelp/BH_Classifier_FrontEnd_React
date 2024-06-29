@@ -1,6 +1,6 @@
 import axios from "axios";
-// axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
-axios.defaults.baseURL = "http://localhost:5000/api/v1";
+axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
+// axios.defaults.baseURL = "http://localhost:5000/api/v1";
 
 export const PLUGIN_URL =
   "https://bimhelp.com.ua/bimstore/construction-cost-management/";
@@ -192,10 +192,10 @@ export async function registerUser(credentials) {
 }
 
 export async function googleAuthenticate() {
-  // window.location.href =
-  //   "https://classifier-backend.fly.dev/api/v1/auth/google";
-  // }
-  window.location.href = "http://localhost:5000/api/v1/auth/google";
+  window.location.href =
+    "https://classifier-backend.fly.dev/api/v1/auth/google";
+
+  // window.location.href = "http://localhost:5000/api/v1/auth/google";
 }
 
 export async function completeRegistration(credentials) {
@@ -213,7 +213,6 @@ export async function logIn(credentials) {
   return response.data;
 }
 export async function currentUser(currenttoken) {
-  // console.log("currenttoken: ", currenttoken);
   token.set(currenttoken);
   const response = await axios.get("/auth/current");
 

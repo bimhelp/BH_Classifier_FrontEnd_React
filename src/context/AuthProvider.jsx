@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { authContext } from "./authContext";
 import {
   logIn,
@@ -7,6 +7,7 @@ import {
   // currentUser,
   completeRegistration,
   googleAuthenticate,
+  currentUser,
 } from "../services";
 import { toast } from "react-toastify";
 import { useLocalStorage } from "../hooks/useLocalStorage";
@@ -14,11 +15,10 @@ import { useNavigate } from "react-router-dom";
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = useLocalStorage("token", "");
-  console.log("token: ", token);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [role, setRole] = useLocalStorage("role", "");
-  // const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: null,
@@ -34,47 +34,47 @@ const AuthProvider = ({ children }) => {
     // console.log("tokenPayload.userId: ", tokenPayload.id);
     setUserId(tokenPayload.id);
   }
-  // useEffect(() => {
-  //   function storeUserId() {
-  //     if (token) {
-  //       // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
-  //       const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-  //       // console.log("tokenPayload: ", tokenPayload);
+  useEffect(() => {
+    function storeUserId() {
+      if (token) {
+        // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
+        const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+        // console.log("tokenPayload: ", tokenPayload);
 
-  //       // Отримуємо ідентифікатор користувача з токена
-  //       // console.log("tokenPayload.userId: ", tokenPayload.userId);
-  //       setUserId(tokenPayload.id);
-  //     }
-  //   }
+        // Отримуємо ідентифікатор користувача з токена
+        // console.log("tokenPayload.userId: ", tokenPayload.userId);
+        setUserId(tokenPayload.id);
+      }
+    }
 
-  //   if (!mounted) {
-  //     // Код, який потрібно виконати тільки при першому монтуванні
-  //     async function getCurrent(token) {
-  //       // console.log("token: ", token);
+    if (!mounted) {
+      // Код, який потрібно виконати тільки при першому монтуванні
+      async function getCurrent(token) {
+        // console.log("token: ", token);
 
-  //       try {
-  //         const response = await currentUser(token);
-  //         // console.log("response: ", response);
+        try {
+          const response = await currentUser(token);
+          // console.log("response: ", response);
 
-  //         setUser(response.user);
-  //         storeUserId();
-  //         setRole(response.user.role);
-  //         setIsLoggedIn(true);
-  //       } catch (error) {
-  //         // toast.error(`Не вдалось автоматично зайти в систему`);
-  //         setRole("");
-  //       }
-  //     }
-  //     // console.log("useEffect виконується тільки раз при першому монтуванні");
-  //     if (token === "") {
-  //       // console.log("no token");
-  //       setRole("");
-  //       return;
-  //     }
-  //     getCurrent(token);
-  //     setMounted(true);
-  //   }
-  // }, [mounted, setRole, setUser, token]);
+          setUser(response.user);
+          storeUserId();
+          setRole(response.user.role);
+          setIsLoggedIn(true);
+        } catch (error) {
+          // toast.error(`Не вдалось автоматично зайти в систему`);
+          setRole("");
+        }
+      }
+      // console.log("useEffect виконується тільки раз при першому монтуванні");
+      if (token === "") {
+        // console.log("no token");
+        setRole("");
+        return;
+      }
+      getCurrent(token);
+      setMounted(true);
+    }
+  }, [mounted, setRole, setUser, token]);
 
   const onRegister = (credentials) => {
     // console.log("register", credentials);
@@ -129,7 +129,7 @@ const AuthProvider = ({ children }) => {
     complete(credentials);
   };
 
-  const onGoogleLogin = () => {
+  const onGoogleAuthenticate = () => {
     async function authenticate() {
       try {
         const response = await googleAuthenticate();
@@ -139,6 +139,27 @@ const AuthProvider = ({ children }) => {
       }
     }
     authenticate();
+  };
+
+  const onGoogleLogin = (token) => {
+    async function login(token) {
+      try {
+        const response = await currentUser(token);
+
+        setToken(response.token);
+        setRole(response.user.role);
+        setUser(response.user);
+        setIsLoggedIn(true);
+        // при успішному логіні видалить всі тости
+        toast.dismiss();
+        // Перенаправляємо на головну сторінку
+        navigate("/", { replace: true });
+      } catch (error) {
+        console.log("error: ", error);
+        toast.error("Не вдалось виконати вхід в акаунт", { autoClose: false });
+      }
+    }
+    login(token);
   };
 
   const onLogIn = (credentials) => {
@@ -205,8 +226,9 @@ const AuthProvider = ({ children }) => {
     role,
     userId,
     setToken,
-    onGoogleLogin,
+    onGoogleAuthenticate,
     onCompleteRegistration,
+    onGoogleLogin,
   };
   return (
     <authContext.Provider value={providerValue}>
