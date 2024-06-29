@@ -18,63 +18,63 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [role, setRole] = useLocalStorage("role", "");
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: null,
     email: null,
   });
 
-  function storeUserId(token) {
-    // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
-    const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-    // console.log("tokenPayload: ", tokenPayload);
+  // function storeUserId(token) {
+  //   // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
+  //   const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+  //   // console.log("tokenPayload: ", tokenPayload);
 
-    // Отримуємо ідентифікатор користувача з токена
-    // console.log("tokenPayload.userId: ", tokenPayload.id);
-    setUserId(tokenPayload.id);
-  }
-  useEffect(() => {
-    function storeUserId() {
-      if (token) {
-        // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
-        const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-        // console.log("tokenPayload: ", tokenPayload);
+  //   // Отримуємо ідентифікатор користувача з токена
+  //   // console.log("tokenPayload.userId: ", tokenPayload.id);
+  //   setUserId(tokenPayload.id);
+  // }
+  // useEffect(() => {
+  //   function storeUserId() {
+  //     if (token) {
+  //       // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
+  //       const tokenPayload = JSON.parse(atob(token.split(".")[1]));
+  //       // console.log("tokenPayload: ", tokenPayload);
 
-        // Отримуємо ідентифікатор користувача з токена
-        // console.log("tokenPayload.userId: ", tokenPayload.userId);
-        setUserId(tokenPayload.id);
-      }
-    }
+  //       // Отримуємо ідентифікатор користувача з токена
+  //       // console.log("tokenPayload.userId: ", tokenPayload.userId);
+  //       setUserId(tokenPayload.id);
+  //     }
+  //   }
 
-    if (!mounted) {
-      // Код, який потрібно виконати тільки при першому монтуванні
-      async function getCurrent(token) {
-        // console.log("token: ", token);
+  //   if (!mounted) {
+  //     // Код, який потрібно виконати тільки при першому монтуванні
+  //     async function getCurrent(token) {
+  //       // console.log("token: ", token);
 
-        try {
-          const response = await currentUser(token);
-          // console.log("response: ", response);
+  //       try {
+  //         const response = await currentUser(token);
+  //         // console.log("response: ", response);
 
-          setUser(response.user);
-          storeUserId();
-          setRole(response.user.role);
-          setIsLoggedIn(true);
-        } catch (error) {
-          // toast.error(`Не вдалось автоматично зайти в систему`);
-          setRole("");
-        }
-      }
-      // console.log("useEffect виконується тільки раз при першому монтуванні");
-      if (token === "") {
-        // console.log("no token");
-        setRole("");
-        return;
-      }
-      getCurrent(token);
-      setMounted(true);
-    }
-  }, [mounted, setRole, setUser, token]);
+  //         setUser(response.user);
+  //         storeUserId();
+  //         setRole(response.user.role);
+  //         setIsLoggedIn(true);
+  //       } catch (error) {
+  //         // toast.error(`Не вдалось автоматично зайти в систему`);
+  //         setRole("");
+  //       }
+  //     }
+  //     // console.log("useEffect виконується тільки раз при першому монтуванні");
+  //     if (token === "") {
+  //       // console.log("no token");
+  //       setRole("");
+  //       return;
+  //     }
+  //     getCurrent(token);
+  //     setMounted(true);
+  //   }
+  // }, [mounted, setRole, setUser, token]);
 
   const onRegister = (credentials) => {
     // console.log("register", credentials);
