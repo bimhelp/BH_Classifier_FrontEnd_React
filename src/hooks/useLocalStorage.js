@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 
 export const useLocalStorage = (key, initialState = "") => {
-  const [data, setData] = useState(
-    () => JSON.parse(localStorage.getItem(key)) ?? initialState
-  );
+  // const [data, setData] = useState(
+  //   () => JSON.parse(localStorage.getItem(key)) ?? initialState
+  // );
+  const [data, setData] = useState(() => {
+    try {
+      const item = localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialState;
+    } catch (error) {
+      console.error(`Error parsing localStorage key "${key}":`, error);
+      return initialState;
+    }
+  });
+
   // console.log("Get From LocalStorage", key, data);
 
   useEffect(() => {
