@@ -10,6 +10,7 @@ const AdminPage = () => {
         <SideBar>
           <StyledNavLink to="users">Users</StyledNavLink>
           <StyledNavLink to="script">Update parentId</StyledNavLink>
+          <StyledNavLink to="drag">Drag and Drop</StyledNavLink>
         </SideBar>
         <Section>
           <Outlet />

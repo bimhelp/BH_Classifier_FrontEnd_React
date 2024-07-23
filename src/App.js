@@ -11,6 +11,7 @@ import CabinetPage from "./pages/CabinetPage/CabinetPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import Users from "./components/Users/Users";
 import Script from "./components/Script/Script";
+import DragDrop from "./components/DragDrop/DragDrop";
 // Динамічне завантаження додатку
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const CompleteRegistrationPage = lazy(() =>
@@ -77,6 +78,10 @@ function App() {
             <Route
               path="script"
               element={<PrivateRoute component={<Script />} />}
+            />
+            <Route
+              path="drag"
+              element={<PrivateRoute component={<DragDrop />} />}
             />
           </Route>
 
