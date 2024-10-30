@@ -381,13 +381,10 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 as={Select}
                 name="Currency"
                 bordercolor={validationColor(
-                  props.errors.Unit,
-                  props.values.Unit
+                  props.errors.Currency,
+                  props.values.Currency
                 )}
               >
-                <option value="" disabled hidden>
-                  Оберіть грошову одиницю
-                </option>
                 <option value="UAH">Гривня</option>
                 <option value="EUR">Євро</option>
                 <option value="USD">Долар</option>
