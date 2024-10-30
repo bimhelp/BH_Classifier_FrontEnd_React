@@ -22,21 +22,26 @@ import {
   ErrorMessageStyled,
   ButtonWrapper,
   CheckBox,
+  StyledSelect,
 } from "./AddMaterialForm.styled";
 
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
-  // const [selectedId, setSelectedId] = useState(id);
   const [selectedUnit, setSelectedUnit] = useState("");
   const [reset, setReset] = useState(false);
   const { role } = useContext(context);
   const [isLoading, setIsLoading] = useState(false);
+
+  // const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const currencyType = ["UAH", "EUR", "USD"];
+
   // Початкові значення
   const initialValues = {
     DescriptionUA: "",
     DescriptionEN: "",
     Code: "",
-    PriceUAH: "",
+    Price: "",
+    Currency: "UAH",
     Unit: "",
     Length: "",
     Width: "",
@@ -138,7 +143,8 @@ const AddMaterialForm = ({ onClose, id, create }) => {
         /^\d{8}-\d$/,
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
       ),
-    PriceUAH: yup.number().typeError("Введіть число").positive(),
+    Price: yup.number().typeError("Введіть число").positive(),
+    Currency: yup.string().oneOf(currencyType, "Недопустима валюта"),
     // Unit: yup
     //   .string()
     //   .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
@@ -322,9 +328,31 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 reset={reset}
               ></Field>
             </InputWrapper>
-
             <InputWrapper>
-              <label htmlFor="PriseUAH">Ціна в грн.</label>
+              <label htmlFor="Currency">Валюта</label>
+              <Field
+                as={StyledSelect}
+                name="Currency"
+                bordercolor={validationColor(
+                  props.errors.Unit,
+                  props.values.Unit
+                )}
+              >
+                <option value="" disabled hidden>
+                  Оберіть грошову одиницю
+                </option>
+                <option value="UAH">Гривня</option>
+                <option value="EUR">Євро</option>
+                <option value="USD">Долар</option>
+              </Field>
+
+              <ErrorMessage
+                name="Currency"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <label htmlFor="PriseUAH">Ціна</label>
               <Input
                 type="text"
                 placeholder="Ціна"
