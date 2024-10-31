@@ -23,6 +23,7 @@ import {
 const EditServiceForm = ({ element, onClose, id, edit }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
   const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const currencyType = ["UAH", "EUR", "USD"];
   const { role } = useContext(context);
 
   // Функція, що перевіряє значення на undefined і встановлює пустий рядок в разі потреби
@@ -42,7 +43,8 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
   const initialValues = {
     DescriptionUA: getFieldValue(element, "DescriptionUA"),
     DescriptionEN: getFieldValue(element, "DescriptionEN"),
-    PriceUAH: getFieldValue(element, "PriceUAH"),
+    Price: getFieldValue(element, "Price"),
+    Currency: getFieldValue(element, "Currency"),
     Unit: getFieldValue(element, "Unit"),
     OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
@@ -68,7 +70,8 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
       )
       .required("Код обов'язкове поле"),
-    PriceUAH: yup.number().typeError("Введіть число").positive(),
+    Price: yup.number().typeError("Введіть число").positive(),
+    Currency: yup.string().oneOf(currencyType, "Недопустима валюта"),
     Unit: yup
       .string()
       .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
@@ -180,20 +183,42 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
+
             <InputWrapper>
-              <label htmlFor="PriseUAH">Ціна в грн.</label>
+              <label htmlFor="Currency">Валюта</label>
+              <Field
+                as={Select}
+                name="Currency"
+                bordercolor={validationColor(
+                  props.errors.Currency,
+                  props.values.Currency
+                )}
+              >
+                <option value="UAH">Гривня</option>
+                <option value="EUR">Євро</option>
+                <option value="USD">Долар</option>
+              </Field>
+
+              <ErrorMessage
+                name="Currency"
+                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
+              />
+            </InputWrapper>
+
+            <InputWrapper>
+              <label htmlFor="PriseUAH">Ціна</label>
               <Input
                 type="text"
                 placeholder="Ціна"
-                name="PriceUAH"
-                id="PriceUAH"
+                name="Price"
+                id="Price"
                 bordercolor={validationColor(
-                  props.errors.PriceUAH,
-                  props.values.PriceUAH
+                  props.errors.Price,
+                  props.values.Price
                 )}
               />
               <ErrorMessage
-                name="PriceUAH"
+                name="Price"
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
@@ -274,7 +299,7 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                     )}
                   />
                   <ErrorMessage
-                    name="PriceUAH"
+                    name="Price"
                     render={(msg) => (
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}

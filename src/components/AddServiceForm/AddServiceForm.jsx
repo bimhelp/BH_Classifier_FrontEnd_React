@@ -19,11 +19,14 @@ import {
   ButtonWrapper,
   FormTitle,
 } from "./AddServiceForm.styled";
+import UnitSelect from "../UnitSelect/UnitSelect";
 
 const AddServiceForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
-  const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const currencyType = ["UAH", "EUR", "USD"];
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [reset, setReset] = useState(false);
+  const [selectedUnit, setSelectedUnit] = useState("");
 
   const { role } = useContext(context);
 
@@ -31,7 +34,8 @@ const AddServiceForm = ({ onClose, id, create }) => {
   const initialValues = {
     DescriptionUA: "",
     DescriptionEN: "",
-    PriceUAH: "",
+    Price: "",
+    Currency: "UAH",
     Url: "",
     Unit: "",
     OwnerBarcode: "",
@@ -60,18 +64,21 @@ const AddServiceForm = ({ onClose, id, create }) => {
         /^\d{8}-\d$/,
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
       ),
-    PriceUAH: yup.number().typeError("Введіть число").positive(),
-    Unit: yup
-      .string()
-      .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
-      .required("Оберіть одиниці виміру"),
+    Price: yup.number().typeError("Введіть число").positive(),
+    Currency: yup.string().oneOf(currencyType, "Недопустима валюта"),
+
+    // Закоментовано тому що використовується інший тип селекту
+    // Unit: yup
+    //   .string()
+    //   .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
+    //   .required("Оберіть одиниці виміру"),
     OwnerBarcode: yup
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
   });
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     // formik метод очистки форми
     const { resetForm } = actions;
 
@@ -82,12 +89,18 @@ const AddServiceForm = ({ onClose, id, create }) => {
 
     const additionalElement = {
       ParentElementId: id,
+      Unit: selectedUnit,
       ...filteredValues,
     };
-    create(additionalElement);
-    // Очистка форми
-    resetForm();
-    onClose();
+    try {
+      await create(additionalElement);
+      resetForm();
+      setReset(true);
+      onClose();
+    } catch (error) {
+      console.error("Error creating material:", error);
+    } finally {
+    }
   };
 
   // Показує або приховує додаткові параметри
@@ -99,6 +112,13 @@ const AddServiceForm = ({ onClose, id, create }) => {
   function toggleModal() {
     setModalIsOpen(!modalIsOpen);
   }
+
+  const onUnitSelect = (data) => {
+    if (data) {
+      setSelectedUnit(data.value);
+    }
+    return;
+  };
 
   return (
     <>
@@ -146,50 +166,56 @@ const AddServiceForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </DescriptionWrapper>
+
             <InputWrapper>
               <label htmlFor="Unit">Одиниці виміру</label>
               <Field
-                as={Select}
+                as={UnitSelect}
                 name="Unit"
+                onSelect={onUnitSelect}
+                variant="add"
+                reset={reset}
+              ></Field>
+            </InputWrapper>
+
+            <InputWrapper>
+              <label htmlFor="Currency">Валюта</label>
+              <Field
+                as={Select}
+                name="Currency"
                 bordercolor={validationColor(
-                  props.errors.Unit,
-                  props.values.Unit
+                  props.errors.Currency,
+                  props.values.Currency
                 )}
               >
-                <option value="" disabled hidden>
-                  Оберіть одиницю виміру
-                </option>
-                <option value="category">Категорія</option>
-                <option value="pcs.">Штука</option>
-                <option value="m">Метр погонний</option>
-                <option value="m2">Метр квадратний</option>
-                <option value="m3">Метр кубічний</option>
-                <option value="t">Тона</option>
-                <option value="kg">Кілограм</option>
+                <option value="UAH">Гривня</option>
+                <option value="EUR">Євро</option>
+                <option value="USD">Долар</option>
               </Field>
 
               <ErrorMessage
-                name="Unit"
+                name="Currency"
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
             <InputWrapper>
-              <label htmlFor="PriseUAH">Ціна в грн.</label>
+              <label htmlFor="PriseUAH">Ціна</label>
               <Input
                 type="text"
                 placeholder="Ціна"
-                name="PriceUAH"
-                id="PriceUAH"
+                name="Price"
+                id="Price"
                 bordercolor={validationColor(
-                  props.errors.PriceUAH,
-                  props.values.PriceUAH
+                  props.errors.Price,
+                  props.values.Price
                 )}
               />
               <ErrorMessage
-                name="PriceUAH"
+                name="Price"
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
+
             {role === "admin" && (
               <div>
                 <label htmlFor="Origin">cpv</label>
@@ -197,7 +223,6 @@ const AddServiceForm = ({ onClose, id, create }) => {
               </div>
             )}
             <ButtonWrapper>
-              {" "}
               <IconButton
                 type="button"
                 visibility="visible"
@@ -251,7 +276,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
                     )}
                   />
                   <ErrorMessage
-                    name="PriceUAH"
+                    name="Price"
                     render={(msg) => (
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}

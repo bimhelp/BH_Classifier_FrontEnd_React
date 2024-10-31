@@ -245,7 +245,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       changedValues.ParentElementId = initialValues.ParentElementId;
     }
 
-    console.log("changedValues: ", changedValues);
+    // console.log("changedValues: ", changedValues);
 
     // Відправка даних у верхній компонент
     edit(id, changedValues);

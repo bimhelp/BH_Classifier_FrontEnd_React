@@ -145,7 +145,8 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       ),
     Price: yup.number().typeError("Введіть число").positive(),
     Currency: yup.string().oneOf(currencyType, "Недопустима валюта"),
-    // Unit: yup
+    // Закоментовано тому що використовується інший тип селекту
+    // Unit: yup?/
     //   .string()
     //   .oneOf(unitTypes, "Недопустимий тип одиниці виміру")
     //   .required("Оберіть одиниці виміру"),
@@ -228,6 +229,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     // formik метод очистки форми
     const { resetForm } = actions;
     setIsLoading(true);
+
     // фільтрація заповнених полів
     const filteredValues = Object.fromEntries(
       Object.entries(values).filter(([key, value]) => value !== "")
@@ -349,19 +351,19 @@ const AddMaterialForm = ({ onClose, id, create }) => {
               />
             </InputWrapper>
             <InputWrapper>
-              <label htmlFor="PriseUAH">Ціна</label>
+              <label htmlFor="Price">Ціна</label>
               <Input
                 type="text"
                 placeholder="Ціна"
-                name="PriceUAH"
-                id="PriceUAH"
+                name="Price"
+                id="Price"
                 bordercolor={validationColor(
-                  props.errors.PriceUAH,
-                  props.values.PriceUAH
+                  props.errors.Price,
+                  props.values.Price
                 )}
               />
               <ErrorMessage
-                name="PriceUAH"
+                name="Price"
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
