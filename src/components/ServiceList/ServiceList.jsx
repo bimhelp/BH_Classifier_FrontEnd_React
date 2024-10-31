@@ -4,6 +4,7 @@ import { getServiceByParentId } from "../../services";
 import { addService } from "../../services";
 import { updateService } from "../../services";
 import { removeService } from "../../services";
+import { getServiceTree } from "../../services";
 
 // components
 import Category from "../Category/Category";
@@ -16,7 +17,7 @@ import EditServiceForm from "../EditServiceForm/EditServiceForm";
 import Confirm from "../Confirm/Confirm";
 import { Button } from "../Button/Button";
 
-const ServiceList = ({ items, query }) => {
+const ServiceList = ({ items, query, byId }) => {
   const [subCategories, setSubCategories] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [newService, setNewService] = useState(null);
@@ -24,7 +25,12 @@ const ServiceList = ({ items, query }) => {
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
-  // const [tree, setTree] = useState([]);
+  const [tree, setTree] = useState([]);
+
+  // Якщо перейти по дереву, то сюди передаються вибрані елементи
+  useEffect(() => {
+    setCurrentItems(items);
+  }, [items]);
 
   // Запит по під категорії
   useEffect(() => {
@@ -168,22 +174,21 @@ const ServiceList = ({ items, query }) => {
   }
 
   // Показати Дерево
-  // function showTree(id) {
-  //   toast.info("Ця фукнція в розробці");
-  //   const controller = new AbortController();
-  //   async function tree(id) {
-  //       try {
-  //         const response = await getMaterialTree(id, controller.signal);
-  //         setTree(response.data);
-  //       } catch (error) {
-  //         toast.error("Не вдалось отримати дерево вкладеності");
-  //       }
-  //     }
-  //     tree(id);
-  //     return () => {
-  //       controller.abort();
-  //     };
-  //   }
+  function showTree(id) {
+    const controller = new AbortController();
+    async function tree(id) {
+      try {
+        const response = await getServiceTree(id, controller.signal);
+        setTree(response.data);
+      } catch (error) {
+        toast.error("Не вдалось отримати дерево вкладеності");
+      }
+    }
+    tree(id);
+    return () => {
+      controller.abort();
+    };
+  }
 
   return (
     <>
@@ -204,13 +209,18 @@ const ServiceList = ({ items, query }) => {
                 edit={editService}
                 isdelete={item._id === confirmOpen ? item._id : undefined}
                 // submit={submit}
-                // showTree={showTree}
-                // tree={tree}
+                showTree={showTree}
+                tree={tree}
+                byId={byId}
               >
                 {isLoading ? (
                   <BarLoader color="#125b56" width="100%" />
                 ) : (
-                  <ServiceList items={subCategories} query={query} />
+                  <ServiceList
+                    items={subCategories}
+                    query={query}
+                    byId={byId}
+                  />
                 )}
               </Category>
             ) : (
@@ -225,8 +235,9 @@ const ServiceList = ({ items, query }) => {
                 edit={editService}
                 isdelete={item._id === confirmOpen ? item._id : undefined}
                 // submit={submit}
-                // showTree={showTsree}
-                // tree={tree}
+                showTree={showTree}
+                tree={tree}
+                byId={byId}
               ></Category>
             )}
           </Item>

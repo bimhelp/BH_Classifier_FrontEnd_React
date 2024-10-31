@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
 import { ListWrapper } from "./ServiceTable.styled";
 
-const ServiceTable = () => {
+const ServiceTable = ({ byId }) => {
   const [mainCategory, setMainCategory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -36,7 +36,11 @@ const ServiceTable = () => {
         <BarLoader color="#125b56" width="100%" />
       ) : (
         <ListWrapper>
-          <ServiceList items={mainCategory} style={{ padding: 0 }} />
+          <ServiceList
+            items={mainCategory}
+            style={{ padding: 0 }}
+            byId={byId}
+          />
         </ListWrapper>
       )}
     </>

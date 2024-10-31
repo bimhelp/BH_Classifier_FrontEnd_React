@@ -112,6 +112,18 @@ export async function removeService(id) {
   return response.data;
 }
 
+// Отримати сервіс по ID
+export async function getServiceById(id, signal) {
+  const response = await axios.get(`/service/${id}`, { signal });
+  return response.data;
+}
+
+// Отримати дерево сервісу
+export async function getServiceTree(id, signal) {
+  const response = await axios.get(`/service-tree/${id}`, { signal });
+  return response.data;
+}
+
 // Отримати всі сервіси
 export async function getAllServices(signal) {
   const responce = await axios.get("/all-service", { signal });

@@ -23,7 +23,7 @@ const MaterialPage = () => {
   const [query, setQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [material, setMaterial] = useState([]);
-  const [status, setStatus] = useState("materials");
+  const [status, setStatus] = useState("materials"); // визначає що буде показано, матеріали чи результат пошуку по дереву
 
   useEffect(() => {
     const getVisibleMaterials = () => {
@@ -64,7 +64,6 @@ const MaterialPage = () => {
         try {
           const response = await searchMaterialByDescription(searchValue);
           if (response) {
-            // console.log(response.data);
             setSearchResult(response.data);
 
             // зробити опції для фільтру по unit
@@ -101,7 +100,7 @@ const MaterialPage = () => {
 
   // Отримати по id
   const materialById = (id) => {
-    setStatus("material");
+    setStatus("oneMaterial");
     const controller = new AbortController();
     async function getMaterial(id) {
       try {
@@ -138,11 +137,12 @@ const MaterialPage = () => {
           </div>
         </SearchWrapper>
       </Section>
+
       <Section>
         <MainTableWrapper>
           {status === "materials" && <MaterialTable byId={materialById} />}
 
-          {status === "material" && (
+          {status === "oneMaterial" && (
             <MaterialList items={material} byId={materialById} />
           )}
 

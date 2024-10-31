@@ -30,6 +30,7 @@ const MaterialList = ({ items, query, byId }) => {
   const [delitingCandidate, setDelitingCandidate] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
+  // Якщо перейти по дереву, то сюди передаються вибрані елементи
   useEffect(() => {
     setCurrentItems(items);
   }, [items]);

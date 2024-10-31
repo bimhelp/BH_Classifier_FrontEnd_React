@@ -5,12 +5,12 @@ import { IconButton } from "../Button/Button";
 import { MdModeEditOutline } from "react-icons/md";
 import { FaSquarePlus } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
+import { GrTree } from "react-icons/gr";
 import { IoIosCopy } from "react-icons/io";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { BsFillInfoSquareFill } from "react-icons/bs";
-import { GrTree } from "react-icons/gr";
+// import { BsFillInfoSquareFill } from "react-icons/bs";
 import { toast } from "react-toastify";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 const ItemMenu = ({
   id,
   ParentElementId,
@@ -26,7 +26,7 @@ const ItemMenu = ({
   if (role === "admin" && !location.pathname.includes(id)) {
     return (
       <>
-        <NavLink to={`/materials/${id}`} state={{ from: location }}>
+        {/* <NavLink to={`/materials/${id}`} state={{ from: location }}>
           <IconButton
             id="info"
             icon={BsFillInfoSquareFill}
@@ -34,7 +34,7 @@ const ItemMenu = ({
             variant="neutral"
             tooltip="Інформація"
           ></IconButton>
-        </NavLink>
+        </NavLink>*/}
 
         <CopyToClipboard
           text={id}
