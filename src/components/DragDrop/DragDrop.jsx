@@ -31,6 +31,7 @@ const initialItems = [
 
 const DragDrop = () => {
   const [items, setItems] = useState(initialItems);
+  console.log("setItems: ", setItems);
   return (
     <List>
       {items.map((item) => (

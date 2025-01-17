@@ -167,13 +167,14 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await logIn(credentials);
         if (response) {
-          // console.log("token", response.token);
-          // console.log("username", response.user.name);
+          console.log("token", response.token);
+          console.log("username", response.user.name);
+          console.log("userId", response.user.userId);
           setToken(response.token);
           setRole(response.user.role);
           setUser(response.user);
           setIsLoggedIn(true);
-          // storeUserId(response.token);
+          setUserId(response.user.userId);
           // при успішному логіні видалить всі тости
           toast.dismiss();
           // Перенаправляємо на головну сторінку

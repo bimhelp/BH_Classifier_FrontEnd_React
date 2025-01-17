@@ -244,11 +244,18 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     if (!changedValues.hasOwnProperty("ParentElementId")) {
       changedValues.ParentElementId = initialValues.ParentElementId;
     }
+    if (!changedValues.hasOwnProperty("Currency")) {
+      changedValues.Currency = initialValues.Currency;
+    }
+    if (!changedValues.hasOwnProperty("Unit")) {
+      changedValues.Unit = initialValues.Unit;
+    }
 
-    // console.log("changedValues: ", changedValues);
+    console.log("changedValues: ", changedValues);
 
     // Відправка даних у верхній компонент
     edit(id, changedValues);
+
     actions.setSubmitting(false); // Позначити, що обробка завершена
 
     // Очистка форми

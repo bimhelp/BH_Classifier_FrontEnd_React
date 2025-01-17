@@ -61,8 +61,10 @@ const Category = ({
   const { role, userId } = useContext(context);
 
   useEffect(() => {
+    // console.log(role);
+    // console.log(userId);
     setLevel(ElementNestingLevel);
-  }, [ElementNestingLevel]);
+  }, [ElementNestingLevel, role, userId]);
 
   // Відкриття-закриття форми додавання
   function toggleAddForm(id) {

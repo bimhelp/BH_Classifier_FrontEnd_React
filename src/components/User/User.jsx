@@ -95,6 +95,11 @@ const User = () => {
                     <LinkTitle>Мої матеріали</LinkTitle>
                   </StyledNavLink>
 
+                  <StyledNavLink to="user-service">
+                    <FaListAlt />
+                    <LinkTitle>Мої послуги</LinkTitle>
+                  </StyledNavLink>
+
                   <StyledNavLink to="projects">
                     <GrProjects />
                     <LinkTitle>Projects</LinkTitle>
