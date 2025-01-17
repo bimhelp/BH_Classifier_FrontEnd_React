@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Section from "../../components/Section/Section";
 import MaterialList from "../../components/MaterialList/MaterialList";
 import { IconButton } from "../../components/Button/Button";
-import { Layout, Content, Menu } from "./AddItemPage.styled";
+import { Layout, Content, Menu } from "./UserMaterialPage.styled";
 import { toast } from "react-toastify";
-import { getByUser, getMaterialById } from "../../services";
+import { getMaterialByUser, getMaterialById } from "../../services";
 import { IoMdBackspace } from "react-icons/io";
+import { BarLoader } from "react-spinners";
 
-const AddItemPage = () => {
+const UserMaterialPage = () => {
   const [userMaterials, setUserMaterials] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState("userMaterials");
@@ -20,7 +21,7 @@ const AddItemPage = () => {
     async function userMaterials(selectedId) {
       setIsLoading(true);
       try {
-        const response = await getByUser(selectedId, controller.signal);
+        const response = await getMaterialByUser(selectedId, controller.signal);
         setUserMaterials(response.data);
       } catch (error) {
         toast.error("Не вдалось завантажити матеріали");
@@ -77,7 +78,10 @@ const AddItemPage = () => {
         </Menu>
         <Layout>
           <Content>
-            {!isLoading && (
+            <p>Мої матеріали:</p>
+            {isLoading ? (
+              <BarLoader color="#125b56" width="100%" />
+            ) : (
               <Section>
                 {userMaterials.length < 1 && (
                   <p>
@@ -102,4 +106,4 @@ const AddItemPage = () => {
   );
 };
 
-export default AddItemPage;
+export default UserMaterialPage;

@@ -8,7 +8,8 @@ import { PrivateRoute, PublicRoute } from "./services";
 // Private Pages
 import SharedLayout from "./pages/SharedLayout/SharedLayout";
 import CabinetPage from "./pages/CabinetPage/CabinetPage";
-import AddItemPage from "./pages/AddItemPage/AddItemPage";
+import UserMaterialPage from "./pages/UserMaterialPage/UserMaterialPage";
+import UserServicePage from "./pages/UserServicePage/UserServicePage";
 import Users from "./components/Users/Users";
 import Script from "./components/Script/Script";
 import DragDrop from "./components/DragDrop/DragDrop";
@@ -56,8 +57,12 @@ function App() {
           />
           <Route path="cabinet" element={<CabinetPage />} />
           <Route
-            path="materials"
-            element={<PrivateRoute component={<AddItemPage />} />}
+            path="user-material"
+            element={<PrivateRoute component={<UserMaterialPage />} />}
+          />
+          <Route
+            path="user-service"
+            element={<PrivateRoute component={<UserServicePage />} />}
           />
           <Route
             path="materials/:id"

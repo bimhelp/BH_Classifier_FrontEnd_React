@@ -77,14 +77,20 @@ const User = () => {
                 <span style={{ marginLeft: "auto" }}>{role}</span>
               </IconWrapper>
               {role === "designer" && (
-                <StyledNavLink to="materials">
-                  <FaListAlt />
-                  <LinkTitle>Мої матеріали</LinkTitle>
-                </StyledNavLink>
+                <>
+                  <StyledNavLink to="user-material">
+                    <FaListAlt />
+                    <LinkTitle>Мої матеріали</LinkTitle>
+                  </StyledNavLink>
+                  <StyledNavLink to="user-service">
+                    <FaListAlt />
+                    <LinkTitle>Мої послуги</LinkTitle>
+                  </StyledNavLink>
+                </>
               )}
               {role === "admin" && (
                 <>
-                  <StyledNavLink to="materials">
+                  <StyledNavLink to="user-material">
                     <FaListAlt />
                     <LinkTitle>Мої матеріали</LinkTitle>
                   </StyledNavLink>

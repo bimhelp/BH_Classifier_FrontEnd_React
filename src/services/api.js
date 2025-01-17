@@ -18,8 +18,8 @@ export async function getByLevel(level, signal) {
   return response.data;
 }
 
-export async function getByUser(signal) {
-  const response = await axios.get("/material", { signal });
+export async function getMaterialByUser(signal) {
+  const response = await axios.get("/user-material", { signal });
   return response.data;
 }
 
@@ -128,6 +128,12 @@ export async function getServiceTree(id, signal) {
 export async function getAllServices(signal) {
   const responce = await axios.get("/all-service", { signal });
   return responce.data;
+}
+
+// Отримати сервіси користувача
+export async function getServiceByUser(signal) {
+  const response = await axios.get("/user-service", { signal });
+  return response.data;
 }
 
 // Ортимати сервіси по level
