@@ -61,7 +61,7 @@ const Category = ({
   const { role, userId } = useContext(context);
 
   useEffect(() => {
-    console.log("userId: ", userId);
+    // console.log("userId: ", userId);
 
     setLevel(ElementNestingLevel);
   }, [ElementNestingLevel, role, userId]);
