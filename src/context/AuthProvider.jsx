@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { authContext } from "./authContext";
+
 import {
   logIn,
   logOut,
   registerUser,
-  // currentUser,
   completeRegistration,
   googleAuthenticate,
   currentUser,
@@ -18,63 +18,37 @@ const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const [role, setRole] = useLocalStorage("role", "");
-  // const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: null,
     email: null,
   });
-
-  // function storeUserId(token) {
-  //   // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
-  //   const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-  //   // console.log("tokenPayload: ", tokenPayload);
-
-  //   // Отримуємо ідентифікатор користувача з токена
-  //   // console.log("tokenPayload.userId: ", tokenPayload.id);
-  //   setUserId(tokenPayload.id);
-  // }
-  // useEffect(() => {
-  //   function storeUserId() {
-  //     if (token) {
-  //       // Парсимо токен для отримання його вмісту (зазвичай це JSON об'єкт)
-  //       const tokenPayload = JSON.parse(atob(token.split(".")[1]));
-  //       // console.log("tokenPayload: ", tokenPayload);
-
-  //       // Отримуємо ідентифікатор користувача з токена
-  //       // console.log("tokenPayload.userId: ", tokenPayload.userId);
-  //       setUserId(tokenPayload.id);
-  //     }
-  //   }
-
-  //   if (!mounted) {
-  //     // Код, який потрібно виконати тільки при першому монтуванні
-  //     async function getCurrent(token) {
-  //       // console.log("token: ", token);
-
-  //       try {
-  //         const response = await currentUser(token);
-  //         // console.log("response: ", response);
-
-  //         setUser(response.user);
-  //         storeUserId();
-  //         setRole(response.user.role);
-  //         setIsLoggedIn(true);
-  //       } catch (error) {
-  //         // toast.error(`Не вдалось автоматично зайти в систему`);
-  //         setRole("");
-  //       }
-  //     }
-  //     // console.log("useEffect виконується тільки раз при першому монтуванні");
-  //     if (token === "") {
-  //       // console.log("no token");
-  //       setRole("");
-  //       return;
-  //     }
-  //     getCurrent(token);
-  //     setMounted(true);
-  //   }
-  // }, [mounted, setRole, setUser, token]);
+  useEffect(() => {
+    console.log(token);
+    async function onRefresh(token) {
+      try {
+        const response = await currentUser(token);
+        if (response) {
+          console.log("response: ", response);
+          setRole(response.user.role);
+          setUser(response.user);
+          setIsLoggedIn(true);
+          setUserId(response.user.userId);
+          // при успішному логіні видалить всі тости
+          toast.dismiss();
+        } else {
+        }
+      } catch (error) {
+        toast.error(
+          "Не вдалось увійти в акаунт, перевірте чи коректний email та пароль",
+          { autoClose: false }
+        );
+      }
+    }
+    if (token) {
+      onRefresh(token);
+    }
+  }, [setRole, setToken, token]);
 
   const onRegister = (credentials) => {
     // console.log("register", credentials);
@@ -167,9 +141,9 @@ const AuthProvider = ({ children }) => {
       try {
         const response = await logIn(credentials);
         if (response) {
-          console.log("token", response.token);
-          console.log("username", response.user.name);
-          console.log("userId", response.user.userId);
+          // console.log("token", response.token);
+          // console.log("username", response.user.name);
+          // console.log("userId", response.user.userId);
           setToken(response.token);
           setRole(response.user.role);
           setUser(response.user);
@@ -213,10 +187,6 @@ const AuthProvider = ({ children }) => {
     }
     logout();
   };
-
-  // const providerValue = useMemo(() => {
-  //   return { user, isLoggedIn, onRegister, onLogIn, onLogOut };
-  // }, [isLoggedIn, onLogIn, onLogOut, onRegister, user]);
 
   const providerValue = {
     token,

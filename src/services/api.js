@@ -5,6 +5,65 @@ axios.defaults.baseURL = "https://classifier-backend.fly.dev/api/v1";
 export const PLUGIN_URL =
   "https://bimhelp.com.ua/bimstore/construction-cost-management/";
 
+// Auth________________________________________________________
+
+// Об'єкт token, має два методи
+export const token = {
+  // Передає токен в заголовок для будь-якого (common) запиту
+  set(token) {
+    // console.log("token: ", token);
+
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  // Скидає токен
+  clear() {
+    axios.defaults.headers.common.Authorization = "";
+  },
+};
+
+export async function registerUser(credentials) {
+  const response = await axios.post("/auth/register", credentials);
+  // записує токен в об'єкт token
+  token.set(response.data.token);
+  return response.data;
+}
+
+export async function googleAuthenticate() {
+  window.location.href =
+    "https://classifier-backend.fly.dev/api/v1/auth/google";
+
+  // window.location.href = "http://localhost:5000/api/v1/auth/google";
+}
+
+export async function completeRegistration(credentials) {
+  const response = await axios.post("/auth/complete", credentials);
+  console.log("response: ", response);
+  // записує токен в об'єкт token
+  token.set(response.data.token);
+  return response.data;
+}
+
+export async function logIn(credentials) {
+  const response = await axios.post("/auth/login", credentials);
+  // записує токен в об'єкт token
+  token.set(response.data.token);
+  return response.data;
+}
+export async function currentUser(currenttoken) {
+  token.set(currenttoken);
+  const response = await axios.get("/auth/current");
+
+  return response.data;
+}
+
+export async function logOut() {
+  const response = await axios.post("/auth/logout");
+  // токен вже є у хедері, тому що юзер вже був залогінений
+  // тому його потрібно обнулити
+  token.clear();
+  return response.data;
+}
+
 // Materials ________________________________________________________
 export async function getAll(signal) {
   const response = await axios.get(`/all-material`, { signal });
@@ -183,65 +242,6 @@ export async function searchServiceByDescription(description) {
       description: description,
     },
   });
-  return response.data;
-}
-
-// Auth________________________________________________________
-
-// Об'єкт token, має два методи
-export const token = {
-  // Передає токен в заголовок для будь-якого (common) запиту
-  set(token) {
-    // console.log("token: ", token);
-
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  // Скидає токен
-  clear() {
-    axios.defaults.headers.common.Authorization = "";
-  },
-};
-
-export async function registerUser(credentials) {
-  const response = await axios.post("/auth/register", credentials);
-  // записує токен в об'єкт token
-  token.set(response.data.token);
-  return response.data;
-}
-
-export async function googleAuthenticate() {
-  window.location.href =
-    "https://classifier-backend.fly.dev/api/v1/auth/google";
-
-  // window.location.href = "http://localhost:5000/api/v1/auth/google";
-}
-
-export async function completeRegistration(credentials) {
-  const response = await axios.post("/auth/complete", credentials);
-  console.log("response: ", response);
-  // записує токен в об'єкт token
-  token.set(response.data.token);
-  return response.data;
-}
-
-export async function logIn(credentials) {
-  const response = await axios.post("/auth/login", credentials);
-  // записує токен в об'єкт token
-  token.set(response.data.token);
-  return response.data;
-}
-export async function currentUser(currenttoken) {
-  token.set(currenttoken);
-  const response = await axios.get("/auth/current");
-
-  return response.data;
-}
-
-export async function logOut() {
-  const response = await axios.post("/auth/logout");
-  // токен вже є у хедері, тому що юзер вже був залогінений
-  // тому його потрібно обнулити
-  token.clear();
   return response.data;
 }
 

@@ -61,8 +61,8 @@ const Category = ({
   const { role, userId } = useContext(context);
 
   useEffect(() => {
-    // console.log(role);
-    // console.log(userId);
+    console.log("userId: ", userId);
+
     setLevel(ElementNestingLevel);
   }, [ElementNestingLevel, role, userId]);
 
@@ -116,6 +116,7 @@ const Category = ({
           </Chain>
         )}
       </div>
+
       <Card onClick={selectCategory} isdelete={isdelete}>
         <CategoryWrapper level={level}>
           <CodeWrapper level={level}>

@@ -15,15 +15,15 @@ import { ThemeProvider } from "styled-components";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  // <React.StrictMode>
-  <BrowserRouter basename="/classifier">
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <MaterialProvider>
-          <App />
-        </MaterialProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  </BrowserRouter>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter basename="/classifier">
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <MaterialProvider>
+            <App />
+          </MaterialProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );

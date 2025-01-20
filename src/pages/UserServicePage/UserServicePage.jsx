@@ -29,7 +29,7 @@ const UserServicePage = () => {
   return (
     <>
       <Section>
-        <p>Мої ослуги:</p>
+        <p>Мої послуги:</p>
         {isLoading ? (
           <BarLoader color="#125b56" width="100%" />
         ) : (

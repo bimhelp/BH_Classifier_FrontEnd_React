@@ -92,6 +92,8 @@ const ServiceList = ({ items, query, byId }) => {
     async function createService(newService) {
       try {
         const response = await addService(newService, controller.signal);
+
+        console.log("response.data: ", response.data);
         toast.success("Послугу успішно створено");
         setNewService(response.data);
       } catch (error) {

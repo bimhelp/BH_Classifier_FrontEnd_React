@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 // functions
 import {
   addMaterial,
@@ -62,12 +62,18 @@ const MaterialList = ({ items, query, byId }) => {
   }, [selectedId, newMaterial, setSubCategories]);
 
   // Створення класів для кольорів
-  const level = useMemo(() => {
+  // const level = useMemo(() => {
+  //   if (items.length > 0) {
+  //     return items[0].ElementNestingLevel;
+  //   }
+  //   return null;
+  // }, [items]);
+
+  const level = () => {
     if (items.length > 0) {
       return items[0].ElementNestingLevel;
     }
-    return null;
-  }, [items]);
+  };
 
   // Функція  тоглить відкриття категорії
   const selectCategory = async (event, id) => {
@@ -210,7 +216,7 @@ const MaterialList = ({ items, query, byId }) => {
   return (
     <>
       <div>
-        <List level={level}>
+        <List level={level()}>
           {curentItems.map((item) => (
             <Item key={item._id}>
               {/* якщо вибраний елемент */}
