@@ -135,7 +135,9 @@ const Category = ({
                 left={0}
               />
             </CopyToClipboard>
-            <CategoryCode origin={Origin?.toString()}>{Code}</CategoryCode>
+            <CategoryCode origin={Origin?.toString()} owner={userId === owner}>
+              {Code}
+            </CategoryCode>
           </CodeWrapper>
 
           <DescriptionWrapper>

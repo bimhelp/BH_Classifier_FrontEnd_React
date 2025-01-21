@@ -153,6 +153,7 @@ export const CategoryCode = styled.p`
     border-radius: 50%; // Зробити коло
     background-color: ${(props) =>
       props.origin === "false" && props.theme.colors.white};
+    background-color: ${(props) => props.owner && props.theme.colors.red};
   }
 `;
 
