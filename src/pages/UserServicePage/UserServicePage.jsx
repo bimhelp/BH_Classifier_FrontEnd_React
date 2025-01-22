@@ -11,7 +11,7 @@ import { IoMdBackspace } from "react-icons/io";
 const UserServicePage = () => {
   const [userServices, setUserServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState("userMaterials");
+  const [status, setStatus] = useState("userServices");
   const [service, setService] = useState([]);
 
   // Запит по матеріали користувача
