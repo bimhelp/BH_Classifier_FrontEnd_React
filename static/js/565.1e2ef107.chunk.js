@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkclassifier=self.webpackChunkclassifier||[]).push([[565],{9565:(e,s,n)=>{n.r(s),n.d(s,{default:()=>l});var o=n(2791),t=n(1012),c=n(1087),i=n(184);const l=()=>{const{onGoogleLogin:e}=(0,o.useContext)(t.g),[s]=(0,c.lr)();return(0,o.useEffect)((()=>{const n=s.get("token");e(n)}),[e,s]),(0,i.jsx)("div",{children:"Google Login"})}}}]);
+//# sourceMappingURL=565.1e2ef107.chunk.js.map
