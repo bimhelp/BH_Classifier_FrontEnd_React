@@ -99,7 +99,11 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
       return acc;
     }, {});
     // console.log("changedValues: ", changedValues);
-
+    // Передаємо обов'язкові поля
+    // Перевірка та додавання ParentElementId, якщо його немає в changedValues
+    if (!changedValues.hasOwnProperty("ParentElementId")) {
+      changedValues.ParentElementId = initialValues.ParentElementId;
+    }
     // Відправка даних у верхній компонент
     edit(id, changedValues);
     actions.setSubmitting(false); // Позначити, що обробка завершена

@@ -124,7 +124,7 @@ const User = () => {
                 onClick={handleConfirm}
                 role="warning"
               >
-                Log Out
+                Вийти із системи
               </Button>
             </Menu>
           )}
@@ -135,10 +135,10 @@ const User = () => {
         <Confirm onClose={toggleConfirm} title="Ви точно хочете вийти?">
           <FlexWrapper>
             <Button icon={FaArrowRight} onClick={handleLogOut} role="warning">
-              Log Out
+              Вийти
             </Button>
             <Button icon={RxCross2} onClick={toggleConfirm}>
-              Cancel
+              Залишитись
             </Button>
           </FlexWrapper>
         </Confirm>
