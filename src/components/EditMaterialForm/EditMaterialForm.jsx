@@ -54,19 +54,22 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
     Height: getFieldValue(element, "Height"),
     Density: getFieldValue(element, "Density"),
     WeightElement: getFieldValue(element, "WeightElement"),
+    AssortmentWeight: getFieldValue(element, "AssortmentWeight"),
     Perimeter: getFieldValue(element, "Perimeter"),
     Area: getFieldValue(element, "Area"),
     Volume: getFieldValue(element, "Volume"),
-    WriteOffCoefficient: getFieldValue(element, "WriteOffCoefficient"),
-    Consumption: getFieldValue(element, "Consumption"),
-    ConsumptionPer1m2: getFieldValue(element, "ConsumptionPer1m2"),
-    ConsumptionPer1m3: getFieldValue(element, "ConsumptionPer1m3"),
-    ConsumptionPer1m: getFieldValue(element, "ConsumptionPer1m"),
-    ConsumptionPer1t: getFieldValue(element, "ConsumptionPer1t"),
-    OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
     Comment: getFieldValue(element, "Comment"),
     Origin: getFieldValue(element, "Origin"),
+    Category: getFieldValue(element, "Category"),
     ParentElementId: getFieldValue(element, "ParentElementId"),
+    // Витрата
+    // WriteOffCoefficient: getFieldValue(element, "WriteOffCoefficient"),
+    // Consumption: getFieldValue(element, "Consumption"),
+    // ConsumptionPer1m2: getFieldValue(element, "ConsumptionPer1m2"),
+    // ConsumptionPer1m3: getFieldValue(element, "ConsumptionPer1m3"),
+    // ConsumptionPer1m: getFieldValue(element, "ConsumptionPer1m"),
+    // ConsumptionPer1t: getFieldValue(element, "ConsumptionPer1t"),
+    // OwnerBarcode: getFieldValue(element, "OwnerBarcode"),
   };
 
   // Масив для рендеру інпутів
@@ -92,6 +95,10 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       id: "WeightElement",
     },
     {
+      label: "Асортиментна вага, кг",
+      id: "AssortmentWeight",
+    },
+    {
       label: "Периметр, мм",
       id: "Perimeter",
     },
@@ -103,34 +110,35 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       label: "Об'єм, м3",
       id: "Volume",
     },
-    {
-      label: "Коефіціент витрати",
-      id: "WriteOffCoefficient",
-    },
-    {
-      label: "Витрата",
-      id: "Consumption",
-    },
-    {
-      label: "Витрата 1/m2",
-      id: "ConsumptionPer1m2",
-    },
-    {
-      label: "Витрата 1/m3",
-      id: "ConsumptionPer1m3",
-    },
-    {
-      label: "Витрата 1/m",
-      id: "ConsumptionPer1m",
-    },
-    {
-      label: "Витрата 1/t",
-      id: "ConsumptionPer1t",
-    },
+
     {
       label: "Власний код",
       id: "OwnerBarcode",
     },
+    // {
+    //   label: "Коефіціент витрати",
+    //   id: "WriteOffCoefficient",
+    // },
+    // {
+    //   label: "Витрата",
+    //   id: "Consumption",
+    // },
+    // {
+    //   label: "Витрата 1/m2",
+    //   id: "ConsumptionPer1m2",
+    // },
+    // {
+    //   label: "Витрата 1/m3",
+    //   id: "ConsumptionPer1m3",
+    // },
+    // {
+    //   label: "Витрата 1/m",
+    //   id: "ConsumptionPer1m",
+    // },
+    // {
+    //   label: "Витрата 1/t",
+    //   id: "ConsumptionPer1t",
+    // },
   ];
 
   // Схема валідації
@@ -180,6 +188,10 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .number()
       .typeError("Введіть число")
       .positive("Число повинне бути додатним"),
+    AssortmentWeight: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
     Perimeter: yup
       .number()
       .typeError("Введіть число")
@@ -193,34 +205,35 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .number()
       .typeError("Введіть число")
       .positive("Число повинне бути додатним"),
-    WriteOffCoefficient: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    Consumption: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1m2: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1m3: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1m: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1t: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
+    //
     OwnerBarcode: yup
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
+    // WriteOffCoefficient: yup,
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // Consumption: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1m2: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1m3: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1m: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1t: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
   });
 
   // Показує або приховує додаткові параметри
@@ -436,6 +449,20 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
+            {role === "admin" && (
+              <>
+                <div>
+                  <label htmlFor="Origin">Це оригінальний код cpv</label>
+                  <Input type="checkbox" name="Origin" id="Origin"></Input>
+                </div>
+                <div>
+                  <label htmlFor="Category">
+                    Це категорія, буде створений код по логіці cpv
+                  </label>
+                  <Input type="checkbox" name="Category" id="Category"></Input>
+                </div>
+              </>
+            )}
             <ButtonWrapper>
               <IconButton
                 type="button"
@@ -493,12 +520,6 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                     )}
                   />
                 </DescriptionWrapper>
-                {role === "admin" && (
-                  <div>
-                    <label htmlFor="Origin">cpv</label>
-                    <Input type="checkbox" name="Origin" id="Origin"></Input>
-                  </div>
-                )}
               </>
             )}
 

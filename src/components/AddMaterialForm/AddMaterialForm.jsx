@@ -21,7 +21,7 @@ import {
   DescriptionWrapper,
   ErrorMessageStyled,
   ButtonWrapper,
-  CheckBox,
+  // CheckBox,
   StyledSelect,
 } from "./AddMaterialForm.styled";
 
@@ -48,18 +48,19 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     Height: "",
     Density: "",
     WeightElement: "",
+    AssortmentWeight: "",
     Perimeter: "",
     Area: "",
     Volume: "",
-    WriteOffCoefficient: "",
-    Consumption: "",
-    ConsumptionPer1m2: "",
-    ConsumptionPer1m3: "",
-    ConsumptionPer1m: "",
-    ConsumptionPer1t: "",
     OwnerBarcode: "",
     Comment: "",
     Origin: false,
+    // WriteOffCoefficient: "",
+    // Consumption: "",
+    // ConsumptionPer1m2: "",
+    // ConsumptionPer1m3: "",
+    // ConsumptionPer1m: "",
+    // ConsumptionPer1t: "",
   };
 
   // Масив для рендеру інпутів
@@ -85,6 +86,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       id: "WeightElement",
     },
     {
+      label: "Асортиментна вага, кг",
+      id: "AssortmentWeight",
+    },
+    {
       label: "Периметр, мм",
       id: "Perimeter",
     },
@@ -96,34 +101,35 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       label: "Об'єм, м3",
       id: "Volume",
     },
-    {
-      label: "Коефіціент витрати",
-      id: "WriteOffCoefficient",
-    },
-    {
-      label: "Витрата",
-      id: "Consumption",
-    },
-    {
-      label: "Витрата 1/m2",
-      id: "ConsumptionPer1m2",
-    },
-    {
-      label: "Витрата 1/m3",
-      id: "ConsumptionPer1m3",
-    },
-    {
-      label: "Витрата 1/m",
-      id: "ConsumptionPer1m",
-    },
-    {
-      label: "Витрата 1/t",
-      id: "ConsumptionPer1t",
-    },
+
     {
       label: "Власний код",
       id: "OwnerBarcode",
     },
+    // {
+    //   label: "Коефіціент витрати",
+    //   id: "WriteOffCoefficient",
+    // },
+    // {
+    //   label: "Витрата",
+    //   id: "Consumption",
+    // },
+    // {
+    //   label: "Витрата 1/m2",
+    //   id: "ConsumptionPer1m2",
+    // },
+    // {
+    //   label: "Витрата 1/m3",
+    //   id: "ConsumptionPer1m3",
+    // },
+    // {
+    //   label: "Витрата 1/m",
+    //   id: "ConsumptionPer1m",
+    // },
+    // {
+    //   label: "Витрата 1/t",
+    //   id: "ConsumptionPer1t",
+    // },
   ];
 
   // Схема валідації
@@ -174,6 +180,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       .number()
       .typeError("Введіть число")
       .positive("Число повинне бути додатним"),
+    AssortmentWeight: yup
+      .number()
+      .typeError("Введіть число")
+      .positive("Число повинне бути додатним"),
     Perimeter: yup
       .number()
       .typeError("Введіть число")
@@ -187,34 +197,35 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       .number()
       .typeError("Введіть число")
       .positive("Число повинне бути додатним"),
-    WriteOffCoefficient: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    Consumption: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1m2: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1m3: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1m: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
-    ConsumptionPer1t: yup
-      .number()
-      .typeError("Введіть число")
-      .positive("Число повинне бути додатним"),
     OwnerBarcode: yup
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
+
+    // WriteOffCoefficient: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // Consumption: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1m2: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1m3: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1m: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
+    // ConsumptionPer1t: yup
+    //   .number()
+    //   .typeError("Введіть число")
+    //   .positive("Число повинне бути додатним"),
   });
 
   // Показує або приховує додаткові параметри
@@ -384,6 +395,20 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
               />
             </InputWrapper>
+            {role === "admin" && (
+              <>
+                <div>
+                  <label htmlFor="Origin">Це оригінальний код cpv</label>
+                  <Input type="checkbox" name="Origin" id="Origin"></Input>
+                </div>
+                <div>
+                  <label htmlFor="Category">
+                    Це категорія, буде створений код по логіці cpv
+                  </label>
+                  <Input type="checkbox" name="Category" id="Category"></Input>
+                </div>
+              </>
+            )}
             <ButtonWrapper>
               <IconButton
                 type="button"
@@ -463,16 +488,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                     )}
                   />
                 </DescriptionWrapper>
-                {role === "admin" && (
-                  <div>
-                    <label htmlFor="Origin">cpv</label>
-                    <CheckBox
-                      type="checkbox"
-                      name="Origin"
-                      id="Origin"
-                    ></CheckBox>
-                  </div>
-                )}
               </>
             )}
 
