@@ -152,6 +152,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
         "Код повине бути довжиною 8 цифр, дефіс, 1 цифра, наприклад 47000000-6"
       ),
     Price: yup.number().typeError("Введіть число").positive(),
+    Url: yup
+      .string()
+      .min(3, "Занадто коротке посилання")
+      .max(500, "Занадто довге посилання"),
     Currency: yup.string().oneOf(currencyType, "Недопустима валюта"),
     // Закоментовано тому що використовується інший тип селекту
     // Unit: yup?/
@@ -201,8 +205,8 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       .positive("Число повинне бути додатним"),
     OwnerBarcode: yup
       .string()
-      .min(3, "Занадто короткий опис")
-      .max(500, "Занадто довкий опис"),
+      .min(3, "Занадто короткий код")
+      .max(500, "Занадто довкий код"),
 
     // WriteOffCoefficient: yup
     //   .number()
@@ -354,7 +358,15 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 ></Field>
               </InputWrapper>
               <InputWrapper>
-                <label htmlFor="Currency">Валюта</label>
+                <MessageVrapper>
+                  <label htmlFor="Currency">Валюта</label>
+                  <ErrorMessage
+                    name="Currency"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
                 <Field
                   as={StyledSelect}
                   name="Currency"
@@ -367,16 +379,17 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   <option value="EUR">Євро</option>
                   <option value="USD">Долар</option>
                 </Field>
-
-                <ErrorMessage
-                  name="Currency"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
               </InputWrapper>
               <InputWrapper>
-                <label htmlFor="Price">Ціна</label>
+                <MessageVrapper>
+                  <label htmlFor="Price">Ціна</label>
+                  <ErrorMessage
+                    name="Price"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
                 <Input
                   type="text"
                   placeholder="Ціна"
@@ -387,15 +400,17 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                     props.values.Price
                   )}
                 />
-                <ErrorMessage
-                  name="Price"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
               </InputWrapper>
               <InputWrapper>
-                <label htmlFor="Url">Посилання</label>
+                <MessageVrapper>
+                  <label htmlFor="Url">Посилання</label>{" "}
+                  <ErrorMessage
+                    name="Url"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
                 <Input
                   type="text"
                   placeholder="Посилання на сайт виробника"
@@ -404,12 +419,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   bordercolor={validationColor(
                     props.errors.Url,
                     props.values.Url
-                  )}
-                />
-                <ErrorMessage
-                  name="Url"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                   )}
                 />
               </InputWrapper>
@@ -444,7 +453,15 @@ const AddMaterialForm = ({ onClose, id, create }) => {
               <>
                 {role === "admin" && (
                   <InputWrapper>
-                    <label htmlFor="Code">Код</label>
+                    <MessageVrapper>
+                      <label htmlFor="Code">Код</label>
+                      <ErrorMessage
+                        name="Code"
+                        render={(msg) => (
+                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                        )}
+                      />
+                    </MessageVrapper>
                     <Input
                       type="text"
                       placeholder="Код"
@@ -455,19 +472,21 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                         props.values.Code
                       )}
                     />
-                    <ErrorMessage
-                      name="Code"
-                      render={(msg) => (
-                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                      )}
-                    />
                   </InputWrapper>
                 )}
 
                 <InputGroup>
                   {inputs.map(({ id, label }) => (
                     <ShortInputWrapper key={id}>
-                      <label htmlFor={id}>{label}</label>
+                      <MessageVrapper>
+                        <label htmlFor={id}>{label}</label>
+                        <ErrorMessage
+                          name={id}
+                          render={(msg) => (
+                            <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                          )}
+                        />
+                      </MessageVrapper>
                       <Input
                         type="text"
                         placeholder={label}
@@ -478,17 +497,19 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                           props.values[id]
                         )}
                       />
-                      <ErrorMessage
-                        name={id}
-                        render={(msg) => (
-                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                        )}
-                      />
                     </ShortInputWrapper>
                   ))}
                 </InputGroup>
                 <ShortInputWrapper>
-                  <label htmlFor="Comment">Коментар</label>
+                  <MessageVrapper>
+                    <label htmlFor="Comment">Коментар</label>
+                    <ErrorMessage
+                      name="Comment"
+                      render={(msg) => (
+                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                      )}
+                    />
+                  </MessageVrapper>
                   <TextArea
                     name="Comment"
                     id="Comment"
@@ -497,12 +518,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                     bordercolor={validationColor(
                       props.errors.Comment,
                       props.values.Comment
-                    )}
-                  />
-                  <ErrorMessage
-                    name="Comment"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}
                   />
                 </ShortInputWrapper>
