@@ -9,21 +9,22 @@ import { CgClose } from "react-icons/cg";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import {
-  InputWrapper,
   StyledForm,
   TextArea,
   InputGroup,
+  InputWrapper,
+  ShortInputWrapper,
   Input,
-  DescriptionWrapper,
   ErrorMessageStyled,
   Select,
   ButtonWrapper,
   FormTitle,
+  MessageVrapper,
 } from "./EditMaterialForm.styled";
 
 const EditMaterialForm = ({ element, onClose, id, edit }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
-  const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const unitTypes = ["none", "m", "m2", "m3", "t", "kg", "pcs."];
   const currencyType = ["UAH", "EUR", "USD"];
   const { role } = useContext(context);
 
@@ -95,7 +96,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       id: "WeightElement",
     },
     {
-      label: "Асортиментна вага, кг",
+      label: "Маса 1 метра, кг",
       id: "AssortmentWeight",
     },
     {
@@ -288,8 +289,16 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
 
-            <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис UA</label>
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="DescriptionUA">Опис UA</label>
+                <ErrorMessage
+                  name="DescriptionUA"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </MessageVrapper>
               <TextArea
                 autoFocus={true}
                 name="DescriptionUA"
@@ -301,13 +310,17 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                   props.values.DescriptionUA
                 )}
               />
-              <ErrorMessage
-                name="DescriptionUA"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </DescriptionWrapper>
-            <DescriptionWrapper>
-              <label htmlFor="DescriptionEN">Опис EN</label>
+            </InputWrapper>
+            <InputWrapper>
+              <ErrorMessage>
+                <label htmlFor="DescriptionEN">Опис EN</label>
+                <ErrorMessage
+                  name="DescriptionEN"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </ErrorMessage>
               <TextArea
                 name="DescriptionEN"
                 id="DescriptionEN"
@@ -318,150 +331,158 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                   props.values.DescriptionEN
                 )}
               />
-              <ErrorMessage
-                name="DescriptionEN"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </DescriptionWrapper>
-            {role === "admin" && (
-              <>
-                <InputWrapper>
-                  <label htmlFor="Code">Код</label>
-                  <Input
-                    type="text"
-                    placeholder="Код"
-                    name="Code"
-                    id="Code"
-                    bordercolor={validationColor(
-                      props.errors.Code,
-                      props.values.Code
-                    )}
-                  />
+            </InputWrapper>
+            <InputGroup>
+              {role === "admin" && (
+                <>
+                  <InputWrapper>
+                    <MessageVrapper>
+                      <label htmlFor="Code">Код</label>
+                      <ErrorMessage
+                        name="Code"
+                        render={(msg) => (
+                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                        )}
+                      />
+                    </MessageVrapper>
+                    <Input
+                      type="text"
+                      placeholder="Код"
+                      name="Code"
+                      id="Code"
+                      bordercolor={validationColor(
+                        props.errors.Code,
+                        props.values.Code
+                      )}
+                    />
+                  </InputWrapper>
+                  <InputWrapper>
+                    <MessageVrapper>
+                      <label htmlFor="ParentElementId">Код Категорії</label>
+                      <ErrorMessage
+                        name="ParentElementId"
+                        render={(msg) => (
+                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                        )}
+                      />
+                    </MessageVrapper>
+                    <Input
+                      type="text"
+                      placeholder="Код Категорії"
+                      name="ParentElementId"
+                      id="ParentElementId"
+                      disabled={element.CodeParentElement === "materials"}
+                      bordercolor={validationColor(
+                        props.errors.Code,
+                        props.values.Code
+                      )}
+                    />
+                  </InputWrapper>
+                </>
+              )}
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="Unit">Одиниці виміру</label>
                   <ErrorMessage
-                    name="Code"
+                    name="Unit"
                     render={(msg) => (
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}
                   />
-                </InputWrapper>
-                <InputWrapper>
-                  <label htmlFor="ParentElementId">Код Категорії</label>
-                  <Input
-                    type="text"
-                    placeholder="Код Категорії"
-                    name="ParentElementId"
-                    id="ParentElementId"
-                    disabled={element.CodeParentElement === "materials"}
-                    bordercolor={validationColor(
-                      props.errors.Code,
-                      props.values.Code
-                    )}
-                  />
+                </MessageVrapper>
+                <Field
+                  as={Select}
+                  name="Unit"
+                  bordercolor={validationColor(
+                    props.errors.Unit,
+                    props.values.Unit
+                  )}
+                >
+                  <option value="" disabled hidden>
+                    Оберіть одиницю виміру
+                  </option>
+                  {role === "admin" && (
+                    <option value="none">Не визначено</option>
+                  )}
+                  <option value="pcs.">Штука</option>
+                  <option value="m">Метр погонний</option>
+                  <option value="m2">Метр квадратний</option>
+                  <option value="m3">Метр кубічний</option>
+                  <option value="t">Тона</option>
+                  <option value="kg">Кілограм</option>
+                </Field>
+              </InputWrapper>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="Currency">Валюта</label>
                   <ErrorMessage
-                    name="ParentElementId"
+                    name="Currency"
                     render={(msg) => (
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}
                   />
-                </InputWrapper>
-              </>
-            )}
-            <InputWrapper>
-              <label htmlFor="Unit">Одиниці виміру</label>
-              <Field
-                as={Select}
-                name="Unit"
-                bordercolor={validationColor(
-                  props.errors.Unit,
-                  props.values.Unit
-                )}
-              >
-                <option value="" disabled hidden>
-                  Оберіть одиницю виміру
-                </option>
-                {role === "admin" && (
-                  <option value="category">Категорія</option>
-                )}
-                <option value="pcs.">Штука</option>
-                <option value="m">Метр погонний</option>
-                <option value="m2">Метр квадратний</option>
-                <option value="m3">Метр кубічний</option>
-                <option value="t">Тона</option>
-                <option value="kg">Кілограм</option>
-              </Field>
-
-              <ErrorMessage
-                name="Unit"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <label htmlFor="Currency">Валюта</label>
-              <Field
-                as={Select}
-                name="Currency"
-                bordercolor={validationColor(
-                  props.errors.Currency,
-                  props.values.Currency
-                )}
-              >
-                <option value="UAH">Гривня</option>
-                <option value="EUR">Євро</option>
-                <option value="USD">Долар</option>
-              </Field>
-
-              <ErrorMessage
-                name="Currency"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <label htmlFor="Prise">Ціна</label>
-              <Input
-                type="text"
-                placeholder="Ціна"
-                name="Price"
-                id="Price"
-                bordercolor={validationColor(
-                  props.errors.PriceUAH,
-                  props.values.PriceUAH
-                )}
-              />
-              <ErrorMessage
-                name="Price"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <label htmlFor="Url">Посилання</label>
-              <Input
-                type="text"
-                placeholder="Посилання на сайт виробника"
-                name="Url"
-                id="Url"
-                bordercolor={validationColor(
-                  props.errors.Url,
-                  props.values.Url
-                )}
-              />
-              <ErrorMessage
-                name="Url"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
+                </MessageVrapper>
+                <Field
+                  as={Select}
+                  name="Currency"
+                  bordercolor={validationColor(
+                    props.errors.Currency,
+                    props.values.Currency
+                  )}
+                >
+                  <option value="UAH">Гривня</option>
+                  <option value="EUR">Євро</option>
+                  <option value="USD">Долар</option>
+                </Field>
+              </InputWrapper>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="Prise">Ціна</label>
+                  <ErrorMessage
+                    name="Price"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
+                <Input
+                  type="text"
+                  placeholder="Ціна"
+                  name="Price"
+                  id="Price"
+                  bordercolor={validationColor(
+                    props.errors.PriceUAH,
+                    props.values.PriceUAH
+                  )}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="Url">Посилання</label>
+                  <ErrorMessage
+                    name="Url"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
+                <Input
+                  type="text"
+                  placeholder="Посилання на сайт виробника"
+                  name="Url"
+                  id="Url"
+                  bordercolor={validationColor(
+                    props.errors.Url,
+                    props.values.Url
+                  )}
+                />
+              </InputWrapper>
+            </InputGroup>
             {role === "admin" && (
-              <>
-                <div>
-                  <label htmlFor="Origin">Це оригінальний код cpv</label>
-                  <Input type="checkbox" name="Origin" id="Origin"></Input>
-                </div>
-                <div>
-                  <label htmlFor="Category">
-                    Це категорія, буде створений код по логіці cpv
-                  </label>
-                  <Input type="checkbox" name="Category" id="Category"></Input>
-                </div>
-              </>
+              <div>
+                <label htmlFor="Origin">Це оригінальний код cpv</label>
+                <Input type="checkbox" name="Origin" id="Origin"></Input>
+              </div>
             )}
             <ButtonWrapper>
               <IconButton
@@ -473,6 +494,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                 icon={
                   additionalFields ? MdKeyboardArrowUp : MdKeyboardArrowDown
                 }
+                width="100%"
                 onClick={() => toggleAdditionalFields()}
               ></IconButton>
             </ButtonWrapper>
@@ -480,7 +502,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
               <>
                 <InputGroup>
                   {inputs.map(({ id, label }) => (
-                    <InputWrapper key={id}>
+                    <ShortInputWrapper key={id}>
                       <label htmlFor={id}>{label}</label>
                       <Input
                         type="text"
@@ -498,10 +520,10 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                           <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                         )}
                       />
-                    </InputWrapper>
+                    </ShortInputWrapper>
                   ))}
                 </InputGroup>
-                <DescriptionWrapper>
+                <InputWrapper>
                   <label htmlFor="Comment">Коментар</label>
                   <TextArea
                     name="Comment"
@@ -519,7 +541,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}
                   />
-                </DescriptionWrapper>
+                </InputWrapper>
               </>
             )}
 

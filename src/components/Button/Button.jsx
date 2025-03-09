@@ -77,6 +77,7 @@ export const IconButton = ({
   variant,
   tooltip,
   left,
+  width = "",
   iconSize = "24px",
 }) => {
   return (
@@ -90,6 +91,7 @@ export const IconButton = ({
       position={position}
       variant={variant}
       tooltip={tooltip}
+      width={width}
     >
       <div>
         {children} {Icon && <Icon size={iconSize} />}

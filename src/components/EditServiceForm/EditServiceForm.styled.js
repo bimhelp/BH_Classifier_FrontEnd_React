@@ -20,13 +20,40 @@ export const FormTitle = styled.h2`
   margin-left: 20px;
 `;
 
-export const DescriptionWrapper = styled.div`
+export const InputGroup = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  position: relative;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
+export const InputWrapper = styled.div`
+  /* outline: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  position: relative;
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    flex-basis: calc((100% - 10px) / 2);
+  }
+`;
+
+export const ShortInputWrapper = styled.div`
+  /* outline: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  position: relative;
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    flex-basis: calc((100% - 3 * 10px) / 4);
+  }
+`;
+export const MessageVrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 export const TextArea = styled(Field)`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
@@ -54,17 +81,6 @@ export const TextArea = styled(Field)`
     box-shadow: ${(props) => props.theme.shadows.shadow};
     border-color: ${({ bordercolor }) => bordercolor};
     outline: 0px solid white;
-  }
-`;
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  position: relative;
-  width: 100%;
-  @media screen and (min-width: 480px) {
-    width: auto;
   }
 `;
 
@@ -119,20 +135,10 @@ export const Select = styled.select`
   }
 `;
 
-export const InputGroup = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
 export const ErrorMessageStyled = styled.div`
   color: ${(props) => props.theme.colors.invalid};
-  position: absolute;
+  display: inline-block;
   font-size: ${(props) => props.theme.fontSizes.s};
-  top: 65px;
 `;
 
 export const ButtonWrapper = styled.div`

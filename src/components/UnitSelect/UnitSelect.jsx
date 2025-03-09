@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import Select from "react-select";
 
 const defaultOptions = [
-  { value: "category", label: "Категорія" },
+  { value: "none", label: "Не визначено" },
   { value: "pcs.", label: "Штука" },
   { value: "m", label: "Метр погонний" },
   { value: "m2", label: "Метр квадратний" },
@@ -26,7 +26,7 @@ const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
 
   const makeOptions = (options) => {
     if (role !== "admin" && variant === "add") {
-      return options.filter((option) => option.value !== "category");
+      return options.filter((option) => option.value !== "none");
     } else return options;
   };
 

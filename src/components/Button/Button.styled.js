@@ -132,6 +132,7 @@ export const StyledCloseButton = styled(StyledButton)`
   }
 `;
 export const StyledIconButton = styled(StyledButton)`
+  /* outline: 1px solid tomato; */
   display: block;
   position: ${(props) => props.position === "absolute" && "absolute"};
   top: 60%;
@@ -139,7 +140,7 @@ export const StyledIconButton = styled(StyledButton)`
   transform: ${(props) =>
     props.position === "absolute" && "translate(0, -50%)"};
   min-width: fit-content;
-  width: fit-content;
+  width: ${(props) => (props.width ? props.width : "fit-content")};
   font-size: ${(props) => props.theme.fontSizes.m};
   /* padding: ${(props) => props.theme.space[2]}px; */
   /* padding-left: 0px; */

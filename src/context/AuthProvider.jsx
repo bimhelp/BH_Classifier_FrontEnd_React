@@ -24,12 +24,12 @@ const AuthProvider = ({ children }) => {
     email: null,
   });
   useEffect(() => {
-    console.log(token);
+    // console.log(token);
     async function onRefresh(token) {
       try {
         const response = await currentUser(token);
         if (response) {
-          console.log("response: ", response);
+          // console.log("response: ", response);
           setRole(response.user.role);
           setUser(response.user);
           setIsLoggedIn(true);
@@ -86,7 +86,7 @@ const AuthProvider = ({ children }) => {
       // console.log("credentials: ", credentials);
       try {
         const response = await completeRegistration(credentials);
-        console.log("complete registration response: ", response);
+        // console.log("complete registration response: ", response);
         setUser(response);
         // записуємо токен в lacalstorage
         setToken(response.token);

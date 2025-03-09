@@ -13,12 +13,14 @@ import { PulseLoader } from "react-spinners";
 // import CategorySelect from "../CategorySelect/CategorySelect";
 import UnitSelect from "../UnitSelect/UnitSelect";
 import {
+  FormTitle,
   InputWrapper,
+  ShortInputWrapper,
+  MessageVrapper,
   StyledForm,
   TextArea,
   InputGroup,
   Input,
-  DescriptionWrapper,
   ErrorMessageStyled,
   ButtonWrapper,
   // CheckBox,
@@ -286,6 +288,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
 
   return (
     <>
+      <FormTitle>Створити матеріал:</FormTitle>
       <Formik
         initialValues={initialValues}
         validationSchema={addMaterialSchema}
@@ -295,8 +298,16 @@ const AddMaterialForm = ({ onClose, id, create }) => {
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
 
-            <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис UA</label>
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="DescriptionUA">Опис UA</label>
+                <ErrorMessage
+                  name="DescriptionUA"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </MessageVrapper>
               <TextArea
                 // autoFocus={true}
                 name="DescriptionUA"
@@ -308,13 +319,17 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   props.values.DescriptionUA
                 )}
               />
-              <ErrorMessage
-                name="DescriptionUA"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </DescriptionWrapper>
-            <DescriptionWrapper>
-              <label htmlFor="DescriptionEN">Опис EN</label>
+            </InputWrapper>
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="DescriptionEN">Опис EN</label>
+                <ErrorMessage
+                  name="DescriptionEN"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </MessageVrapper>
               <TextArea
                 name="DescriptionEN"
                 id="DescriptionEN"
@@ -325,76 +340,80 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   props.values.DescriptionEN
                 )}
               />
-              <ErrorMessage
-                name="DescriptionEN"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </DescriptionWrapper>
+            </InputWrapper>
 
-            <InputWrapper>
-              <label htmlFor="Unit">Одиниці виміру</label>
-              <Field
-                as={UnitSelect}
-                name="Unit"
-                onSelect={onUnitSelect}
-                variant="add"
-                reset={reset}
-              ></Field>
-            </InputWrapper>
-            <InputWrapper>
-              <label htmlFor="Currency">Валюта</label>
-              <Field
-                as={StyledSelect}
-                name="Currency"
-                bordercolor={validationColor(
-                  props.errors.Currency,
-                  props.values.Currency
-                )}
-              >
-                <option value="UAH">Гривня</option>
-                <option value="EUR">Євро</option>
-                <option value="USD">Долар</option>
-              </Field>
+            <InputGroup>
+              <InputWrapper>
+                <label htmlFor="Unit">Одиниці виміру</label>
+                <Field
+                  as={UnitSelect}
+                  name="Unit"
+                  onSelect={onUnitSelect}
+                  variant="add"
+                  reset={reset}
+                ></Field>
+              </InputWrapper>
+              <InputWrapper>
+                <label htmlFor="Currency">Валюта</label>
+                <Field
+                  as={StyledSelect}
+                  name="Currency"
+                  bordercolor={validationColor(
+                    props.errors.Currency,
+                    props.values.Currency
+                  )}
+                >
+                  <option value="UAH">Гривня</option>
+                  <option value="EUR">Євро</option>
+                  <option value="USD">Долар</option>
+                </Field>
 
-              <ErrorMessage
-                name="Currency"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <label htmlFor="Price">Ціна</label>
-              <Input
-                type="text"
-                placeholder="Ціна"
-                name="Price"
-                id="Price"
-                bordercolor={validationColor(
-                  props.errors.Price,
-                  props.values.Price
-                )}
-              />
-              <ErrorMessage
-                name="Price"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
-            <InputWrapper>
-              <label htmlFor="Url">Посилання</label>
-              <Input
-                type="text"
-                placeholder="Посилання на сайт виробника"
-                name="Url"
-                id="Url"
-                bordercolor={validationColor(
-                  props.errors.Url,
-                  props.values.Url
-                )}
-              />
-              <ErrorMessage
-                name="Url"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
+                <ErrorMessage
+                  name="Currency"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <label htmlFor="Price">Ціна</label>
+                <Input
+                  type="text"
+                  placeholder="Ціна"
+                  name="Price"
+                  id="Price"
+                  bordercolor={validationColor(
+                    props.errors.Price,
+                    props.values.Price
+                  )}
+                />
+                <ErrorMessage
+                  name="Price"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </InputWrapper>
+              <InputWrapper>
+                <label htmlFor="Url">Посилання</label>
+                <Input
+                  type="text"
+                  placeholder="Посилання на сайт виробника"
+                  name="Url"
+                  id="Url"
+                  bordercolor={validationColor(
+                    props.errors.Url,
+                    props.values.Url
+                  )}
+                />
+                <ErrorMessage
+                  name="Url"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </InputWrapper>
+            </InputGroup>
             {role === "admin" && (
               <>
                 <div>
@@ -402,9 +421,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   <Input type="checkbox" name="Origin" id="Origin"></Input>
                 </div>
                 <div>
-                  <label htmlFor="Category">
-                    Це категорія, буде створений код по логіці cpv
-                  </label>
+                  <label htmlFor="Category">Це категорія</label>
                   <Input type="checkbox" name="Category" id="Category"></Input>
                 </div>
               </>
@@ -416,6 +433,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 variant="dark"
                 tooltip={"Додаткові властивості"}
                 iconSize="40px"
+                width="100%"
                 icon={
                   additionalFields ? MdKeyboardArrowUp : MdKeyboardArrowDown
                 }
@@ -448,7 +466,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
 
                 <InputGroup>
                   {inputs.map(({ id, label }) => (
-                    <InputWrapper key={id}>
+                    <ShortInputWrapper key={id}>
                       <label htmlFor={id}>{label}</label>
                       <Input
                         type="text"
@@ -466,10 +484,10 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                           <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                         )}
                       />
-                    </InputWrapper>
+                    </ShortInputWrapper>
                   ))}
                 </InputGroup>
-                <DescriptionWrapper>
+                <ShortInputWrapper>
                   <label htmlFor="Comment">Коментар</label>
                   <TextArea
                     name="Comment"
@@ -487,7 +505,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                       <ErrorMessageStyled>{msg}</ErrorMessageStyled>
                     )}
                   />
-                </DescriptionWrapper>
+                </ShortInputWrapper>
               </>
             )}
 

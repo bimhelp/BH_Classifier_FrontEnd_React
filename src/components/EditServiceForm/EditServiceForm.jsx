@@ -10,10 +10,11 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import {
   InputWrapper,
+  InputGroup,
+  MessageVrapper,
   StyledForm,
   TextArea,
   Input,
-  DescriptionWrapper,
   ErrorMessageStyled,
   Select,
   ButtonWrapper,
@@ -22,7 +23,7 @@ import {
 
 const EditServiceForm = ({ element, onClose, id, edit }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
-  const unitTypes = ["category", "m", "m2", "m3", "t", "kg", "pcs."];
+  const unitTypes = ["none", "m", "m2", "m3", "t", "kg", "pcs."];
   const currencyType = ["UAH", "EUR", "USD"];
   const { role } = useContext(context);
 
@@ -124,8 +125,16 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
         {(props) => (
           <StyledForm>
             <CloseButton onClick={onClose} icon={CgClose}></CloseButton>
-            <DescriptionWrapper>
-              <label htmlFor="DescriptionUA">Опис UA</label>
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="DescriptionUA">Опис UA</label>
+                <ErrorMessage
+                  name="DescriptionUA"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </MessageVrapper>
               <TextArea
                 autoFocus={true}
                 name="DescriptionUA"
@@ -137,14 +146,18 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                   props.values.DescriptionUA
                 )}
               />
-              <ErrorMessage
-                name="DescriptionUA"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </DescriptionWrapper>
+            </InputWrapper>
 
-            <DescriptionWrapper>
-              <label htmlFor="DescriptionEN">Опис EN</label>
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="DescriptionEN">Опис EN</label>
+                <ErrorMessage
+                  name="DescriptionEN"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </MessageVrapper>
               <TextArea
                 name="DescriptionEN"
                 id="DescriptionEN"
@@ -155,80 +168,87 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                   props.values.DescriptionEN
                 )}
               />
-              <ErrorMessage
-                name="DescriptionEN"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </DescriptionWrapper>
-            <InputWrapper>
-              <label htmlFor="Unit">Одиниці виміру</label>
-              <Field
-                as={Select}
-                name="Unit"
-                bordercolor={validationColor(
-                  props.errors.Unit,
-                  props.values.Unit
-                )}
-              >
-                <option value="" disabled hidden>
-                  Оберіть одиницю виміру
-                </option>
-                <option value="category">Категорія</option>
-                <option value="pcs.">Штука</option>
-                <option value="m">Метр погонний</option>
-                <option value="m2">Метр квадратний</option>
-                <option value="m3">Метр кубічний</option>
-                <option value="t">Тона</option>
-                <option value="kg">Кілограм</option>
-              </Field>
-
-              <ErrorMessage
-                name="Unit"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
             </InputWrapper>
-
-            <InputWrapper>
-              <label htmlFor="Currency">Валюта</label>
-              <Field
-                as={Select}
-                name="Currency"
-                bordercolor={validationColor(
-                  props.errors.Currency,
-                  props.values.Currency
-                )}
-              >
-                <option value="UAH">Гривня</option>
-                <option value="EUR">Євро</option>
-                <option value="USD">Долар</option>
-              </Field>
-
-              <ErrorMessage
-                name="Currency"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
-
-            <InputWrapper>
-              <label htmlFor="PriseUAH">Ціна</label>
-              <Input
-                type="text"
-                placeholder="Ціна"
-                name="Price"
-                id="Price"
-                bordercolor={validationColor(
-                  props.errors.Price,
-                  props.values.Price
-                )}
-              />
-              <ErrorMessage
-                name="Price"
-                render={(msg) => <ErrorMessageStyled>{msg}</ErrorMessageStyled>}
-              />
-            </InputWrapper>
+            <InputGroup>
+              {" "}
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="Unit">Одиниці виміру</label>
+                  <ErrorMessage
+                    name="Unit"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
+                <Field
+                  as={Select}
+                  name="Unit"
+                  bordercolor={validationColor(
+                    props.errors.Unit,
+                    props.values.Unit
+                  )}
+                >
+                  <option value="" disabled hidden>
+                    Оберіть одиницю виміру
+                  </option>
+                  <option value="none">Не визначено</option>
+                  <option value="pcs.">Штука</option>
+                  <option value="m">Метр погонний</option>
+                  <option value="m2">Метр квадратний</option>
+                  <option value="m3">Метр кубічний</option>
+                  <option value="t">Тона</option>
+                  <option value="kg">Кілограм</option>
+                </Field>
+              </InputWrapper>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="Currency">Валюта</label>
+                  <ErrorMessage
+                    name="Currency"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
+                <Field
+                  as={Select}
+                  name="Currency"
+                  bordercolor={validationColor(
+                    props.errors.Currency,
+                    props.values.Currency
+                  )}
+                >
+                  <option value="UAH">Гривня</option>
+                  <option value="EUR">Євро</option>
+                  <option value="USD">Долар</option>
+                </Field>
+              </InputWrapper>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="PriseUAH">Ціна</label>
+                  <ErrorMessage
+                    name="Price"
+                    render={(msg) => (
+                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                    )}
+                  />
+                </MessageVrapper>
+                <Input
+                  type="text"
+                  placeholder="Ціна"
+                  name="Price"
+                  id="Price"
+                  bordercolor={validationColor(
+                    props.errors.Price,
+                    props.values.Price
+                  )}
+                />
+              </InputWrapper>
+            </InputGroup>
             {role === "admin" && (
               <div>
-                <label htmlFor="Origin">cpv</label>
+                <label htmlFor="Origin">Це оригінальний код cpv</label>
                 <Input type="checkbox" name="Origin" id="Origin"></Input>
               </div>
             )}
@@ -239,6 +259,7 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                 variant="dark"
                 tooltip={"Додаткові властивості"}
                 iconSize="40px"
+                width="100%"
                 icon={
                   additionalFields ? MdKeyboardArrowUp : MdKeyboardArrowDown
                 }
@@ -250,7 +271,15 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                 {role === "admin" && (
                   <>
                     <InputWrapper>
-                      <label htmlFor="Code">Код</label>
+                      <MessageVrapper>
+                        <label htmlFor="Code">Код</label>
+                        <ErrorMessage
+                          name="Code"
+                          render={(msg) => (
+                            <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                          )}
+                        />
+                      </MessageVrapper>
                       <Input
                         type="text"
                         placeholder="Код"
@@ -261,15 +290,17 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                           props.values.Code
                         )}
                       />
-                      <ErrorMessage
-                        name="Code"
-                        render={(msg) => (
-                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                        )}
-                      />
                     </InputWrapper>
                     <InputWrapper>
-                      <label htmlFor="ParentElementId">Код Категорії</label>
+                      <MessageVrapper>
+                        <label htmlFor="ParentElementId">Код Категорії</label>
+                        <ErrorMessage
+                          name="ParentElementId"
+                          render={(msg) => (
+                            <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                          )}
+                        />
+                      </MessageVrapper>
                       <Input
                         type="text"
                         placeholder="Код Категорії"
@@ -280,18 +311,20 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                           props.values.Code
                         )}
                       />
-                      <ErrorMessage
-                        name="ParentElementId"
-                        render={(msg) => (
-                          <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                        )}
-                      />
                     </InputWrapper>
                   </>
                 )}
 
                 <InputWrapper>
-                  <label htmlFor="OwnerBarcode">Власний код</label>
+                  <MessageVrapper>
+                    <label htmlFor="OwnerBarcode">Власний код</label>
+                    <ErrorMessage
+                      name="Price"
+                      render={(msg) => (
+                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                      )}
+                    />
+                  </MessageVrapper>
                   <Input
                     type="text"
                     placeholder="Власний код"
@@ -302,15 +335,17 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                       props.values.OwnerBarcode
                     )}
                   />
-                  <ErrorMessage
-                    name="Price"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                    )}
-                  />
                 </InputWrapper>
-                <DescriptionWrapper>
-                  <label htmlFor="Comment">Коментар</label>
+                <InputWrapper>
+                  <MessageVrapper>
+                    <label htmlFor="Comment">Коментар</label>
+                    <ErrorMessage
+                      name="Comment"
+                      render={(msg) => (
+                        <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                      )}
+                    />
+                  </MessageVrapper>
                   <TextArea
                     name="Comment"
                     id="Comment"
@@ -321,13 +356,7 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                       props.values.Comment
                     )}
                   />
-                  <ErrorMessage
-                    name="Comment"
-                    render={(msg) => (
-                      <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                    )}
-                  />
-                </DescriptionWrapper>
+                </InputWrapper>
               </>
             )}
 

@@ -15,17 +15,44 @@ export const StyledForm = styled(Form)`
   box-shadow: ${(props) => props.theme.shadows.full};
   position: relative;
 `;
-
 export const FormTitle = styled.h2`
   margin-left: 20px;
 `;
-export const DescriptionWrapper = styled.div`
+
+export const InputGroup = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  position: relative;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
+export const InputWrapper = styled.div`
+  /* outline: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  position: relative;
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    flex-basis: calc((100% - 10px) / 2);
+  }
+`;
+
+export const ShortInputWrapper = styled.div`
+  /* outline: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+  position: relative;
+  width: 100%;
+  @media screen and (min-width: 480px) {
+    flex-basis: calc((100% - 3 * 10px) / 4);
+  }
+`;
+export const MessageVrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 export const TextArea = styled(Field)`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
@@ -34,13 +61,13 @@ export const TextArea = styled(Field)`
   font-weight: 400;
 
   font-weight: 400;
-  padding: 8px;
+  padding: 6px;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.02em;
   color: ${(props) => props.theme.colors.black};
   height: 21px;
-  resize: none;
+  /* resize: none; */
   /* @media screen and (min-width: 480px) {
     font-size: 14px;
     padding: 8px;
@@ -56,17 +83,6 @@ export const TextArea = styled(Field)`
   }
 `;
 
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  position: relative;
-  width: 100%;
-  @media screen and (min-width: 480px) {
-    width: auto;
-  }
-`;
-
 export const Input = styled(Field)`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
@@ -76,7 +92,7 @@ export const Input = styled(Field)`
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: -0.02em;
-  padding: 8px;
+  padding: 6px;
   color: ${(props) => props.theme.colors.black};
 
   /* @media screen and (min-width: 480px) {
@@ -118,20 +134,10 @@ export const Select = styled.select`
   }
 `;
 
-export const InputGroup = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
 export const ErrorMessageStyled = styled.div`
   color: ${(props) => props.theme.colors.invalid};
-  position: absolute;
+  display: inline-block;
   font-size: ${(props) => props.theme.fontSizes.s};
-  top: 65px;
 `;
 
 export const ButtonWrapper = styled.div`
