@@ -119,11 +119,13 @@ const AuthProvider = ({ children }) => {
     async function login(token) {
       try {
         const response = await currentUser(token);
+        console.log("google login response: ", response);
 
         // setToken(response.token);
         setRole(response.user.role);
         setUser(response.user);
         setIsLoggedIn(true);
+        setUserId(response.user.userId);
         // при успішному логіні видалить всі тости
         toast.dismiss();
         // Перенаправляємо на головну сторінку
