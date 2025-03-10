@@ -145,15 +145,26 @@ export const CategoryCode = styled.p`
   &::before {
     content: "";
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 3px;
+    right: 3px;
     width: 5px;
     height: 5px;
     display: inline-block;
     border-radius: 50%; // Зробити коло
     background-color: ${(props) =>
       props.origin === "false" && props.theme.colors.white};
-    background-color: ${(props) => props.owner && props.theme.colors.red};
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 3px;
+    width: 5px;
+    height: 5px;
+    display: inline-block;
+    border-radius: 50%; // Зробити коло
+
+    background-color: ${(props) => props.owner && props.theme.colors.orangeRed};
   }
 `;
 
