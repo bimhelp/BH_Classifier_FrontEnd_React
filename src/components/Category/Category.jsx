@@ -39,6 +39,7 @@ const Category = ({
     ElementNestingLevel,
     Origin,
     owner,
+    Category,
   },
   selectCategory,
   children,
@@ -55,6 +56,7 @@ const Category = ({
   byId,
 }) => {
   const [level, setLevel] = useState(null);
+  const [category, setCategory] = useState(false);
   const [addFormVisible, setAddFormVisible] = useState(false);
   const [editFormVisible, setEditFormVisible] = useState(false);
   const [treeVisible, setTreeVisible] = useState(null);
@@ -64,7 +66,8 @@ const Category = ({
     // console.log("userId: ", userId);
 
     setLevel(ElementNestingLevel);
-  }, [ElementNestingLevel, role, userId]);
+    setCategory(Category);
+  }, [ElementNestingLevel, role, userId, Category]);
 
   // Відкриття-закриття форми додавання
   function toggleAddForm(id) {
@@ -119,7 +122,7 @@ const Category = ({
 
       <Card onClick={selectCategory} isdelete={isdelete}>
         <CategoryWrapper level={level}>
-          <CodeWrapper level={level}>
+          <CodeWrapper level={level} category={category}>
             <CopyToClipboard
               text={Code}
               onCopy={() =>

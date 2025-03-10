@@ -22,7 +22,9 @@ export const theme = Object.freeze({
     thirdLevelColorAlfa: "rgba(68, 41, 127, 0.1)",
 
     fourLevelColor: "#78297F",
-    fiveLevelColor: "#7F2929",
+    // fiveLevelColor: "#7F2929",
+    fiveLevelColor: "#6A143A",
+    sixLevelColor: "#981F1F",
     // fourLevelColorAlfa: "rgba(68, 41, 127, 0.1)",
 
     materialColor: "#4e4d4f",
@@ -47,6 +49,7 @@ export const theme = Object.freeze({
     accentHover: "#4fe04f",
     muted: "#424242",
     red: "#AB0E0F",
+    yellow: "#FFFF00",
     orangeRed: "#FF4500",
     green: "#609729",
     orange: "#cc5506",
