@@ -44,7 +44,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     Code: "",
     Price: "",
     Currency: "UAH",
-    Unit: "",
+    Unit: "none",
     Length: "",
     Width: "",
     Height: "",
@@ -57,12 +57,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     OwnerBarcode: "",
     Comment: "",
     Origin: false,
-    // WriteOffCoefficient: "",
-    // Consumption: "",
-    // ConsumptionPer1m2: "",
-    // ConsumptionPer1m3: "",
-    // ConsumptionPer1m: "",
-    // ConsumptionPer1t: "",
   };
 
   // Масив для рендеру інпутів
@@ -108,30 +102,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       label: "Власний код",
       id: "OwnerBarcode",
     },
-    // {
-    //   label: "Коефіціент витрати",
-    //   id: "WriteOffCoefficient",
-    // },
-    // {
-    //   label: "Витрата",
-    //   id: "Consumption",
-    // },
-    // {
-    //   label: "Витрата 1/m2",
-    //   id: "ConsumptionPer1m2",
-    // },
-    // {
-    //   label: "Витрата 1/m3",
-    //   id: "ConsumptionPer1m3",
-    // },
-    // {
-    //   label: "Витрата 1/m",
-    //   id: "ConsumptionPer1m",
-    // },
-    // {
-    //   label: "Витрата 1/t",
-    //   id: "ConsumptionPer1t",
-    // },
   ];
 
   // Схема валідації

@@ -24,6 +24,13 @@ const UnitSelect = ({ onSelect, reset, options = defaultOptions, variant }) => {
     }
   }, [reset]);
 
+  useEffect(() => {
+    // Якщо адміністратор додає матеріал, встановлюємо значення "none" за замовчуванням
+    if (role === "admin" && !selectedOption) {
+      setSelectedOption({ value: "none", label: "Не визначено" });
+    }
+  }, [role, selectedOption]); // Залежність від ролі та вибраного значення
+
   const makeOptions = (options) => {
     if (role !== "admin" && variant === "add") {
       return options.filter((option) => option.value !== "none");
