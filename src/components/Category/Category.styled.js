@@ -190,12 +190,6 @@ export const HilightDescription = styled.div`
   background-color: ${(props) => props.type === "mark" && "yellow"};
 `;
 
-export const MaterialPrice = styled.p`
-  font-size: 12px;
-  color: ${(props) => props.theme.colors.green};
-  padding-left: 10px;
-`;
-
 export const UserPrice = styled.p`
   font-size: 12px;
   color: ${(props) => props.theme.colors.orange};

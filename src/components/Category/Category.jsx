@@ -7,6 +7,7 @@ import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ItemMenu from "../ItemMenu/ItemMenu";
+import PriceDisplay from "../PriceDisplay/PriceDisplay";
 
 import {
   CategoryWrapper,
@@ -15,7 +16,6 @@ import {
   HilightDescription,
   CodeWrapper,
   DescriptionWrapper,
-  MaterialPrice,
   MaterialUnit,
   Extended,
   SubList,
@@ -34,7 +34,8 @@ const Category = ({
     ParentElementId,
     Code,
     DescriptionUA,
-    PriceUAH,
+    Price,
+    Currency,
     Unit,
     ElementNestingLevel,
     Origin,
@@ -188,9 +189,13 @@ const Category = ({
               {Unit && Unit !== "category" && (
                 <MaterialUnit>Одиниця виміру: {Unit}</MaterialUnit>
               )}
-              {PriceUAH && (
-                <MaterialPrice>Ціна: {PriceUAH} &#8372;</MaterialPrice>
-              )}
+              <PriceDisplay
+                price={Price}
+                currency={Currency}
+                role={role}
+                userId={userId}
+                owner={owner}
+              />
             </Extended>
           </DescriptionWrapper>
         </CategoryWrapper>
