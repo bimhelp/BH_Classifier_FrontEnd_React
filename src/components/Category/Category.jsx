@@ -16,7 +16,6 @@ import {
   HilightDescription,
   CodeWrapper,
   DescriptionWrapper,
-  MaterialUnit,
   Extended,
   SubList,
   Card,
@@ -25,6 +24,7 @@ import {
   Chain,
   ChainLink,
 } from "./Category.styled";
+import UnitDisplay from "../UnitDisplay/UnitDisplay";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -186,9 +186,8 @@ const Category = ({
               </div>
             )}
             <Extended>
-              {Unit && Unit !== "category" && (
-                <MaterialUnit>Одиниця виміру: {Unit}</MaterialUnit>
-              )}
+              <UnitDisplay unit={Unit} />
+
               <PriceDisplay
                 price={Price}
                 currency={Currency}

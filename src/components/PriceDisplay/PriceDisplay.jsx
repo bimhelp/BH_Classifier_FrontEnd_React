@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { MaterialPrice } from "./PriceDisplay.styled";
 
 const currencyType = ["UAH", "EUR", "USD"];
-const currencySymbols = {
-  UAH: "₴",
-  EUR: "€",
-  USD: "$",
-};
+// const currencySymbols = {
+//   UAH: "₴",
+//   EUR: "€",
+//   USD: "$",
+// };
 
 const PriceDisplay = ({ price, currency = "UAH", role, userId, owner }) => {
   const hasAccess = role === "admin" || role === "designer" || userId === owner;
@@ -16,10 +16,10 @@ const PriceDisplay = ({ price, currency = "UAH", role, userId, owner }) => {
 
   if (!price) return null; // Якщо немає ціни, теж нічого не рендеримо
 
-  const currencySymbol = currencySymbols[currency] || currency; // Якщо символа немає, відображаємо код валюти
+  // const currencySymbol = currencySymbols[currency] || currency; // Якщо символа немає, відображаємо код валюти
   return (
     <MaterialPrice>
-      Ціна: {price} {currencySymbol}
+      Ціна: {price} {currency}
     </MaterialPrice>
   );
 };

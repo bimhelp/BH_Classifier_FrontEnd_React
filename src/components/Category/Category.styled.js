@@ -196,12 +196,6 @@ export const UserPrice = styled.p`
   padding-left: 10px;
 `;
 
-export const MaterialUnit = styled.p`
-  font-size: 12px;
-  color: var(--unit-color);
-  padding-left: 10px;
-`;
-
 export const Extended = styled.div`
   line-height: 1;
   /* outline: 1px red solid; */
