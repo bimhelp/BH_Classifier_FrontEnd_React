@@ -14,7 +14,7 @@ const UnitDisplay = ({ unit }) => {
 
   if (!unit) return null;
 
-  return <Unit>Unit: {unit}</Unit>;
+  return <Unit>Одиниці виміру: {unit}</Unit>;
 };
 
 UnitDisplay.propTypes = {
