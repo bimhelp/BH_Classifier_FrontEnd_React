@@ -164,7 +164,7 @@ export const CategoryCode = styled.p`
     display: inline-block;
     border-radius: 50%; // Зробити коло
 
-    background-color: ${(props) => props.owner && props.theme.colors.yellow};
+    background-color: ${(props) => props.$owner && props.theme.colors.yellow};
   }
 `;
 

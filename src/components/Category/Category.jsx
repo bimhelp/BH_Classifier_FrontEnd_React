@@ -123,7 +123,7 @@ const Category = ({
 
       <Card onClick={selectCategory} isdelete={isdelete}>
         <CategoryWrapper level={level}>
-          <CodeWrapper level={level} category={category}>
+          <CodeWrapper level={level} $category={category}>
             <CopyToClipboard
               text={Code}
               onCopy={() =>
@@ -139,7 +139,7 @@ const Category = ({
                 left={0}
               />
             </CopyToClipboard>
-            <CategoryCode origin={Origin?.toString()} owner={userId === owner}>
+            <CategoryCode origin={Origin?.toString()} $owner={userId === owner}>
               {Code}
             </CategoryCode>
           </CodeWrapper>
