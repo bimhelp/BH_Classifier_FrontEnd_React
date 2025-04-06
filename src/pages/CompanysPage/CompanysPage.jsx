@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getAllCompanys } from "../../services";
 import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
+import CompanyList from "../../components/CompanyList/CompanyList";
 
-const Companys = () => {
+const CompanysPage = () => {
   const [companys, setCopanys] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   // Запит по компанії
@@ -30,14 +31,10 @@ const Companys = () => {
       {isLoading ? (
         <BarLoader color="#125b56" width="100%" />
       ) : (
-        <ul>
-          {companys.map((company) => (
-            <li key={company._id}>{company.companyName}</li>
-          ))}
-        </ul>
+        <CompanyList items={companys} />
       )}
     </>
   );
 };
 
-export default Companys;
+export default CompanysPage;

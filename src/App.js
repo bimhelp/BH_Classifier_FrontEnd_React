@@ -12,7 +12,7 @@ import UserMaterialPage from "./pages/UserMaterialPage/UserMaterialPage";
 import UserServicePage from "./pages/UserServicePage/UserServicePage";
 import Users from "./components/Users/Users";
 import DragDrop from "./components/DragDrop/DragDrop";
-import Companys from "./components/Companys/Companys";
+import CompanysPage from "./pages/CompanysPage/CompanysPage";
 // Динамічне завантаження додатку
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const CompleteRegistrationPage = lazy(() =>
@@ -83,7 +83,7 @@ function App() {
           </Route>
           <Route
             path="companys"
-            element={<PrivateRoute component={<Companys />} />}
+            element={<PrivateRoute component={<CompanysPage />} />}
           />
           <Route
             path="users"
