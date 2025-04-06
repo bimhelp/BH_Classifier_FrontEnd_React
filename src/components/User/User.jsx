@@ -20,7 +20,7 @@ import { RxCross2 } from "react-icons/rx";
 import { SiAutodeskrevit } from "react-icons/si";
 import { FaListAlt } from "react-icons/fa";
 import { GrProjects } from "react-icons/gr";
-import { FaGear } from "react-icons/fa6";
+// import { FaGear } from "react-icons/fa6";
 
 const User = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -105,10 +105,10 @@ const User = () => {
                     <LinkTitle>Projects</LinkTitle>
                   </StyledNavLink>
 
-                  <StyledNavLink to="admin-panel">
+                  {/* <StyledNavLink to="admin-panel">
                     <FaGear />
                     <LinkTitle>Admin panel</LinkTitle>
-                  </StyledNavLink>
+                  </StyledNavLink> */}
                 </>
               )}
 

@@ -245,6 +245,13 @@ export async function searchServiceByDescription(description) {
   return response.data;
 }
 
+// Companys ___________________________________________________
+
+export async function getAllCompanys(signal) {
+  const response = await axios.get("/all-companys", { signal });
+  return response.data;
+}
+
 // Projects___________________________________________________
 
 export async function getProjects(signal) {

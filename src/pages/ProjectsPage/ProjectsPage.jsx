@@ -33,7 +33,7 @@ const ProjectsPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("isLoading", isLoading);
+    // console.log("isLoading", isLoading);
   }, [isLoading]);
 
   return (

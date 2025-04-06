@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { Table, Row, Name, Role } from "./Users.styled";
 import Select from "react-select";
 import Section from "../Section/Section";
+import { BarLoader } from "react-spinners";
 
 const options = [
   { value: "user", label: "user" },
@@ -25,6 +26,7 @@ const Users = () => {
 
     async function allUsers() {
       try {
+        setIsLoading(true);
         const response = await getAllUsers(controller.signal);
         // console.log("response: ", response.data);
         setUsers(response.data);
@@ -98,7 +100,9 @@ const Users = () => {
 
   return (
     <>
-      {!isLoading && (
+      {isLoading ? (
+        <BarLoader color="#125b56" width="100%" />
+      ) : (
         <Section>
           <Table>
             <caption>Список зареєстрованих користувачів</caption>

@@ -11,8 +11,8 @@ import CabinetPage from "./pages/CabinetPage/CabinetPage";
 import UserMaterialPage from "./pages/UserMaterialPage/UserMaterialPage";
 import UserServicePage from "./pages/UserServicePage/UserServicePage";
 import Users from "./components/Users/Users";
-import Script from "./components/Script/Script";
 import DragDrop from "./components/DragDrop/DragDrop";
+import Companys from "./components/Companys/Companys";
 // Динамічне завантаження додатку
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const CompleteRegistrationPage = lazy(() =>
@@ -77,19 +77,18 @@ function App() {
             element={<PrivateRoute component={<AdminPage />} />}
           >
             <Route
-              path="users"
-              element={<PrivateRoute component={<Users />} />}
-            />
-            <Route
-              path="script"
-              element={<PrivateRoute component={<Script />} />}
-            />
-            <Route
               path="drag"
               element={<PrivateRoute component={<DragDrop />} />}
             />
           </Route>
-
+          <Route
+            path="companys"
+            element={<PrivateRoute component={<Companys />} />}
+          />
+          <Route
+            path="users"
+            element={<PrivateRoute component={<Users />} />}
+          />
           <Route path="projects/:id" element={<ProjectDetails />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
