@@ -177,31 +177,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
       .string()
       .min(3, "Занадто короткий код")
       .max(500, "Занадто довкий код"),
-
-    // WriteOffCoefficient: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // Consumption: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1m2: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1m3: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1m: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1t: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
   });
 
   // Показує або приховує додаткові параметри
@@ -224,8 +199,8 @@ const AddMaterialForm = ({ onClose, id, create }) => {
 
     const additionalElement = {
       ParentElementId: id,
-      Unit: selectedUnit,
       ...filteredValues,
+      Unit: selectedUnit,
     };
     try {
       setIsLoading(true);
@@ -238,24 +213,12 @@ const AddMaterialForm = ({ onClose, id, create }) => {
     } finally {
       setIsLoading(false);
     }
-    // await create(additionalElement);
-    // setIsLoading(false);
-    // // Очистка форми
-    // resetForm();
-    // setReset(true);
-    // onClose();
   };
-
-  // const categorySelect = (data) => {
-  //   if (data) {
-  //     setSelectedId(data.value._id);
-  //   }
-  //   return;
-  // };
 
   const onUnitSelect = (data) => {
     if (data) {
       setSelectedUnit(data.value);
+      console.log("data.value: ", data.value);
     }
     return;
   };
@@ -283,7 +246,6 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 />
               </MessageVrapper>
               <TextArea
-                // autoFocus={true}
                 name="DescriptionUA"
                 id="DescriptionUA"
                 placeholder="Введіть опис українською мовою"

@@ -38,7 +38,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
     Price: "",
     Currency: "UAH",
     Url: "",
-    Unit: "",
+    Unit: "none",
     OwnerBarcode: "",
     Comment: "",
     Origin: false,
@@ -90,8 +90,8 @@ const AddServiceForm = ({ onClose, id, create }) => {
 
     const additionalElement = {
       ParentElementId: id,
-      Unit: selectedUnit,
       ...filteredValues,
+      Unit: selectedUnit,
     };
     try {
       await create(additionalElement);
