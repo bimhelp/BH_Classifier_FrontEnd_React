@@ -61,14 +61,6 @@ const MaterialList = ({ items, query, byId }) => {
     };
   }, [selectedId, newMaterial, setSubCategories]);
 
-  // Створення класів для кольорів
-  // const level = useMemo(() => {
-  //   if (items.length > 0) {
-  //     return items[0].ElementNestingLevel;
-  //   }
-  //   return null;
-  // }, [items]);
-
   const level = () => {
     if (items.length > 0) {
       return items[0].ElementNestingLevel;

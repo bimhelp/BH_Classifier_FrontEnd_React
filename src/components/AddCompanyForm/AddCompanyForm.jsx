@@ -18,7 +18,7 @@ import {
   ButtonWrapper,
 } from "../CommonFormStyles/CommonFormStyles.styled";
 
-const AddCompanyForm = () => {
+const AddCompanyForm = ({ onClose, create }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Початкові значення
@@ -58,13 +58,19 @@ const AddCompanyForm = () => {
   });
 
   const handleSubmit = async (values, actions) => {
-    console.log("values: ", values);
-    console.log("actions: ", actions);
+    // console.log("values: ", values);
+    // console.log("actions: ", actions);
+    const { resetForm } = actions;
     try {
       setIsLoading(true);
-    } catch (error) {}
-    // const { resetForm } = actions;
-    // setIsLoading(true);
+      await create({ ...values });
+      resetForm();
+      onClose();
+    } catch (error) {
+      console.log("Не вдалось створити компанію");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -149,7 +155,7 @@ const AddCompanyForm = () => {
                   Дата початку дії ліцензій
                 </label>
               </MessageVrapper>
-              <InputDatePicker name="licenseStartTime" />
+              <InputDatePicker name="licenseStartTime" id="licenseStartTime" />
             </InputWrapper>
 
             <InputWrapper>
@@ -158,7 +164,7 @@ const AddCompanyForm = () => {
                   Дата завершення дії ліцензій
                 </label>
               </MessageVrapper>
-              <InputDatePicker name="licenseEndTime" />
+              <InputDatePicker name="licenseEndTime" id="licenseEndTime" />
             </InputWrapper>
             <div style={{ fontSize: "12px", color: "#666" }}>
               <strong>Підказка:</strong> Коли активний календар, Ви можете:

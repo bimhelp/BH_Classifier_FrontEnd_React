@@ -9,6 +9,7 @@ import Section from "../../components/Section/Section";
 import CompanyList from "../../components/CompanyList/CompanyList";
 import { Modal } from "../../components/Modal/Modal";
 import AddCompanyForm from "../../components/AddCompanyForm/AddCompanyForm";
+import { addCompany } from "../../services";
 
 const CompanysPage = () => {
   const [companys, setCopanys] = useState([]);
@@ -35,14 +36,30 @@ const CompanysPage = () => {
   }, []);
 
   // Створення компанії
+  function createCompany(company) {
+    const controller = new AbortController();
+    async function createCompany(newCompany) {
+      try {
+        const response = await addCompany(newCompany, controller.signal);
+        setCopanys([...companys, response.data]);
+        toast.success("Компанію успішно створено");
+      } catch (error) {
+        toast.error("Не вдалось створити компанію");
+      }
+    }
+    createCompany(company);
+    return () => {
+      controller.abort();
+    };
+  }
 
+  // Відкриття форми додавання
   const addCompanyToggle = () => {
     setModalOpen(!modalOpen);
   };
 
   return (
     <Section>
-      {/* <addCompanyForm/> */}
       {isLoading ? (
         <BarLoader color="#125b56" width="100%" />
       ) : (
@@ -53,7 +70,7 @@ const CompanysPage = () => {
       </Button>
       {modalOpen && (
         <Modal onClose={addCompanyToggle}>
-          <AddCompanyForm />
+          <AddCompanyForm onClose={addCompanyToggle} create={createCompany} />
         </Modal>
       )}
     </Section>

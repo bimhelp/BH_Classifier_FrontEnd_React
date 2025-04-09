@@ -245,14 +245,19 @@ export async function searchServiceByDescription(description) {
   return response.data;
 }
 
-// Companys ___________________________________________________
+// Компанії ___________________________________________________
 
 export async function getAllCompanys(signal) {
   const response = await axios.get("/all-companys", { signal });
   return response.data;
 }
 
-// Projects___________________________________________________
+export async function addCompany(newCompany, signal) {
+  const response = await axios.post("/company", newCompany, { signal });
+  return response.data;
+}
+
+// Проекти ___________________________________________________
 
 export async function getProjects(signal) {
   const response = await axios.get("/projects", { signal });
