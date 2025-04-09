@@ -5,7 +5,7 @@ import { Table, Row, Name, Role } from "./Users.styled";
 import Select from "react-select";
 import Section from "../Section/Section";
 import { BarLoader } from "react-spinners";
-
+import { customStyles } from "./SelectCustomStyles";
 const options = [
   { value: "user", label: "user" },
   { value: "designer", label: "designer" },
@@ -134,6 +134,7 @@ const Users = () => {
                         defaultValue={selectedRole}
                         onChange={(option) => handleChange(option, user._id)}
                         options={options}
+                        styles={customStyles}
                       />
                     </Role>
                   </Row>

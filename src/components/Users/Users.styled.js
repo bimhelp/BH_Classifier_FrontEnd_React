@@ -3,6 +3,7 @@ import { setRoleColor } from "../../services";
 
 export const Table = styled.table`
   border-collapse: collapse;
+  font-size: ${(props) => props.theme.fontSizes.s};
 
   & caption {
     text-align: left;
