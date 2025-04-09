@@ -1,3 +1,5 @@
+import { format, formatDistanceStrict } from "date-fns";
+import { uk } from "date-fns/locale";
 // Функція отримує код вибраного елемента обрізає нулі і повертає число
 export const cutCpvCode = (code) => {
   const cpvCode = [];
@@ -230,4 +232,16 @@ export const createOptionsFromUnits = (materials) => {
   });
 
   return options;
+};
+
+// Форматування дати
+export const formatDate = (date) => {
+  return format(Date.parse(date), "dd MM yyyy");
+};
+
+// Обчислення кінця дії ліцензії
+export const timeDifference = (start, end) => {
+  return formatDistanceStrict(Date.parse(start), Date.parse(end), {
+    locale: uk,
+  });
 };

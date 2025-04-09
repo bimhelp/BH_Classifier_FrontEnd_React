@@ -246,16 +246,21 @@ export async function searchServiceByDescription(description) {
 }
 
 // Компанії ___________________________________________________
-
+// Отримати всі компнії
 export async function getAllCompanys(signal) {
   const response = await axios.get("/all-companys", { signal });
   return response.data;
 }
 
+// Додати компанію
 export async function addCompany(newCompany, signal) {
   const response = await axios.post("/company", newCompany, { signal });
   return response.data;
 }
+
+// Редагувати компанію
+
+// Видалити компанію
 
 // Проекти ___________________________________________________
 
