@@ -261,6 +261,10 @@ export async function addCompany(newCompany, signal) {
 // Редагувати компанію
 
 // Видалити компанію
+export async function deleteCompany(id) {
+  const response = await axios.delete(`/company/${id}`);
+  return response.data;
+}
 
 // Проекти ___________________________________________________
 

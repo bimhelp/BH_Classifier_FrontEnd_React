@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllCompanys } from "../../services";
+import { deleteCompany, getAllCompanys } from "../../services";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
@@ -15,6 +15,7 @@ const CompanysPage = () => {
   const [companys, setCopanys] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   // Запит по компанії
   useEffect(() => {
@@ -58,12 +59,28 @@ const CompanysPage = () => {
     setModalOpen(!modalOpen);
   };
 
+  // Видалення компанії
+  async function handleDeleteCompany(id) {
+    try {
+      setDeleteLoading(true);
+      const response = await deleteCompany(id);
+      if (response) {
+        toast.info("Компанія успішно видалена");
+        setCopanys(companys.filter((company) => company._id !== id));
+      }
+    } catch (error) {
+      toast.error("Не вдалось видалити компанію");
+    } finally {
+      setDeleteLoading(false);
+    }
+  }
+
   return (
     <Section>
       {isLoading ? (
         <BarLoader color="#125b56" width="100%" />
       ) : (
-        <CompanyList items={companys} />
+        <CompanyList items={companys} handleDelete={handleDeleteCompany} />
       )}
       <Button icon={BsBuildingFillAdd} onClick={addCompanyToggle}>
         Додати компанію
