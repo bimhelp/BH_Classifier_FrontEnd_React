@@ -10,22 +10,20 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { PulseLoader } from "react-spinners";
 
-// import CategorySelect from "../CategorySelect/CategorySelect";
 import UnitSelect from "../UnitSelect/UnitSelect";
 import {
-  FormTitle,
-  InputWrapper,
-  ShortInputWrapper,
-  MessageVrapper,
   StyledForm,
-  TextArea,
+  FormTitle,
   InputGroup,
+  InputWrapper,
+  MessageVrapper,
   Input,
+  TextArea,
+  StyledSelect,
   ErrorMessageStyled,
   ButtonWrapper,
-  // CheckBox,
-  StyledSelect,
-} from "./AddMaterialForm.styled";
+  ShortInputWrapper,
+} from "../CommonFormStyles/CommonFormStyles.styled";
 
 const AddMaterialForm = ({ onClose, id, create }) => {
   const [additionalFields, setAdditionalFields] = useState(false);
@@ -245,6 +243,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                   )}
                 />
               </MessageVrapper>
+
               <TextArea
                 name="DescriptionUA"
                 id="DescriptionUA"
@@ -256,6 +255,7 @@ const AddMaterialForm = ({ onClose, id, create }) => {
                 )}
               />
             </InputWrapper>
+
             <InputWrapper>
               <MessageVrapper>
                 <label htmlFor="DescriptionEN">Опис EN</label>

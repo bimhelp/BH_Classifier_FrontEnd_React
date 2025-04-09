@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Form, Field } from "formik";
-
 export const StyledForm = styled(Form)`
   margin-top: 5px;
   margin-left: 15px;
@@ -15,11 +14,9 @@ export const StyledForm = styled(Form)`
   box-shadow: ${(props) => props.theme.shadows.full};
   position: relative;
 `;
-
 export const FormTitle = styled.h2`
   margin-left: 20px;
 `;
-
 export const InputGroup = styled.div`
   width: 100%;
   display: flex;
@@ -38,6 +35,36 @@ export const InputWrapper = styled.div`
   }
 `;
 
+export const MessageVrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+export const Input = styled(Field)`
+  background-color: ${(props) => props.theme.colors.backgroundWhite};
+  border: ${(props) => props.theme.borders.bold};
+  border-color: ${({ bordercolor }) => bordercolor};
+  border-radius: ${(props) => props.theme.radii.normal};
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  padding: 6px;
+  color: ${(props) => props.theme.colors.black};
+
+  /* @media screen and (min-width: 480px) {
+    font-size: 14px;
+    padding: 8px;
+  } */
+
+  &:hover,
+  &:focus {
+    border: ${(props) => props.theme.borders.bold};
+    border-color: ${({ bordercolor }) => bordercolor};
+    box-shadow: ${(props) => props.theme.shadows.shadow};
+    outline: 0px solid white;
+  }
+`;
 export const ShortInputWrapper = styled.div`
   /* outline: 1px solid red; */
   display: flex;
@@ -49,10 +76,7 @@ export const ShortInputWrapper = styled.div`
     flex-basis: calc((100% - 3 * 10px) / 4);
   }
 `;
-export const MessageVrapper = styled.div`
-  display: flex;
-  gap: 10px;
-`;
+
 export const TextArea = styled(Field)`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
@@ -83,35 +107,6 @@ export const TextArea = styled(Field)`
   }
 `;
 
-export const Input = styled(Field)`
-  background-color: ${(props) => props.theme.colors.backgroundWhite};
-  border: ${(props) => props.theme.borders.bold};
-  border-color: ${({ bordercolor }) => bordercolor};
-  border-radius: ${(props) => props.theme.radii.normal};
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
-  padding: 6px;
-  color: ${(props) => props.theme.colors.black};
-
-  /* @media screen and (min-width: 480px) {
-    font-size: 14px;
-    padding: 8px;
-  } */
-
-  &:hover,
-  &:focus {
-    border: ${(props) => props.theme.borders.bold};
-    border-color: ${({ bordercolor }) => bordercolor};
-    box-shadow: ${(props) => props.theme.shadows.shadow};
-    outline: 0px solid white;
-  }
-`;
-
-export const CheckBox = styled(Field)`
-  margin-left: 10px;
-`;
 export const StyledSelect = styled.select`
   background-color: ${(props) => props.theme.colors.backgroundWhite};
   border: ${(props) => props.theme.borders.bold};
@@ -137,26 +132,6 @@ export const StyledSelect = styled.select`
     box-shadow: ${(props) => props.theme.shadows.shadow};
   }
 `;
-
-export const StyledOption = styled.option`
-  background-color: ${(props) => props.theme.colors.backgroundWhite};
-  color: ${(props) => props.theme.colors.black};
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: -0.02em;
-
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primaryLight};
-    color: ${(props) => props.theme.colors.white};
-  }
-
-  &:checked {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.white};
-  }
-`;
-
 export const ErrorMessageStyled = styled.div`
   color: ${(props) => props.theme.colors.invalid};
   display: inline-block;

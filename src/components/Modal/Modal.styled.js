@@ -15,8 +15,8 @@ export const ModalWindow = styled.div`
   transform: translate(-50%, -50%);
   min-height: 300px;
   min-width: 300px;
-  height: 80%;
-  width: 90%;
+  height: 75%;
+  width: 76%;
   padding: 12px;
   padding-top: 30px;
   background-color: ${(props) => props.theme.colors.backgroundWhite};

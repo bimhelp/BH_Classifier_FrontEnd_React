@@ -9,17 +9,18 @@ import { CgClose } from "react-icons/cg";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import {
-  InputWrapper,
   StyledForm,
-  TextArea,
-  Input,
-  ErrorMessageStyled,
-  Select,
-  ButtonWrapper,
   FormTitle,
-  MessageVrapper,
   InputGroup,
-} from "./AddServiceForm.styled";
+  InputWrapper,
+  MessageVrapper,
+  Input,
+  TextArea,
+  StyledSelect,
+  ErrorMessageStyled,
+  ButtonWrapper,
+} from "../CommonFormStyles/CommonFormStyles.styled";
+
 import UnitSelect from "../UnitSelect/UnitSelect";
 
 const AddServiceForm = ({ onClose, id, create }) => {
@@ -198,7 +199,7 @@ const AddServiceForm = ({ onClose, id, create }) => {
                   />
                 </MessageVrapper>
                 <Field
-                  as={Select}
+                  as={StyledSelect}
                   name="Currency"
                   bordercolor={validationColor(
                     props.errors.Currency,
