@@ -21,14 +21,16 @@ export const Modal = ({ children, title, onClose }) => {
     };
   }, [onClose]);
 
-  function handleBackDropClick(event) {
-    if (event.currentTarget === event.target) {
-      onClose();
-    }
-  }
+  // Виключив бо часто випадково закриваю форму
+  // function handleBackDropClick(event) {
+  //   if (event.currentTarget === event.target) {
+  //     onClose();
+  //   }
+  // }
 
   return createPortal(
-    <Backdrop onClick={handleBackDropClick}>
+    // <Backdrop onClick={handleBackDropClick}>
+    <Backdrop>
       <ModalWindow>
         <div>
           <CloseButton onClick={onClose} icon={CgClose}></CloseButton>

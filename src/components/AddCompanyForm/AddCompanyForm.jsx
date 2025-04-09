@@ -1,33 +1,33 @@
 import React, { useState } from "react";
 import { Formik, ErrorMessage } from "formik";
 import * as yup from "yup";
+import "react-datepicker/dist/react-datepicker.css";
 import { validationColor } from "../../services/utility";
 import { Button } from "../Button/Button";
 import { PulseLoader } from "react-spinners";
+import InputDatePicker from "../DatePicker/InputDatePicker";
+
 import {
   StyledForm,
   FormTitle,
-  // InputGroup,
   InputWrapper,
   MessageVrapper,
   Input,
   TextArea,
-  // StyledSelect,
   ErrorMessageStyled,
   ButtonWrapper,
-
-  // ShortInputWrapper,
 } from "../CommonFormStyles/CommonFormStyles.styled";
 
 const AddCompanyForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+
   // Початкові значення
   const initialValues = {
     companyName: "",
     edrpo: "",
     licenseCount: "",
-    licenseStartTime: "",
-    licenseEndTime: "",
+    licenseStartTime: null,
+    licenseEndTime: null,
   };
   // Схема валідації
   const addCompanySchema = yup.object().shape({
@@ -47,19 +47,22 @@ const AddCompanyForm = () => {
       .typeError("Введіть число")
       .positive("Введіть число більше 0"),
     licenseStartTime: yup
-      .string()
-      .min(3, "Повинно бути мінімум три символи")
-      .max(50, "Допустимо не більше 50 символів"),
+      .date()
+      .typeError("Оберіть дату")
+      .required("Дата початку є обов’язковою"),
+
     licenseEndTime: yup
-      .string()
-      .min(3, "Повинно бути мінімум три символи")
-      .max(50, "Допустимо не більше 50 символів"),
+      .date()
+      .typeError("Оберіть дату")
+      .required("Дата завершення є обов’язковою"),
   });
 
   const handleSubmit = async (values, actions) => {
     console.log("values: ", values);
     console.log("actions: ", actions);
-
+    try {
+      setIsLoading(true);
+    } catch (error) {}
     // const { resetForm } = actions;
     // setIsLoading(true);
   };
@@ -145,26 +148,29 @@ const AddCompanyForm = () => {
                 <label htmlFor="licenseStartTime">
                   Дата початку дії ліцензій
                 </label>
-                <ErrorMessage
-                  name="licenseStartTime"
-                  render={(msg) => (
-                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
-                  )}
-                />
               </MessageVrapper>
-
-              <Input
-                name="licenseStartTime"
-                id="licenseStartTime"
-                placeholder="Оберіть дату початку дії ліцензій"
-                type="text"
-                bordercolor={validationColor(
-                  props.errors.licenseStartTime,
-                  props.values.licenseStartTime
-                )}
-              />
+              <InputDatePicker name="licenseStartTime" />
             </InputWrapper>
 
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="licenseEndTime">
+                  Дата завершення дії ліцензій
+                </label>
+              </MessageVrapper>
+              <InputDatePicker name="licenseEndTime" />
+            </InputWrapper>
+            <div style={{ fontSize: "12px", color: "#666" }}>
+              <strong>Підказка:</strong> Коли активний календар, Ви можете:
+              <ul style={{ margin: 0, paddingLeft: "18px" }}>
+                <li>← → — переміщення по днях</li>
+                <li>↑ ↓ — переміщення по тижнях</li>
+                <li>PageUp / PageDown — по місяцях</li>
+                <li>Shift+PageUp / Shift+PageDown — по роках</li>
+                <li>Enter — вибрати дату</li>
+                {/* <li>Esc — закрити календар</li> */}
+              </ul>
+            </div>
             <ButtonWrapper>
               <Button
                 type="submit"

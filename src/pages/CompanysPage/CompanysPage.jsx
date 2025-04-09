@@ -34,6 +34,8 @@ const CompanysPage = () => {
     allCompanys();
   }, []);
 
+  // Створення компанії
+
   const addCompanyToggle = () => {
     setModalOpen(!modalOpen);
   };
