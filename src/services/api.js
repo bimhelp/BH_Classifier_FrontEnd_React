@@ -259,6 +259,10 @@ export async function addCompany(newCompany, signal) {
 }
 
 // Редагувати компанію
+export async function updateCompany(id, company, signal) {
+  const response = await axios.put(`/company/${id}`, company, { signal });
+  return response.data;
+}
 
 // Видалити компанію
 export async function deleteCompany(id) {

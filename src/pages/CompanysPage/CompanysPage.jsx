@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { deleteCompany, getAllCompanys } from "../../services";
+import { deleteCompany, getAllCompanys, updateCompany } from "../../services";
 import { Button } from "../../components/Button/Button";
 import { toast } from "react-toastify";
 import { BarLoader } from "react-spinners";
@@ -59,6 +59,30 @@ const CompanysPage = () => {
     setModalOpen(!modalOpen);
   };
 
+  // Редагування компанії
+  function editCompany(id, company) {
+    const controller = new AbortController();
+    async function editCompany(id, company) {
+      try {
+        const response = await updateCompany(id, company, controller.signal);
+        console.log("response: ", response);
+        // якщо id співпадають то замінюємо елемент тим що повернув бекенд, в іншому випадку залишаємо старий елемент
+        setCopanys(
+          companys.map((company) =>
+            company._id === id ? response.data : company
+          )
+        );
+        toast.success("Компанію успішно оновлено");
+      } catch (error) {
+        toast.error("Не вдалось оновити компанію");
+      }
+    }
+    editCompany(id, company);
+    return () => {
+      controller.abort();
+    };
+  }
+
   // Видалення компанії
   async function handleDeleteCompany(id) {
     try {
@@ -80,11 +104,17 @@ const CompanysPage = () => {
       {isLoading ? (
         <BarLoader color="#125b56" width="100%" />
       ) : (
-        <CompanyList items={companys} handleDelete={handleDeleteCompany} />
+        <CompanyList
+          items={companys}
+          edit={editCompany}
+          handleDelete={handleDeleteCompany}
+        />
       )}
+
       <Button icon={BsBuildingFillAdd} onClick={addCompanyToggle}>
         Додати компанію
       </Button>
+
       {modalOpen && (
         <Modal onClose={addCompanyToggle}>
           <AddCompanyForm onClose={addCompanyToggle} create={createCompany} />

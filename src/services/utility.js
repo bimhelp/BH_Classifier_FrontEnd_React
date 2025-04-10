@@ -236,6 +236,7 @@ export const createOptionsFromUnits = (materials) => {
 
 // Форматування дати
 export const formatDate = (date) => {
+  console.log("date: ", date);
   return format(Date.parse(date), "dd MM yyyy");
 };
 

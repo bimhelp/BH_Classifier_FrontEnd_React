@@ -6,6 +6,7 @@ import { validationColor } from "../../services/utility";
 import { Button } from "../Button/Button";
 import { PulseLoader } from "react-spinners";
 import InputDatePicker from "../DatePicker/InputDatePicker";
+import { FaGear } from "react-icons/fa6";
 
 import {
   StyledForm,
@@ -17,19 +18,29 @@ import {
   ErrorMessageStyled,
   ButtonWrapper,
 } from "../CommonFormStyles/CommonFormStyles.styled";
-import { DateWrapper, Hint } from "./AddCompanyForm.style";
+import { DateWrapper } from "./AddCompanyForm.style";
 
-const AddCompanyForm = ({ onClose, create }) => {
+const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   // Початкові значення
-  const initialValues = {
+  let initialValues = {
     companyName: "",
     edrpo: "",
     licenseCount: "",
     licenseStartTime: null,
     licenseEndTime: null,
   };
+  if (variant === "edit") {
+    initialValues = {
+      companyName: company.companyName,
+      edrpo: company.edrpo,
+      licenseCount: company.licenseCount,
+      licenseStartTime: company.licenseStartTime,
+      licenseEndTime: company.licenseEndTime,
+    };
+    console.log("initialValues: ", initialValues);
+  }
   // Схема валідації
   const addCompanySchema = yup.object().shape({
     companyName: yup
@@ -39,10 +50,8 @@ const AddCompanyForm = ({ onClose, create }) => {
       .required("Назва компанії обов'язкове поле"),
     edrpo: yup
       .string()
-      .matches(
-        /^\d{8}$/,
-        "Код повинен складатися з 8 цифр наприклад: 12345678"
-      ),
+      .matches(/^\d{8}$/, "Код повинен складатися з 8 цифр наприклад: 12345678")
+      .required("Код компанії обов'язкове поле"),
     licenseCount: yup
       .number()
       .typeError("Введіть число")
@@ -64,7 +73,9 @@ const AddCompanyForm = ({ onClose, create }) => {
     const { resetForm } = actions;
     try {
       setIsLoading(true);
-      await create({ ...values });
+      if (variant === "edit") {
+        await edit(company._id, values);
+      } else await create({ ...values });
       resetForm();
       onClose();
     } catch (error) {
@@ -76,7 +87,11 @@ const AddCompanyForm = ({ onClose, create }) => {
 
   return (
     <div>
-      <FormTitle>Створення нової компанії</FormTitle>
+      {variant === "edit" ? (
+        <FormTitle>Редагування компанії</FormTitle>
+      ) : (
+        <FormTitle>Створення нової компанії</FormTitle>
+      )}
       <Formik
         initialValues={initialValues}
         validationSchema={addCompanySchema}
@@ -175,28 +190,28 @@ const AddCompanyForm = ({ onClose, create }) => {
                   id="licenseEndTime"
                 />
               </InputWrapper>
-
-              <InputWrapper>
-                <strong>Підказка:</strong> Коли активний календар, Ви можете:
-                <Hint style={{ margin: 0, paddingLeft: "18px" }}>
-                  <li>← → — переміщення по днях </li>
-                  <li>↑ ↓ — переміщення по тижнях</li>
-                  <li>PageUp / PageDown — по місяцях</li>
-                  <li>Shift+PageUp / Shift+PageDown — по роках</li>
-                  <li>Enter — вибрати дату</li>
-                  {/* <li>Esc — закрити календар</li> */}
-                </Hint>
-              </InputWrapper>
             </DateWrapper>
             <ButtonWrapper>
-              <Button
-                type="submit"
-                disabled={Object.keys(props.errors).length > 0}
-                isLoading={true}
-              >
-                Створити
-                {isLoading && <PulseLoader color="#ffffff" size={5} />}
-              </Button>
+              {variant === "edit" ? (
+                <Button
+                  type="submit"
+                  disabled={Object.keys(props.errors).length > 0}
+                  isLoading={true}
+                  icon={FaGear}
+                >
+                  Оновити
+                  {isLoading && <PulseLoader color="#ffffff" size={5} />}
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={Object.keys(props.errors).length > 0}
+                  isLoading={true}
+                >
+                  Створити
+                  {isLoading && <PulseLoader color="#ffffff" size={5} />}
+                </Button>
+              )}
             </ButtonWrapper>
           </StyledForm>
         )}
@@ -206,3 +221,15 @@ const AddCompanyForm = ({ onClose, create }) => {
 };
 
 export default AddCompanyForm;
+
+//  <InputWrapper>
+//    <strong>Підказка:</strong> Коли активний календар, Ви можете:
+//    <Hint style={{ margin: 0, paddingLeft: "18px" }}>
+//      <li>← → — переміщення по днях </li>
+//      <li>↑ ↓ — переміщення по тижнях</li>
+//      <li>PageUp / PageDown — по місяцях</li>
+//      <li>Shift+PageUp / Shift+PageDown — по роках</li>
+//      <li>Enter — вибрати дату</li>
+//      {/* <li>Esc — закрити календар</li> */}
+//    </Hint>
+//  </InputWrapper>;
