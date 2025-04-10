@@ -2,10 +2,18 @@ import React from "react";
 import { IconButton } from "../Button/Button";
 // import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import { FaGear } from "react-icons/fa6";
 
 const CompanyMenu = ({ id, handleDelete }) => {
   return (
-    <div>
+    <>
+      <IconButton
+        icon={FaGear}
+        visibility="visible"
+        variant="neutral"
+        tooltip="Налаштувати"
+        onClick={() => console.log("config")}
+      ></IconButton>
       <IconButton
         icon={MdDelete}
         visibility="visible"
@@ -13,7 +21,7 @@ const CompanyMenu = ({ id, handleDelete }) => {
         tooltip="Видалити"
         onClick={() => handleDelete(id)}
       ></IconButton>
-    </div>
+    </>
   );
 };
 

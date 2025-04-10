@@ -1,15 +1,16 @@
 import React from "react";
 import CompanyCard from "../CompanyCard/CompanyCard";
+import { ListItem, StyledList } from "./CompanyList.styled";
 
 const CompanyList = ({ items, handleDelete }) => {
   return (
-    <ul>
+    <StyledList>
       {items.map((item) => (
-        <li key={item._id}>
+        <ListItem key={item._id}>
           <CompanyCard company={item} handleDelete={handleDelete} />
-        </li>
+        </ListItem>
       ))}
-    </ul>
+    </StyledList>
   );
 };
 

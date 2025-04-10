@@ -59,6 +59,7 @@ export const theme = Object.freeze({
 
     textBlackColor: "#000000",
     textWhiteColor: "#ffffff",
+    textGreyColor: "#666",
   },
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
   fonts: {

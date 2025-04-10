@@ -17,6 +17,7 @@ import {
   ErrorMessageStyled,
   ButtonWrapper,
 } from "../CommonFormStyles/CommonFormStyles.styled";
+import { DateWrapper, Hint } from "./AddCompanyForm.style";
 
 const AddCompanyForm = ({ onClose, create }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -149,34 +150,44 @@ const AddCompanyForm = ({ onClose, create }) => {
                 )}
               />
             </InputWrapper>
-            <InputWrapper>
-              <MessageVrapper>
-                <label htmlFor="licenseStartTime">
-                  Дата початку дії ліцензій
-                </label>
-              </MessageVrapper>
-              <InputDatePicker name="licenseStartTime" id="licenseStartTime" />
-            </InputWrapper>
+            <DateWrapper>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="licenseStartTime">
+                    Дата початку дії ліцензій
+                  </label>
+                </MessageVrapper>
+                <InputDatePicker
+                  name="licenseStartTime"
+                  id="licenseStartTime"
+                />
+              </InputWrapper>
 
-            <InputWrapper>
-              <MessageVrapper>
-                <label htmlFor="licenseEndTime">
-                  Дата завершення дії ліцензій
-                </label>
-              </MessageVrapper>
-              <InputDatePicker name="licenseEndTime" id="licenseEndTime" />
-            </InputWrapper>
-            <div style={{ fontSize: "12px", color: "#666" }}>
-              <strong>Підказка:</strong> Коли активний календар, Ви можете:
-              <ul style={{ margin: 0, paddingLeft: "18px" }}>
-                <li>← → — переміщення по днях</li>
-                <li>↑ ↓ — переміщення по тижнях</li>
-                <li>PageUp / PageDown — по місяцях</li>
-                <li>Shift+PageUp / Shift+PageDown — по роках</li>
-                <li>Enter — вибрати дату</li>
-                {/* <li>Esc — закрити календар</li> */}
-              </ul>
-            </div>
+              <InputWrapper>
+                <MessageVrapper>
+                  <label htmlFor="licenseEndTime">
+                    Дата завершення дії ліцензій
+                  </label>
+                </MessageVrapper>
+                <InputDatePicker
+                  name="licenseEndTime"
+                  minDate={new Date()}
+                  id="licenseEndTime"
+                />
+              </InputWrapper>
+
+              <InputWrapper>
+                <strong>Підказка:</strong> Коли активний календар, Ви можете:
+                <Hint style={{ margin: 0, paddingLeft: "18px" }}>
+                  <li>← → — переміщення по днях </li>
+                  <li>↑ ↓ — переміщення по тижнях</li>
+                  <li>PageUp / PageDown — по місяцях</li>
+                  <li>Shift+PageUp / Shift+PageDown — по роках</li>
+                  <li>Enter — вибрати дату</li>
+                  {/* <li>Esc — закрити календар</li> */}
+                </Hint>
+              </InputWrapper>
+            </DateWrapper>
             <ButtonWrapper>
               <Button
                 type="submit"
