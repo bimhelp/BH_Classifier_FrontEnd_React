@@ -143,7 +143,8 @@ const Category = ({
             {tree.map((item) => (
               <li key={item._id} onClick={() => byId(item._id)}>
                 <ChainLink level={item.ElementNestingLevel}>
-                  <p level={item.ElementNestingLevel}>{item.DescriptionUA}</p>
+                  <p level={item.ElementNestingLevel}>{item.DescriptionUA} </p>
+                  <p>▶</p>
                 </ChainLink>
               </li>
             ))}

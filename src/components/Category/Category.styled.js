@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { setBgColor } from "../../services";
+import { setBgColor, setTreeColor } from "../../services";
 
 export const MenuWrapper = styled.div`
   /* outline: 1px solid tomato; */
@@ -102,7 +102,7 @@ export const ChainLink = styled.div`
   padding-left: ${(props) => props.theme.space[3]}px;
   /* padding-right: ${(props) => props.theme.space[3]}px; */
 
-  background-color: ${setBgColor};
+  background-color: ${setTreeColor};
 
   display: flex;
   gap: 5px;
@@ -111,13 +111,18 @@ export const ChainLink = styled.div`
   border-radius: 0 5px 5px 0px;
   text-align: left;
   color: ${(props) => props.theme.colors.textWhiteColor};
-  font-size: ${(props) => props.theme.fontSizes.s};
-
+  font-size: 13px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
   & p {
+    max-width: 100px;
     white-space: nowrap; /* Важливо для обрізання тексту */
     overflow: hidden; /* Важливо для обрізання тексту */
     text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
     margin: 0; /* Додаємо margin, щоб текст правильно обрізався */
+    padding-right: 5px;
   }
 
   /* @media screen and (min-width: 480px) {

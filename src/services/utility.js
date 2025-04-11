@@ -90,33 +90,33 @@ export const setBgColor = ({ level, theme, $category }) => {
   return theme.colors.materialColor; // Замініть на відповідний колір для категорії
 };
 
-// export const setBgColor = ({ level, theme, category }) => {
-//   console.log("category: ", typeof category);
-//   // Розконсолити коли будуть оновлені всі Category в базі даних
-//   // if (!category) {
-//   //   return theme.colors.materialColor;
-//   // }
-//   switch (level) {
-//     case 1 || 2:
-//       return theme.colors.mainLevelColor;
-//     case 3:
-//       return theme.colors.firstLevelColor;
-//     case 4:
-//       return theme.colors.secondLevelColor;
-//     case 5:
-//       return theme.colors.thirdLevelColor;
-//     case 6:
-//       return theme.colors.fourLevelColor;
-//     case 7:
-//       return theme.colors.fiveLevelColor;
-//     case 8:
-//       return theme.colors.sixLevelColor;
-//     case 9:
-//       return theme.colors.materialColor;
-//     default:
-//       return theme.colors.mainLevelColor;
-//   }
-// };
+// Функція отримує проп із назвою поточного рівня вкладеності повертає колір із констант
+export const setTreeColor = ({ level, theme }) => {
+  // Якщо category є true, визначаємо колір за рівнем
+
+  switch (level) {
+    case 1:
+    case 2:
+      return theme.colors.mainLevelColor;
+    case 3:
+      return theme.colors.firstLevelColor;
+    case 4:
+      return theme.colors.secondLevelColor;
+    case 5:
+      return theme.colors.thirdLevelColor;
+    case 6:
+      return theme.colors.fourLevelColor;
+    case 7:
+      return theme.colors.fiveLevelColor;
+    case 8:
+      return theme.colors.sixLevelColor;
+    case 9:
+      return theme.colors.materialColor;
+    default:
+      return theme.colors.mainLevelColor;
+  }
+};
+
 // Функція отримує проп із назвою ролі користувача і повертає колір із констант
 export const setRoleColor = ({ role, theme }) => {
   // console.log("role: ", role);

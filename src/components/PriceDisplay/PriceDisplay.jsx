@@ -9,6 +9,7 @@ const currencyType = ["UAH", "EUR", "USD"];
 //   USD: "$",
 // };
 
+// тут додаємо ролі які повинні бачити ціну
 const PriceDisplay = ({ price, currency = "UAH", role, userId, owner }) => {
   const hasAccess = role === "admin" || role === "designer" || userId === owner;
 
