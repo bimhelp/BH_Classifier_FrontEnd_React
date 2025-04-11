@@ -39,7 +39,6 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
       licenseStartTime: company.licenseStartTime,
       licenseEndTime: company.licenseEndTime,
     };
-    console.log("initialValues: ", initialValues);
   }
   // Схема валідації
   const addCompanySchema = yup.object().shape({

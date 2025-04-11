@@ -15,3 +15,9 @@ export const ListItem = styled.li`
   min-width: 250px;
   box-sizing: border-box;
 `;
+
+export const ConfirmButtons = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+`;
