@@ -116,30 +116,6 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       label: "Власний код",
       id: "OwnerBarcode",
     },
-    // {
-    //   label: "Коефіціент витрати",
-    //   id: "WriteOffCoefficient",
-    // },
-    // {
-    //   label: "Витрата",
-    //   id: "Consumption",
-    // },
-    // {
-    //   label: "Витрата 1/m2",
-    //   id: "ConsumptionPer1m2",
-    // },
-    // {
-    //   label: "Витрата 1/m3",
-    //   id: "ConsumptionPer1m3",
-    // },
-    // {
-    //   label: "Витрата 1/m",
-    //   id: "ConsumptionPer1m",
-    // },
-    // {
-    //   label: "Витрата 1/t",
-    //   id: "ConsumptionPer1t",
-    // },
   ];
 
   // Схема валідації
@@ -211,30 +187,6 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
       .string()
       .min(3, "Занадто короткий опис")
       .max(500, "Занадто довкий опис"),
-    // WriteOffCoefficient: yup,
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // Consumption: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1m2: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1m3: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1m: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
-    // ConsumptionPer1t: yup
-    //   .number()
-    //   .typeError("Введіть число")
-    //   .positive("Число повинне бути додатним"),
   });
 
   // Показує або приховує додаткові параметри
@@ -358,7 +310,9 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                   </InputWrapper>
                   <InputWrapper>
                     <MessageVrapper>
-                      <label htmlFor="ParentElementId">Код Категорії</label>
+                      <label htmlFor="ParentElementId">
+                        Код категорії в яку переміщується
+                      </label>
                       <ErrorMessage
                         name="ParentElementId"
                         render={(msg) => (
@@ -368,7 +322,7 @@ const EditMaterialForm = ({ element, onClose, id, edit }) => {
                     </MessageVrapper>
                     <Input
                       type="text"
-                      placeholder="Код Категорії"
+                      placeholder="Код категорії в яку переміщується"
                       name="ParentElementId"
                       id="ParentElementId"
                       disabled={element.CodeParentElement === "materials"}

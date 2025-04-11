@@ -8,9 +8,8 @@ import { MdDelete } from "react-icons/md";
 import { GrTree } from "react-icons/gr";
 import { IoIosCopy } from "react-icons/io";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-// import { BsFillInfoSquareFill } from "react-icons/bs";
+import { BsFillInfoSquareFill } from "react-icons/bs";
 import { toast } from "react-toastify";
-// import { NavLink } from "react-router-dom";
 
 const ItemMenu = ({
   id,
@@ -20,6 +19,8 @@ const ItemMenu = ({
   handleDelete,
   toggleTree,
   extended,
+  handleInfo,
+  info,
 }) => {
   const { role } = useContext(context);
   const location = useLocation();
@@ -27,16 +28,16 @@ const ItemMenu = ({
   if (role === "admin" && !location.pathname.includes(id)) {
     return (
       <>
-        {/* <NavLink to={`/materials/${id}`} state={{ from: location }}>
+        {info && (
           <IconButton
             id="info"
             icon={BsFillInfoSquareFill}
             visibility="visible"
             variant="neutral"
             tooltip="Інформація"
+            onClick={handleInfo}
           ></IconButton>
-        </NavLink>*/}
-
+        )}
         <CopyToClipboard
           text={id}
           onCopy={() => toast.info(`Код ${id} скопійовано в буфер омбіну`)}
@@ -60,6 +61,7 @@ const ItemMenu = ({
             onClick={() => toggleTree(id)}
           ></IconButton>
         )}
+
         <IconButton
           id="add"
           icon={FaSquarePlus}
@@ -88,15 +90,16 @@ const ItemMenu = ({
   if (role === "designer" && !location.pathname.includes(id)) {
     return (
       <>
-        {/* <NavLink to={`/materials/${id}`} state={{ from: location }}>
+        {info && (
           <IconButton
             id="info"
             icon={BsFillInfoSquareFill}
             visibility="visible"
             variant="neutral"
             tooltip="Інформація"
+            onClick={handleInfo}
           ></IconButton>
-        </NavLink> */}
+        )}
         <IconButton
           id="add"
           icon={FaSquarePlus}

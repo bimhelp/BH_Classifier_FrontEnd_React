@@ -137,7 +137,6 @@ const MaterialPage = () => {
           </div>
         </SearchWrapper>
       </Section>
-
       <Section>
         <MainTableWrapper>
           {status === "materials" && <MaterialTable byId={materialById} />}

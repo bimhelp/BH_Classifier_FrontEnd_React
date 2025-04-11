@@ -293,7 +293,9 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                     </InputWrapper>
                     <InputWrapper>
                       <MessageVrapper>
-                        <label htmlFor="ParentElementId">Код Категорії</label>
+                        <label htmlFor="ParentElementId">
+                          Код категорії в яку переміщується
+                        </label>
                         <ErrorMessage
                           name="ParentElementId"
                           render={(msg) => (
@@ -303,7 +305,7 @@ const EditServiceForm = ({ element, onClose, id, edit }) => {
                       </MessageVrapper>
                       <Input
                         type="text"
-                        placeholder="Код Категорії"
+                        placeholder="Код категорії в яку переміщується"
                         name="ParentElementId"
                         id="ParentElementId"
                         bordercolor={validationColor(

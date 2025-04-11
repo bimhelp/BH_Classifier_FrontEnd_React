@@ -7,8 +7,6 @@ import { hiLight } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ItemMenu from "../ItemMenu/ItemMenu";
-import PriceDisplay from "../PriceDisplay/PriceDisplay";
-
 import {
   CategoryWrapper,
   CategoryCode,
@@ -16,7 +14,6 @@ import {
   HilightDescription,
   CodeWrapper,
   DescriptionWrapper,
-  Extended,
   SubList,
   Card,
   MenuWrapper,
@@ -24,7 +21,8 @@ import {
   Chain,
   ChainLink,
 } from "./Category.styled";
-import UnitDisplay from "../UnitDisplay/UnitDisplay";
+
+import Properties from "../Properties/Properties";
 
 // Компонент рендерить розмітку категорії і вкладені списки
 const Category = ({
@@ -34,13 +32,23 @@ const Category = ({
     ParentElementId,
     Code,
     DescriptionUA,
-    Price,
-    Currency,
-    Unit,
     ElementNestingLevel,
     Origin,
     owner,
     Category,
+
+    Url = "",
+    Length = "",
+    Height = "",
+    Width = "",
+    Density = "",
+    WeightElement = "",
+    AssortmentWeight = "",
+    Perimeter = "",
+    Area = "",
+    Volume = "",
+    OwnerBarcode = "",
+    Comment = "",
   },
   selectCategory,
   children,
@@ -62,6 +70,8 @@ const Category = ({
   const [editFormVisible, setEditFormVisible] = useState(false);
   const [treeVisible, setTreeVisible] = useState(null);
   const { role, userId } = useContext(context);
+  const [propertiesIsShow, setPropertiesIsShow] = useState(false);
+  const [infoIsShow, setInfoIsShow] = useState(false);
 
   useEffect(() => {
     // console.log("userId: ", userId);
@@ -104,6 +114,26 @@ const Category = ({
   function closeEditForm() {
     setEditFormVisible(null);
   }
+
+  // Показувати інфо
+  function toggleInfo() {
+    setInfoIsShow(!infoIsShow);
+    setPropertiesIsShow(!propertiesIsShow);
+  }
+
+  const checkProperties =
+    Url !== "" ||
+    Length !== "" ||
+    Height !== "" ||
+    Width !== "" ||
+    Density !== "" ||
+    WeightElement !== "" ||
+    AssortmentWeight !== "" ||
+    Perimeter !== "" ||
+    Area !== "" ||
+    Volume !== "" ||
+    OwnerBarcode !== "" ||
+    Comment !== "";
 
   return (
     <>
@@ -185,20 +215,8 @@ const Category = ({
                 <CategoryDescription>{DescriptionUA}</CategoryDescription>
               </div>
             )}
-            <Extended>
-              <UnitDisplay unit={Unit} />
-
-              <PriceDisplay
-                price={Price}
-                currency={Currency}
-                role={role}
-                userId={userId}
-                owner={owner}
-              />
-            </Extended>
           </DescriptionWrapper>
         </CategoryWrapper>
-
         <MenuWrapper>
           {role === "admin" || userId === owner ? (
             <ItemMenu
@@ -209,6 +227,8 @@ const Category = ({
               handleDelete={handleDelete}
               toggleTree={toggleTree}
               extended={true}
+              handleInfo={toggleInfo}
+              info={checkProperties}
             />
           ) : (
             <ItemMenu
@@ -219,11 +239,13 @@ const Category = ({
               handleDelete={handleDelete}
               toggleTree={toggleTree}
               extended={false}
+              handleInfo={toggleInfo}
+              info={checkProperties}
             />
           )}
         </MenuWrapper>
       </Card>
-
+      {infoIsShow && <Properties element={element} />}
       <TransitionGroup>
         {addFormVisible && (
           <CSSTransition classNames="fade" timeout={300} unmountOnExit>

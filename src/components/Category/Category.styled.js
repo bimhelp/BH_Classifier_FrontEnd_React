@@ -196,12 +196,6 @@ export const UserPrice = styled.p`
   padding-left: 10px;
 `;
 
-export const Extended = styled.div`
-  line-height: 1;
-  /* outline: 1px red solid; */
-  padding-left: 24px;
-  display: flex;
-`;
 // Можна отримати доступ до пропсів
 //  ${(props) => {
 //     console.log(props);
