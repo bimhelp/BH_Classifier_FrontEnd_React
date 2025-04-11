@@ -6,7 +6,6 @@ import { uk } from "date-fns/locale";
 
 const InputDatePicker = ({ name, minDate }) => {
   const [field, meta, helpers] = useField(name);
-  console.log("field: ", field.value);
   const { setValue } = helpers;
 
   return (
