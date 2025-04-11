@@ -5,7 +5,7 @@ import Search from "../../components/Search/Search";
 import SearchResults from "../../components/SearchResults/SearchResults";
 import UnitSelect from "../../components/UnitSelect/UnitSelect";
 import { createOptionsFromUnits } from "../../services";
-import { checkIsString, parseNumber } from "../../services";
+import { checkIsString } from "../../services";
 import { MainTableWrapper, SearchWrapper } from "./MaterialPage.styled";
 import { toast } from "react-toastify";
 import {
@@ -52,7 +52,6 @@ const MaterialPage = () => {
   const submit = (searchValue) => {
     setStatus("search");
     const isString = checkIsString(searchValue);
-    const codeNumber = parseNumber(searchValue);
 
     if (isString) {
       setQuery(searchValue);
@@ -77,12 +76,12 @@ const MaterialPage = () => {
       }
       search(searchValue);
     } else {
-      async function search(codeNumber) {
+      async function search(searchValue) {
         // console.log(`search ${codeNumber} by code`);
         setIsLoading(true);
         setSearchResult([]);
         try {
-          const response = await searchMaterialByCode(codeNumber);
+          const response = await searchMaterialByCode(searchValue);
           // console.log(response.data);
           if (response) {
             setSearchResult(response.data);
@@ -94,7 +93,7 @@ const MaterialPage = () => {
           setIsLoading(false);
         }
       }
-      search(codeNumber);
+      search(searchValue);
     }
   };
 

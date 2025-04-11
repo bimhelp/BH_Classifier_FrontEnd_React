@@ -8,7 +8,7 @@ import {
   searchServiceByCode,
   getServiceById,
 } from "../../services/api";
-import { checkIsString, parseNumber } from "../../services";
+import { checkIsString } from "../../services";
 import { MainTableWrapper } from "./ServicePage.styled";
 import { toast } from "react-toastify";
 import SearchResults from "../../components/SearchResults/SearchResults";
@@ -30,7 +30,6 @@ const ServicePage = () => {
   const submit = (searchValue) => {
     setStatus("search");
     const isString = checkIsString(searchValue);
-    const codeNumber = parseNumber(searchValue);
 
     if (isString) {
       setQuery(searchValue);
@@ -52,12 +51,12 @@ const ServicePage = () => {
       }
       search(searchValue);
     } else {
-      async function search(codeNumber) {
+      async function search(searchValue) {
         // console.log(`search ${codeNumber} by code`);
         setIsLoading(true);
         setSearchResult([]);
         try {
-          const response = await searchServiceByCode(codeNumber);
+          const response = await searchServiceByCode(searchValue);
           // console.log(response.data);
           if (response) {
             setSearchResult(response.data);
@@ -68,7 +67,7 @@ const ServicePage = () => {
           setIsLoading(false);
         }
       }
-      search(codeNumber);
+      search(searchValue);
     }
   };
 

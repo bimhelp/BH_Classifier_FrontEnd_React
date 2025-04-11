@@ -162,15 +162,6 @@ export function checkIsString(query) {
   return isString;
 }
 
-// Функція повертає число із введеного користувачем рядка
-export function parseNumber(query) {
-  // Якщо код починається з нуля то потрібно додати цей нуль, щоб отримати правильний результат пошуку
-  if (query.startsWith("0")) {
-    // console.log("with zero", "0".concat(Number.parseInt(query)));
-    return "0".concat(Number.parseInt(query));
-  } else return Number.parseInt(query);
-}
-
 // Функція підфарбовує слово в результатах пошуку
 export function hiLight(query, text) {
   const regex = new RegExp(`(${query})`, "gi");
