@@ -15,7 +15,7 @@ const CompanysPage = () => {
   const [companys, setCopanys] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState(false);
+  // const [deleteLoading, setDeleteLoading] = useState(false);
 
   // Запит по компанії
   useEffect(() => {
@@ -65,7 +65,6 @@ const CompanysPage = () => {
     async function editCompany(id, company) {
       try {
         const response = await updateCompany(id, company, controller.signal);
-        console.log("response: ", response);
         // якщо id співпадають то замінюємо елемент тим що повернув бекенд, в іншому випадку залишаємо старий елемент
         setCopanys(
           companys.map((company) =>
@@ -86,7 +85,7 @@ const CompanysPage = () => {
   // Видалення компанії
   async function handleDeleteCompany(id) {
     try {
-      setDeleteLoading(true);
+      // setDeleteLoading(true);
       const response = await deleteCompany(id);
       if (response) {
         toast.info("Компанія успішно видалена");
@@ -95,7 +94,7 @@ const CompanysPage = () => {
     } catch (error) {
       toast.error("Не вдалось видалити компанію");
     } finally {
-      setDeleteLoading(false);
+      // setDeleteLoading(false);
     }
   }
 
