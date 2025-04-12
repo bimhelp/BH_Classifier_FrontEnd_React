@@ -77,11 +77,26 @@ export async function getByLevel(level, signal) {
   return response.data;
 }
 
+// Отримати всі матеріали користувача
 export async function getMaterialByUser(signal) {
   const response = await axios.get("/user-material", { signal });
   return response.data;
 }
 
+// Отримати головін матеріали користувача
+export async function getMainMaterialByUser(signal) {
+  const response = await axios.get("/user-main-material", { signal });
+  return response.data;
+}
+
+// Отримати головін матеріали користувача
+export async function getSubMaterialByUser(id, signal) {
+  console.log("sub");
+  const response = await axios.get(`/user-material/${id}`, { signal });
+  return response.data;
+}
+
+//
 export async function getByParentId(parentCode, signal) {
   const response = await axios.get(`/material-by-parent/${parentCode}`, {
     signal,
@@ -192,6 +207,11 @@ export async function getAllServices(signal) {
 // Отримати сервіси користувача
 export async function getServiceByUser(signal) {
   const response = await axios.get("/user-service", { signal });
+  return response.data;
+}
+// Отримати головні сервіси користувача
+export async function getMainServiceByUser(signal) {
+  const response = await axios.get("/user-main-service", { signal });
   return response.data;
 }
 

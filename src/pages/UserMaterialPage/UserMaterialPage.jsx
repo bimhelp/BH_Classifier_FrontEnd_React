@@ -4,7 +4,12 @@ import MaterialList from "../../components/MaterialList/MaterialList";
 import { IconButton } from "../../components/Button/Button";
 import { Layout, Content, Menu } from "./UserMaterialPage.styled";
 import { toast } from "react-toastify";
-import { getMaterialByUser, getMaterialById } from "../../services";
+import {
+  getMaterialByUser,
+  getMaterialById,
+  // getSubMaterialByUser,
+  // getMainMaterialByUser,
+} from "../../services";
 import { IoMdBackspace } from "react-icons/io";
 import { BarLoader } from "react-spinners";
 
@@ -37,7 +42,7 @@ const UserMaterialPage = () => {
     };
   }, []);
 
-  // Отримати по id
+  // Отримати матеріал по id коли натискаємо на дереві
   const materialById = (id) => {
     setStatus("material");
     const controller = new AbortController();
@@ -91,11 +96,21 @@ const UserMaterialPage = () => {
                 )}
 
                 {status === "userMaterials" && (
-                  <MaterialList items={userMaterials} byId={materialById} />
+                  <>
+                    <p>user</p>
+                    <MaterialList
+                      items={userMaterials}
+                      byId={materialById}
+                      querryType="userSubMaterials"
+                    />
+                  </>
                 )}
 
                 {status === "material" && (
-                  <MaterialList items={material} byId={materialById} />
+                  <>
+                    <p>material</p>
+                    <MaterialList items={material} byId={materialById} />
+                  </>
                 )}
               </Section>
             )}
