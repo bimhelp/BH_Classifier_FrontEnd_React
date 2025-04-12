@@ -16,7 +16,6 @@ import { Button } from "../Button/Button";
 import Confirm from "../Confirm/Confirm";
 import AddMaterialForm from "../AddMaterialForm/AddMaterialForm";
 import EditMaterialForm from "../EditMaterialForm/EditMaterialForm";
-import { getMaterialTree } from "../../services";
 import { ConfirmButtons } from "./MaterialList.styled";
 
 const MaterialList = ({ items, query, byId }) => {
@@ -26,7 +25,6 @@ const MaterialList = ({ items, query, byId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
-  const [tree, setTree] = useState([]);
   const [delitingCandidate, setDelitingCandidate] = useState(null);
   const [deleteLoading, setDeleteLoading] = useState(false);
 
@@ -188,23 +186,6 @@ const MaterialList = ({ items, query, byId }) => {
     }
   }
 
-  // Показати Дерево
-  function showTree(id) {
-    const controller = new AbortController();
-    async function tree(id) {
-      try {
-        const response = await getMaterialTree(id, controller.signal);
-        setTree(response.data);
-      } catch (error) {
-        toast.error("Не вдалось отримати дерево вкладеності");
-      }
-    }
-    tree(id);
-    return () => {
-      controller.abort();
-    };
-  }
-
   return (
     <>
       <div>
@@ -224,8 +205,7 @@ const MaterialList = ({ items, query, byId }) => {
                   create={createMaterial}
                   edit={editMaterial}
                   isdelete={item._id === confirmOpen ? item._id : undefined}
-                  showTree={showTree}
-                  tree={tree}
+                  variant="material"
                   byId={byId}
                 >
                   {isLoading ? (
@@ -249,8 +229,7 @@ const MaterialList = ({ items, query, byId }) => {
                   create={createMaterial}
                   edit={editMaterial}
                   isdelete={item._id === confirmOpen ? item._id : undefined}
-                  showTree={showTree}
-                  tree={tree}
+                  variant="material"
                   byId={byId}
                 ></Category>
               )}

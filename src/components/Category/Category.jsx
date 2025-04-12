@@ -3,7 +3,7 @@ import { authContext as context } from "../../context/authContext";
 import { toast } from "react-toastify";
 import { IconButton } from "../Button/Button";
 import { IoIosCopy } from "react-icons/io";
-import { hiLight } from "../../services";
+import { hiLight, getMaterialTree, getServiceTree } from "../../services";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import ItemMenu from "../ItemMenu/ItemMenu";
@@ -59,8 +59,7 @@ const Category = ({
   create,
   editForm: EditForm,
   edit,
-  showTree,
-  tree = [],
+  variant = "",
   isdelete,
   byId,
 }) => {
@@ -72,6 +71,7 @@ const Category = ({
   const { role, userId } = useContext(context);
   const [propertiesIsShow, setPropertiesIsShow] = useState(false);
   const [infoIsShow, setInfoIsShow] = useState(false);
+  const [tree, setTree] = useState([]);
 
   useEffect(() => {
     // console.log("userId: ", userId);
@@ -134,6 +134,30 @@ const Category = ({
     Volume !== "" ||
     OwnerBarcode !== "" ||
     Comment !== "";
+
+  // Показати Дерево
+  function showTree(id) {
+    const controller = new AbortController();
+    async function tree(id) {
+      try {
+        let response = null;
+
+        if (variant === "service") {
+          response = await getServiceTree(id, controller.signal);
+        }
+        if (variant === "material") {
+          response = await getMaterialTree(id, controller.signal);
+        }
+        setTree(response.data);
+      } catch (error) {
+        toast.error("Не вдалось отримати дерево вкладеності");
+      }
+    }
+    tree(id);
+    return () => {
+      controller.abort();
+    };
+  }
 
   return (
     <>

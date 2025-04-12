@@ -4,7 +4,6 @@ import { getServiceByParentId } from "../../services";
 import { addService } from "../../services";
 import { updateService } from "../../services";
 import { removeService } from "../../services";
-import { getServiceTree } from "../../services";
 
 // components
 import Category from "../Category/Category";
@@ -25,7 +24,6 @@ const ServiceList = ({ items, query, byId }) => {
   const [curentItems, setCurrentItems] = useState(items);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
-  const [tree, setTree] = useState([]);
 
   // Якщо перейти по дереву, то сюди передаються вибрані елементи
   useEffect(() => {
@@ -175,23 +173,6 @@ const ServiceList = ({ items, query, byId }) => {
     }
   }
 
-  // Показати Дерево
-  function showTree(id) {
-    const controller = new AbortController();
-    async function tree(id) {
-      try {
-        const response = await getServiceTree(id, controller.signal);
-        setTree(response.data);
-      } catch (error) {
-        toast.error("Не вдалось отримати дерево вкладеності");
-      }
-    }
-    tree(id);
-    return () => {
-      controller.abort();
-    };
-  }
-
   return (
     <>
       <List level={level}>
@@ -210,9 +191,7 @@ const ServiceList = ({ items, query, byId }) => {
                 create={createService}
                 edit={editService}
                 isdelete={item._id === confirmOpen ? item._id : undefined}
-                // submit={submit}
-                showTree={showTree}
-                tree={tree}
+                variant="service"
                 byId={byId}
               >
                 {isLoading ? (
@@ -236,9 +215,7 @@ const ServiceList = ({ items, query, byId }) => {
                 create={createService}
                 edit={editService}
                 isdelete={item._id === confirmOpen ? item._id : undefined}
-                // submit={submit}
-                showTree={showTree}
-                tree={tree}
+                variant="service"
                 byId={byId}
               ></Category>
             )}
