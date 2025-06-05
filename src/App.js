@@ -31,7 +31,7 @@ const MaterialInfoPage = lazy(() =>
   import("./pages/MaterialInfoPage/MaterialInfoPage")
 );
 const AdminPage = lazy(() => import("./pages/AdminPage/AdminPage"));
-
+// console.log("hello");
 function App() {
   return (
     <>
@@ -93,7 +93,6 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
-
       <ToastContainer
         stacked
         position="bottom-right"
