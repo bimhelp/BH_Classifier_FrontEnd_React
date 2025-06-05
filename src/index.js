@@ -16,7 +16,7 @@ import { ThemeProvider } from "styled-components";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/classifier">
+    <BrowserRouter basename="/BH_Classifier_FrontEnd_React">
       <ThemeProvider theme={theme}>
         <AuthProvider>
           <MaterialProvider>
