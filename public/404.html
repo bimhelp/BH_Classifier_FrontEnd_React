@@ -56,7 +56,7 @@
   </head>
   <body></body>
 </html> -->
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -70,6 +70,26 @@
           window.location.hash;
         var redirectTo = "/" + fullPath.replace(/^\/+/, "");
         window.location.replace(redirectTo);
+      })();
+    </script>
+  </head>
+  <body>
+    Redirecting...
+  </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script>
+      // Take the path, query, and hash, and redirect to index.html
+      (function () {
+        var newUrl =
+          "/index.html" + window.location.search + window.location.hash;
+        sessionStorage.redirect = window.location.pathname;
+        window.location.replace(newUrl);
       })();
     </script>
   </head>
