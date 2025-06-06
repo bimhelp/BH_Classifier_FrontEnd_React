@@ -4,7 +4,7 @@ import AuthProvider from "./context/AuthProvider";
 import MaterialProvider from "./context/MaterialProvider";
 
 // навігація по сторінках
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 // стилі
 import "./index.css";
 // константи
@@ -16,7 +16,7 @@ import { ThemeProvider } from "styled-components";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+    <HashRouter basename="/">
       <ThemeProvider theme={theme}>
         <AuthProvider>
           <MaterialProvider>
@@ -24,6 +24,6 @@ root.render(
           </MaterialProvider>
         </AuthProvider>
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
 );
