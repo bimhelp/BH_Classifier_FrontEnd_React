@@ -117,10 +117,10 @@ export const ChainLink = styled.div`
     opacity: 1;
   }
   & p {
-    max-width: 100px;
+    // max-width: 100px;
     white-space: nowrap; /* Важливо для обрізання тексту */
-    overflow: hidden; /* Важливо для обрізання тексту */
-    text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
+    // overflow: hidden; /* Важливо для обрізання тексту */
+    // text-overflow: ellipsis; /* Важливо для додавання трьох крапок */
     margin: 0; /* Додаємо margin, щоб текст правильно обрізався */
     padding-right: 5px;
   }
