@@ -49,7 +49,11 @@ const CompanysPage = () => {
         setCopanys([...companys, response.data]);
         toast.success("Компанію успішно створено");
       } catch (error) {
-        toast.error("Не вдалось створити компанію");
+        console.log('status:', error.response?.status);
+    console.log('message:', error.response?.data?.message);
+        if (error.response?.data?.message === "Controller: Email not found") { toast.error("Компанія не створена. Не вдалось знайти email керівника компанії") } else { toast.error("Не вдалось створити компанію")}
+       
+        
       }
     }
     createCompany(company);

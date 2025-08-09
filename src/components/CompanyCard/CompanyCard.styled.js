@@ -50,10 +50,10 @@ export const MenuWrapper = styled.div`
 export const Code = styled.p`
   font-size: ${(props) => props.theme.fontSizes.s};
 `;
-export const Time = styled.div`
-  width: 220px;
+export const CompanyAttribute = styled.div`
+  width: 260px;
   gap: 20px;
-  /* outline: 1px solid tomato; */
+// outline: 1px solid tomato; 
   display: flex;
   justify-content: space-between;
   font-size: ${(props) => props.theme.fontSizes.xs};

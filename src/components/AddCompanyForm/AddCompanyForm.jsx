@@ -50,7 +50,8 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
     edrpo: yup
       .string()
       .matches(/^\d{8}$/, "Код повинен складатися з 8 цифр наприклад: 12345678")
-      .required("Код компанії обов'язкове поле"),
+      .required("Код компанії обов'язкове поле"), 
+    headEmail: yup.string().email("Invalid email").required("Це обов'язкове поле, введіть email керівника компанії"),
     licenseCount: yup
       .number()
       .typeError("Введіть число")
@@ -139,6 +140,28 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
                 bordercolor={validationColor(
                   props.errors.edrpo,
                   props.values.edrpo
+                )}
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <MessageVrapper>
+                <label htmlFor="headEmail">Email керівника компанії</label>
+                <ErrorMessage
+                  name="headEmail"
+                  render={(msg) => (
+                    <ErrorMessageStyled>{msg}</ErrorMessageStyled>
+                  )}
+                />
+              </MessageVrapper>
+
+              <Input
+                name="headEmail"
+                id="headEmail"
+                placeholder="Введіть email керівника компанії"
+                type="email"
+                bordercolor={validationColor(
+                  props.errors.headEmail,
+                  props.values.headEmail
                 )}
               />
             </InputWrapper>

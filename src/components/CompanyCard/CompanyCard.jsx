@@ -6,7 +6,7 @@ import {
   Code,
   CompanyName,
   // MenuWrapper,
-  Time,
+  CompanyAttribute,
 } from "./CompanyCard.styled";
 import { BiSolidBusiness } from "react-icons/bi";
 import { Modal } from "../Modal/Modal";
@@ -20,6 +20,7 @@ const CompanyCard = ({
     _id,
     companyName,
     edrpo,
+    headEmail,
     licenseStartTime,
     licenseEndTime,
     licenseCount,
@@ -47,18 +48,21 @@ const CompanyCard = ({
         </CompanyName>
         <div>
           <Code>ЄДПРОУ {edrpo}</Code>
-          <Time>
+          <CompanyAttribute>
+            <p>Керівник компанії:</p> <p>{headEmail}</p>
+          </CompanyAttribute>
+          <CompanyAttribute>
             <p>Кількість ліцензій:</p> <p>{licenseCount}</p>
-          </Time>
-          <Time>
+          </CompanyAttribute>
+          <CompanyAttribute>
             <p>Дата початку ліцензії:</p> <p>{formatedStartDate}</p>
-          </Time>
-          <Time>
+          </CompanyAttribute>
+          <CompanyAttribute>
             <p>Дата закінчення ліцензії:</p> <p>{formatedEndDate}</p>
-          </Time>
-          <Time>
+          </CompanyAttribute>
+          <CompanyAttribute>
             <p>Час до закінчення ліцензії:</p> <p>{remainingTime}</p>
-          </Time>
+          </CompanyAttribute>
         </div>
         {/* <MenuWrapper>
           <CompanyMenu id={_id} handleDelete={handleDelete} />
