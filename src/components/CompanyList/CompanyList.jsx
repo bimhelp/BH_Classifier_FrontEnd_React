@@ -3,6 +3,8 @@ import CompanyCard from "../CompanyCard/CompanyCard";
 import { ListItem, StyledList } from "./CompanyList.styled";
 
 const CompanyList = ({ items, ...props }) => {
+  console.log("items: ", items);
+
   return (
     <StyledList>
       {items.map((item) => (

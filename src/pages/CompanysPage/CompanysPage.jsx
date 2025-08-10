@@ -49,11 +49,24 @@ const CompanysPage = () => {
         setCopanys([...companys, response.data]);
         toast.success("Компанію успішно створено");
       } catch (error) {
-        console.log('status:', error.response?.status);
-    console.log('message:', error.response?.data?.message);
-        if (error.response?.data?.message === "Controller: Email not found") { toast.error("Компанія не створена. Не вдалось знайти email керівника компанії") } else { toast.error("Не вдалось створити компанію")}
-       
-        
+        console.log("status:", error.response?.status);
+        console.log("message:", error.response?.data?.message);
+        switch (error.response?.data?.message) {
+          case "Controller: Email not found":
+            toast.error(
+              "Компанія не створена. Не вдалось знайти email керівника компанії"
+            );
+            break;
+          case "Controller: Email used in other company":
+            toast.error(
+              "Компанія не створена. Email вже використовується в іншій компанії"
+            );
+            break;
+
+          default:
+            toast.error("Не вдалось створити компанію");
+            break;
+        }
       }
     }
     createCompany(company);
@@ -69,8 +82,12 @@ const CompanysPage = () => {
 
   // Редагування компанії
   function editCompany(id, company) {
+    console.log("edit func id: ", id);
+    console.log("company: ", company);
     const controller = new AbortController();
     async function editCompany(id, company) {
+      console.log("edit function id: ", id);
+
       try {
         const response = await updateCompany(id, company, controller.signal);
         // якщо id співпадають то замінюємо елемент тим що повернув бекенд, в іншому випадку залишаємо старий елемент
@@ -81,7 +98,22 @@ const CompanysPage = () => {
         );
         toast.success("Компанію успішно оновлено");
       } catch (error) {
-        toast.error("Не вдалось оновити компанію");
+        switch (error.response?.data?.message) {
+          case "Controller: Email not found":
+            toast.error(
+              "Компанія не оновлена. Не вдалось знайти email керівника компанії"
+            );
+            break;
+          case "Controller: Email used in other company":
+            toast.error(
+              "Компанія не оновлена. Email вже використовується в іншій компанії"
+            );
+            break;
+
+          default:
+            toast.error("Не вдалось оновити компанію");
+            break;
+        }
       }
     }
     editCompany(id, company);

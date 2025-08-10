@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { IconButton } from "../Button/Button";
+import { Button } from "../Button/Button";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdDelete } from "react-icons/md";
 import {
   Card,
@@ -7,11 +8,13 @@ import {
   CompanyName,
   // MenuWrapper,
   CompanyAttribute,
+  Menu,
 } from "./CompanyCard.styled";
 import { BiSolidBusiness } from "react-icons/bi";
 import { Modal } from "../Modal/Modal";
 import { formatDate, timeDifference } from "../../services";
 import AddCompanyForm from "../AddCompanyForm/AddCompanyForm";
+import { toast } from "react-toastify";
 // import CompanyMenu from "../CompanyMenu/CompanyMenu";
 
 const CompanyCard = ({
@@ -76,13 +79,20 @@ const CompanyCard = ({
             edit={edit}
             onClose={closeEditForm}
           />
-          <IconButton
+        <Menu>  <Button
             icon={MdDelete}
             visibility="visible"
             variant="neutral"
             tooltip="Видалити компанію"
             onClick={() => handleDelete(_id)}
-          ></IconButton>
+            role="warning"
+          >Видалити компанію</Button>
+            <CopyToClipboard text={_id}
+            onCopy={()=> toast.info(`Id компанії ${_id} скопійовано в буфер обміну`)}>
+            <Button>Копіювати id компанії</Button>
+            </CopyToClipboard>
+            <Button>Керувати співробітниками</Button>
+        </Menu>
         </Modal>
       )}
     </>

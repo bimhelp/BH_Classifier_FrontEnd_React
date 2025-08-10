@@ -49,6 +49,7 @@ export const theme = Object.freeze({
     accentHover: "#4fe04f",
     muted: "#424242",
     red: "#AB0E0F",
+    brightRed:"#e01011",
     yellow: "#FFFF00",
     orangeRed: "#FF4500",
     green: "#609729",

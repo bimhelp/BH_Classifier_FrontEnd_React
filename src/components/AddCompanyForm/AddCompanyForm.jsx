@@ -27,6 +27,7 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
   let initialValues = {
     companyName: "",
     edrpo: "",
+    headEmail: "",
     licenseCount: "",
     licenseStartTime: null,
     licenseEndTime: null,
@@ -35,6 +36,7 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
     initialValues = {
       companyName: company.companyName,
       edrpo: company.edrpo,
+      headEmail: company.headEmail,
       licenseCount: company.licenseCount,
       licenseStartTime: company.licenseStartTime,
       licenseEndTime: company.licenseEndTime,
@@ -50,8 +52,11 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
     edrpo: yup
       .string()
       .matches(/^\d{8}$/, "Код повинен складатися з 8 цифр наприклад: 12345678")
-      .required("Код компанії обов'язкове поле"), 
-    headEmail: yup.string().email("Invalid email").required("Це обов'язкове поле, введіть email керівника компанії"),
+      .required("Код компанії обов'язкове поле"),
+    headEmail: yup
+      .string()
+      .email("Invalid email")
+      .required("Це обов'язкове поле, введіть email керівника компанії"),
     licenseCount: yup
       .number()
       .typeError("Введіть число")
@@ -74,6 +79,7 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
     try {
       setIsLoading(true);
       if (variant === "edit") {
+        console.log("company: ", company._id);
         await edit(company._id, values);
       } else await create({ ...values });
       resetForm();

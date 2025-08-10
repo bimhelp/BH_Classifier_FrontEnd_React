@@ -62,3 +62,9 @@ export const CompanyAttribute = styled.div`
     display: inline-block;
   }
 `;
+export const Menu = styled.div`
+display:flex;
+gap: 20px;
+margin-left: 15px;
+margin-right: 15px;
+`

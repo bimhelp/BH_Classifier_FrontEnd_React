@@ -31,13 +31,13 @@ export const StyledButton = styled.button`
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     cursor: pointer;
-    color: black;
+    // color: black;
     box-shadow: var(--card-shadow);
     border-color: ${(props) => props.theme.colors.black};
     background-color: ${(props) => props.theme.colors.accentHover};
     background-color: ${(props) =>
       props.role === "warning"
-        ? props.theme.colors.red
+        ? props.theme.colors.brightRed
         : props.theme.colors.accentHover};
   }
 `;
