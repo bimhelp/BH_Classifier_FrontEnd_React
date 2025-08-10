@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Button } from "../Button/Button";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdDelete } from "react-icons/md";
+import CompanyMenu from "../CompanyMenu/CompanyMenu";
 import {
   Card,
   Code,
   CompanyName,
-  // MenuWrapper,
+  MenuWrapper,
   CompanyAttribute,
   Menu,
 } from "./CompanyCard.styled";
@@ -35,16 +36,23 @@ const CompanyCard = ({
   const formatedEndDate = formatDate(licenseEndTime);
   const remainingTime = timeDifference(licenseStartTime, licenseEndTime);
   const [editFormOpen, setEditFormOpen] = useState(false);
-
+  const [editTeam, setEditTeam] = useState(false);
   function openEditForm() {
     setEditFormOpen(true);
   }
   function closeEditForm() {
     setEditFormOpen(false);
   }
+
+  function openEditTeam() {
+    setEditTeam(true);
+  }
+  function closeEditTeam() {
+    setEditTeam(false);
+  }
   return (
     <>
-      <Card onClick={() => openEditForm(_id)}>
+      <Card>
         <CompanyName>
           <BiSolidBusiness />
           <p>{companyName}</p>
@@ -67,9 +75,14 @@ const CompanyCard = ({
             <p>Час до закінчення ліцензії:</p> <p>{remainingTime}</p>
           </CompanyAttribute>
         </div>
-        {/* <MenuWrapper>
-          <CompanyMenu id={_id} handleDelete={handleDelete} />
-        </MenuWrapper> */}
+        <MenuWrapper>
+          <CompanyMenu
+            id={_id}
+            edit={openEditForm}
+            team={openEditTeam}
+            handleDelete={handleDelete}
+          />
+        </MenuWrapper>
       </Card>
       {editFormOpen && (
         <Modal onClose={closeEditForm}>
@@ -79,20 +92,28 @@ const CompanyCard = ({
             edit={edit}
             onClose={closeEditForm}
           />
-        <Menu>  <Button
-            icon={MdDelete}
-            visibility="visible"
-            variant="neutral"
-            tooltip="Видалити компанію"
-            onClick={() => handleDelete(_id)}
-            role="warning"
-          >Видалити компанію</Button>
-            <CopyToClipboard text={_id}
-            onCopy={()=> toast.info(`Id компанії ${_id} скопійовано в буфер обміну`)}>
-            <Button>Копіювати id компанії</Button>
+          <Menu>
+            {" "}
+            <Button
+              icon={MdDelete}
+              visibility="visible"
+              variant="neutral"
+              tooltip="Видалити компанію"
+              onClick={() => handleDelete(_id)}
+              role="warning"
+            >
+              Видалити компанію
+            </Button>
+            <CopyToClipboard
+              text={_id}
+              onCopy={() =>
+                toast.info(`Id компанії ${_id} скопійовано в буфер обміну`)
+              }
+            >
+              <Button>Копіювати id компанії</Button>
             </CopyToClipboard>
             <Button>Керувати співробітниками</Button>
-        </Menu>
+          </Menu>
         </Modal>
       )}
     </>

@@ -3,16 +3,24 @@ import { IconButton } from "../Button/Button";
 // import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
+import { RiTeamFill } from "react-icons/ri";
 
-const CompanyMenu = ({ id, handleDelete }) => {
+const CompanyMenu = ({ id, edit, handleDelete }) => {
   return (
     <>
+      <IconButton
+        icon={RiTeamFill}
+        visibility="visible"
+        variant="neutral"
+        tooltip="Команда"
+        onClick={() => console.log("open team manager")}
+      ></IconButton>
       <IconButton
         icon={FaGear}
         visibility="visible"
         variant="neutral"
         tooltip="Налаштувати"
-        onClick={() => console.log("config")}
+        onClick={() => edit(id)}
       ></IconButton>
       <IconButton
         icon={MdDelete}
