@@ -79,6 +79,31 @@ export async function searchByEmail(email) {
   return response.data;
 }
 
+// Team _____________________________________________________________
+
+//  Отримати всіх співробітників компанії
+export async function getAllCompanyTeam(id, signal) {
+  const response = await axios.get(`/team/company/all/${id}`, { signal });
+
+  // console.log(response);
+  return response.data;
+}
+
+// Додати користувача до компанії
+export async function addCompanyMember(id, email) {
+  const response = await axios.patch(`/team/company/add/${id}`, {
+    userEmail: email,
+  });
+  return response.data;
+}
+
+// Видалити користувача з компанії
+export async function removeCompanyMember(id, email) {
+  const response = await axios.patch(`/team/company/remove/${id}`, {
+    userEmail: email,
+  });
+  return response.data;
+}
 // Materials ________________________________________________________
 export async function getAll(signal) {
   const response = await axios.get(`/all-material`, { signal });

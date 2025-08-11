@@ -1,14 +1,20 @@
 import React from "react";
 import MemberCard from "../MemberCard/MemberCard";
 import Section from "../Section/Section";
-const MemberList = ({ title, memders, ...props }) => {
+const MemberList = ({ title, members, companyId, add, remove, variant }) => {
   return (
     <Section>
       <h2>{title}</h2>
       <ul>
-        {memders?.map((member) => (
+        {members?.map((member) => (
           <li key={member._id}>
-            <MemberCard member={member} {...props}></MemberCard>
+            <MemberCard
+              member={member}
+              companyId={companyId}
+              add={add}
+              remove={remove}
+              variant={variant}
+            ></MemberCard>
           </li>
         ))}
       </ul>

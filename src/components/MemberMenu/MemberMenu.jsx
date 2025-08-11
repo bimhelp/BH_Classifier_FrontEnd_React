@@ -1,9 +1,9 @@
 import React from "react";
 import { IconButton } from "../Button/Button";
-// import { MdModeEditOutline } from "react-icons/md";
 import { IoPersonAddSharp } from "react-icons/io5";
+import { IoPersonRemoveSharp } from "react-icons/io5";
 
-const MemberMenu = ({ variant, member: { _id } }) => {
+const MemberMenu = ({ member: { email }, companyId, add, remove, variant }) => {
   return (
     <>
       {variant === "search" ? (
@@ -12,23 +12,16 @@ const MemberMenu = ({ variant, member: { _id } }) => {
           visibility="visible"
           variant="neutral"
           tooltip="Додати"
-          onClick={() => console.log({ _id })}
+          onClick={() => add(companyId, email)}
         ></IconButton>
       ) : (
         <>
           <IconButton
-            icon={IoPersonAddSharp}
+            icon={IoPersonRemoveSharp}
             visibility="visible"
             variant="neutral"
-            tooltip="Команда"
-            onClick={() => console.log("add")}
-          ></IconButton>
-          <IconButton
-            icon={IoPersonAddSharp}
-            visibility="visible"
-            variant="neutral"
-            tooltip="Команда"
-            onClick={() => console.log("add")}
+            tooltip="Видалити"
+            onClick={() => remove(companyId, email)}
           ></IconButton>
         </>
       )}

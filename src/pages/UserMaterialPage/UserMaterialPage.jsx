@@ -4,12 +4,7 @@ import MaterialList from "../../components/MaterialList/MaterialList";
 import { IconButton } from "../../components/Button/Button";
 import { Layout, Content, Menu } from "./UserMaterialPage.styled";
 import { toast } from "react-toastify";
-import {
-  getMaterialByUser,
-  getMaterialById,
-  // getSubMaterialByUser,
-  // getMainMaterialByUser,
-} from "../../services";
+import { getMaterialByUser, getMaterialById } from "../../services";
 import { IoMdBackspace } from "react-icons/io";
 import { BarLoader } from "react-spinners";
 
