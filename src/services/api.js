@@ -312,6 +312,17 @@ export async function getAllCompanys(signal) {
   return response.data;
 }
 
+// Отримати компанію по id
+export async function getCompanyById(id) {
+  const response = await axios.get(`./company/${id}`);
+  return response.data;
+}
+// Отримати info компанії по id
+export async function getCompanyInfo(id) {
+  const response = await axios.get(`./company-info/${id}`);
+  return response.data;
+}
+
 // Додати компанію
 export async function addCompany(newCompany, signal) {
   const response = await axios.post("/company", newCompany, { signal });

@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { authContext as context } from "../../context/authContext";
 import { FaUser } from "react-icons/fa";
 import { Button } from "../Button/Button";
 import { PLUGIN_URL } from "../../services";
+import { getCompanyInfo } from "../../services";
 import {
   LogInButton,
   UserWrapper,
@@ -12,6 +13,7 @@ import {
   IconWrapper,
   StyledNavLink,
   LinkTitle,
+  Company,
 } from "./User.styled";
 import ContextMenu from "../ContextMenu/ContextMenu";
 import Confirm from "../Confirm/Confirm";
@@ -20,11 +22,26 @@ import { RxCross2 } from "react-icons/rx";
 import { SiAutodeskrevit } from "react-icons/si";
 import { FaListAlt } from "react-icons/fa";
 import { GrProjects } from "react-icons/gr";
-// import { FaGear } from "react-icons/fa6";
 
 const User = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [company, setCompany] = useState(null);
+  const { user, isLoggedIn, onLogOut, role } = useContext(context);
+
+  // Запит по компанію
+  useEffect(() => {
+    async function getCompany(id) {
+      try {
+        const company = await getCompanyInfo(id);
+        setCompany(company.data);
+      } catch (error) {}
+    }
+
+    if (user.companyId) {
+      getCompany(user.companyId);
+    }
+  }, [user]);
 
   // Показує або приховує меню
   const toggleMenu = () => {
@@ -46,8 +63,6 @@ const User = () => {
     toggleConfirm();
     toggleMenu();
   };
-
-  const { user, isLoggedIn, onLogOut, role } = useContext(context);
 
   return (
     <>
@@ -71,11 +86,16 @@ const User = () => {
         <ContextMenu onClose={toggleMenu}>
           {isLoggedIn && (
             <Menu>
-              <IconWrapper role={role}>
-                <FaUser />
-                <span>{user.name}</span>
-                <span style={{ marginLeft: "auto" }}>{role}</span>
-              </IconWrapper>
+              <div>
+                <IconWrapper role={role}>
+                  <FaUser />
+                  <span>{user.name}</span>
+                  <span style={{ marginLeft: "auto" }}>{role}</span>
+                </IconWrapper>
+                {company && (
+                  <Company role={role}>{company.companyName}</Company>
+                )}
+              </div>
               {role === "designer" && (
                 <>
                   <StyledNavLink to="user-material">

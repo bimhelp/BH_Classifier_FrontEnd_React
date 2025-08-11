@@ -22,7 +22,9 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     name: null,
     email: null,
+    companyId: null,
   });
+  // Рефреш користувача при оновленні сторінки
   useEffect(() => {
     // console.log(token);
     async function onRefresh(token) {
@@ -50,6 +52,7 @@ const AuthProvider = ({ children }) => {
     }
   }, [setRole, setToken, token]);
 
+  // Реєстрація
   const onRegister = (credentials) => {
     // console.log("register", credentials);
 
@@ -131,7 +134,6 @@ const AuthProvider = ({ children }) => {
         // Перенаправляємо на головну сторінку
         navigate("/", { replace: true });
       } catch (error) {
-        console.log("error: ", error);
         toast.error("Не вдалось виконати вхід в акаунт", { autoClose: false });
       }
     }
@@ -180,6 +182,7 @@ const AuthProvider = ({ children }) => {
           setRole("");
           setUserId(null);
           setIsLoggedIn(false);
+
           // Перенаправляємо на головну сторінку
           navigate("/", { replace: true });
         }

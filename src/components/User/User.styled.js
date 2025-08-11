@@ -39,13 +39,27 @@ export const LinkTitle = styled.span`
   }
 `;
 
+export const Company = styled.div`
+  // display: flex;
+  // gap: 10px;
+  // justify-content: space-between;
+  // align-items: center;
+  padding: 4px 6px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  color: white;
+  text-weight: 700;
+  background-color: ${setRoleColor};
+`;
+
 export const IconWrapper = styled.div`
   display: flex;
   gap: 10px;
   padding: 4px 6px;
   justify-content: space-between;
   align-items: center;
-  border-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
   color: white;
   background-color: ${setRoleColor};
 `;
