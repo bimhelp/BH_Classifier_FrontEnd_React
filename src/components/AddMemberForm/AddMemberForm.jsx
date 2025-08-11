@@ -11,7 +11,6 @@ import {
   FormTitle,
   InputWrapper,
   MessageVrapper,
-  Input,
   TextArea,
   ErrorMessageStyled,
   ButtonWrapper,
@@ -22,10 +21,8 @@ import MemberList from "../MemberList/MemberList";
 
 const AddMemberForm = ({ company: { _id: companyId, companyName } }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [active, setIsActive] = useState(false);
   const [searchResult, setSearchResult] = useState([]);
   const [team, setTeam] = useState([]);
-  const [user, setUser] = useState(null);
 
   // Запит по користувачів компанії
   useEffect(() => {
@@ -46,7 +43,7 @@ const AddMemberForm = ({ company: { _id: companyId, companyName } }) => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [companyId]);
 
   let initialValues = {
     email: "",

@@ -7,13 +7,11 @@ import {
   CompanyName,
   MenuWrapper,
   CompanyAttribute,
-  Menu,
 } from "./CompanyCard.styled";
 import { BiSolidBusiness } from "react-icons/bi";
 import { Modal } from "../Modal/Modal";
 import { formatDate, timeDifference } from "../../services";
 import AddCompanyForm from "../AddCompanyForm/AddCompanyForm";
-import { toast } from "react-toastify";
 
 const CompanyCard = ({
   company,
