@@ -79,13 +79,12 @@ const AddCompanyForm = ({ onClose, create, edit, variant, company }) => {
     try {
       setIsLoading(true);
       if (variant === "edit") {
-        console.log("company: ", company._id);
+        // console.log("company: ", company._id);
         await edit(company._id, values);
       } else await create({ ...values });
       resetForm();
       onClose();
     } catch (error) {
-      console.log("Не вдалось створити компанію");
     } finally {
       setIsLoading(false);
     }

@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaGear } from "react-icons/fa6";
 import { RiTeamFill } from "react-icons/ri";
 
-const CompanyMenu = ({ id, edit, handleDelete }) => {
+const CompanyMenu = ({ id, edit, team, handleDelete }) => {
   return (
     <>
       <IconButton
@@ -13,7 +13,7 @@ const CompanyMenu = ({ id, edit, handleDelete }) => {
         visibility="visible"
         variant="neutral"
         tooltip="Команда"
-        onClick={() => console.log("open team manager")}
+        onClick={() => team(id)}
       ></IconButton>
       <IconButton
         icon={FaGear}

@@ -21,6 +21,7 @@ export const token = {
   },
 };
 
+// Register
 export async function registerUser(credentials) {
   const response = await axios.post("/auth/register", credentials);
   // записує токен в об'єкт token
@@ -28,6 +29,7 @@ export async function registerUser(credentials) {
   return response.data;
 }
 
+// Google
 export async function googleAuthenticate() {
   window.location.href =
     "https://classifier-backend.fly.dev/api/v1/auth/google";
@@ -43,6 +45,7 @@ export async function completeRegistration(credentials) {
   return response.data;
 }
 
+// Log In
 export async function logIn(credentials) {
   const response = await axios.post("/auth/login", credentials);
   // записує токен в об'єкт token
@@ -56,11 +59,23 @@ export async function currentUser(currenttoken) {
   return response.data;
 }
 
+// Log Out
 export async function logOut() {
   const response = await axios.post("/auth/logout");
   // токен вже є у хедері, тому що юзер вже був залогінений
   // тому його потрібно обнулити
   token.clear();
+  return response.data;
+}
+
+// Search by Email
+export async function searchByEmail(email) {
+  const response = await axios.get("/auth/search/by-email", {
+    params: {
+      email: email,
+    },
+  });
+  // console.log(response);
   return response.data;
 }
 

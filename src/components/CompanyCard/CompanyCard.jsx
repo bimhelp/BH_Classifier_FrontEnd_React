@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "../Button/Button";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import { MdDelete } from "react-icons/md";
 import CompanyMenu from "../CompanyMenu/CompanyMenu";
+import AddMemberForm from "../AddMemberForm/AddMemberForm";
 import {
   Card,
   Code,
@@ -16,7 +14,6 @@ import { Modal } from "../Modal/Modal";
 import { formatDate, timeDifference } from "../../services";
 import AddCompanyForm from "../AddCompanyForm/AddCompanyForm";
 import { toast } from "react-toastify";
-// import CompanyMenu from "../CompanyMenu/CompanyMenu";
 
 const CompanyCard = ({
   company,
@@ -45,6 +42,7 @@ const CompanyCard = ({
   }
 
   function openEditTeam() {
+    console.log("open");
     setEditTeam(true);
   }
   function closeEditTeam() {
@@ -81,9 +79,14 @@ const CompanyCard = ({
             edit={openEditForm}
             team={openEditTeam}
             handleDelete={handleDelete}
-          />
+          ></CompanyMenu>
         </MenuWrapper>
       </Card>
+      {editTeam && (
+        <Modal onClose={closeEditTeam}>
+          <AddMemberForm company={company}></AddMemberForm>
+        </Modal>
+      )}
       {editFormOpen && (
         <Modal onClose={closeEditForm}>
           <AddCompanyForm
@@ -92,28 +95,6 @@ const CompanyCard = ({
             edit={edit}
             onClose={closeEditForm}
           />
-          <Menu>
-            {" "}
-            <Button
-              icon={MdDelete}
-              visibility="visible"
-              variant="neutral"
-              tooltip="Видалити компанію"
-              onClick={() => handleDelete(_id)}
-              role="warning"
-            >
-              Видалити компанію
-            </Button>
-            <CopyToClipboard
-              text={_id}
-              onCopy={() =>
-                toast.info(`Id компанії ${_id} скопійовано в буфер обміну`)
-              }
-            >
-              <Button>Копіювати id компанії</Button>
-            </CopyToClipboard>
-            <Button>Керувати співробітниками</Button>
-          </Menu>
         </Modal>
       )}
     </>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Card = styled.div`
-  /* outline: 1px solid tomato; */
+  // outline: 1px solid tomato;
   position: relative;
   width: 100%;
   height: 100%;
@@ -10,7 +10,8 @@ export const Card = styled.div`
 
   border-radius: ${(props) => props.theme.radii.normal};
   padding: ${(props) => props.theme.space[2]}px;
-  padding-left: ${(props) => props.theme.space[3]}px;
+  // padding-left: ${(props) => props.theme.space[3]}px;
+  // padding-right: ${(props) => props.theme.space[4]}px;
   background-color: ${(props) =>
     props.isdelete
       ? props.theme.colors.atention
@@ -23,18 +24,8 @@ export const Card = styled.div`
     background-color: white;
   }
 `;
-
-export const CompanyName = styled.div`
-  font-size: ${(props) => props.theme.fontSizes.l};
-  font-weight: bold;
-  text-overflow: clip;
-  margin-bottom: 10px;
-  display: flex;
-  gap: 10px;
-`;
-
 export const MenuWrapper = styled.div`
-  /* outline: 1px solid tomato; */
+  // outline: 1px solid tomato;
   position: absolute;
   display: flex;
   gap: 6px;
@@ -46,25 +37,4 @@ export const MenuWrapper = styled.div`
   /* @media screen and (min-width: 680px) {
     opacity: 0;
     } */
-`;
-export const Code = styled.p`
-  font-size: ${(props) => props.theme.fontSizes.s};
-`;
-export const CompanyAttribute = styled.div`
-  width: 260px;
-  gap: 20px;
-  // outline: 1px solid tomato;
-  display: flex;
-  justify-content: space-between;
-  font-size: ${(props) => props.theme.fontSizes.xs};
-
-  p {
-    display: inline-block;
-  }
-`;
-export const Menu = styled.div`
-  display: flex;
-  gap: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
 `;
