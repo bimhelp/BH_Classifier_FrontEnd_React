@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getAllUsers, updateRole } from "../../services";
+import { getAllUsers, removeUser, updateRole } from "../../services";
 import { toast } from "react-toastify";
 import { Table, Row, Name, Role } from "./Users.styled";
 import Select from "react-select";
 import Section from "../Section/Section";
 import { BarLoader } from "react-spinners";
+import { PulseLoader } from "react-spinners";
 import { customStyles } from "./SelectCustomStyles";
+import { IconButton } from "../Button/Button";
+import { MdDelete } from "react-icons/md";
+import Confirm from "../Confirm/Confirm";
+import { ConfirmButtons } from "../MaterialList/MaterialList.styled";
+import { Button } from "../Button/Button";
 const options = [
   { value: "user", label: "user" },
   { value: "designer", label: "designer" },
@@ -19,6 +25,9 @@ const Users = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedRole, setSelectedRole] = useState(null);
   const [sortDirection, setSortDirection] = useState("asc");
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [delitingCandidate, setDelitingCandidate] = useState(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   // запит по всіх користувачів
   useEffect(() => {
@@ -83,6 +92,41 @@ const Users = () => {
     updateUserRole(id);
   }
 
+  // Відкриття меню підтвердження
+  const confirmDelete = (id) => {
+    console.log("id: ", id);
+    setDelitingCandidate(users.filter((user) => user._id === id)[0]);
+
+    setConfirmOpen(id);
+  };
+
+  // Тогл меню підтвердження
+  const toggleConfirm = () => {
+    setConfirmOpen(!confirmOpen);
+  };
+
+  // функція видалення користувача
+  async function handleDelete(id) {
+    console.log("delete user: ", id);
+    const controller = new AbortController();
+    try {
+      setDeleteLoading(true);
+      const result = await removeUser(id, controller.signal);
+      // console.log("result: ", result);
+      // console.log(users.filter((user) => user._id !== result.data._id));
+      setConfirmOpen(false);
+      setUsers(users.filter((user) => user._id !== result.data._id));
+
+      toast.info("Користувач успішно видалений");
+    } catch (error) {
+      toast.error("Не вдалось видалити користувача");
+    } finally {
+      setDeleteLoading(false);
+    }
+    return () => {
+      controller.abort();
+    };
+  }
   // функція Сортування таблиці
   const sortData = (param) => {
     const sortedData =
@@ -115,6 +159,7 @@ const Users = () => {
                 <th onClick={() => sortData("company")}>Компанія</th>
                 <th onClick={() => sortData("jobRole")}>Посада</th>
                 <th onClick={() => sortData("role")}>Змінити роль</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -137,6 +182,15 @@ const Users = () => {
                         styles={customStyles}
                       />
                     </Role>
+                    <td>
+                      <IconButton
+                        icon={MdDelete}
+                        visibility="visible"
+                        variant="neutral"
+                        tooltip="Видалити"
+                        onClick={() => confirmDelete(user._id)}
+                      />
+                    </td>
                   </Row>
                 );
               })}
@@ -145,6 +199,30 @@ const Users = () => {
 
           <p>Кількість користувачів: {users.length}</p>
         </Section>
+      )}
+
+      {confirmOpen && (
+        <Confirm
+          onClose={toggleConfirm}
+          title="Видалити користувача? "
+          element={
+            delitingCandidate.name +
+            " " +
+            delitingCandidate.lastName +
+            " " +
+            delitingCandidate.email +
+            " " +
+            "Також будуть видалені всі його проекти, матеріали і послуги!"
+          }
+        >
+          <ConfirmButtons>
+            <Button onClick={() => handleDelete(confirmOpen)} role="warning">
+              Видалити
+              {deleteLoading && <PulseLoader color="#000000" size={5} />}
+            </Button>
+            <Button onClick={toggleConfirm}>Залишити</Button>
+          </ConfirmButtons>
+        </Confirm>
       )}
     </>
   );

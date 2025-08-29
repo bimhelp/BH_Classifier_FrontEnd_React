@@ -79,6 +79,13 @@ export async function searchByEmail(email) {
   return response.data;
 }
 
+// Delete User
+
+export async function removeUser(id, signal) {
+  const response = await axios.delete(`/auth/user/remove/${id}`, { signal });
+  return response.data;
+}
+
 // Team _____________________________________________________________
 
 //  Отримати всіх співробітників компанії
