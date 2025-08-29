@@ -7,7 +7,7 @@ const LogInPage = () => {
   return (
     <Section>
       <LoginForm />
-      <GoogleLoginBtn />
+      {/* <GoogleLoginBtn />  Вимкнено поки не налаштовано в плагіні*/}
     </Section>
   );
 };
